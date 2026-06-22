@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BMI + Günlük Kalori Hesaplayıcı – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#070E1A',
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#263348',
+              600: '#334155',
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+
+    .navbar-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,0.92);
+      border-bottom: 1px solid rgba(16,185,129,0.12);
+    }
+
+    /* Number inputs */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    .finput {
+      background: #1E293B;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      color: #f1f5f9;
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+    .finput:focus {
+      border-color: #10B981;
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+    }
+    .finput::placeholder { color: #475569; }
+    .finput.error {
+      border-color: #f43f5e;
+      box-shadow: 0 0 0 3px rgba(244,63,94,0.12);
+    }
+
+    /* Select */
+    .fselect {
+      background: #1E293B;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      color: #f1f5f9;
+      border-radius: 0.75rem;
+      padding: 0.75rem 2.5rem 0.75rem 1rem;
+      font-size: 0.9375rem;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.875rem center;
+      background-size: 1rem;
+      cursor: pointer;
+    }
+    .fselect:focus {
+      border-color: #10B981;
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+    }
+    .fselect.error {
+      border-color: #f43f5e;
+      box-shadow: 0 0 0 3px rgba(244,63,94,0.12);
+    }
+    .fselect option { background: #1E293B; }
+
+    /* Gender toggle */
+    .gender-btn {
+      flex: 1;
+      padding: 0.625rem 0;
+      border-radius: 0.625rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+    }
+    .gender-btn.inactive {
+      background: #263348;
+      color: #64748b;
+      border-color: rgba(255,255,255,0.05);
+    }
+    .gender-btn.inactive:hover {
+      color: #94a3b8;
+      border-color: rgba(255,255,255,0.1);
+    }
+    .gender-btn.active-m {
+      background: rgba(59,130,246,0.15);
+      color: #60a5fa;
+      border-color: rgba(59,130,246,0.35);
+    }
+    .gender-btn.active-f {
+      background: rgba(236,72,153,0.15);
+      color: #f472b6;
+      border-color: rgba(236,72,153,0.35);
+    }
+
+    /* BMI ruler */
+    .bmi-ruler {
+      position: relative;
+      height: 10px;
+      border-radius: 9999px;
+      background: linear-gradient(to right, #38bdf8 0%, #10B981 18.5%, #f59e0b 25%, #f97316 30%, #ef4444 40%, #991b1b 100%);
+      overflow: visible;
+    }
+    .bmi-needle {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid #0F172A;
+      box-shadow: 0 0 0 2px white, 0 2px 8px rgba(0,0,0,0.5);
+      transition: left 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* Result card animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.42s ease forwards; }
+
+    /* Calorie goal bar */
+    .goal-bar { transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+
+    /* Quick tag */
+    .qtag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.6875rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.18s;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: #263348;
+      color: #64748b;
+      white-space: nowrap;
+    }
+    .qtag:hover { color: #10B981; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.08); }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0F172A; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+
+      <a href="finanskolay.html"
+        class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+        <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <span class="hidden sm:inline">Geri Dön</span>
+      </a>
+
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-rose-500/15 flex items-center justify-center">
+          <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+        </div>
+        <span class="font-semibold text-white text-sm sm:text-base">BMI + Günlük Kalori Hesaplayıcı</span>
+      </div>
+
+      <a href="finanskolay.html" class="flex items-center gap-2 group">
+        <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">
+          Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="pt-16 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Page header -->
+      <div class="py-8 sm:py-12 text-center">
+        <p class="text-rose-400 text-xs font-semibold tracking-widest uppercase mb-2">Sağlık & Fitness</p>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
+          Vücut Kütle İndeksi &amp; Kalori İhtiyacı
+        </h1>
+        <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+          Boy, kilo, yaş ve aktivite seviyenizi girerek BMI değerinizi, bazal metabolizma hızınızı (BMR)
+          ve günlük toplam kalori ihtiyacınızı (TDEE) hesaplayın.
+        </p>
+      </div>
+
+      <!-- ── Grid ── -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+
+        <!-- ══ LEFT: Form ══ -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+          <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+            </svg>
+            Kişisel Bilgiler
+          </h2>
+
+          <!-- Cinsiyet -->
+          <div class="mb-5">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Cinsiyet</label>
+            <div class="flex gap-2 p-1.5 bg-navy-700/60 rounded-xl border border-white/5">
+              <button id="btn-erkek" onclick="setCinsiyet('erkek')"
+                class="gender-btn active-m">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+                Erkek
+              </button>
+              <button id="btn-kadin" onclick="setCinsiyet('kadin')"
+                class="gender-btn inactive">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+                Kadın
+              </button>
+            </div>
+          </div>
+
+          <!-- Yaş -->
+          <div class="mb-5">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Yaş</label>
+            <div class="relative">
+              <input type="number" id="yas" class="finput pr-14" placeholder="25"
+                min="10" max="110" oninput="clearErr('yas')" />
+              <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">yaş</span>
+            </div>
+            <p id="yas-err" class="text-xs text-rose-400 mt-1.5 hidden">Lütfen geçerli bir yaş girin (10–110).</p>
+            <div class="flex gap-1.5 mt-2 flex-wrap">
+              <span class="qtag" onclick="setVal('yas',20)">20</span>
+              <span class="qtag" onclick="setVal('yas',25)">25</span>
+              <span class="qtag" onclick="setVal('yas',30)">30</span>
+              <span class="qtag" onclick="setVal('yas',35)">35</span>
+              <span class="qtag" onclick="setVal('yas',40)">40</span>
+              <span class="qtag" onclick="setVal('yas',50)">50</span>
+            </div>
+          </div>
+
+          <!-- Boy + Kilo (2-col) -->
+          <div class="grid grid-cols-2 gap-4 mb-5">
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Boy</label>
+              <div class="relative">
+                <input type="number" id="boy" class="finput pr-10" placeholder="175"
+                  min="100" max="250" oninput="clearErr('boy')" />
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">cm</span>
+              </div>
+              <p id="boy-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli boy girin.</p>
+              <div class="flex gap-1.5 mt-2 flex-wrap">
+                <span class="qtag" onclick="setVal('boy',160)">160</span>
+                <span class="qtag" onclick="setVal('boy',170)">170</span>
+                <span class="qtag" onclick="setVal('boy',175)">175</span>
+                <span class="qtag" onclick="setVal('boy',180)">180</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Kilo</label>
+              <div class="relative">
+                <input type="number" id="kilo" class="finput pr-10" placeholder="70"
+                  min="30" max="300" oninput="clearErr('kilo')" />
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">kg</span>
+              </div>
+              <p id="kilo-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli kilo girin.</p>
+              <div class="flex gap-1.5 mt-2 flex-wrap">
+                <span class="qtag" onclick="setVal('kilo',55)">55</span>
+                <span class="qtag" onclick="setVal('kilo',70)">70</span>
+                <span class="qtag" onclick="setVal('kilo',80)">80</span>
+                <span class="qtag" onclick="setVal('kilo',90)">90</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aktivite -->
+          <div class="mb-7">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Aktivite Seviyesi</label>
+            <select id="aktivite" class="fselect" onchange="clearErr('aktivite')">
+              <option value="">Aktivite seviyesi seçin</option>
+              <option value="1.2">🪑 Hareketsiz (masa başı iş)</option>
+              <option value="1.375">🚶 Az aktif (haftada 1–3 gün hafif spor)</option>
+              <option value="1.55">🏃 Orta aktif (haftada 3–5 gün spor)</option>
+              <option value="1.725">🏋️ Çok aktif (haftada 6–7 gün spor)</option>
+              <option value="1.9">⚡ Ekstra aktif (ağır iş + spor)</option>
+            </select>
+            <p id="aktivite-err" class="text-xs text-rose-400 mt-1.5 hidden">Lütfen aktivite seviyenizi seçin.</p>
+          </div>
+
+          <!-- Calculate -->
+          <button onclick="hesapla()"
+            class="w-full flex items-center justify-center gap-2 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-base rounded-xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Hesapla
+          </button>
+          <p class="text-xs text-slate-600 text-center mt-3 leading-relaxed">
+            Mifflin–St Jeor formülü kullanılmaktadır. Sonuçlar genel bir rehber niteliğindedir; kesin değerler için bir uzmana danışın.
+          </p>
+        </div>
+
+        <!-- ══ RIGHT: Results ══ -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl flex flex-col">
+          <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            Sonuçlar
+          </h2>
+
+          <!-- Empty state -->
+          <div id="empty-state" class="flex-1 flex flex-col items-center justify-center py-10 text-center">
+            <div class="w-16 h-16 rounded-2xl bg-rose-500/8 flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-rose-500/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+            </div>
+            <p class="text-slate-400 text-sm font-medium mb-1">Sonuç bekleniyor</p>
+            <p class="text-slate-600 text-xs">Bilgilerinizi girin ve Hesapla butonuna tıklayın</p>
+          </div>
+
+          <!-- Results -->
+          <div id="results-area" class="hidden flex-1 flex flex-col gap-4">
+
+            <!-- BMI Hero -->
+            <div id="bmi-card"
+              class="rounded-xl p-5 border text-center">
+              <p id="bmi-label-top" class="text-xs font-semibold uppercase tracking-widest mb-2">Vücut Kütle İndeksi (BMI)</p>
+              <p id="bmi-val" class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-2">—</p>
+              <span id="bmi-kategori" class="inline-block px-4 py-1 rounded-full text-sm font-bold">—</span>
+
+              <!-- BMI ruler -->
+              <div class="mt-4 px-2">
+                <div class="bmi-ruler" id="bmi-ruler">
+                  <div class="bmi-needle" id="bmi-needle" style="left:0%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-slate-500 mt-2 px-0.5">
+                  <span>16</span>
+                  <span>18.5</span>
+                  <span class="text-emerald-500 font-semibold">25</span>
+                  <span>30</span>
+                  <span>40</span>
+                </div>
+                <div class="flex justify-between text-xs mt-0.5 px-0.5">
+                  <span class="text-sky-400">Zayıf</span>
+                  <span class="text-emerald-400">Normal</span>
+                  <span class="text-amber-400">Fazla</span>
+                  <span class="text-orange-400">Obez</span>
+                  <span class="text-red-400">Morbid</span>
+                </div>
+              </div>
+
+              <!-- Ideal weight range -->
+              <div id="ideal-kilo-row"
+                class="mt-4 bg-black/20 rounded-lg px-4 py-2.5 flex items-center justify-center gap-2 text-sm">
+                <svg class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="text-slate-300">Boyunuz için ideal kilo: </span>
+                <span id="ideal-kilo" class="text-white font-bold ml-1">—</span>
+              </div>
+            </div>
+
+            <!-- BMR + TDEE row -->
+            <div class="grid grid-cols-2 gap-3">
+              <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+                <div class="w-8 h-8 rounded-lg bg-sky-500/15 flex items-center justify-center mx-auto mb-2">
+                  <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                  </svg>
+                </div>
+                <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">BMR</p>
+                <p id="bmr-val" class="text-xl font-extrabold text-white">—</p>
+                <p class="text-xs text-slate-500 mt-0.5">kcal / gün</p>
+                <p class="text-xs text-slate-600 mt-1.5 leading-tight">Bazal metabolizma (dinlenme kalori ihtiyacı)</p>
+              </div>
+              <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+                <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center mx-auto mb-2">
+                  <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                </div>
+                <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">TDEE</p>
+                <p id="tdee-val" class="text-xl font-extrabold text-emerald-400">—</p>
+                <p class="text-xs text-slate-500 mt-0.5">kcal / gün</p>
+                <p class="text-xs text-slate-600 mt-1.5 leading-tight">Günlük toplam kalori ihtiyacı</p>
+              </div>
+            </div>
+
+            <!-- Kalori hedef önerileri -->
+            <div class="bg-navy-700/40 border border-white/5 rounded-xl p-4">
+              <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Hedefe Göre Günlük Kalori</p>
+              <div class="space-y-2.5">
+                <div class="flex items-center gap-3">
+                  <span class="text-xs text-rose-400 w-28 shrink-0 font-medium">Kilo ver</span>
+                  <div class="flex-1 h-2 bg-navy-600 rounded-full overflow-hidden">
+                    <div id="bar-ver" class="goal-bar h-full bg-rose-400 rounded-full" style="width:0%"></div>
+                  </div>
+                  <span id="lbl-ver" class="text-xs text-white font-semibold w-20 text-right shrink-0">—</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs text-emerald-400 w-28 shrink-0 font-medium">Kilo koru</span>
+                  <div class="flex-1 h-2 bg-navy-600 rounded-full overflow-hidden">
+                    <div id="bar-koru" class="goal-bar h-full bg-emerald-500 rounded-full" style="width:0%"></div>
+                  </div>
+                  <span id="lbl-koru" class="text-xs text-white font-semibold w-20 text-right shrink-0">—</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs text-sky-400 w-28 shrink-0 font-medium">Kilo al</span>
+                  <div class="flex-1 h-2 bg-navy-600 rounded-full overflow-hidden">
+                    <div id="bar-al" class="goal-bar h-full bg-sky-400 rounded-full" style="width:0%"></div>
+                  </div>
+                  <span id="lbl-al" class="text-xs text-white font-semibold w-20 text-right shrink-0">—</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ Makro Dağılım & Bilgi ══ -->
+      <div id="alt-bolum" class="hidden mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+
+          <!-- Makro önerisi -->
+          <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+            <h3 class="text-base font-bold text-white mb-1 flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+              </svg>
+              Önerilen Makro Besin Dağılımı
+            </h3>
+            <p class="text-xs text-slate-500 mb-5">TDEE değerinize göre günlük makro hedefleri (%40 Karbonhidrat / %30 Protein / %30 Yağ)</p>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-amber-400 font-semibold">🌾 Karbonhidrat</span>
+                  <span id="makro-karbo" class="text-white font-bold">—</span>
+                </div>
+                <div class="h-2.5 bg-navy-700 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width:40%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-sky-400 font-semibold">🥩 Protein</span>
+                  <span id="makro-protein" class="text-white font-bold">—</span>
+                </div>
+                <div class="h-2.5 bg-navy-700 rounded-full overflow-hidden">
+                  <div class="h-full bg-sky-400 rounded-full" style="width:30%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-rose-400 font-semibold">🥑 Yağ</span>
+                  <span id="makro-yag" class="text-white font-bold">—</span>
+                </div>
+                <div class="h-2.5 bg-navy-700 rounded-full overflow-hidden">
+                  <div class="h-full bg-rose-400 rounded-full" style="width:30%"></div>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 mt-4">1g karbonhidrat = 4 kcal · 1g protein = 4 kcal · 1g yağ = 9 kcal</p>
+          </div>
+
+          <!-- BMI açıklama -->
+          <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+            <h3 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              BMI Kategorileri
+            </h3>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-navy-700/40 border border-white/4">
+                <div class="w-3 h-3 rounded-sm bg-sky-400 flex-shrink-0"></div>
+                <div class="flex-1">
+                  <span class="text-sm font-semibold text-sky-300">Zayıf</span>
+                  <span class="text-xs text-slate-500 ml-2">BMI &lt; 18.5</span>
+                </div>
+                <span class="text-xs text-slate-500">Yetersiz beslenme riski</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-emerald-500/8 border border-emerald-500/20">
+                <div class="w-3 h-3 rounded-sm bg-emerald-400 flex-shrink-0"></div>
+                <div class="flex-1">
+                  <span class="text-sm font-semibold text-emerald-300">Normal</span>
+                  <span class="text-xs text-slate-500 ml-2">18.5 – 24.9</span>
+                </div>
+                <span class="text-xs text-emerald-500 font-semibold">✓ Sağlıklı aralık</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-navy-700/40 border border-white/4">
+                <div class="w-3 h-3 rounded-sm bg-amber-400 flex-shrink-0"></div>
+                <div class="flex-1">
+                  <span class="text-sm font-semibold text-amber-300">Fazla Kilolu</span>
+                  <span class="text-xs text-slate-500 ml-2">25 – 29.9</span>
+                </div>
+                <span class="text-xs text-slate-500">Dikkat gerektirir</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-navy-700/40 border border-white/4">
+                <div class="w-3 h-3 rounded-sm bg-orange-400 flex-shrink-0"></div>
+                <div class="flex-1">
+                  <span class="text-sm font-semibold text-orange-300">Obez</span>
+                  <span class="text-xs text-slate-500 ml-2">30 – 39.9</span>
+                </div>
+                <span class="text-xs text-slate-500">Sağlık riski yüksek</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-navy-700/40 border border-white/4">
+                <div class="w-3 h-3 rounded-sm bg-red-500 flex-shrink-0"></div>
+                <div class="flex-1">
+                  <span class="text-sm font-semibold text-red-300">Morbid Obez</span>
+                  <span class="text-xs text-slate-500 ml-2">≥ 40</span>
+                </div>
+                <span class="text-xs text-slate-500">Acil müdahale</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600 mt-4 leading-relaxed">
+              BMI tek başına sağlık durumunun tam göstergesi değildir. Kas kitlesi, kemik yapısı ve yaş gibi faktörler de önemlidir.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-navy-950 border-t border-white/5 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-xs text-slate-600">
+        © 2025 FinansKolay · Hesaplama yalnızca bilgilendirme amaçlıdır. Kesin değerler için bir sağlık uzmanına danışın.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ═══════════ JAVASCRIPT ═══════════ -->
+  <script>
+    let cinsiyet = 'erkek';
+
+    function setCinsiyet(c) {
+      cinsiyet = c;
+      const bE = document.getElementById('btn-erkek');
+      const bK = document.getElementById('btn-kadin');
+      if (c === 'erkek') {
+        bE.className = 'gender-btn active-m';
+        bK.className = 'gender-btn inactive';
+      } else {
+        bK.className = 'gender-btn active-f';
+        bE.className = 'gender-btn inactive';
+      }
+    }
+
+    function setVal(id, v) {
+      document.getElementById(id).value = v;
+      clearErr(id);
+    }
+
+    function clearErr(id) {
+      const el  = document.getElementById(id);
+      const err = document.getElementById(id + '-err');
+      if (el)  el.classList.remove('error');
+      if (err) err.classList.add('hidden');
+    }
+    function showErr(id) {
+      const el  = document.getElementById(id);
+      const err = document.getElementById(id + '-err');
+      if (el)  el.classList.add('error');
+      if (err) err.classList.remove('hidden');
+      return false;
+    }
+
+    function fmt1(n) { return n.toLocaleString('tr-TR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }); }
+    function fmtInt(n) { return Math.round(n).toLocaleString('tr-TR'); }
+
+    // BMI → category data
+    function bmiKategori(bmi) {
+      if (bmi < 18.5) return {
+        label: 'Zayıf',
+        color: 'text-sky-300',
+        bg: 'bg-sky-500/12',
+        border: 'border-sky-500/25',
+        topLabel: 'text-sky-400',
+        badge: 'bg-sky-500/20 text-sky-300',
+      };
+      if (bmi < 25) return {
+        label: 'Normal (Sağlıklı)',
+        color: 'text-emerald-300',
+        bg: 'bg-emerald-500/12',
+        border: 'border-emerald-500/25',
+        topLabel: 'text-emerald-400',
+        badge: 'bg-emerald-500/20 text-emerald-300',
+      };
+      if (bmi < 30) return {
+        label: 'Fazla Kilolu',
+        color: 'text-amber-300',
+        bg: 'bg-amber-500/12',
+        border: 'border-amber-500/25',
+        topLabel: 'text-amber-400',
+        badge: 'bg-amber-500/20 text-amber-300',
+      };
+      if (bmi < 40) return {
+        label: 'Obez',
+        color: 'text-orange-300',
+        bg: 'bg-orange-500/12',
+        border: 'border-orange-500/25',
+        topLabel: 'text-orange-400',
+        badge: 'bg-orange-500/20 text-orange-300',
+      };
+      return {
+        label: 'Morbid Obez',
+        color: 'text-red-300',
+        bg: 'bg-red-500/12',
+        border: 'border-red-500/25',
+        topLabel: 'text-red-400',
+        badge: 'bg-red-500/20 text-red-300',
+      };
+    }
+
+    // Map BMI value to ruler % (range 15–45)
+    function bmiToRulerPct(bmi) {
+      const MIN = 15, MAX = 45;
+      return Math.min(100, Math.max(0, (bmi - MIN) / (MAX - MIN) * 100));
+    }
+
+    function hesapla() {
+      const yasVal = parseFloat(document.getElementById('yas').value);
+      const boyVal = parseFloat(document.getElementById('boy').value);
+      const kiloVal = parseFloat(document.getElementById('kilo').value);
+      const aktiviteVal = parseFloat(document.getElementById('aktivite').value);
+
+      let valid = true;
+      if (isNaN(yasVal) || yasVal < 10 || yasVal > 110)  valid = showErr('yas');
+      if (isNaN(boyVal) || boyVal < 100 || boyVal > 250) valid = showErr('boy');
+      if (isNaN(kiloVal) || kiloVal < 30 || kiloVal > 300) valid = showErr('kilo');
+      if (!aktiviteVal) valid = showErr('aktivite');
+      if (!valid) return;
+
+      // ── Calculations ──
+      const bmi = kiloVal / Math.pow(boyVal / 100, 2);
+
+      let bmr;
+      if (cinsiyet === 'erkek') {
+        bmr = 88.362 + (13.397 * kiloVal) + (4.799 * boyVal) - (5.677 * yasVal);
+      } else {
+        bmr = 447.593 + (9.247 * kiloVal) + (3.098 * boyVal) - (4.330 * yasVal);
+      }
+
+      const tdee = bmr * aktiviteVal;
+
+      // Ideal weight (BMI 18.5–24.9)
+      const boyM = boyVal / 100;
+      const idealMin = 18.5 * boyM * boyM;
+      const idealMax = 24.9 * boyM * boyM;
+
+      // Calorie goals
+      const kaloiVer  = Math.max(1200, tdee - 500);
+      const kaloriAl  = tdee + 400;
+
+      // Macros (based on TDEE, 40/30/30)
+      const karboG   = (tdee * 0.40) / 4;
+      const proteinG = (tdee * 0.30) / 4;
+      const yagG     = (tdee * 0.30) / 9;
+
+      // ── Render ──
+      document.getElementById('empty-state').classList.add('hidden');
+      const ra = document.getElementById('results-area');
+      ra.classList.remove('hidden');
+      ra.classList.add('fade-up');
+
+      // BMI card theming
+      const kat = bmiKategori(bmi);
+      const card = document.getElementById('bmi-card');
+      card.className = `rounded-xl p-5 border text-center ${kat.bg} ${kat.border}`;
+      document.getElementById('bmi-label-top').className = `text-xs font-semibold uppercase tracking-widest mb-2 ${kat.topLabel}`;
+      document.getElementById('bmi-val').className = `text-4xl sm:text-5xl font-extrabold tracking-tight mb-2 ${kat.color}`;
+      document.getElementById('bmi-val').textContent = fmt1(bmi);
+      const katEl = document.getElementById('bmi-kategori');
+      katEl.className = `inline-block px-4 py-1 rounded-full text-sm font-bold ${kat.badge}`;
+      katEl.textContent = kat.label;
+
+      // BMI ruler needle
+      setTimeout(() => {
+        document.getElementById('bmi-needle').style.left = bmiToRulerPct(bmi) + '%';
+      }, 60);
+
+      // Ideal weight
+      document.getElementById('ideal-kilo').textContent =
+        `${idealMin.toFixed(1)} – ${idealMax.toFixed(1)} kg`;
+
+      // BMR / TDEE
+      document.getElementById('bmr-val').textContent  = fmtInt(bmr);
+      document.getElementById('tdee-val').textContent = fmtInt(tdee);
+
+      // Goal bars (relative to max = kaloriAl)
+      const maxKal = kaloriAl;
+      setTimeout(() => {
+        document.getElementById('bar-ver').style.width  = (kaloiVer  / maxKal * 100) + '%';
+        document.getElementById('bar-koru').style.width = (tdee      / maxKal * 100) + '%';
+        document.getElementById('bar-al').style.width   = (kaloriAl  / maxKal * 100) + '%';
+      }, 60);
+      document.getElementById('lbl-ver').textContent  = fmtInt(kaloiVer)  + ' kcal';
+      document.getElementById('lbl-koru').textContent = fmtInt(tdee)      + ' kcal';
+      document.getElementById('lbl-al').textContent   = fmtInt(kaloriAl)  + ' kcal';
+
+      // Macros
+      document.getElementById('makro-karbo').textContent   = `${fmtInt(karboG)} g/gün`;
+      document.getElementById('makro-protein').textContent = `${fmtInt(proteinG)} g/gün`;
+      document.getElementById('makro-yag').textContent     = `${fmtInt(yagG)} g/gün`;
+
+      // Show bottom section
+      document.getElementById('alt-bolum').classList.remove('hidden');
+
+      // Mobile scroll
+      if (window.innerWidth < 1024) {
+        document.getElementById('results-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Enter key support
+    ['yas','boy','kilo'].forEach(id => {
+      document.getElementById(id).addEventListener('keydown', e => {
+        if (e.key === 'Enter') hesapla();
+      });
+    });
+  </script>
+</body>
+</html>

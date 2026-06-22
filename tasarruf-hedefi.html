@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tasarruf Hedefi Hesaplayıcı – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { navy: { 950:'#070E1A', 900:'#0F172A', 800:'#1E293B', 700:'#263348', 600:'#334155' } },
+          fontFamily: { sans:['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .navbar-blur {
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,.92); border-bottom: 1px solid rgba(16,185,129,.12);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    .finput {
+      background:#1E293B; border:1.5px solid rgba(255,255,255,.08); color:#f1f5f9;
+      border-radius:.75rem; padding:.75rem 1rem; width:100%; font-size:.9375rem;
+      outline:none; transition:border-color .18s,box-shadow .18s;
+    }
+    .finput:focus { border-color:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,.15); }
+    .finput::placeholder { color:#475569; }
+    .finput.err { border-color:#f43f5e; box-shadow:0 0 0 3px rgba(244,63,94,.12); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { animation: fadeUp .42s ease forwards; }
+    .prog { transition: width .9s cubic-bezier(.4,0,.2,1); }
+
+    .qtag {
+      font-size:.6875rem; padding:.2rem .65rem; border-radius:9999px; font-weight:600;
+      transition:all .18s; cursor:pointer; border:1px solid rgba(255,255,255,.06);
+      background:#263348; color:#64748b; white-space:nowrap; display:inline-block;
+    }
+    .qtag:hover { color:#10B981; border-color:rgba(16,185,129,.3); background:rgba(16,185,129,.08); }
+
+    /* Mode tabs */
+    .mode-tab {
+      flex:1; padding:.85rem .5rem; border-radius:.75rem; font-size:.8125rem; font-weight:700;
+      transition:all .22s; border:1.5px solid transparent; cursor:pointer;
+      display:flex; flex-direction:column; align-items:center; gap:.3rem; text-align:center;
+    }
+    .mode-tab.inactive { background:#1E293B; color:#64748b; border-color:rgba(255,255,255,.06); }
+    .mode-tab.inactive:hover { color:#94a3b8; border-color:rgba(255,255,255,.12); }
+    .mode-tab.active { background:rgba(16,185,129,.14); color:#10B981; border-color:rgba(16,185,129,.4); box-shadow:0 4px 16px rgba(16,185,129,.12); }
+
+    /* Ring */
+    .goal-ring { stroke-dasharray:251.2; transition: stroke-dashoffset 1s cubic-bezier(.4,0,.2,1); }
+
+    ::-webkit-scrollbar { width:4px; }
+    ::-webkit-scrollbar-track { background:#0F172A; }
+    ::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+<!-- NAVBAR -->
+<header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+    <a href="finanskolay.html" class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+      <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <span class="hidden sm:inline">Geri Dön</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-lg bg-emerald-500/15 flex items-center justify-center">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+      </div>
+      <span class="font-semibold text-white text-sm sm:text-base">Tasarruf Hedefi Hesaplayıcı</span>
+    </div>
+    <a href="finanskolay.html" class="flex items-center gap-2 group">
+      <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span></span>
+    </a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="pt-16 pb-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Page header -->
+    <div class="py-8 sm:py-12 text-center">
+      <p class="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-2">Finans Aracı</p>
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
+        Hedefinize Ne Zaman Ulaşırsınız?
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        Bir hedef tutar belirleyin; ister ulaşma sürenizi öğrenin, ister gereken aylık tasarrufu hesaplayın.
+      </p>
+    </div>
+
+    <!-- Mode toggle -->
+    <div class="max-w-md mx-auto mb-8">
+      <div class="flex gap-2 p-1.5 bg-navy-800 rounded-2xl border border-white/5 shadow-lg">
+        <button id="tab-sure" onclick="setMode('sure')" class="mode-tab active">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Ne kadar sürede ulaşırım?
+        </button>
+        <button id="tab-tutar" onclick="setMode('tutar')" class="mode-tab inactive">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+          </svg>
+          Aylık ne kadar biriktirmeliyim?
+        </button>
+      </div>
+    </div>
+
+    <!-- FORM + RESULTS grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+
+      <!-- FORM -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+        <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+          </svg>
+          Hedef Bilgileri
+        </h2>
+
+        <!-- Hedef miktar -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Hedef Miktar</label>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+            <input type="number" id="hedef" class="finput pl-8" placeholder="200.000" min="1" oninput="clearErr('hedef')"/>
+          </div>
+          <p id="hedef-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir hedef tutar girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('hedef',50000)">₺50K</span>
+            <span class="qtag" onclick="sv('hedef',100000)">₺100K</span>
+            <span class="qtag" onclick="sv('hedef',200000)">₺200K</span>
+            <span class="qtag" onclick="sv('hedef',500000)">₺500K</span>
+          </div>
+        </div>
+
+        <!-- Mevcut birikim -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+            Mevcut Birikim <span class="text-slate-500 font-normal normal-case">(opsiyonel)</span>
+          </label>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+            <input type="number" id="mevcut" class="finput pl-8" placeholder="0" min="0" value="0" oninput="clearErr('mevcut')"/>
+          </div>
+          <p id="mevcut-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir değer girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('mevcut',0)">₺0</span>
+            <span class="qtag" onclick="sv('mevcut',10000)">₺10K</span>
+            <span class="qtag" onclick="sv('mevcut',50000)">₺50K</span>
+            <span class="qtag" onclick="sv('mevcut',100000)">₺100K</span>
+          </div>
+        </div>
+
+        <!-- Aylık tasarruf (mode: sure) / Hedef ay sayısı (mode: tutar) -->
+        <div id="field-aylik" class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Aylık Tasarruf Miktarı</label>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+            <input type="number" id="aylik" class="finput pl-8" placeholder="5.000" min="1" oninput="clearErr('aylik')"/>
+          </div>
+          <p id="aylik-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir tutar girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('aylik',2000)">₺2K</span>
+            <span class="qtag" onclick="sv('aylik',5000)">₺5K</span>
+            <span class="qtag" onclick="sv('aylik',10000)">₺10K</span>
+            <span class="qtag" onclick="sv('aylik',20000)">₺20K</span>
+          </div>
+        </div>
+
+        <div id="field-sure" class="mb-5 hidden">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Hedeflenen Süre</label>
+          <div class="relative">
+            <input type="number" id="hedef-ay" class="finput pr-12" placeholder="24" min="1" max="600" oninput="clearErr('hedef-ay')"/>
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">ay</span>
+          </div>
+          <p id="hedef-ay-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir süre girin (1–600 ay).</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('hedef-ay',12)">1 yıl</span>
+            <span class="qtag" onclick="sv('hedef-ay',24)">2 yıl</span>
+            <span class="qtag" onclick="sv('hedef-ay',36)">3 yıl</span>
+            <span class="qtag" onclick="sv('hedef-ay',60)">5 yıl</span>
+          </div>
+        </div>
+
+        <!-- Getiri oranı -->
+        <div class="mb-7">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+            Yıllık Getiri Oranı <span class="text-slate-500 font-normal normal-case">(mevduat/yatırım faizi)</span>
+          </label>
+          <div class="relative">
+            <input type="number" id="getiri" class="finput pr-10" placeholder="8" min="0" max="100" step="0.5" oninput="clearErr('getiri')"/>
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">%</span>
+          </div>
+          <p id="getiri-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir oran girin (0–100).</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('getiri',0)">%0 (nakit)</span>
+            <span class="qtag" onclick="sv('getiri',5)">%5</span>
+            <span class="qtag" onclick="sv('getiri',8)">%8</span>
+            <span class="qtag" onclick="sv('getiri',12)">%12</span>
+          </div>
+        </div>
+
+        <button onclick="hesapla()"
+          class="w-full flex items-center justify-center gap-2 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-base rounded-xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          Hesapla
+        </button>
+        <p class="text-xs text-slate-600 text-center mt-3 leading-relaxed">
+          Aylık döngüsel bileşik getiri formülü kullanılmaktadır. Sonuçlar tahmini niteliktedir.
+        </p>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl flex flex-col">
+        <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          Sonuçlar
+        </h2>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="flex-1 flex flex-col items-center justify-center py-10 text-center">
+          <div class="w-16 h-16 rounded-2xl bg-emerald-500/8 flex items-center justify-center mb-4">
+            <svg class="w-8 h-8 text-emerald-500/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <p class="text-slate-400 text-sm font-medium mb-1">Sonuç bekleniyor</p>
+          <p class="text-slate-600 text-xs">Bilgilerinizi girin ve Hesapla butonuna tıklayın</p>
+        </div>
+
+        <!-- Results -->
+        <div id="results-area" class="hidden flex-1 flex flex-col gap-4">
+
+          <!-- Narrative -->
+          <div id="narrative" class="bg-emerald-500/8 border border-emerald-500/20 rounded-xl px-4 py-3 text-sm text-slate-300 leading-relaxed"></div>
+
+          <!-- HERO: değişken (mode'a göre) -->
+          <div id="hero-card" class="bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border border-emerald-500/25 rounded-xl p-5 text-center">
+            <p id="hero-label" class="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">—</p>
+            <p id="hero-value" class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">—</p>
+            <p id="hero-sub" class="text-slate-400 text-xs mt-2">—</p>
+          </div>
+
+          <!-- Progress ring + kalan hedef -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 flex flex-col items-center justify-center text-center">
+              <div class="relative w-20 h-20 mb-2">
+                <svg class="w-full h-full -rotate-90" viewBox="0 0 90 90">
+                  <circle cx="45" cy="45" r="38" fill="none" stroke="#263348" stroke-width="7"/>
+                  <circle id="goal-ring" cx="45" cy="45" r="38" fill="none" stroke="#10B981" stroke-width="7"
+                    stroke-linecap="round" class="goal-ring" stroke-dashoffset="251.2"/>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span id="ring-pct" class="text-sm font-bold text-white">—</span>
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 font-semibold">Hedefe İlerleme</p>
+            </div>
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 flex flex-col items-center justify-center text-center">
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-2">Kalan Hedef Tutar</p>
+              <p id="kalan-hedef" class="text-xl font-extrabold text-amber-400">—</p>
+              <p class="text-xs text-slate-600 mt-1">bugünden itibaren</p>
+            </div>
+          </div>
+
+          <!-- Toplam birikim + getiri ayrımı -->
+          <div class="bg-navy-700/40 border border-white/5 rounded-xl p-4">
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Birikim Bileşimi (Hedef Anında)</p>
+            <div class="h-3 rounded-full bg-navy-600 overflow-hidden flex mb-3">
+              <div id="bar-mevcut" class="prog h-full bg-violet-400" style="width:0%"></div>
+              <div id="bar-katki"  class="prog h-full bg-sky-400" style="width:0%"></div>
+              <div id="bar-getiri" class="prog h-full bg-emerald-400" style="width:0%"></div>
+            </div>
+            <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500">
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-violet-400"></span>Mevcut: <span id="pct-mevcut" class="text-white font-semibold ml-0.5">—</span></span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-sky-400"></span>Katkı: <span id="pct-katki" class="text-white font-semibold ml-0.5">—</span></span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-400"></span>Getiri: <span id="pct-getiri" class="text-white font-semibold ml-0.5">—</span></span>
+            </div>
+          </div>
+
+          <!-- Detay metrikleri -->
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-3 text-center">
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1 leading-tight">Toplam Katkı</p>
+              <p id="res-katki" class="text-base font-extrabold text-sky-300">—</p>
+            </div>
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-3 text-center">
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1 leading-tight">Getiri Kazancı</p>
+              <p id="res-getiri" class="text-base font-extrabold text-emerald-400">—</p>
+            </div>
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-3 text-center">
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1 leading-tight" id="res-sure-label">Süre</p>
+              <p id="res-sure" class="text-base font-extrabold text-violet-400">—</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- AÇIKLAMA -->
+    <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl mb-4">
+      <h3 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Hesaplama Hakkında
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">İki Mod, Tek Amaç</p>
+            <p class="text-xs text-slate-400 leading-relaxed">İster süreyi öğrenin, ister gerekli aylık tutarı — ikisi de aynı bileşik faiz mantığına dayanır.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-sky-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">Getiri Oranı Önemli</p>
+            <p class="text-xs text-slate-400 leading-relaxed">%0 yerine %8 getiri seçmek, hedefe ulaşma sürenizi belirgin şekilde kısaltabilir.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">Disiplin Şart</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Düzenli aylık tasarruf, tek seferlik büyük katkılardan daha güvenilir sonuç verir.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="bg-navy-950 border-t border-white/5 py-6">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p class="text-xs text-slate-600">© 2025 FinansKolay · Sonuçlar tahmini niteliktedir, yatırım tavsiyesi değildir.</p>
+  </div>
+</footer>
+
+<script>
+var mode = 'sure'; // 'sure' | 'tutar'
+
+function setMode(m) {
+  mode = m;
+  var tS = document.getElementById('tab-sure');
+  var tT = document.getElementById('tab-tutar');
+  var fA = document.getElementById('field-aylik');
+  var fS = document.getElementById('field-sure');
+
+  if (m === 'sure') {
+    tS.className = 'mode-tab active';
+    tT.className = 'mode-tab inactive';
+    fA.classList.remove('hidden');
+    fS.classList.add('hidden');
+  } else {
+    tT.className = 'mode-tab active';
+    tS.className = 'mode-tab inactive';
+    fS.classList.remove('hidden');
+    fA.classList.add('hidden');
+  }
+  document.getElementById('empty-state').classList.remove('hidden');
+  document.getElementById('results-area').classList.add('hidden');
+}
+
+function sv(id, v) { document.getElementById(id).value = v; clearErr(id); }
+
+function clearErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.remove('err');
+  if (er) er.classList.add('hidden');
+}
+function showErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.add('err');
+  if (er) er.classList.remove('hidden');
+  return false;
+}
+
+function fmt(n) {
+  if (n >= 1e9) return '₺' + (n/1e9).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' Mr';
+  if (n >= 1e6) return '₺' + (n/1e6).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' Mn';
+  return '₺' + Math.round(n).toLocaleString('tr-TR');
+}
+function fmtPct(n) { return '%' + n.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
+
+// FV: mevcut + aylık katkı (n ay), aylık bileşik
+function fv(pv, pmt, rAylik, n) {
+  var lump = pv * Math.pow(1+rAylik, n);
+  var ann  = rAylik === 0 ? pmt * n : pmt * (Math.pow(1+rAylik, n) - 1) / rAylik;
+  return lump + ann;
+}
+
+function hesapla() {
+  var hedefV  = parseFloat(document.getElementById('hedef').value);
+  var mevcutV = parseFloat(document.getElementById('mevcut').value) || 0;
+  var getiriV = parseFloat(document.getElementById('getiri').value);
+
+  var ok = true;
+  if (isNaN(hedefV) || hedefV <= 0)            ok = showErr('hedef');
+  if (isNaN(mevcutV) || mevcutV < 0)           ok = showErr('mevcut');
+  if (isNaN(getiriV) || getiriV < 0 || getiriV > 100) ok = showErr('getiri');
+
+  var aylikV, hedefAyV;
+  if (mode === 'sure') {
+    aylikV = parseFloat(document.getElementById('aylik').value);
+    if (isNaN(aylikV) || aylikV <= 0) ok = showErr('aylik');
+  } else {
+    hedefAyV = parseInt(document.getElementById('hedef-ay').value);
+    if (isNaN(hedefAyV) || hedefAyV < 1 || hedefAyV > 600) ok = showErr('hedef-ay');
+  }
+
+  if (mevcutV >= hedefV && mode === 'sure') {
+    // Already reached
+  }
+
+  if (!ok) return;
+
+  var rAylik = (getiriV/100) / 12;
+
+  document.getElementById('empty-state').classList.add('hidden');
+  var ra = document.getElementById('results-area');
+  ra.classList.remove('hidden');
+  ra.classList.add('fade-up');
+
+  if (mode === 'sure') {
+    // ── Mode 1: Ne kadar sürede ulaşırım? ──
+    if (mevcutV >= hedefV) {
+      // Already there
+      document.getElementById('narrative').innerHTML =
+        '<span class="font-semibold text-emerald-400">Tebrikler!</span> Mevcut birikiminiz zaten hedefe ulaşmış durumda.';
+      document.getElementById('hero-label').textContent = 'Hedefe Ulaşma Süresi';
+      document.getElementById('hero-value').textContent = '0 Ay';
+      document.getElementById('hero-sub').textContent = 'Hedefiniz şu an karşılanıyor';
+      document.getElementById('kalan-hedef').textContent = fmt(0);
+      document.getElementById('ring-pct').textContent = '100%';
+      setTimeout(function(){ document.getElementById('goal-ring').style.strokeDashoffset = 0; }, 60);
+      document.getElementById('res-katki').textContent = fmt(0);
+      document.getElementById('res-getiri').textContent = fmt(0);
+      document.getElementById('res-sure-label').textContent = 'Yıl';
+      document.getElementById('res-sure').textContent = '0';
+      ['bar-mevcut','bar-katki','bar-getiri'].forEach(function(id){ document.getElementById(id).style.width='0%'; });
+      document.getElementById('bar-mevcut').style.width='100%';
+      document.getElementById('pct-mevcut').textContent='%100';
+      document.getElementById('pct-katki').textContent='%0';
+      document.getElementById('pct-getiri').textContent='%0';
+      return;
+    }
+
+    // Binary-search / iterative: find n (months) such that fv(mevcut, aylik, r, n) >= hedef
+    var n = 0;
+    var maxAy = 1200; // 100 yıl cap
+    var cur = mevcutV;
+    while (cur < hedefV && n < maxAy) {
+      cur = cur * (1 + rAylik) + aylikV;
+      n++;
+    }
+
+    var ulasildi = n < maxAy;
+    var toplamKatki = mevcutV + aylikV * n;
+    var toplamDeger = cur;
+    var getiriKazanc = toplamDeger - toplamKatki;
+    var yil = Math.floor(n/12);
+    var ayKalan = n % 12;
+
+    var sureTxt = (yil>0 ? yil+' yıl ' : '') + (ayKalan>0 || yil===0 ? ayKalan+' ay' : '');
+
+    document.getElementById('narrative').innerHTML = ulasildi
+      ? '<span class="font-semibold text-white">' + fmt(hedefV) + '</span> hedefinize ' +
+        '<span class="font-semibold text-emerald-400">' + sureTxt + '</span> içinde ulaşmanız bekleniyor. ' +
+        'Bu sürede toplam <span class="font-semibold text-white">' + fmt(toplamKatki) + '</span> katkı yapacak, ' +
+        '<span class="font-semibold text-emerald-400">' + fmt(getiriKazanc) + '</span> getiri kazanacaksınız.'
+      : '<span class="text-rose-400 font-semibold">100 yıl içinde hedefe ulaşılamıyor.</span> Aylık tasarrufunuzu veya getiri oranınızı artırmayı deneyin.';
+
+    document.getElementById('hero-label').textContent = 'Hedefe Ulaşma Süresi';
+    document.getElementById('hero-value').textContent = ulasildi ? sureTxt : '100+ Yıl';
+    document.getElementById('hero-sub').textContent = ulasildi ? (n + ' ay sürecek') : 'Parametreleri gözden geçirin';
+
+    var kalanHedef = Math.max(0, hedefV - mevcutV);
+    document.getElementById('kalan-hedef').textContent = fmt(kalanHedef);
+
+    var ringPct = Math.min(100, mevcutV / hedefV * 100);
+    document.getElementById('ring-pct').textContent = ringPct.toFixed(0) + '%';
+    setTimeout(function(){ document.getElementById('goal-ring').style.strokeDashoffset = 251.2 * (1 - ringPct/100); }, 60);
+
+    document.getElementById('res-katki').textContent  = fmt(toplamKatki);
+    document.getElementById('res-getiri').textContent = fmt(getiriKazanc);
+    document.getElementById('res-sure-label').textContent = 'Toplam Ay';
+    document.getElementById('res-sure').textContent = n;
+
+    var pM = mevcutV / toplamDeger * 100;
+    var pK = (toplamKatki - mevcutV) / toplamDeger * 100;
+    var pG = getiriKazanc / toplamDeger * 100;
+    setTimeout(function(){
+      document.getElementById('bar-mevcut').style.width = pM + '%';
+      document.getElementById('bar-katki').style.width  = pK + '%';
+      document.getElementById('bar-getiri').style.width = pG + '%';
+    }, 80);
+    document.getElementById('pct-mevcut').textContent = fmtPct(pM);
+    document.getElementById('pct-katki').textContent  = fmtPct(pK);
+    document.getElementById('pct-getiri').textContent = fmtPct(pG);
+
+  } else {
+    // ── Mode 2: Aylık ne kadar biriktirmeliyim? ──
+    var n2 = hedefAyV;
+    var r = rAylik;
+    var mevcutFV = mevcutV * Math.pow(1+r, n2);
+    var kalan = hedefV - mevcutFV;
+
+    var aylikGerekli;
+    if (kalan <= 0) {
+      aylikGerekli = 0;
+    } else if (r === 0) {
+      aylikGerekli = kalan / n2;
+    } else {
+      aylikGerekli = kalan * r / (Math.pow(1+r, n2) - 1);
+    }
+    aylikGerekli = Math.max(0, aylikGerekli);
+
+    var toplamKatki2 = mevcutV + aylikGerekli * n2;
+    var toplamDeger2 = hedefV;
+    var getiriKazanc2 = toplamDeger2 - toplamKatki2;
+    var yil2 = Math.floor(n2/12);
+    var ayKalan2 = n2 % 12;
+    var sureTxt2 = (yil2>0 ? yil2+' yıl ' : '') + (ayKalan2>0 || yil2===0 ? ayKalan2+' ay' : '');
+
+    document.getElementById('narrative').innerHTML =
+      '<span class="font-semibold text-white">' + fmt(hedefV) + '</span> hedefe ' +
+      '<span class="font-semibold text-emerald-400">' + sureTxt2 + '</span> içinde ulaşmak için ayda ' +
+      '<span class="font-bold text-emerald-400">' + fmt(aylikGerekli) + '</span> tasarruf etmeniz gerekiyor.';
+
+    document.getElementById('hero-label').textContent = 'Gereken Aylık Tasarruf';
+    document.getElementById('hero-value').textContent = fmt(aylikGerekli);
+    document.getElementById('hero-sub').textContent = sureTxt2 + ' boyunca her ay';
+
+    document.getElementById('kalan-hedef').textContent = fmt(Math.max(0,kalan));
+
+    var ringPct2 = mevcutV>0 ? Math.min(100, mevcutFV/hedefV*100) : 0;
+    document.getElementById('ring-pct').textContent = ringPct2.toFixed(0) + '%';
+    setTimeout(function(){ document.getElementById('goal-ring').style.strokeDashoffset = 251.2 * (1 - ringPct2/100); }, 60);
+
+    document.getElementById('res-katki').textContent  = fmt(toplamKatki2);
+    document.getElementById('res-getiri').textContent = fmt(getiriKazanc2);
+    document.getElementById('res-sure-label').textContent = 'Hedef Süre (Ay)';
+    document.getElementById('res-sure').textContent = n2;
+
+    var pM2 = mevcutV / toplamDeger2 * 100;
+    var pK2 = (aylikGerekli * n2) / toplamDeger2 * 100;
+    var pG2 = getiriKazanc2 / toplamDeger2 * 100;
+    setTimeout(function(){
+      document.getElementById('bar-mevcut').style.width = pM2 + '%';
+      document.getElementById('bar-katki').style.width  = pK2 + '%';
+      document.getElementById('bar-getiri').style.width = pG2 + '%';
+    }, 80);
+    document.getElementById('pct-mevcut').textContent = fmtPct(pM2);
+    document.getElementById('pct-katki').textContent  = fmtPct(pK2);
+    document.getElementById('pct-getiri').textContent = fmtPct(pG2);
+  }
+
+  if (window.innerWidth < 1024) {
+    ra.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+// Enter key
+['hedef','mevcut','aylik','hedef-ay','getiri'].forEach(function(id){
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('keydown', function(e){ if (e.key==='Enter') hesapla(); });
+});
+</script>
+</body>
+</html>

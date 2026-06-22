@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Konut Kredisi vs Kira – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 950:'#070E1A', 900:'#0F172A', 800:'#1E293B', 700:'#263348', 600:'#334155' }
+          },
+          fontFamily: {
+            sans:['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .navbar-blur {
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,.92);
+      border-bottom: 1px solid rgba(16,185,129,.12);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    .finput {
+      background: #1E293B; border: 1.5px solid rgba(255,255,255,.08); color: #f1f5f9;
+      border-radius: .75rem; padding: .75rem 1rem; width: 100%; font-size: .9375rem;
+      outline: none; transition: border-color .18s, box-shadow .18s;
+    }
+    .finput:focus { border-color: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,.15); }
+    .finput::placeholder { color: #475569; }
+    .finput.err { border-color: #f43f5e; box-shadow: 0 0 0 3px rgba(244,63,94,.12); }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(10px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .fade-up { animation: fadeUp .42s ease forwards; }
+
+    .prog { transition: width .9s cubic-bezier(.4,0,.2,1); }
+
+    .qtag {
+      font-size:.6875rem; padding:.2rem .65rem; border-radius:9999px; font-weight:600;
+      transition:all .18s; cursor:pointer; border:1px solid rgba(255,255,255,.06);
+      background:#263348; color:#64748b; white-space:nowrap; display:inline-block;
+    }
+    .qtag:hover { color:#10B981; border-color:rgba(16,185,129,.3); background:rgba(16,185,129,.08); }
+
+    /* Scenario card hover lift */
+    .scen-card { transition: transform .22s, box-shadow .22s; }
+    .scen-card:hover { transform: translateY(-3px); }
+
+    .win-glow  { box-shadow: 0 0 0 2px #10B981, 0 8px 32px rgba(16,185,129,.18); }
+    .lose-glow { box-shadow: 0 0 0 1px rgba(244,63,94,.3); }
+
+    ::-webkit-scrollbar { width:4px; }
+    ::-webkit-scrollbar-track { background:#0F172A; }
+    ::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+<!-- NAVBAR -->
+<header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+    <a href="finanskolay.html"
+      class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+      <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <span class="hidden sm:inline">Geri Dön</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-lg bg-sky-500/15 flex items-center justify-center">
+        <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+      </div>
+      <span class="font-semibold text-white text-sm sm:text-base">Konut Kredisi vs Kira</span>
+    </div>
+    <a href="finanskolay.html" class="flex items-center gap-2 group">
+      <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">
+        Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+      </span>
+    </a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="pt-16 pb-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Page header -->
+    <div class="py-8 sm:py-12 text-center">
+      <p class="text-sky-400 text-xs font-semibold tracking-widest uppercase mb-2">Günlük Yaşam</p>
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
+        Kira mı, Ev mi Alsam?
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        Konut kredisiyle ev almanın mı yoksa kirada yaşamaya devam etmenin mi daha avantajlı olduğunu
+        net rakamlarla karşılaştırın.
+      </p>
+    </div>
+
+    <!-- FORM + RESULTS grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 mb-8">
+
+      <!-- FORM (2/5) -->
+      <div class="lg:col-span-2 bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+        <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+          </svg>
+          Hesaplama Parametreleri
+        </h2>
+
+        <!-- Konut fiyatı -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Konut Fiyatı</label>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+            <input type="number" id="konut-fiyat" class="finput pl-8" placeholder="3.500.000" min="1" oninput="clearErr('konut-fiyat')"/>
+          </div>
+          <p id="konut-fiyat-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir fiyat girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('konut-fiyat',2000000)">₺2M</span>
+            <span class="qtag" onclick="sv('konut-fiyat',3500000)">₺3.5M</span>
+            <span class="qtag" onclick="sv('konut-fiyat',5000000)">₺5M</span>
+            <span class="qtag" onclick="sv('konut-fiyat',8000000)">₺8M</span>
+          </div>
+        </div>
+
+        <!-- Peşinat oranı -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Peşinat Oranı</label>
+          <div class="relative">
+            <input type="number" id="pesinat-oran" class="finput pr-10" placeholder="20" min="1" max="99" step="1" oninput="clearErr('pesinat-oran'); updatePesinatTutar()"/>
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">%</span>
+          </div>
+          <p id="pesinat-oran-err" class="text-xs text-rose-400 mt-1.5 hidden">1–99 arası girin.</p>
+          <p id="pesinat-tutar" class="text-xs text-emerald-400 mt-1.5 hidden"></p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('pesinat-oran',10); updatePesinatTutar()">%10</span>
+            <span class="qtag" onclick="sv('pesinat-oran',20); updatePesinatTutar()">%20</span>
+            <span class="qtag" onclick="sv('pesinat-oran',30); updatePesinatTutar()">%30</span>
+            <span class="qtag" onclick="sv('pesinat-oran',40); updatePesinatTutar()">%40</span>
+          </div>
+        </div>
+
+        <!-- Faiz oranı -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Yıllık Kredi Faiz Oranı</label>
+          <div class="relative">
+            <input type="number" id="faiz" class="finput pr-10" placeholder="3.50" min="0.1" max="100" step="0.1" oninput="clearErr('faiz')"/>
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">%</span>
+          </div>
+          <p id="faiz-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir oran girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('faiz',2.5)">%2.5</span>
+            <span class="qtag" onclick="sv('faiz',3.5)">%3.5</span>
+            <span class="qtag" onclick="sv('faiz',5.0)">%5.0</span>
+            <span class="qtag" onclick="sv('faiz',7.5)">%7.5</span>
+          </div>
+        </div>
+
+        <!-- Vade -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Kredi Vadesi</label>
+          <div class="relative">
+            <input type="number" id="vade" class="finput pr-12" placeholder="120" min="12" max="360" step="12" oninput="clearErr('vade')"/>
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">ay</span>
+          </div>
+          <p id="vade-err" class="text-xs text-rose-400 mt-1.5 hidden">12–360 ay arasında girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('vade',60)">5 yıl</span>
+            <span class="qtag" onclick="sv('vade',120)">10 yıl</span>
+            <span class="qtag" onclick="sv('vade',180)">15 yıl</span>
+            <span class="qtag" onclick="sv('vade',240)">20 yıl</span>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="relative my-5">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/6"></div></div>
+          <div class="relative flex justify-center">
+            <span class="bg-navy-800 px-3 text-xs text-slate-500 uppercase tracking-widest font-semibold">Kira Bilgileri</span>
+          </div>
+        </div>
+
+        <!-- Kira -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Aylık Kira Bedeli</label>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+            <input type="number" id="kira" class="finput pl-8" placeholder="25.000" min="1" oninput="clearErr('kira')"/>
+          </div>
+          <p id="kira-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir kira girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('kira',15000)">₺15K</span>
+            <span class="qtag" onclick="sv('kira',25000)">₺25K</span>
+            <span class="qtag" onclick="sv('kira',40000)">₺40K</span>
+            <span class="qtag" onclick="sv('kira',60000)">₺60K</span>
+          </div>
+        </div>
+
+        <!-- Kira artış oranı -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+            Yıllık Kira Artış Oranı
+            <span class="ml-1 text-slate-500 font-normal normal-case">(TÜFE)</span>
+          </label>
+          <div class="relative">
+            <input type="number" id="kira-artis" class="finput pr-10" placeholder="25" min="0" max="200" step="1" oninput="clearErr('kira-artis')"/>
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">%</span>
+          </div>
+          <p id="kira-artis-err" class="text-xs text-rose-400 mt-1.5 hidden">0–200 arası girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('kira-artis',10)">%10</span>
+            <span class="qtag" onclick="sv('kira-artis',25)">%25</span>
+            <span class="qtag" onclick="sv('kira-artis',40)">%40</span>
+          </div>
+        </div>
+
+        <!-- Konut değer artışı -->
+        <div class="mb-7">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+            Beklenen Yıllık Konut Değer Artışı
+          </label>
+          <div class="relative">
+            <input type="number" id="deger-artis" class="finput pr-10" placeholder="15" min="0" max="100" step="1" oninput="clearErr('deger-artis')"/>
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">%</span>
+          </div>
+          <p id="deger-artis-err" class="text-xs text-rose-400 mt-1.5 hidden">0–100 arası girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('deger-artis',10)">%10</span>
+            <span class="qtag" onclick="sv('deger-artis',15)">%15</span>
+            <span class="qtag" onclick="sv('deger-artis',20)">%20</span>
+            <span class="qtag" onclick="sv('deger-artis',30)">%30</span>
+          </div>
+        </div>
+
+        <button onclick="hesapla()"
+          class="w-full flex items-center justify-center gap-2 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-base rounded-xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          Karşılaştır
+        </button>
+        <p class="text-xs text-slate-600 text-center mt-3 leading-relaxed">
+          Hesaplama tahmini niteliktedir; vergi, aidat ve bakım giderleri dahil değildir.
+        </p>
+      </div>
+
+      <!-- RESULTS (3/5) -->
+      <div class="lg:col-span-3 flex flex-col gap-5">
+
+        <!-- Empty state -->
+        <div id="empty-state"
+          class="flex-1 bg-navy-800 rounded-2xl border border-white/5 p-10 shadow-xl flex flex-col items-center justify-center text-center min-h-64">
+          <div class="w-16 h-16 rounded-2xl bg-sky-500/8 flex items-center justify-center mb-4">
+            <svg class="w-8 h-8 text-sky-500/25" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+          </div>
+          <p class="text-slate-400 text-sm font-medium mb-1">Karşılaştırma bekleniyor</p>
+          <p class="text-slate-600 text-xs">Parametreleri girin ve Karşılaştır butonuna tıklayın</p>
+        </div>
+
+        <!-- Results wrapper -->
+        <div id="results-wrapper" class="hidden flex-col gap-5 fade-up">
+
+          <!-- Narrative banner -->
+          <div id="narrative"
+            class="bg-navy-800 border border-white/5 rounded-2xl px-5 py-4 shadow-xl text-sm text-slate-300 leading-relaxed">
+          </div>
+
+          <!-- Two scenario cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <!-- Kredi kartı -->
+            <div id="card-kredi"
+              class="scen-card bg-navy-800 rounded-2xl border p-5 shadow-xl"
+              style="border-color:rgba(16,185,129,.25); background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(16,185,129,.04))">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+                  <span class="text-sm font-bold text-emerald-300">Krediyle Ev Al</span>
+                </div>
+                <span id="badge-kredi" class="text-xs font-bold px-2.5 py-0.5 rounded-full hidden"></span>
+              </div>
+
+              <div class="mb-4">
+                <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-1">Net Maliyet (Vade Sonu)</p>
+                <p id="k-net" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">—</p>
+              </div>
+
+              <div class="space-y-2.5 text-xs">
+                <div class="flex justify-between py-2 border-t border-white/5">
+                  <span class="text-slate-400">Aylık Taksit</span>
+                  <span id="k-taksit" class="font-bold text-emerald-400">—</span>
+                </div>
+                <div class="flex justify-between py-2 border-t border-white/5">
+                  <span class="text-slate-400">Peşinat</span>
+                  <span id="k-pesinat" class="font-bold text-white">—</span>
+                </div>
+                <div class="flex justify-between py-2 border-t border-white/5">
+                  <span class="text-slate-400">Toplam Kredi Ödemesi</span>
+                  <span id="k-toplam-odeme" class="font-bold text-white">—</span>
+                </div>
+                <div class="flex justify-between py-2 border-t border-white/5">
+                  <span class="text-slate-400">Toplam Faiz</span>
+                  <span id="k-faiz" class="font-bold text-rose-400">—</span>
+                </div>
+                <div class="flex justify-between py-2 border-t border-white/5">
+                  <span class="text-slate-400">Konut Değeri (vade sonu)</span>
+                  <span id="k-deger" class="font-bold text-emerald-400">—</span>
+                </div>
+                <div class="flex justify-between py-2 border-t border-emerald-500/25">
+                  <span class="text-emerald-300 font-semibold">Tahmini Servet Kazancı</span>
+                  <span id="k-kazanc" class="font-extrabold text-emerald-400">—</span>
+                </div>
+              </div>
+
+              <!-- Cost bar -->
+              <div class="mt-4">
+                <div class="h-2 rounded-full bg-navy-700 overflow-hidden flex">
+                  <div id="k-bar-ana" class="prog h-full bg-sky-400" style="width:0%"></div>
+                  <div id="k-bar-faiz" class="prog h-full bg-rose-400" style="width:0%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-slate-500 mt-1.5">
+                  <span>Anapara <span id="k-pct-ana" class="text-slate-300 font-medium">—</span></span>
+                  <span>Faiz <span id="k-pct-faiz" class="text-slate-300 font-medium">—</span></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kira kartı -->
+            <div id="card-kira"
+              class="scen-card bg-navy-800 rounded-2xl border p-5 shadow-xl"
+              style="border-color:rgba(244,63,94,.2); background:linear-gradient(135deg,rgba(244,63,94,.1),rgba(244,63,94,.03))">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-3 h-3 rounded-full bg-rose-400"></div>
+                  <span class="text-sm font-bold text-rose-300">Kirada Kal</span>
+                </div>
+                <span id="badge-kira" class="text-xs font-bold px-2.5 py-0.5 rounded-full hidden"></span>
+              </div>
+
+              <div class="mb-4">
+                <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-1">Toplam Kira Ödemesi</p>
+                <p id="r-toplam" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">—</p>
+              </div>
+
+              <div class="space-y-2.5 text-xs">
+                <div class="flex justify-between py-2 border-t border-white/5">
+                  <span class="text-slate-400">Başlangıç Kira</span>
+                  <span id="r-baslangic" class="font-bold text-white">—</span>
+                </div>
+                <div class="flex justify-between py-2 border-t border-white/5">
+                  <span class="text-slate-400">Vade Sonu Kira</span>
+                  <span id="r-son" class="font-bold text-rose-400">—</span>
+                </div>
+                <div class="flex justify-between py-2 border-t border-white/5">
+                  <span class="text-slate-400">Yıllık Artış Oranı</span>
+                  <span id="r-artis" class="font-bold text-white">—</span>
+                </div>
+                <div class="flex justify-between py-2 border-t border-white/5">
+                  <span class="text-slate-400">Servet Birikimi</span>
+                  <span class="text-slate-500 font-semibold">₺0 (mülk yok)</span>
+                </div>
+                <div class="flex justify-between py-2 border-t border-white/5">
+                  <span class="text-slate-400">Esneklik</span>
+                  <span class="text-emerald-400 font-semibold">✓ Yüksek</span>
+                </div>
+                <div class="flex justify-between py-2 border-t border-rose-500/20">
+                  <span class="text-rose-300 font-semibold">Kaybedilen Fırsat</span>
+                  <span id="r-firsat" class="font-extrabold text-rose-400">—</span>
+                </div>
+              </div>
+
+              <!-- Kira artış bar -->
+              <div class="mt-4">
+                <p class="text-xs text-slate-500 mb-1.5">Kira yükü (başlangıç → vade sonu)</p>
+                <div class="h-2 rounded-full bg-navy-700 overflow-hidden flex">
+                  <div id="r-bar-bas" class="prog h-full bg-rose-400/50" style="width:0%"></div>
+                  <div id="r-bar-art" class="prog h-full bg-rose-500" style="width:0%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-slate-500 mt-1.5">
+                  <span>Başlangıç <span id="r-pct-bas" class="text-slate-300 font-medium">—</span></span>
+                  <span>Artış <span id="r-pct-art" class="text-slate-300 font-medium">—</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Verdict / Fark kartı -->
+          <div id="verdict-card"
+            class="bg-navy-800 rounded-2xl border border-white/5 p-5 sm:p-6 shadow-xl">
+            <h3 class="text-sm font-bold text-white mb-4 flex items-center gap-2">
+              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Karar Özeti
+            </h3>
+            <div id="verdict-text" class="text-sm text-slate-300 leading-relaxed mb-5"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="bg-navy-700/50 border border-white/5 rounded-xl p-4 text-center">
+                <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-2">Toplam Maliyet Farkı</p>
+                <p id="fark-maliyet" class="text-xl font-extrabold">—</p>
+                <p id="fark-maliyet-lbl" class="text-xs text-slate-500 mt-1"></p>
+              </div>
+              <div class="bg-navy-700/50 border border-white/5 rounded-xl p-4 text-center">
+                <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-2">Konut Değer Artışı</p>
+                <p id="fark-deger" class="text-xl font-extrabold text-emerald-400">—</p>
+                <p class="text-xs text-slate-500 mt-1">vade sonunda</p>
+              </div>
+              <div class="bg-navy-700/50 border border-white/5 rounded-xl p-4 text-center">
+                <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-2">Başa Baş Noktası</p>
+                <p id="fark-basabas" class="text-xl font-extrabold text-amber-400">—</p>
+                <p class="text-xs text-slate-500 mt-1">tahmini süre</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Yıllık özet tablo -->
+          <div class="bg-navy-800 rounded-2xl border border-white/5 shadow-xl overflow-hidden">
+            <div class="px-5 sm:px-6 py-4 border-b border-white/5 flex items-center justify-between">
+              <div>
+                <h3 class="text-sm font-bold text-white">Yıllık Karşılaştırma</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Yıl bazında kümülatif kira ödemesi vs kredi ödemesi</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <label class="text-xs text-slate-400">Göster:</label>
+                <select id="show-count" onchange="renderYillik()"
+                  class="bg-navy-700 border border-white/8 text-slate-300 text-xs rounded-lg px-3 py-1.5 outline-none focus:border-emerald-500">
+                  <option value="10">İlk 10 yıl</option>
+                  <option value="20">İlk 20 yıl</option>
+                  <option value="all">Tümü</option>
+                </select>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs">
+                <thead>
+                  <tr class="bg-navy-700/50">
+                    <th class="text-left text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-5 py-2.5">Yıl</th>
+                    <th class="text-right text-xs font-semibold text-emerald-400 uppercase tracking-wide px-3 py-2.5">Kredi Ödemesi</th>
+                    <th class="text-right text-xs font-semibold text-rose-400 uppercase tracking-wide px-3 py-2.5">Kira Ödemesi</th>
+                    <th class="text-right text-xs font-semibold text-amber-400 uppercase tracking-wide px-3 py-2.5">Konut Değeri</th>
+                    <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-5 py-2.5">Fark</th>
+                  </tr>
+                </thead>
+                <tbody id="yillik-tbody" class="divide-y divide-white/4"></tbody>
+              </table>
+            </div>
+          </div>
+
+        </div><!-- /results-wrapper -->
+      </div>
+    </div>
+
+    <!-- AÇIKLAMA -->
+    <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl mb-4">
+      <h3 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Karar Verirken Göz Önünde Bulundurun
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">Gizli Maliyetler</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Tapu harcı, sigorta, aidat, bakım ve tadilat ev sahipliğinin görünmez giderleridir.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-sky-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">Fırsat Maliyeti</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Peşinat olarak bağlanan para alternatif yatırımlarda değerlendirilebilirdi.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">Yaşam Planı</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Uzun vadeli ikamet planı varsa ev almak mantıklıdır; kısa vadede kira daha esnek.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-violet-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">Piyasa Belirsizliği</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Konut değer artışı tahminlere dayalıdır; piyasa koşulları beklenmedik şekilde değişebilir.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="bg-navy-950 border-t border-white/5 py-6">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p class="text-xs text-slate-600">
+      © 2025 FinansKolay · Sonuçlar tahmini niteliktedir, yatırım tavsiyesi değildir. Kesin kararlar için mali danışman görüşü alın.
+    </p>
+  </div>
+</footer>
+
+<script>
+var yillikData = [];
+
+function sv(id, v) { document.getElementById(id).value = v; clearErr(id); }
+
+function clearErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.remove('err');
+  if (er) er.classList.add('hidden');
+}
+function showErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.add('err');
+  if (er) er.classList.remove('hidden');
+  return false;
+}
+
+function updatePesinatTutar() {
+  var fiyat = parseFloat(document.getElementById('konut-fiyat').value);
+  var oran  = parseFloat(document.getElementById('pesinat-oran').value);
+  var lbl   = document.getElementById('pesinat-tutar');
+  if (fiyat > 0 && oran > 0 && oran < 100) {
+    var tutar = fiyat * oran / 100;
+    lbl.textContent = 'Peşinat tutarı: ' + fmt(tutar);
+    lbl.classList.remove('hidden');
+  } else {
+    lbl.classList.add('hidden');
+  }
+}
+
+function fmt(n) {
+  if (n >= 1e9) return '₺' + (n/1e9).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' Mr';
+  if (n >= 1e6) return '₺' + (n/1e6).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' Mn';
+  return '₺' + Math.round(n).toLocaleString('tr-TR');
+}
+function fmtFull(n) { return '₺' + Math.round(n).toLocaleString('tr-TR'); }
+function fmtPct(n) { return '%' + n.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
+
+function hesapla() {
+  var fiyat      = parseFloat(document.getElementById('konut-fiyat').value);
+  var pesinatOr  = parseFloat(document.getElementById('pesinat-oran').value);
+  var faizYillik = parseFloat(document.getElementById('faiz').value);
+  var vadeAy     = parseInt(document.getElementById('vade').value);
+  var kira0      = parseFloat(document.getElementById('kira').value);
+  var kiraArtis  = parseFloat(document.getElementById('kira-artis').value);
+  var degerArtis = parseFloat(document.getElementById('deger-artis').value);
+
+  var ok = true;
+  if (isNaN(fiyat)      || fiyat <= 0)                ok = showErr('konut-fiyat');
+  if (isNaN(pesinatOr)  || pesinatOr<1||pesinatOr>99) ok = showErr('pesinat-oran');
+  if (isNaN(faizYillik) || faizYillik<0.1||faizYillik>100) ok = showErr('faiz');
+  if (isNaN(vadeAy)     || vadeAy<12||vadeAy>360)     ok = showErr('vade');
+  if (isNaN(kira0)      || kira0 <= 0)                ok = showErr('kira');
+  if (isNaN(kiraArtis)  || kiraArtis<0||kiraArtis>200) ok = showErr('kira-artis');
+  if (isNaN(degerArtis) || degerArtis<0||degerArtis>100) ok = showErr('deger-artis');
+  if (!ok) return;
+
+  var pesinat   = fiyat * pesinatOr / 100;
+  var krediTut  = fiyat - pesinat;
+  var vadeYil   = vadeAy / 12;
+  var rAylik    = (faizYillik / 100) / 12;
+
+  // Aylık taksit (amortisman)
+  var taksit;
+  if (rAylik === 0) {
+    taksit = krediTut / vadeAy;
+  } else {
+    taksit = krediTut * (rAylik * Math.pow(1+rAylik, vadeAy)) / (Math.pow(1+rAylik, vadeAy) - 1);
+  }
+
+  var toplamKrediOdeme = taksit * vadeAy;
+  var toplamFaiz       = toplamKrediOdeme - krediTut;
+  var toplamKrediMaliyet = pesinat + toplamKrediOdeme; // peşinat + kredi ödemeleri
+
+  // Konut değeri (bileşik)
+  var konutDeger = fiyat * Math.pow(1 + degerArtis/100, vadeYil);
+  var degerKazanc = konutDeger - fiyat; // salt artış
+
+  // Net maliyet = toplam ödenen - konut değeri (yani özkaynak)
+  // Servet kazancı = konut değeri - toplam ödenen (peşinat dahil)
+  var krediNetMaliyet = toplamKrediMaliyet; // gerçek harcama
+  var krediServet     = konutDeger - toplamKrediMaliyet; // + ise kazandı, - ise kaybetti
+
+  // Kira: yıllık artan
+  var toplamKira = 0;
+  var kiraYilSonu = kira0;
+  for (var y = 1; y <= vadeYil; y++) {
+    var kiraYillikBu = 0;
+    var kiraAylik = (y === 1) ? kira0 : kira0 * Math.pow(1 + kiraArtis/100, y-1);
+    for (var ay = 0; ay < 12; ay++) {
+      kiraYillikBu += kiraAylik;
+    }
+    toplamKira += kiraYillikBu;
+    kiraYilSonu = kiraAylik;
+  }
+
+  // Fırsat maliyeti kira tarafı (sadece kaybedilen servet = konut değer artışı)
+  var kiraFirsat = konutDeger - fiyat; // büyüme
+
+  // Başa baş: kaç yılda toplam kredi maliyeti = toplam kira
+  var basabas = null;
+  var kumKredi = pesinat; // peşinat başta çıkıyor
+  var kumKira  = 0;
+  for (var y2 = 1; y2 <= 50; y2++) {
+    // Kredi ödemesi (taksit × 12, vade bittikten sonra 0)
+    kumKredi += (y2 <= vadeYil) ? (taksit * 12) : 0;
+    // Kira ödemesi (artan)
+    var kiraY = kira0 * Math.pow(1 + kiraArtis/100, y2-1);
+    kumKira  += kiraY * 12;
+    if (kumKredi >= kumKira && basabas === null) {
+      basabas = y2;
+    }
+  }
+
+  // Yıllık tablo verisi
+  yillikData = [];
+  var cumKredi2 = pesinat;
+  var cumKira2  = 0;
+  for (var y3 = 1; y3 <= vadeYil; y3++) {
+    cumKredi2 += (y3 <= vadeYil) ? taksit * 12 : 0;
+    var kiraYY = kira0 * Math.pow(1 + kiraArtis/100, y3-1);
+    cumKira2  += kiraYY * 12;
+    var konutY = fiyat * Math.pow(1 + degerArtis/100, y3);
+    yillikData.push({ yil:y3, kredi:cumKredi2, kira:cumKira2, konut:konutY });
+  }
+
+  // ── RENDER ──
+  document.getElementById('empty-state').classList.add('hidden');
+  var rw = document.getElementById('results-wrapper');
+  rw.classList.remove('hidden');
+  rw.classList.add('fade-up');
+
+  // Narrative
+  var winner = krediServet > 0 ? 'kredi' : 'belirsiz';
+  document.getElementById('narrative').innerHTML =
+    '<span class="font-semibold text-white">' + Math.round(vadeYil) + ' yıllık</span> hesaplamada: ' +
+    'Toplam kredi maliyeti <span class="text-emerald-400 font-bold">' + fmt(toplamKrediMaliyet) + '</span>, ' +
+    'toplam kira ödemesi <span class="text-rose-400 font-bold">' + fmt(toplamKira) + '</span>. ' +
+    'Konutun vade sonu değeri <span class="font-bold text-white">' + fmt(konutDeger) + '</span> olarak tahmin ediliyor.';
+
+  // Kredi kartı
+  document.getElementById('k-net').textContent          = fmt(toplamKrediMaliyet);
+  document.getElementById('k-taksit').textContent       = fmtFull(taksit) + ' / ay';
+  document.getElementById('k-pesinat').textContent      = fmt(pesinat);
+  document.getElementById('k-toplam-odeme').textContent = fmt(toplamKrediOdeme);
+  document.getElementById('k-faiz').textContent         = fmt(toplamFaiz);
+  document.getElementById('k-deger').textContent        = fmt(konutDeger);
+  document.getElementById('k-kazanc').textContent       = (krediServet >= 0 ? '+' : '') + fmt(krediServet);
+
+  var pctAna  = krediTut / toplamKrediOdeme * 100;
+  var pctFaiz = toplamFaiz / toplamKrediOdeme * 100;
+  document.getElementById('k-pct-ana').textContent  = fmtPct(pctAna);
+  document.getElementById('k-pct-faiz').textContent = fmtPct(pctFaiz);
+  setTimeout(function(){
+    document.getElementById('k-bar-ana').style.width  = pctAna  + '%';
+    document.getElementById('k-bar-faiz').style.width = pctFaiz + '%';
+  }, 80);
+
+  // Kira kartı
+  document.getElementById('r-toplam').textContent    = fmt(toplamKira);
+  document.getElementById('r-baslangic').textContent = fmtFull(kira0) + ' / ay';
+  document.getElementById('r-son').textContent       = fmtFull(kiraYilSonu) + ' / ay';
+  document.getElementById('r-artis').textContent     = fmtPct(kiraArtis) + ' / yıl';
+  document.getElementById('r-firsat').textContent    = fmt(kiraFirsat);
+
+  var pctBas = kira0 * 12 / toplamKira * 100;
+  var pctArt = 100 - pctBas;
+  document.getElementById('r-pct-bas').textContent = fmtPct(pctBas);
+  document.getElementById('r-pct-art').textContent = fmtPct(pctArt);
+  setTimeout(function(){
+    document.getElementById('r-bar-bas').style.width = pctBas + '%';
+    document.getElementById('r-bar-art').style.width = pctArt + '%';
+  }, 80);
+
+  // Badges
+  var kWin = toplamKira > toplamKrediMaliyet;
+  var bKredi = document.getElementById('badge-kredi');
+  var bKira  = document.getElementById('badge-kira');
+  bKredi.classList.remove('hidden');
+  bKira.classList.remove('hidden');
+
+  if (kWin) {
+    bKredi.textContent = '🏆 Avantajlı';
+    bKredi.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+    bKira.textContent  = '2. Sıra';
+    bKira.className  = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-white/6 text-slate-400 border border-white/8';
+    document.getElementById('card-kredi').classList.add('win-glow');
+    document.getElementById('card-kira').classList.remove('win-glow');
+  } else {
+    bKira.textContent  = '🏆 Avantajlı';
+    bKira.className  = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+    bKredi.textContent = '2. Sıra';
+    bKredi.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-white/6 text-slate-400 border border-white/8';
+    document.getElementById('card-kira').classList.add('win-glow');
+    document.getElementById('card-kredi').classList.remove('win-glow');
+  }
+
+  // Verdict
+  var farkMaliyet = Math.abs(toplamKrediMaliyet - toplamKira);
+  var fEl = document.getElementById('fark-maliyet');
+  var fLbl = document.getElementById('fark-maliyet-lbl');
+  fEl.textContent = fmt(farkMaliyet);
+  fEl.className = 'text-xl font-extrabold ' + (kWin ? 'text-emerald-400' : 'text-rose-400');
+  fLbl.textContent = kWin ? 'Kredi daha ucuz' : 'Kira daha ucuz';
+
+  document.getElementById('fark-deger').textContent  = fmt(konutDeger);
+  document.getElementById('fark-basabas').textContent = basabas ? basabas + '. yıl' : '50+ yıl';
+
+  var verdictTxt = kWin
+    ? '<strong class="text-emerald-400">Krediyle ev almak</strong> rakamsal olarak daha avantajlı görünüyor. '
+      + Math.round(vadeYil) + ' yılda toplam kira ödemesi, kredi maliyetini <strong class="text-white">' + fmt(farkMaliyet) + '</strong> aşıyor. '
+      + 'Üstelik konut değeri <strong class="text-emerald-400">' + fmt(konutDeger) + '</strong>\'e ulaşarak servet biriktiriyor.'
+    : '<strong class="text-rose-400">Kirada kalmak</strong> kısa vadede nakitten daha az harcatıyor. '
+      + 'Ancak konut değer artışının servet yarattığını unutmayın. '
+      + 'Peşinat ve ek masrafları alternatif yatırımda değerlendirmek önemli bir faktördür.';
+  document.getElementById('verdict-text').innerHTML = verdictTxt;
+
+  renderYillik();
+
+  if (window.innerWidth < 1024) {
+    rw.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function renderYillik() {
+  var sv = document.getElementById('show-count').value;
+  var lim = sv === 'all' ? yillikData.length : parseInt(sv);
+  var rows = yillikData.slice(0, lim);
+  var tbody = document.getElementById('yillik-tbody');
+
+  tbody.innerHTML = rows.map(function(r, i) {
+    var fark = r.kredi - r.kira;
+    var fCls = fark < 0 ? 'text-emerald-400' : 'text-rose-400';
+    var fStr = (fark < 0 ? '' : '+') + fmt(fark);
+    return '<tr class="transition-colors hover:bg-white/[0.02] ' + (i%2?'bg-white/[0.012]':'') + '">' +
+      '<td class="px-4 sm:px-5 py-2 text-xs text-slate-400 font-semibold">' + r.yil + '. Yıl</td>' +
+      '<td class="px-3 py-2 text-xs text-emerald-300 font-bold text-right whitespace-nowrap">' + fmt(r.kredi) + '</td>' +
+      '<td class="px-3 py-2 text-xs text-rose-300 font-bold text-right whitespace-nowrap">' + fmt(r.kira) + '</td>' +
+      '<td class="px-3 py-2 text-xs text-amber-300 font-bold text-right whitespace-nowrap">' + fmt(r.konut) + '</td>' +
+      '<td class="px-4 sm:px-5 py-2 text-xs ' + fCls + ' font-semibold text-right whitespace-nowrap">' + fStr + '</td>' +
+    '</tr>';
+  }).join('');
+
+  if (sv !== 'all' && yillikData.length > lim) {
+    var rem = yillikData.length - lim;
+    tbody.innerHTML += '<tr><td colspan="5" class="text-center py-3 text-xs text-slate-500">… ve ' + rem + ' yıl daha ' +
+      '<button onclick="document.getElementById(\'show-count\').value=\'all\';renderYillik();" ' +
+      'class="ml-2 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors">Tümünü Göster →</button></td></tr>';
+  }
+}
+
+// Enter key
+['konut-fiyat','pesinat-oran','faiz','vade','kira','kira-artis','deger-artis'].forEach(function(id){
+  document.getElementById(id).addEventListener('keydown', function(e){
+    if (e.key === 'Enter') hesapla();
+  });
+});
+</script>
+</body>
+</html>

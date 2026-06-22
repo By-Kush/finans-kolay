@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Not Ortalaması Hesaplayıcı – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 950:'#070E1A', 900:'#0F172A', 800:'#1E293B', 700:'#263348', 600:'#334155' }
+          },
+          fontFamily: {
+            sans:['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .navbar-blur {
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,.92);
+      border-bottom: 1px solid rgba(16,185,129,.12);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    .finput {
+      background: #1E293B;
+      border: 1.5px solid rgba(255,255,255,.08);
+      color: #f1f5f9;
+      border-radius: .625rem;
+      padding: .6rem .875rem;
+      width: 100%;
+      font-size: .875rem;
+      outline: none;
+      transition: border-color .18s, box-shadow .18s;
+    }
+    .finput:focus { border-color: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,.15); }
+    .finput::placeholder { color: #475569; }
+    .finput.err { border-color: #f43f5e; box-shadow: 0 0 0 3px rgba(244,63,94,.12); }
+
+    .fselect {
+      background: #1E293B;
+      border: 1.5px solid rgba(255,255,255,.08);
+      color: #f1f5f9;
+      border-radius: .625rem;
+      padding: .6rem 2rem .6rem .875rem;
+      font-size: .875rem;
+      width: 100%;
+      outline: none;
+      appearance: none; -webkit-appearance: none; cursor: pointer;
+      transition: border-color .18s, box-shadow .18s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right .5rem center;
+      background-size: .875rem;
+    }
+    .fselect:focus { border-color: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,.15); }
+    .fselect option { background: #1E293B; }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(8px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .fade-up { animation: fadeUp .4s ease forwards; }
+
+    @keyframes rowIn {
+      from { opacity:0; transform:translateX(-8px); }
+      to   { opacity:1; transform:translateX(0); }
+    }
+    .row-in { animation: rowIn .22s ease forwards; }
+
+    /* GPA ring */
+    .gpa-ring { stroke-dasharray: 251.2; transition: stroke-dashoffset 1s cubic-bezier(.4,0,.2,1); }
+
+    /* Bar */
+    .prog { transition: width .8s cubic-bezier(.4,0,.2,1); }
+
+    /* Delete button */
+    .delbtn {
+      width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(244,63,94,.1); color: #f87171;
+      border: 1px solid rgba(244,63,94,.2);
+      transition: all .18s; cursor: pointer;
+    }
+    .delbtn:hover { background: rgba(244,63,94,.28); transform: scale(1.12); color: #fff; }
+
+    /* Row hover */
+    .drow { transition: background .15s; }
+    .drow:hover { background: rgba(255,255,255,.025); }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0F172A; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+<!-- NAVBAR -->
+<header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
+    <a href="finanskolay.html"
+      class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+      <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <span class="hidden sm:inline">Geri Dön</span>
+    </a>
+
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-lg bg-amber-500/15 flex items-center justify-center">
+        <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+        </svg>
+      </div>
+      <span class="font-semibold text-white text-sm sm:text-base">Not Ortalaması Hesaplayıcı</span>
+    </div>
+
+    <a href="finanskolay.html" class="flex items-center gap-2 group">
+      <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">
+        Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+      </span>
+    </a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="pt-16 pb-16">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6">
+
+    <!-- Page header -->
+    <div class="py-8 sm:py-10 text-center">
+      <p class="text-amber-400 text-xs font-semibold tracking-widest uppercase mb-2">Eğitim & Kariyer</p>
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">GNO / GPA Hesaplayıcı</h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        Derslerinizi ve harf notlarınızı girerek ağırlıklı not ortalamanızı hem 4'lük hem 100'lük sistemde anında hesaplayın.
+      </p>
+    </div>
+
+    <!-- DERS TABLOSU KARTI -->
+    <div class="bg-navy-800 rounded-2xl border border-white/5 shadow-xl mb-6 overflow-hidden">
+
+      <!-- Card header -->
+      <div class="px-5 sm:px-6 py-4 border-b border-white/5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h2 class="text-base font-bold text-white flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+            Ders Listesi
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">Ders adı, harf notu ve kredi bilgilerini girin</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="tumTemizle()"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-rose-400 bg-white/4 hover:bg-rose-500/10 border border-white/6 hover:border-rose-500/25 transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+            </svg>
+            Temizle
+          </button>
+          <button onclick="ornekYukle()"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-emerald-400 bg-white/4 hover:bg-emerald-500/10 border border-white/6 hover:border-emerald-500/25 transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+            </svg>
+            Örnek Yükle
+          </button>
+        </div>
+      </div>
+
+      <!-- Column labels (desktop) -->
+      <div class="hidden sm:grid grid-cols-12 gap-3 px-5 sm:px-6 py-2.5 bg-navy-700/40 border-b border-white/4">
+        <div class="col-span-5 text-xs font-semibold text-slate-400 uppercase tracking-wide">Ders Adı</div>
+        <div class="col-span-3 text-xs font-semibold text-slate-400 uppercase tracking-wide">Harf Notu</div>
+        <div class="col-span-2 text-xs font-semibold text-slate-400 uppercase tracking-wide">Kredi</div>
+        <div class="col-span-1 text-xs font-semibold text-slate-400 uppercase tracking-wide text-center">Puan</div>
+        <div class="col-span-1"></div>
+      </div>
+
+      <!-- Rows -->
+      <div id="ders-listesi" class="divide-y divide-white/4 min-h-16"></div>
+
+      <!-- Footer actions -->
+      <div class="px-5 sm:px-6 py-4 border-t border-white/5 bg-navy-700/20 flex flex-col sm:flex-row gap-3">
+        <button onclick="dersEkle()"
+          class="flex items-center justify-center gap-2 px-5 py-2.5 bg-navy-700 hover:bg-navy-600 text-emerald-400 hover:text-emerald-300 font-semibold text-sm rounded-xl border border-emerald-500/25 hover:border-emerald-500/45 transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+          </svg>
+          Ders Ekle
+        </button>
+        <button onclick="hesapla()"
+          class="flex-1 flex items-center justify-center gap-2 py-2.5 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-emerald-500/25 hover:-translate-y-0.5 active:translate-y-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          Not Ortalamasını Hesapla
+        </button>
+      </div>
+    </div>
+
+    <!-- HATA -->
+    <div id="err-box" class="hidden mb-4 px-4 py-3 bg-rose-500/10 border border-rose-500/25 rounded-xl text-sm text-rose-400 flex items-center gap-2">
+      <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <span id="err-txt"></span>
+    </div>
+
+    <!-- SONUÇLAR -->
+    <div id="sonuclar" class="hidden">
+
+      <!-- Hero row -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-5">
+
+        <!-- GPA ring (4'lük) -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 shadow-xl flex flex-col items-center justify-center text-center">
+          <p class="text-xs text-slate-400 font-semibold uppercase tracking-widest mb-4">GNO — 4'lük Sistem</p>
+          <div class="relative w-32 h-32">
+            <svg class="w-full h-full -rotate-90" viewBox="0 0 90 90">
+              <circle cx="45" cy="45" r="40" fill="none" stroke="#1E293B" stroke-width="8"/>
+              <circle id="gpa-ring" cx="45" cy="45" r="40" fill="none"
+                stroke="#10B981" stroke-width="8" stroke-linecap="round"
+                class="gpa-ring" stroke-dashoffset="251.2"/>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <p id="r-gpa4" class="text-3xl font-extrabold text-white leading-none">-</p>
+              <p class="text-xs text-slate-500 mt-1">/ 4.00</p>
+            </div>
+          </div>
+          <div id="r-badge" class="mt-4 px-4 py-1 rounded-full text-sm font-bold border hidden"></div>
+        </div>
+
+        <!-- 100'lük + harf -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 shadow-xl flex flex-col items-center justify-center text-center">
+          <p class="text-xs text-slate-400 font-semibold uppercase tracking-widest mb-3">GNO — 100'lük Sistem</p>
+          <p id="r-gpa100" class="text-5xl font-extrabold text-white tracking-tight">-</p>
+          <p class="text-xs text-slate-500 mt-2">/ 100</p>
+          <div id="r-harf" class="mt-4 px-5 py-2 rounded-xl text-2xl font-extrabold border hidden"></div>
+        </div>
+
+        <!-- Toplam kredi + ders -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 shadow-xl flex flex-col gap-4 justify-center">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide">Toplam Kredi</p>
+              <p id="r-kredi" class="text-3xl font-extrabold text-emerald-400 mt-1">-</p>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center">
+              <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="h-px bg-white/5"></div>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide">Toplam Ders</p>
+              <p id="r-ders" class="text-3xl font-extrabold text-sky-400 mt-1">-</p>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-sky-500/15 flex items-center justify-center">
+              <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Not dağılımı -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-5 sm:p-6 shadow-xl mb-5">
+        <h3 class="text-sm font-bold text-white mb-4 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          Not Dağılımı
+        </h3>
+        <div id="dagilim" class="space-y-2.5"></div>
+      </div>
+
+      <!-- Ders bazında detay tablosu -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 shadow-xl overflow-hidden mb-5">
+        <div class="px-5 sm:px-6 py-4 border-b border-white/5">
+          <h3 class="text-sm font-bold text-white">Ders Bazında Detay</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Ağırlıklı puanı yüksekten düşüğe sıralı</p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-navy-700/50">
+                <th class="text-left text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-5 py-2.5">Ders</th>
+                <th class="text-center text-xs font-semibold text-slate-400 uppercase tracking-wide px-3 py-2.5">Harf</th>
+                <th class="text-center text-xs font-semibold text-slate-400 uppercase tracking-wide px-3 py-2.5">Puan</th>
+                <th class="text-center text-xs font-semibold text-slate-400 uppercase tracking-wide px-3 py-2.5">Kredi</th>
+                <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-5 py-2.5">Ağır. Puan</th>
+              </tr>
+            </thead>
+            <tbody id="detay-tbody" class="divide-y divide-white/4"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /sonuclar -->
+
+    <!-- AÇIKLAMA -->
+    <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+      <h3 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Not Sistemi Hakkında
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <!-- Tablo -->
+        <div class="bg-navy-700/40 rounded-xl p-4 border border-white/4">
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Harf Notu Karşılıkları</p>
+          <div class="grid grid-cols-2 gap-1.5 text-xs">
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-emerald-500/12 border border-emerald-500/25">
+              <span class="font-bold text-emerald-400">AA</span><span class="text-slate-400">4.00 · 90-100</span>
+            </div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-white/3 border border-white/5">
+              <span class="font-bold text-emerald-300">BA</span><span class="text-slate-400">3.50 · 85-89</span>
+            </div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-white/3 border border-white/5">
+              <span class="font-bold text-sky-400">BB</span><span class="text-slate-400">3.00 · 80-84</span>
+            </div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-white/3 border border-white/5">
+              <span class="font-bold text-indigo-400">CB</span><span class="text-slate-400">2.50 · 75-79</span>
+            </div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-white/3 border border-white/5">
+              <span class="font-bold text-violet-400">CC</span><span class="text-slate-400">2.00 · 70-74</span>
+            </div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-white/3 border border-white/5">
+              <span class="font-bold text-amber-400">DC</span><span class="text-slate-400">1.50 · 65-69</span>
+            </div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-white/3 border border-white/5">
+              <span class="font-bold text-orange-400">DD</span><span class="text-slate-400">1.00 · 60-64</span>
+            </div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-rose-500/8 border border-white/5">
+              <span class="font-bold text-rose-400">FF</span><span class="text-slate-400">0.00 · 0-59</span>
+            </div>
+          </div>
+        </div>
+        <!-- Notlar -->
+        <div class="flex flex-col gap-3">
+          <div class="flex gap-3 bg-navy-700/40 rounded-xl p-4 border border-white/4 flex-1">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white mb-1">Ağırlıklı Ortalama Nedir?</p>
+              <p class="text-xs text-slate-400 leading-relaxed">GNO = Σ(Harf Puanı × Kredi) / Σ(Kredi). Kredisi yüksek ders ortalamaya daha çok katkı sağlar.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 bg-navy-700/40 rounded-xl p-4 border border-white/4 flex-1">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white mb-1">Onur / Yüksek Onur</p>
+              <p class="text-xs text-slate-400 leading-relaxed">Çoğu üniversitede GNO ≥ 3.00 → Onur, GNO ≥ 3.50 → Yüksek Onur sayılır.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="bg-navy-950 border-t border-white/5 py-6">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+    <p class="text-xs text-slate-600">© 2025 FinansKolay · Not sistemi üniversiteden üniversiteye farklılık gösterebilir.</p>
+  </div>
+</footer>
+
+<script>
+// ── Harf notu tablosu ──────────────────────────────────────
+var GR = [
+  { h:'AA', p4:4.00, p100:95, tc:'text-emerald-400', bc:'bg-emerald-400', st:'background:rgba(16,185,129,.18);color:#10B981;border-color:rgba(16,185,129,.38)' },
+  { h:'BA', p4:3.50, p100:87, tc:'text-emerald-300', bc:'bg-emerald-300', st:'background:rgba(52,211,153,.15);color:#34d399;border-color:rgba(52,211,153,.32)' },
+  { h:'BB', p4:3.00, p100:82, tc:'text-sky-400',     bc:'bg-sky-400',     st:'background:rgba(56,189,248,.15);color:#38bdf8;border-color:rgba(56,189,248,.32)' },
+  { h:'CB', p4:2.50, p100:77, tc:'text-indigo-400',  bc:'bg-indigo-400',  st:'background:rgba(99,102,241,.15);color:#818cf8;border-color:rgba(99,102,241,.32)' },
+  { h:'CC', p4:2.00, p100:72, tc:'text-violet-400',  bc:'bg-violet-400',  st:'background:rgba(167,139,250,.15);color:#a78bfa;border-color:rgba(167,139,250,.32)' },
+  { h:'DC', p4:1.50, p100:67, tc:'text-amber-400',   bc:'bg-amber-400',   st:'background:rgba(251,191,36,.14);color:#fbbf24;border-color:rgba(251,191,36,.32)' },
+  { h:'DD', p4:1.00, p100:62, tc:'text-orange-400',  bc:'bg-orange-400',  st:'background:rgba(251,146,60,.14);color:#fb923c;border-color:rgba(251,146,60,.32)' },
+  { h:'FD', p4:0.50, p100:55, tc:'text-rose-400',    bc:'bg-rose-400',    st:'background:rgba(251,113,133,.15);color:#fb7185;border-color:rgba(251,113,133,.32)' },
+  { h:'FF', p4:0.00, p100:30, tc:'text-red-400',     bc:'bg-red-400',     st:'background:rgba(127,29,29,.35);color:#fca5a5;border-color:rgba(239,68,68,.28)' },
+];
+
+function gInfo(harf) {
+  for (var i=0; i<GR.length; i++) if (GR[i].h === harf) return GR[i];
+  return GR[GR.length-1];
+}
+
+// ── State ──────────────────────────────────────────────────
+var uid = 0;
+var rows = [];   // [{id, ad, harf, kredi}]
+
+// ── Render list ────────────────────────────────────────────
+function renderList() {
+  var c = document.getElementById('ders-listesi');
+  if (!rows.length) {
+    c.innerHTML = '<div class="px-5 sm:px-6 py-8 text-center text-slate-600 text-sm">Henüz ders eklenmedi. "Ders Ekle" butonuna tıklayın.</div>';
+    return;
+  }
+
+  var html = '';
+  rows.forEach(function(r, i) {
+    var opts = '<option value="">Not seçin</option>';
+    GR.forEach(function(g) {
+      opts += '<option value="' + g.h + '"' + (r.harf===g.h?' selected':'') + '>' + g.h + '  (' + g.p4.toFixed(2) + ')</option>';
+    });
+
+    var puanTxt = r.harf ? gInfo(r.harf).p4.toFixed(2) : '—';
+    var puanCls = r.harf ? gInfo(r.harf).tc : 'text-slate-600';
+
+    html += '<div id="row-' + r.id + '" class="drow row-in px-4 sm:px-5 py-3">';
+
+    // ── Mobile layout ──
+    html += '<div class="flex flex-col sm:hidden gap-2">';
+    html +=   '<div class="flex items-center gap-2">';
+    html +=     '<span class="text-xs text-slate-500 w-5 flex-shrink-0">' + (i+1) + '.</span>';
+    html +=     '<input id="ad-m-' + r.id + '" type="text" value="' + esc(r.ad) + '" placeholder="Ders adı" class="finput flex-1" oninput="upAd(' + r.id + ',this.value)"/>';
+    html +=     '<button onclick="silRow(' + r.id + ')" class="delbtn">' + xIcon() + '</button>';
+    html +=   '</div>';
+    html +=   '<div class="flex gap-2 ml-7">';
+    html +=     '<select class="fselect flex-1" onchange="upHarf(' + r.id + ',this.value)">' + opts + '</select>';
+    html +=     '<input id="kr-m-' + r.id + '" type="number" value="' + (r.kredi||'') + '" placeholder="Kredi" min="0.5" max="10" step="0.5" class="finput w-24" oninput="upKredi(' + r.id + ',this.value)"/>';
+    html +=   '</div>';
+    html += '</div>';
+
+    // ── Desktop layout ──
+    html += '<div class="hidden sm:grid grid-cols-12 gap-3 items-center">';
+    html +=   '<div class="col-span-5 flex items-center gap-2">';
+    html +=     '<span class="text-xs text-slate-500 w-4 flex-shrink-0">' + (i+1) + '</span>';
+    html +=     '<input id="ad-d-' + r.id + '" type="text" value="' + esc(r.ad) + '" placeholder="Ders adını yazın" class="finput flex-1" oninput="upAd(' + r.id + ',this.value)"/>';
+    html +=   '</div>';
+    html +=   '<div class="col-span-3"><select class="fselect" onchange="upHarf(' + r.id + ',this.value)">' + opts + '</select></div>';
+    html +=   '<div class="col-span-2"><input id="kr-d-' + r.id + '" type="number" value="' + (r.kredi||'') + '" placeholder="3" min="0.5" max="10" step="0.5" class="finput" oninput="upKredi(' + r.id + ',this.value)"/></div>';
+    html +=   '<div class="col-span-1 text-center"><span class="text-xs font-bold ' + puanCls + '">' + puanTxt + '</span></div>';
+    html +=   '<div class="col-span-1 flex justify-end"><button onclick="silRow(' + r.id + ')" class="delbtn">' + xIcon() + '</button></div>';
+    html += '</div>';
+
+    html += '</div>';
+  });
+  c.innerHTML = html;
+}
+
+function xIcon() {
+  return '<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>';
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Row mutations ───────────────────────────────────────────
+function upAd(id, v)    { var r=find(id); if(r) r.ad=v; }
+function upHarf(id, v)  { var r=find(id); if(r){ r.harf=v; renderList(); silentCalc(); } }
+function upKredi(id, v) { var r=find(id); if(r){ r.kredi=v; silentCalc(); } }
+function find(id)        { for(var i=0;i<rows.length;i++) if(rows[i].id===id) return rows[i]; return null; }
+
+function silRow(id) {
+  rows = rows.filter(function(r){ return r.id !== id; });
+  renderList();
+  silentCalc();
+}
+
+// ── Add / clear / sample ────────────────────────────────────
+function dersEkle(ad, harf, kredi) {
+  var id = ++uid;
+  rows.push({ id:id, ad:ad||'', harf:harf||'', kredi:kredi||'' });
+  renderList();
+  if (!ad) {
+    setTimeout(function(){
+      var el = document.getElementById('ad-d-'+id) || document.getElementById('ad-m-'+id);
+      if (el) el.focus();
+    }, 40);
+  }
+}
+
+function tumTemizle() {
+  rows=[]; uid=0;
+  renderList();
+  document.getElementById('sonuclar').classList.add('hidden');
+  document.getElementById('err-box').classList.add('hidden');
+}
+
+function ornekYukle() {
+  tumTemizle();
+  var ornek = [
+    {ad:'Matematik I',         harf:'AA', kredi:4},
+    {ad:'Fizik I',             harf:'BB', kredi:4},
+    {ad:'Programlamaya Giriş', harf:'BA', kredi:3},
+    {ad:'Türk Dili I',         harf:'AA', kredi:2},
+    {ad:'İngilizce I',         harf:'CB', kredi:3},
+    {ad:'Veri Yapıları',       harf:'BB', kredi:4},
+  ];
+  ornek.forEach(function(o){ dersEkle(o.ad, o.harf, o.kredi); });
+  hesapla();
+}
+
+// ── Calculation ─────────────────────────────────────────────
+function silentCalc() {
+  var ok = rows.length > 0 && rows.every(function(r){ return r.harf && parseFloat(r.kredi) > 0; });
+  if (ok) calc(true);
+}
+
+function hesapla() { calc(false); }
+
+function calc(silent) {
+  var eb = document.getElementById('err-box');
+  var et = document.getElementById('err-txt');
+
+  if (!rows.length) {
+    if (!silent) { et.textContent='En az bir ders ekleyin.'; eb.classList.remove('hidden'); }
+    return;
+  }
+  var bad = rows.filter(function(r){ return !r.harf || !(parseFloat(r.kredi) > 0); });
+  if (bad.length) {
+    if (!silent) { et.textContent='Tüm derslerin harf notu ve kredisi dolu olmalıdır.'; eb.classList.remove('hidden'); }
+    return;
+  }
+  eb.classList.add('hidden');
+
+  // ── Hesaplama ──
+  var totK = 0, agTot = 0;
+  rows.forEach(function(r) {
+    var g = gInfo(r.harf);
+    var k = parseFloat(r.kredi);
+    totK  += k;
+    agTot += g.p4 * k;
+  });
+
+  var gno4   = agTot / totK;
+  var gno100 = gno4 * 25;
+
+  // Genel harf karşılığı
+  var gen = GR[GR.length-1];
+  for (var i=0; i<GR.length; i++) {
+    if (gno4 >= GR[i].p4 - 0.001) { gen = GR[i]; break; }
+  }
+
+  // ── Render ──
+  document.getElementById('sonuclar').classList.remove('hidden');
+  document.getElementById('sonuclar').classList.add('fade-up');
+
+  // Ring
+  var offset = 251.2 * (1 - gno4/4);
+  var rCol = gno4>=3.5?'#10B981': gno4>=3?'#34d399': gno4>=2.5?'#38bdf8': gno4>=2?'#a78bfa': gno4>=1?'#fbbf24': '#f87171';
+  var ring = document.getElementById('gpa-ring');
+  ring.setAttribute('stroke', rCol);
+  setTimeout(function(){ ring.style.strokeDashoffset = offset; }, 60);
+
+  document.getElementById('r-gpa4').textContent   = gno4.toFixed(2);
+  document.getElementById('r-gpa100').textContent = gno100.toFixed(1);
+  document.getElementById('r-kredi').textContent  = totK;
+  document.getElementById('r-ders').textContent   = rows.length;
+
+  var statusTxt = gno4>=3.5?'🎖 Yüksek Onur': gno4>=3?'🏅 Onur': gno4>=2?'✓ Normal': '⚠ Düşük GNO';
+  var badge = document.getElementById('r-badge');
+  badge.textContent = statusTxt;
+  badge.setAttribute('style', gen.st);
+  badge.className = 'mt-4 px-4 py-1 rounded-full text-sm font-bold border';
+  badge.classList.remove('hidden');
+
+  var harf = document.getElementById('r-harf');
+  harf.textContent = gen.h;
+  harf.setAttribute('style', gen.st);
+  harf.className = 'mt-4 px-5 py-2 rounded-xl text-2xl font-extrabold border';
+  harf.classList.remove('hidden');
+
+  // Dağılım barları
+  var cnt = {};
+  GR.forEach(function(g){ cnt[g.h]=0; });
+  rows.forEach(function(r){ if(r.harf) cnt[r.harf]=(cnt[r.harf]||0)+1; });
+
+  var dbHtml = '';
+  GR.filter(function(g){ return (cnt[g.h]||0)>0; }).forEach(function(g){
+    var s = cnt[g.h]||0;
+    var bw = (s/rows.length*100).toFixed(0);
+    dbHtml += '<div class="flex items-center gap-3">';
+    dbHtml += '  <span class="text-xs font-bold ' + g.tc + ' w-8 flex-shrink-0">' + g.h + '</span>';
+    dbHtml += '  <div class="flex-1 h-2 bg-navy-700 rounded-full overflow-hidden">';
+    dbHtml += '    <div class="prog h-full ' + g.bc + ' rounded-full" style="width:0%" data-w="' + bw + '"></div>';
+    dbHtml += '  </div>';
+    dbHtml += '  <span class="text-xs text-slate-400 w-20 text-right flex-shrink-0">' + s + ' ders (' + bw + '%)</span>';
+    dbHtml += '</div>';
+  });
+  document.getElementById('dagilim').innerHTML = dbHtml;
+  setTimeout(function(){
+    document.querySelectorAll('[data-w]').forEach(function(el){
+      el.style.width = el.getAttribute('data-w') + '%';
+    });
+  }, 60);
+
+  // Detay tablosu (puana göre sıralı)
+  var sorted = rows.slice().sort(function(a,b){ return gInfo(b.harf).p4 - gInfo(a.harf).p4; });
+  var tbHtml = '';
+  sorted.forEach(function(r, i) {
+    var g = gInfo(r.harf);
+    var k = parseFloat(r.kredi);
+    var ag = (g.p4 * k).toFixed(2);
+    tbHtml += '<tr class="transition-colors hover:bg-white/[0.025] ' + (i%2?'bg-white/[0.012]':'') + '">';
+    tbHtml += '<td class="px-4 sm:px-5 py-2.5 text-sm text-slate-200 font-medium">' + (r.ad||'—') + '</td>';
+    tbHtml += '<td class="px-3 py-2.5 text-center"><span class="text-xs font-bold px-2 py-0.5 rounded-full border" style="' + g.st + '">' + g.h + '</span></td>';
+    tbHtml += '<td class="px-3 py-2.5 text-sm text-center font-semibold ' + g.tc + '">' + g.p4.toFixed(2) + '</td>';
+    tbHtml += '<td class="px-3 py-2.5 text-sm text-center text-slate-300">' + k + '</td>';
+    tbHtml += '<td class="px-4 sm:px-5 py-2.5 text-sm text-right font-bold text-emerald-400">' + ag + '</td>';
+    tbHtml += '</tr>';
+  });
+  document.getElementById('detay-tbody').innerHTML = tbHtml;
+
+  if (!silent && window.innerWidth < 768) {
+    document.getElementById('sonuclar').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+// ── Init: 5 boş satır ──────────────────────────────────────
+dersEkle(); dersEkle(); dersEkle(); dersEkle(); dersEkle();
+</script>
+</body>
+</html>

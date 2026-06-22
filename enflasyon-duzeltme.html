@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enflasyon Düzeltme Hesaplayıcı – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#070E1A',
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#263348',
+              600: '#334155',
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+
+    .navbar-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,0.92);
+      border-bottom: 1px solid rgba(16,185,129,0.12);
+    }
+
+    /* Custom select styling */
+    .fselect {
+      background: #1E293B;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      color: #f1f5f9;
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.9375rem;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.875rem center;
+      background-size: 1rem;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+    .fselect:focus {
+      border-color: #10B981;
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+    }
+    .fselect.error {
+      border-color: #f43f5e;
+      box-shadow: 0 0 0 3px rgba(244,63,94,0.12);
+    }
+    .fselect option { background: #1E293B; color: #f1f5f9; }
+
+    /* Number input */
+    .finput {
+      background: #1E293B;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      color: #f1f5f9;
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      font-size: 0.9375rem;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      outline: none;
+    }
+    .finput:focus {
+      border-color: #10B981;
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+    }
+    .finput::placeholder { color: #475569; }
+    .finput.error {
+      border-color: #f43f5e;
+      box-shadow: 0 0 0 3px rgba(244,63,94,0.12);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    /* Result animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.4s ease forwards; }
+
+    /* Timeline dots */
+    .timeline-dot::before {
+      content: '';
+      position: absolute;
+      left: -1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: #10B981;
+    }
+
+    /* Progress bar transition */
+    .prog-bar { transition: width 0.9s cubic-bezier(0.4,0,0.2,1); }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0F172A; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    /* TÜFE table hover */
+    .tufe-row:hover td { background: rgba(16,185,129,0.04); }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+
+      <a href="finanskolay.html"
+        class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+        <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <span class="hidden sm:inline">Geri Dön</span>
+      </a>
+
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-amber-500/15 flex items-center justify-center">
+          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+              d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+          </svg>
+        </div>
+        <span class="font-semibold text-white text-sm sm:text-base">Enflasyon Düzeltme Hesaplayıcı</span>
+      </div>
+
+      <a href="finanskolay.html" class="flex items-center gap-2 group">
+        <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">
+          Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="pt-16 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Page header -->
+      <div class="py-8 sm:py-12 text-center">
+        <p class="text-amber-400 text-xs font-semibold tracking-widest uppercase mb-2">Ücretsiz Araç</p>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
+          Paranız Nasıl Eridi?
+        </h1>
+        <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+          İki tarih arasındaki enflasyonu kullanarak paranızın satın alma gücünün nasıl değiştiğini hesaplayın.
+          Türkiye'nin yıllık TÜFE verileri baz alınmıştır.
+        </p>
+      </div>
+
+      <!-- ── Form + Results ── -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+
+        <!-- LEFT: Form -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+          <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            Hesaplama Bilgileri
+          </h2>
+
+          <!-- Para Miktarı -->
+          <div class="mb-5">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+              Para Miktarı
+            </label>
+            <div class="relative">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+              <input type="number" id="miktar" class="finput pl-8" placeholder="10.000"
+                min="1" step="any" oninput="clearErr('miktar')" />
+            </div>
+            <p id="miktar-err" class="text-xs text-rose-400 mt-1.5 hidden">Lütfen geçerli bir tutar girin.</p>
+            <!-- Quick -->
+            <div class="flex gap-2 mt-2.5 flex-wrap">
+              <button onclick="setMiktar(1000)"   class="qbtn">₺1.000</button>
+              <button onclick="setMiktar(10000)"  class="qbtn">₺10.000</button>
+              <button onclick="setMiktar(100000)" class="qbtn">₺100.000</button>
+              <button onclick="setMiktar(1000000)"class="qbtn">₺1M</button>
+            </div>
+          </div>
+
+          <!-- Başlangıç Tarihi -->
+          <div class="mb-5">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+              Başlangıç Tarihi
+            </label>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <select id="bas-ay" class="fselect" onchange="clearErr('bas-ay')">
+                  <option value="">Ay seçin</option>
+                </select>
+                <p id="bas-ay-err" class="text-xs text-rose-400 mt-1.5 hidden">Ay seçin.</p>
+              </div>
+              <div>
+                <select id="bas-yil" class="fselect" onchange="clearErr('bas-yil'); updateBitisYillar()">
+                  <option value="">Yıl seçin</option>
+                </select>
+                <p id="bas-yil-err" class="text-xs text-rose-400 mt-1.5 hidden">Yıl seçin.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bitiş Tarihi -->
+          <div class="mb-7">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+              Bitiş Tarihi
+            </label>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <select id="bit-ay" class="fselect" onchange="clearErr('bit-ay')">
+                  <option value="">Ay seçin</option>
+                </select>
+                <p id="bit-ay-err" class="text-xs text-rose-400 mt-1.5 hidden">Ay seçin.</p>
+              </div>
+              <div>
+                <select id="bit-yil" class="fselect" onchange="clearErr('bit-yil')">
+                  <option value="">Yıl seçin</option>
+                </select>
+                <p id="bit-yil-err" class="text-xs text-rose-400 mt-1.5 hidden">Yıl seçin.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hesapla -->
+          <button onclick="hesapla()"
+            class="w-full flex items-center justify-center gap-2 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-base rounded-xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Hesapla
+          </button>
+          <p class="text-xs text-slate-600 text-center mt-3 leading-relaxed">
+            Yıllık TÜFE verileri TÜİK'e dayanmaktadır. Hesaplama bileşik enflasyon formülü ile yapılmaktadır.
+          </p>
+        </div>
+
+        <!-- RIGHT: Results -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl flex flex-col">
+          <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            Sonuçlar
+          </h2>
+
+          <!-- Empty state -->
+          <div id="empty-state" class="flex-1 flex flex-col items-center justify-center py-10 text-center">
+            <div class="w-16 h-16 rounded-2xl bg-amber-500/8 flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-amber-500/35" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+              </svg>
+            </div>
+            <p class="text-slate-400 text-sm font-medium mb-1">Sonuç bekleniyor</p>
+            <p class="text-slate-600 text-xs">Formu doldurun ve Hesapla butonuna tıklayın</p>
+          </div>
+
+          <!-- Results -->
+          <div id="results-area" class="hidden flex-1 flex flex-col gap-4">
+
+            <!-- Narrative summary -->
+            <div id="narrative"
+              class="bg-navy-700/50 border border-white/5 rounded-xl px-4 py-3 text-sm text-slate-300 leading-relaxed">
+            </div>
+
+            <!-- Bugünkü Değer — hero card -->
+            <div class="bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border border-emerald-500/25 rounded-xl p-5 text-center">
+              <p class="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">Bugünkü Satın Alma Gücü</p>
+              <p id="res-bugunki" class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">—</p>
+              <p class="text-slate-400 text-xs mt-1.5" id="res-bugunki-sub">Başlangıç tutarıyla aynı ürünü bugün almak için</p>
+            </div>
+
+            <!-- 3 secondary metrics -->
+            <div class="grid grid-cols-3 gap-3">
+              <div class="bg-navy-700/60 border border-white/5 rounded-xl p-3 sm:p-4 text-center">
+                <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-2 leading-tight">Toplam Enflasyon</p>
+                <p id="res-toplam-pct" class="text-lg sm:text-xl font-extrabold text-amber-400">—</p>
+                <p class="text-slate-600 text-xs mt-1">kümülatif</p>
+              </div>
+              <div class="bg-navy-700/60 border border-white/5 rounded-xl p-3 sm:p-4 text-center">
+                <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-2 leading-tight">Değer Kaybı</p>
+                <p id="res-deger-kaybi" class="text-lg sm:text-xl font-extrabold text-rose-400">—</p>
+                <p class="text-slate-600 text-xs mt-1">eriyen tutar</p>
+              </div>
+              <div class="bg-navy-700/60 border border-white/5 rounded-xl p-3 sm:p-4 text-center">
+                <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-2 leading-tight">Satın Alma Gücü</p>
+                <p id="res-alis-gucu" class="text-lg sm:text-xl font-extrabold text-slate-200">—</p>
+                <p class="text-slate-600 text-xs mt-1">kalan oran</p>
+              </div>
+            </div>
+
+            <!-- Visual: purchasing power bar -->
+            <div class="bg-navy-700/40 border border-white/5 rounded-xl p-4">
+              <div class="flex justify-between text-xs text-slate-400 mb-2">
+                <span>Başlangıç değeri</span>
+                <span>Bugünkü değer</span>
+              </div>
+              <div class="h-3 rounded-full bg-navy-600 overflow-hidden flex">
+                <div id="power-bar" class="prog-bar h-full bg-emerald-500 rounded-l-full" style="width:0%"></div>
+                <div id="lost-bar"  class="prog-bar h-full bg-rose-400/70" style="width:0%"></div>
+              </div>
+              <div class="flex justify-between text-xs text-slate-500 mt-2">
+                <span id="bar-label-kalan" class="text-emerald-400 font-medium">—</span>
+                <span id="bar-label-kayip" class="text-rose-400 font-medium">—</span>
+              </div>
+            </div>
+
+            <!-- Yıllık ortalama -->
+            <div class="flex items-center justify-between bg-navy-700/40 border border-white/5 rounded-xl px-4 py-3">
+              <span class="text-xs text-slate-400 font-medium">Ortalama Yıllık Enflasyon (hesaplanan dönem)</span>
+              <span id="res-yillik-ort" class="text-sm font-bold text-amber-400">—</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ TUFE TABLE ═══════════ -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 shadow-xl overflow-hidden mb-8">
+        <div class="px-6 sm:px-8 py-5 border-b border-white/5">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+            </svg>
+            Türkiye Yıllık TÜFE Verileri
+          </h3>
+          <p class="text-xs text-slate-500 mt-0.5">TÜİK kaynaklı yıllık ortalama TÜFE değerleri (hesaplamada kullanılan)</p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-navy-700/50">
+                <th class="text-left text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3">Yıl</th>
+                <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3">Yıllık TÜFE (%)</th>
+                <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3 hidden sm:table-cell">Görsel</th>
+              </tr>
+            </thead>
+            <tbody id="tufe-tbody" class="divide-y divide-white/4"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ═══════════ BILGI KARTI ═══════════ -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl mb-4">
+        <h3 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Enflasyon Nedir? Neden Önemlidir?
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white mb-1">Satın Alma Gücü Erimesi</p>
+              <p class="text-xs text-slate-400 leading-relaxed">Enflasyon, paranızın zaman içinde daha az ürün ve hizmet satın alabilmesine yol açar.</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white mb-1">Bileşik Etki</p>
+              <p class="text-xs text-slate-400 leading-relaxed">Her yıl önceki yıl üzerine eklenen enflasyon, uzun vadede büyük değer kayıplarına neden olur.</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-lg bg-rose-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white mb-1">Tasarrufu Korumak</p>
+              <p class="text-xs text-slate-400 leading-relaxed">Yastık altındaki para enflasyona yenik düşer. Getirisi enflasyonun üzerinde olan yatırımlar değer korur.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-navy-950 border-t border-white/5 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-xs text-slate-600">
+        © 2025 FinansKolay · TÜFE verileri TÜİK'e dayanmaktadır. Hesaplama yalnızca bilgilendirme amaçlıdır.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ─────────────────── JAVASCRIPT ─────────────────── -->
+  <script>
+  // ── TÜFE verileri (TÜİK yıllık ortalama) ──
+  const TUFE = {
+    2003: 25.3, 2004: 10.6, 2005: 8.2,  2006: 9.6,  2007: 8.8,
+    2008: 10.4, 2009: 6.3,  2010: 8.6,  2011: 6.5,  2012: 8.9,
+    2013: 7.5,  2014: 8.9,  2015: 7.7,  2016: 7.8,  2017: 11.9,
+    2018: 16.3, 2019: 15.2, 2020: 12.3, 2021: 19.6, 2022: 72.3,
+    2023: 53.9, 2024: 58.5, 2025: 38.1,
+  };
+
+  const AYLAR = [
+    'Ocak','Şubat','Mart','Nisan','Mayıs','Haziran',
+    'Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'
+  ];
+
+  const MIN_YIL = 2003;
+  const MAX_YIL = 2025;
+
+  // ── Helpers ──
+  function fmt(n) {
+    return '₺' + n.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function fmtPct(n) {
+    return '%' + n.toLocaleString('tr-TR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  }
+
+  function clearErr(id) {
+    const el = document.getElementById(id);
+    const err = document.getElementById(id + '-err');
+    if (el) el.classList.remove('error');
+    if (err) err.classList.add('hidden');
+  }
+  function showErr(id) {
+    const el = document.getElementById(id);
+    const err = document.getElementById(id + '-err');
+    if (el) el.classList.add('error');
+    if (err) err.classList.remove('hidden');
+    return false;
+  }
+
+  // ── Populate selects ──
+  function populateSelects() {
+    AYLAR.forEach((ad, i) => {
+      ['bas-ay','bit-ay'].forEach(id => {
+        const o = document.createElement('option');
+        o.value = i + 1;
+        o.textContent = ad;
+        document.getElementById(id).appendChild(o);
+      });
+    });
+
+    for (let y = MAX_YIL; y >= MIN_YIL; y--) {
+      const obas = document.createElement('option');
+      obas.value = y; obas.textContent = y;
+      document.getElementById('bas-yil').appendChild(obas);
+
+      const obit = document.createElement('option');
+      obit.value = y; obit.textContent = y;
+      document.getElementById('bit-yil').appendChild(obit);
+    }
+  }
+
+  function updateBitisYillar() {
+    const basYil = parseInt(document.getElementById('bas-yil').value);
+    const bitSel = document.getElementById('bit-yil');
+    const curVal = parseInt(bitSel.value);
+    Array.from(bitSel.options).forEach(o => {
+      if (o.value === '') return;
+      o.disabled = parseInt(o.value) < basYil;
+    });
+    if (curVal && curVal < basYil) {
+      bitSel.value = '';
+    }
+  }
+
+  function setMiktar(v) {
+    document.getElementById('miktar').value = v;
+    clearErr('miktar');
+  }
+
+  // ── Quick presets ──
+  document.querySelectorAll('.qbtn').forEach(btn => {
+    btn.classList.add(
+      'text-xs','px-3','py-1','rounded-lg','bg-navy-700','text-slate-400',
+      'hover:bg-emerald-500/15','hover:text-emerald-400','border','border-white/6','transition-all'
+    );
+  });
+
+  // ── Compute cumulative inflation between two month-year points ──
+  function computeInflation(basYil, basAy, bitYil, bitAy) {
+    // We split into fractional years using partial-year weighting
+    // For each year, we apply the proportion of that year that falls in range
+
+    let cumulative = 1.0;
+
+    if (basYil === bitYil) {
+      // Same year: fractional months
+      const fraction = (bitAy - basAy) / 12;
+      const r = (TUFE[basYil] || 20) / 100;
+      cumulative = Math.pow(1 + r, fraction);
+    } else {
+      // Partial first year (remaining months)
+      const firstFraction = (12 - basAy) / 12;
+      cumulative *= Math.pow(1 + (TUFE[basYil] || 20) / 100, firstFraction);
+
+      // Full middle years
+      for (let y = basYil + 1; y < bitYil; y++) {
+        cumulative *= (1 + (TUFE[y] || 20) / 100);
+      }
+
+      // Partial last year
+      const lastFraction = bitAy / 12;
+      cumulative *= Math.pow(1 + (TUFE[bitYil] || 20) / 100, lastFraction);
+    }
+
+    return cumulative; // e.g. 1.82 means 82% cumulative inflation
+  }
+
+  // ── Main calculation ──
+  function hesapla() {
+    const miktarVal = parseFloat(document.getElementById('miktar').value);
+    const basAy     = parseInt(document.getElementById('bas-ay').value);
+    const basYil    = parseInt(document.getElementById('bas-yil').value);
+    const bitAy     = parseInt(document.getElementById('bit-ay').value);
+    const bitYil    = parseInt(document.getElementById('bit-yil').value);
+
+    let valid = true;
+    if (isNaN(miktarVal) || miktarVal <= 0)  valid = showErr('miktar');
+    if (!basAy)  valid = showErr('bas-ay');
+    if (!basYil) valid = showErr('bas-yil');
+    if (!bitAy)  valid = showErr('bit-ay');
+    if (!bitYil) valid = showErr('bit-yil');
+
+    if (!valid) return;
+
+    // Validate order
+    const basTS = basYil * 12 + basAy;
+    const bitTS = bitYil * 12 + bitAy;
+    if (bitTS <= basTS) {
+      showErr('bit-yil');
+      document.getElementById('bit-yil-err').textContent = 'Bitiş tarihi başlangıçtan sonra olmalı.';
+      return;
+    }
+
+    const cumFactor = computeInflation(basYil, basAy, bitYil, bitAy);
+    const bugunki   = miktarVal * cumFactor;
+    const toplamPct = (cumFactor - 1) * 100;
+    const degerKaybi = bugunki - miktarVal;       // how much MORE you need
+    const alisgucuKalan = (1 / cumFactor) * 100;  // % of original purchasing power remaining
+
+    // Fractional year span for avg annual
+    const totalAylar = (bitYil - basYil) * 12 + (bitAy - basAy);
+    const yilFarki   = totalAylar / 12;
+    const yillikOrt  = (Math.pow(cumFactor, 1 / yilFarki) - 1) * 100;
+
+    // ── Render ──
+    document.getElementById('empty-state').classList.add('hidden');
+    const ra = document.getElementById('results-area');
+    ra.classList.remove('hidden');
+    ra.classList.add('fade-up');
+
+    // Narrative
+    const basAyAd = AYLAR[basAy - 1];
+    const bitAyAd = AYLAR[bitAy - 1];
+    document.getElementById('narrative').innerHTML =
+      `<span class="text-slate-500">${basAyAd} ${basYil}</span> tarihinde <span class="text-white font-semibold">${fmt(miktarVal)}</span> ile alabildiğiniz şeyleri bugün ` +
+      `(<span class="text-slate-500">${bitAyAd} ${bitYil}</span>) alabilmek için <span class="text-emerald-400 font-bold">${fmt(bugunki)}</span> gerekiyor.`;
+
+    document.getElementById('res-bugunki').textContent         = fmt(bugunki);
+    document.getElementById('res-bugunki-sub').textContent     = `${basAyAd} ${basYil} – ${bitAyAd} ${bitYil} arası`;
+    document.getElementById('res-toplam-pct').textContent      = fmtPct(toplamPct);
+    document.getElementById('res-deger-kaybi').textContent     = fmt(degerKaybi);
+    document.getElementById('res-alis-gucu').textContent       = fmtPct(alisgucuKalan);
+    document.getElementById('res-yillik-ort').textContent      = fmtPct(yillikOrt) + ' / yıl';
+
+    // Progress bars
+    const kalanPct = Math.min(100, alisgucuKalan);
+    const kayipPct = Math.min(100, 100 - alisgucuKalan);
+    setTimeout(() => {
+      document.getElementById('power-bar').style.width = kalanPct + '%';
+      document.getElementById('lost-bar').style.width  = kayipPct + '%';
+    }, 60);
+    document.getElementById('bar-label-kalan').textContent = 'Kalan değer: %' + alisgucuKalan.toFixed(1);
+    document.getElementById('bar-label-kayip').textContent = 'Eriyen: %' + (100 - alisgucuKalan).toFixed(1);
+
+    // Scroll on mobile
+    if (window.innerWidth < 1024) {
+      document.getElementById('results-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  // ── Render TÜFE table ──
+  function renderTufeTable() {
+    const tbody = document.getElementById('tufe-tbody');
+    const years = Object.keys(TUFE).map(Number).sort((a, b) => b - a);
+    const maxRate = Math.max(...Object.values(TUFE));
+
+    tbody.innerHTML = years.map((y, i) => {
+      const rate = TUFE[y];
+      const barW = (rate / maxRate * 100).toFixed(1);
+      let rateColor = 'text-emerald-400';
+      if (rate > 50) rateColor = 'text-red-400';
+      else if (rate > 20) rateColor = 'text-amber-400';
+      else if (rate > 10) rateColor = 'text-orange-400';
+
+      let barColor = 'bg-emerald-500';
+      if (rate > 50) barColor = 'bg-red-400';
+      else if (rate > 20) barColor = 'bg-amber-400';
+      else if (rate > 10) barColor = 'bg-orange-400';
+
+      return `
+        <tr class="tufe-row transition-colors ${i % 2 === 0 ? '' : 'bg-white/[0.015]'}">
+          <td class="px-4 sm:px-6 py-3 text-sm text-slate-300 font-semibold">${y}</td>
+          <td class="px-4 sm:px-6 py-3 text-sm ${rateColor} font-bold text-right">%${rate.toFixed(1)}</td>
+          <td class="px-4 sm:px-6 py-3 hidden sm:table-cell">
+            <div class="flex items-center gap-2">
+              <div class="flex-1 h-2 bg-navy-700 rounded-full overflow-hidden">
+                <div class="h-full ${barColor} rounded-full" style="width:${barW}%"></div>
+              </div>
+            </div>
+          </td>
+        </tr>`;
+    }).join('');
+  }
+
+  // ── Init ──
+  populateSelects();
+  renderTufeTable();
+
+  // Enter key
+  document.getElementById('miktar').addEventListener('keydown', e => {
+    if (e.key === 'Enter') hesapla();
+  });
+  </script>
+</body>
+</html>

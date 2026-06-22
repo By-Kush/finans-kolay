@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yatırım Getirisi Karşılaştırması – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 950:'#070E1A', 900:'#0F172A', 800:'#1E293B', 700:'#263348', 600:'#334155' }
+          },
+          fontFamily: {
+            sans: ['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .navbar-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,0.92);
+      border-bottom: 1px solid rgba(16,185,129,0.12);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    .finput {
+      background:#1E293B; border:1.5px solid rgba(255,255,255,0.08); color:#f1f5f9;
+      border-radius:0.75rem; padding:0.75rem 1rem; width:100%; font-size:0.9375rem;
+      outline:none; transition:border-color .18s,box-shadow .18s;
+    }
+    .finput:focus { border-color:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,.15); }
+    .finput::placeholder { color:#475569; }
+    .finput.error { border-color:#f43f5e; box-shadow:0 0 0 3px rgba(244,63,94,.12); }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(10px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .fade-up { animation:fadeUp .42s ease forwards; }
+    .prog-bar { transition:width .9s cubic-bezier(.4,0,.2,1); }
+
+    .qtag {
+      font-size:.6875rem; padding:.2rem .65rem; border-radius:9999px; font-weight:600;
+      transition:all .18s; cursor:pointer; border:1px solid rgba(255,255,255,.06);
+      background:#263348; color:#64748b; white-space:nowrap; display:inline-block;
+    }
+    .qtag:hover { color:#10B981; border-color:rgba(16,185,129,.3); background:rgba(16,185,129,.08); }
+
+    .scen-header-a { background:linear-gradient(135deg,rgba(16,185,129,.14),rgba(16,185,129,.04)); border-color:rgba(16,185,129,.25); }
+    .scen-header-b { background:linear-gradient(135deg,rgba(99,102,241,.14),rgba(99,102,241,.04)); border-color:rgba(99,102,241,.25); }
+    .winner-glow   { box-shadow:0 0 0 2px #10B981, 0 8px 32px rgba(16,185,129,.18); }
+    .runner-glow   { box-shadow:0 0 0 1px rgba(99,102,241,.35); }
+
+    ::-webkit-scrollbar { width:4px; }
+    ::-webkit-scrollbar-track { background:#0F172A; }
+    ::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+  <!-- NAVBAR -->
+  <header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+      <a href="finanskolay.html"
+        class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+        <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <span class="hidden sm:inline">Geri Dön</span>
+      </a>
+
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-indigo-500/15 flex items-center justify-center">
+          <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <span class="font-semibold text-white text-sm sm:text-base">Yatırım Getirisi Karşılaştırması</span>
+      </div>
+
+      <a href="finanskolay.html" class="flex items-center gap-2 group">
+        <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">
+          Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main class="pt-16 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Page header -->
+      <div class="py-8 sm:py-12 text-center">
+        <p class="text-indigo-400 text-xs font-semibold tracking-widest uppercase mb-2">Finans Aracı</p>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
+          İki Senaryoyu Yan Yana Karşılaştır
+        </h1>
+        <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+          Farklı getiri oranlarının uzun vadede yarattığı farkı görün.
+          Küçük bir oran farkının bileşik faizle nasıl büyük bir etki yaratabileceğini keşfedin.
+        </p>
+      </div>
+
+      <!-- Form + Results -->
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 mb-8">
+
+        <!-- FORM (2/5) -->
+        <div class="lg:col-span-2 bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+          <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+            </svg>
+            Yatırım Parametreleri
+          </h2>
+
+          <p class="text-xs text-slate-500 uppercase tracking-widest font-semibold mb-4">Ortak Ayarlar</p>
+
+          <!-- Sermaye -->
+          <div class="mb-5">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Başlangıç Sermayesi</label>
+            <div class="relative">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">&#8378;</span>
+              <input type="number" id="sermaye" class="finput pl-8" placeholder="100.000" min="0" oninput="clearErr('sermaye')" />
+            </div>
+            <p id="sermaye-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir sermaye tutarı girin.</p>
+            <div class="flex gap-1.5 mt-2 flex-wrap">
+              <span class="qtag" onclick="setVal('sermaye',10000)">&#8378;10K</span>
+              <span class="qtag" onclick="setVal('sermaye',50000)">&#8378;50K</span>
+              <span class="qtag" onclick="setVal('sermaye',100000)">&#8378;100K</span>
+              <span class="qtag" onclick="setVal('sermaye',500000)">&#8378;500K</span>
+            </div>
+          </div>
+
+          <!-- Aylık -->
+          <div class="mb-5">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Aylık Ek Yatırım</label>
+            <div class="relative">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">&#8378;</span>
+              <input type="number" id="aylik" class="finput pl-8" placeholder="2.000" min="0" value="0" oninput="clearErr('aylik')" />
+            </div>
+            <p id="aylik-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir tutar girin.</p>
+            <div class="flex gap-1.5 mt-2 flex-wrap">
+              <span class="qtag" onclick="setVal('aylik',0)">&#8378;0</span>
+              <span class="qtag" onclick="setVal('aylik',1000)">&#8378;1K</span>
+              <span class="qtag" onclick="setVal('aylik',3000)">&#8378;3K</span>
+              <span class="qtag" onclick="setVal('aylik',5000)">&#8378;5K</span>
+            </div>
+          </div>
+
+          <!-- Sure -->
+          <div class="mb-6">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Yatırım Süresi</label>
+            <div class="relative">
+              <input type="number" id="sure" class="finput pr-12" placeholder="20" min="1" max="50" oninput="clearErr('sure')" />
+              <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">yıl</span>
+            </div>
+            <p id="sure-err" class="text-xs text-rose-400 mt-1.5 hidden">Lütfen 1-50 arasında bir süre girin.</p>
+            <div class="flex gap-1.5 mt-2 flex-wrap">
+              <span class="qtag" onclick="setVal('sure',5)">5 yıl</span>
+              <span class="qtag" onclick="setVal('sure',10)">10 yıl</span>
+              <span class="qtag" onclick="setVal('sure',20)">20 yıl</span>
+              <span class="qtag" onclick="setVal('sure',30)">30 yıl</span>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="relative mb-6">
+            <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/6"></div></div>
+            <div class="relative flex justify-center">
+              <span class="bg-navy-800 px-3 text-xs text-slate-500 uppercase tracking-widest font-semibold">Getiri Oranları</span>
+            </div>
+          </div>
+
+          <!-- Senaryo A getiri -->
+          <div class="mb-5">
+            <label class="block text-xs font-semibold mb-2">
+              <span class="inline-flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span>
+                <span class="text-emerald-400 uppercase tracking-wide">Senaryo A &mdash; Yıllık Getiri</span>
+              </span>
+            </label>
+            <div class="relative">
+              <input type="number" id="getiri-a" class="finput pr-10" placeholder="8" min="0" max="100" step="0.5" oninput="clearErr('getiri-a')" />
+              <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">%</span>
+            </div>
+            <p id="getiri-a-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir oran girin (0-100).</p>
+            <div class="flex gap-1.5 mt-2 flex-wrap">
+              <span class="qtag" onclick="setVal('getiri-a',5)">%5</span>
+              <span class="qtag" onclick="setVal('getiri-a',8)">%8</span>
+              <span class="qtag" onclick="setVal('getiri-a',10)">%10</span>
+              <span class="qtag" onclick="setVal('getiri-a',12)">%12</span>
+            </div>
+          </div>
+
+          <!-- Senaryo B getiri -->
+          <div class="mb-7">
+            <label class="block text-xs font-semibold mb-2">
+              <span class="inline-flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-indigo-400 inline-block"></span>
+                <span class="text-indigo-400 uppercase tracking-wide">Senaryo B &mdash; Yıllık Getiri</span>
+              </span>
+            </label>
+            <div class="relative">
+              <input type="number" id="getiri-b" class="finput pr-10" placeholder="12" min="0" max="100" step="0.5" oninput="clearErr('getiri-b')" />
+              <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">%</span>
+            </div>
+            <p id="getiri-b-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir oran girin (0-100).</p>
+            <div class="flex gap-1.5 mt-2 flex-wrap">
+              <span class="qtag" onclick="setVal('getiri-b',8)">%8</span>
+              <span class="qtag" onclick="setVal('getiri-b',12)">%12</span>
+              <span class="qtag" onclick="setVal('getiri-b',15)">%15</span>
+              <span class="qtag" onclick="setVal('getiri-b',20)">%20</span>
+            </div>
+          </div>
+
+          <!-- Button -->
+          <button onclick="hesapla()"
+            class="w-full flex items-center justify-center gap-2 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-base rounded-xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            Karşılaştır
+          </button>
+          <p class="text-xs text-slate-600 text-center mt-3 leading-relaxed">
+            Aylık döngüsel bileşik faiz formülü kullanılmaktadır. Sonuçlar tahmini niteliktedir.
+          </p>
+        </div>
+
+        <!-- RESULTS (3/5) -->
+        <div class="lg:col-span-3 flex flex-col gap-6">
+
+          <!-- Empty -->
+          <div id="empty-state"
+            class="flex-1 bg-navy-800 rounded-2xl border border-white/5 p-10 shadow-xl flex flex-col items-center justify-center text-center min-h-64">
+            <div class="w-16 h-16 rounded-2xl bg-indigo-500/8 flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-indigo-500/25" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <p class="text-slate-400 text-sm font-medium mb-1">Karşılaştırma bekleniyor</p>
+            <p class="text-slate-600 text-xs">Parametreleri girin ve Karşılaştır butonuna tıklayın</p>
+          </div>
+
+          <div id="results-wrapper" class="hidden flex-col gap-5">
+
+            <!-- Narrative -->
+            <div id="narrative"
+              class="bg-navy-800 border border-white/5 rounded-2xl px-5 py-4 text-sm text-slate-300 leading-relaxed shadow-xl">
+            </div>
+
+            <!-- Two scenario cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+              <!-- Card A -->
+              <div id="card-a" class="bg-navy-800 rounded-2xl border p-5 shadow-xl scen-header-a">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+                    <span class="text-sm font-bold text-emerald-300">Senaryo A</span>
+                  </div>
+                  <span id="badge-a" class="text-xs font-bold px-2.5 py-0.5 rounded-full hidden"></span>
+                </div>
+                <p id="rate-a" class="text-xs text-slate-400 mb-4"></p>
+                <div class="mb-4">
+                  <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-1">Toplam Birikim</p>
+                  <p id="a-toplam" class="text-3xl font-extrabold text-white tracking-tight">-</p>
+                </div>
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center py-2 border-t border-white/5">
+                    <span class="text-xs text-slate-400">Toplam Katkı</span>
+                    <span id="a-katki" class="text-sm font-bold text-sky-300">-</span>
+                  </div>
+                  <div class="flex justify-between items-center py-2 border-t border-white/5">
+                    <span class="text-xs text-slate-400">Getiri Kazancı</span>
+                    <span id="a-getiri" class="text-sm font-bold text-emerald-400">-</span>
+                  </div>
+                  <div class="flex justify-between items-center py-2 border-t border-white/5">
+                    <span class="text-xs text-slate-400">Getiri / Katkı</span>
+                    <span id="a-oran" class="text-sm font-bold text-amber-400">-</span>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <div class="h-2 rounded-full bg-navy-700 overflow-hidden flex">
+                    <div id="a-bar-katki"  class="prog-bar h-full bg-sky-400" style="width:0%"></div>
+                    <div id="a-bar-getiri" class="prog-bar h-full bg-emerald-400" style="width:0%"></div>
+                  </div>
+                  <div class="flex justify-between text-xs text-slate-500 mt-1.5">
+                    <span>Katkı <span id="a-pct-katki" class="text-slate-300 font-medium">-</span></span>
+                    <span>Getiri <span id="a-pct-getiri" class="text-slate-300 font-medium">-</span></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card B -->
+              <div id="card-b" class="bg-navy-800 rounded-2xl border p-5 shadow-xl scen-header-b">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-indigo-400"></div>
+                    <span class="text-sm font-bold text-indigo-300">Senaryo B</span>
+                  </div>
+                  <span id="badge-b" class="text-xs font-bold px-2.5 py-0.5 rounded-full hidden"></span>
+                </div>
+                <p id="rate-b" class="text-xs text-slate-400 mb-4"></p>
+                <div class="mb-4">
+                  <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-1">Toplam Birikim</p>
+                  <p id="b-toplam" class="text-3xl font-extrabold text-white tracking-tight">-</p>
+                </div>
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center py-2 border-t border-white/5">
+                    <span class="text-xs text-slate-400">Toplam Katkı</span>
+                    <span id="b-katki" class="text-sm font-bold text-sky-300">-</span>
+                  </div>
+                  <div class="flex justify-between items-center py-2 border-t border-white/5">
+                    <span class="text-xs text-slate-400">Getiri Kazancı</span>
+                    <span id="b-getiri" class="text-sm font-bold text-indigo-400">-</span>
+                  </div>
+                  <div class="flex justify-between items-center py-2 border-t border-white/5">
+                    <span class="text-xs text-slate-400">Getiri / Katkı</span>
+                    <span id="b-oran" class="text-sm font-bold text-amber-400">-</span>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <div class="h-2 rounded-full bg-navy-700 overflow-hidden flex">
+                    <div id="b-bar-katki"  class="prog-bar h-full bg-sky-400" style="width:0%"></div>
+                    <div id="b-bar-getiri" class="prog-bar h-full bg-indigo-400" style="width:0%"></div>
+                  </div>
+                  <div class="flex justify-between text-xs text-slate-500 mt-1.5">
+                    <span>Katkı <span id="b-pct-katki" class="text-slate-300 font-medium">-</span></span>
+                    <span>Getiri <span id="b-pct-getiri" class="text-slate-300 font-medium">-</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Diff summary -->
+            <div class="bg-navy-800 rounded-2xl border border-white/5 p-5 sm:p-6 shadow-xl">
+              <h3 class="text-sm font-bold text-white mb-4 flex items-center gap-2">
+                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                </svg>
+                Senaryolar Arasi Fark
+              </h3>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-navy-700/50 border border-white/5 rounded-xl p-4 text-center">
+                  <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-2">Birikim Farki</p>
+                  <p id="diff-birikim" class="text-2xl font-extrabold">-</p>
+                  <p id="diff-birikim-lbl" class="text-xs text-slate-500 mt-1"></p>
+                </div>
+                <div class="bg-navy-700/50 border border-white/5 rounded-xl p-4 text-center">
+                  <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-2">Getiri Farki</p>
+                  <p id="diff-getiri" class="text-2xl font-extrabold">-</p>
+                  <p id="diff-getiri-lbl" class="text-xs text-slate-500 mt-1"></p>
+                </div>
+                <div class="bg-navy-700/50 border border-white/5 rounded-xl p-4 text-center">
+                  <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-2">Kazanc Carpani</p>
+                  <p id="diff-carpan" class="text-2xl font-extrabold text-amber-400">-</p>
+                  <p class="text-xs text-slate-500 mt-1">kazanan / kaybeden</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Year table -->
+            <div class="bg-navy-800 rounded-2xl border border-white/5 shadow-xl overflow-hidden">
+              <div class="px-5 sm:px-6 py-4 border-b border-white/5 flex items-center justify-between">
+                <div>
+                  <h3 class="text-sm font-bold text-white">Yillik Birikim Tablosu</h3>
+                  <p class="text-xs text-slate-500 mt-0.5">Her yil sonundaki tahmini birikim degerleri</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <label class="text-xs text-slate-400">Goster:</label>
+                  <select id="show-count" onchange="renderTable()"
+                    class="bg-navy-700 border border-white/8 text-slate-300 text-xs rounded-lg px-3 py-1.5 outline-none focus:border-emerald-500">
+                    <option value="10">Ilk 10 yil</option>
+                    <option value="20">Ilk 20 yil</option>
+                    <option value="all">Tumu</option>
+                  </select>
+                </div>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="bg-navy-700/50">
+                      <th class="text-left text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-5 py-3">Yil</th>
+                      <th class="text-right text-xs font-semibold text-emerald-400 uppercase tracking-wide px-3 sm:px-5 py-3">Senaryo A</th>
+                      <th class="text-right text-xs font-semibold text-indigo-400 uppercase tracking-wide px-3 sm:px-5 py-3">Senaryo B</th>
+                      <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-5 py-3">Fark</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tablo-tbody" class="divide-y divide-white/4"></tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl mb-4">
+        <h3 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Neden Getiri Orani Bu Kadar Onemli?
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white mb-1">Kucuk fark, buyuk sonuc</p>
+              <p class="text-xs text-slate-400 leading-relaxed">Yuzde 8 ile 10 arasi yalnizca 2 puanlik fark, 30 yilda birikim miktarinda carpici farklara yol acar.</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-lg bg-indigo-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white mb-1">Maliyet ve vergiyi unutma</p>
+              <p class="text-xs text-slate-400 leading-relaxed">Fon yonetim ucreti, stopaj ve enflasyon net getirinizi ciddi olcude dusurebilir. Net getiriyi baz alin.</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white mb-1">Cesitlendirme sart</p>
+              <p class="text-xs text-slate-400 leading-relaxed">Yuksek getiri vaadi genellikle yuksek riskle gelir. Portfoyunuzu dengeli tutun ve uzman gorusu alin.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-navy-950 border-t border-white/5 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-xs text-slate-600">
+        2025 FinansKolay - Sonuclar tahmini niteliktedir, yatirim tavsiyesi degildir.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    let tableData = [];
+
+    function setVal(id, v) { document.getElementById(id).value = v; clearErr(id); }
+
+    function clearErr(id) {
+      const el = document.getElementById(id);
+      const er = document.getElementById(id + '-err');
+      if (el) el.classList.remove('error');
+      if (er) er.classList.add('hidden');
+    }
+    function showErr(id, msg) {
+      const el = document.getElementById(id);
+      const er = document.getElementById(id + '-err');
+      if (el) el.classList.add('error');
+      if (er) { if (msg) er.textContent = msg; er.classList.remove('hidden'); }
+      return false;
+    }
+
+    function fmtB(n) {
+      if (n >= 1e9) return '\u20BA' + (n/1e9).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' Mr';
+      if (n >= 1e6) return '\u20BA' + (n/1e6).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' Mn';
+      return '\u20BA' + Math.round(n).toLocaleString('tr-TR');
+    }
+    function fmtPct(n) { return '%' + n.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
+
+    function fv(pv, pmt, yr, yil) {
+      const n = yil * 12;
+      const r = yr / 12;
+      const lump = pv * Math.pow(1+r, n);
+      const ann  = r === 0 ? pmt*n : pmt*(Math.pow(1+r,n)-1)/r;
+      return lump + ann;
+    }
+
+    function hesapla() {
+      const sV = parseFloat(document.getElementById('sermaye').value) || 0;
+      const aV = parseFloat(document.getElementById('aylik').value)   || 0;
+      const yV = parseInt(document.getElementById('sure').value);
+      const rA = parseFloat(document.getElementById('getiri-a').value);
+      const rB = parseFloat(document.getElementById('getiri-b').value);
+
+      let ok = true;
+      if (isNaN(sV)||sV<0)           ok = showErr('sermaye','Gecerli bir sermaye tutari girin.');
+      if (isNaN(aV)||aV<0)           ok = showErr('aylik','Gecerli bir tutar girin.');
+      if (isNaN(yV)||yV<1||yV>50)    ok = showErr('sure','Lutfen 1-50 arasinda bir sure girin.');
+      if (isNaN(rA)||rA<0||rA>100)   ok = showErr('getiri-a','Gecerli bir oran girin (0-100).');
+      if (isNaN(rB)||rB<0||rB>100)   ok = showErr('getiri-b','Gecerli bir oran girin (0-100).');
+      if (sV===0&&aV===0)            ok = showErr('sermaye','En az baslangic sermayesi veya aylik katki girin.');
+      if (!ok) return;
+
+      const katki = sV + aV*12*yV;
+      const totA  = fv(sV, aV, rA/100, yV);
+      const totB  = fv(sV, aV, rB/100, yV);
+      const gA    = totA - katki;
+      const gB    = totB - katki;
+
+      const pkA = katki/totA*100, pgA = gA/totA*100;
+      const pkB = katki/totB*100, pgB = gB/totB*100;
+      const oA  = katki>0 ? gA/katki : 0;
+      const oB  = katki>0 ? gB/katki : 0;
+
+      const winner  = totA >= totB ? 'A' : 'B';
+      const winVal  = Math.max(totA, totB);
+      const losVal  = Math.min(totA, totB);
+      const diff    = winVal - losVal;
+      const carpan  = losVal>0 ? winVal/losVal : 0;
+      const diffG   = Math.abs(gA - gB);
+
+      // Show results
+      document.getElementById('empty-state').classList.add('hidden');
+      const rw = document.getElementById('results-wrapper');
+      rw.classList.remove('hidden');
+      rw.classList.add('fade-up');
+
+      const wRate = winner==='A' ? rA : rB;
+      const wCol  = winner==='A' ? 'text-emerald-400' : 'text-indigo-400';
+      document.getElementById('narrative').innerHTML =
+        '<span class="font-semibold text-white">' + yV + ' yillik</span> yatirimda ' +
+        '<span class="font-semibold ' + wCol + '">Senaryo ' + winner + ' (%' + wRate + ')</span> kazaniyor. ' +
+        '<span class="font-bold text-white">' + fmtB(diff) + '</span> daha fazla birikim sagliyor. ' +
+        'Yalnizca <span class="font-semibold text-white">' + Math.abs(rB-rA).toFixed(1) + ' puan</span>lik getiri farki, ' +
+        '<span class="text-amber-400 font-semibold">' + carpan.toFixed(2) + 'x carpan</span> yaratmaktadir.';
+
+      document.getElementById('rate-a').textContent = 'Yillik %'+rA+' getiri - '+yV+' yil';
+      document.getElementById('a-toplam').textContent = fmtB(totA);
+      document.getElementById('a-katki').textContent  = fmtB(katki);
+      document.getElementById('a-getiri').textContent = fmtB(gA);
+      document.getElementById('a-oran').textContent   = oA.toFixed(2)+'x';
+      document.getElementById('a-pct-katki').textContent  = fmtPct(pkA);
+      document.getElementById('a-pct-getiri').textContent = fmtPct(pgA);
+
+      document.getElementById('rate-b').textContent = 'Yillik %'+rB+' getiri - '+yV+' yil';
+      document.getElementById('b-toplam').textContent = fmtB(totB);
+      document.getElementById('b-katki').textContent  = fmtB(katki);
+      document.getElementById('b-getiri').textContent = fmtB(gB);
+      document.getElementById('b-oran').textContent   = oB.toFixed(2)+'x';
+      document.getElementById('b-pct-katki').textContent  = fmtPct(pkB);
+      document.getElementById('b-pct-getiri').textContent = fmtPct(pgB);
+
+      ['a','b'].forEach(s => {
+        const badge = document.getElementById('badge-'+s);
+        const card  = document.getElementById('card-'+s);
+        badge.classList.remove('hidden');
+        if (s === winner.toLowerCase()) {
+          badge.textContent = 'Kazanan';
+          badge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300';
+          card.classList.add('winner-glow'); card.classList.remove('runner-glow');
+        } else {
+          badge.textContent = '2. Sira';
+          badge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-white/6 text-slate-400';
+          card.classList.add('runner-glow'); card.classList.remove('winner-glow');
+        }
+      });
+
+      setTimeout(function(){
+        document.getElementById('a-bar-katki').style.width  = pkA+'%';
+        document.getElementById('a-bar-getiri').style.width = pgA+'%';
+        document.getElementById('b-bar-katki').style.width  = pkB+'%';
+        document.getElementById('b-bar-getiri').style.width = pgB+'%';
+      }, 60);
+
+      const dEl = document.getElementById('diff-birikim');
+      dEl.textContent = fmtB(diff);
+      dEl.className = 'text-2xl font-extrabold ' + wCol;
+      document.getElementById('diff-birikim-lbl').textContent = 'Senaryo '+winner+' daha fazla birikim saglar';
+
+      const gEl = document.getElementById('diff-getiri');
+      gEl.textContent = fmtB(diffG);
+      gEl.className = 'text-2xl font-extrabold ' + wCol;
+      document.getElementById('diff-getiri-lbl').textContent = 'Senaryo '+winner+' daha fazla faiz kazanir';
+
+      document.getElementById('diff-carpan').textContent = carpan.toFixed(2)+'x';
+
+      // Table data
+      tableData = [];
+      for (var y=1; y<=yV; y++) {
+        tableData.push({ yil:y, a:fv(sV,aV,rA/100,y), b:fv(sV,aV,rB/100,y) });
+      }
+      renderTable();
+
+      if (window.innerWidth < 1024) {
+        rw.scrollIntoView({ behavior:'smooth', block:'start' });
+      }
+    }
+
+    function renderTable() {
+      const sv = document.getElementById('show-count').value;
+      const lim = sv==='all' ? tableData.length : parseInt(sv);
+      const rows = tableData.slice(0, lim);
+      const tbody = document.getElementById('tablo-tbody');
+
+      tbody.innerHTML = rows.map(function(r,i){
+        const diff = r.b - r.a;
+        const pos  = diff > 0;
+        const dc   = pos ? 'text-indigo-400' : 'text-emerald-400';
+        const ds   = (pos?'+':'') + fmtB(diff);
+        return '<tr class="transition-colors hover:bg-white/[0.02] '+(i%2===0?'':'bg-white/[0.015]')+'">' +
+          '<td class="px-4 sm:px-5 py-2.5 text-xs text-slate-400 font-semibold">'+r.yil+'. Yil</td>' +
+          '<td class="px-3 sm:px-5 py-2.5 text-xs text-emerald-300 font-bold text-right whitespace-nowrap">'+fmtB(r.a)+'</td>' +
+          '<td class="px-3 sm:px-5 py-2.5 text-xs text-indigo-300 font-bold text-right whitespace-nowrap">'+fmtB(r.b)+'</td>' +
+          '<td class="px-4 sm:px-5 py-2.5 text-xs '+dc+' font-semibold text-right whitespace-nowrap">'+ds+'</td>' +
+          '</tr>';
+      }).join('');
+
+      if (sv!=='all' && tableData.length>lim) {
+        const rem = tableData.length-lim;
+        tbody.innerHTML += '<tr><td colspan="4" class="text-center py-3 text-xs text-slate-500">... ve '+rem+' yil daha ' +
+          '<button onclick="document.getElementById(\'show-count\').value=\'all\';renderTable();" ' +
+          'class="ml-2 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors">Tumunu Goster</button></td></tr>';
+      }
+    }
+
+    ['sermaye','aylik','sure','getiri-a','getiri-b'].forEach(function(id){
+      document.getElementById(id).addEventListener('keydown', function(e){
+        if (e.key==='Enter') hesapla();
+      });
+    });
+  </script>
+</body>
+</html>

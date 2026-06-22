@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kredi Hesaplama Aracı – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#070E1A',
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#263348',
+              600: '#334155',
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+
+    .navbar-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,0.92);
+      border-bottom: 1px solid rgba(16,185,129,0.12);
+    }
+
+    /* Number input arrows hidden for cleaner look */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    /* Input focus ring */
+    .finput {
+      background: #1E293B;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      color: #f1f5f9;
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      font-size: 1rem;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      outline: none;
+    }
+    .finput:focus {
+      border-color: #10B981;
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+    }
+    .finput::placeholder { color: #475569; }
+    .finput.error {
+      border-color: #f43f5e;
+      box-shadow: 0 0 0 3px rgba(244,63,94,0.12);
+    }
+
+    /* Result number counter animation */
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .result-animate { animation: countUp 0.38s ease forwards; }
+
+    /* Amortization table row hover */
+    .amort-row:hover td { background: rgba(16,185,129,0.05); }
+
+    /* Scrollbar styling for table */
+    .table-scroll::-webkit-scrollbar { height: 4px; width: 4px; }
+    .table-scroll::-webkit-scrollbar-track { background: #1E293B; }
+    .table-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    /* Tooltip for chart */
+    .chartjs-tooltip { pointer-events: none; }
+
+    /* Shimmer placeholder */
+    .shimmer {
+      background: linear-gradient(90deg, #1E293B 25%, #263348 50%, #1E293B 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 0.5rem;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Progress bar for cost breakdown */
+    .progress-bar { transition: width 0.7s cubic-bezier(0.4,0,0.2,1); }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+  <!-- ═══════════════ NAVBAR ═══════════════ -->
+  <header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+
+      <!-- Back button -->
+      <a href="finanskolay.html"
+        class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+        <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <span class="hidden sm:inline">Geri Dön</span>
+      </a>
+
+      <!-- Page title -->
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-emerald-500/15 flex items-center justify-center">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+          </svg>
+        </div>
+        <span class="font-semibold text-white text-sm sm:text-base">Kredi Hesaplama Aracı</span>
+      </div>
+
+      <!-- Logo -->
+      <a href="finanskolay.html" class="flex items-center gap-2 group">
+        <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">
+          Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ═══════════════ MAIN ═══════════════ -->
+  <main class="pt-16 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Page header -->
+      <div class="py-8 sm:py-12 text-center">
+        <p class="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-2">Ücretsiz Araç</p>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">Kredi Taksit Hesaplayıcı</h1>
+        <p class="text-slate-400 text-sm sm:text-base max-w-lg mx-auto">
+          Kredi tutarı, faiz oranı ve vade girerek aylık taksit miktarınızı ve toplam maliyetinizi anında öğrenin.
+        </p>
+      </div>
+
+      <!-- ── Form + Results grid ── -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+
+        <!-- ── LEFT: Form Card ── -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+          <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+            </svg>
+            Kredi Bilgileri
+          </h2>
+
+          <!-- Kredi Türü -->
+          <div class="mb-6">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Kredi Türü</label>
+            <div class="grid grid-cols-3 gap-2">
+              <button onclick="setKrediTuru(this,'konut')"
+                class="kredi-turu-btn active-turu py-2.5 rounded-xl text-xs font-semibold transition-all border border-emerald-500/40 bg-emerald-500/10 text-emerald-400">
+                🏠 Konut
+              </button>
+              <button onclick="setKrediTuru(this,'tasit')"
+                class="kredi-turu-btn py-2.5 rounded-xl text-xs font-semibold transition-all border border-white/8 bg-navy-700 text-slate-400 hover:border-emerald-500/30 hover:text-slate-200">
+                🚗 Taşıt
+              </button>
+              <button onclick="setKrediTuru(this,'ihtiyac')"
+                class="kredi-turu-btn py-2.5 rounded-xl text-xs font-semibold transition-all border border-white/8 bg-navy-700 text-slate-400 hover:border-emerald-500/30 hover:text-slate-200">
+                💳 İhtiyaç
+              </button>
+            </div>
+          </div>
+
+          <!-- Kredi Tutarı -->
+          <div class="mb-5">
+            <label for="tutar" class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+              Kredi Tutarı
+            </label>
+            <div class="relative">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+              <input type="number" id="tutar" class="finput pl-8" placeholder="500.000"
+                min="1000" step="1000" oninput="clearError('tutar')" />
+            </div>
+            <p id="tutar-err" class="text-xs text-rose-400 mt-1.5 hidden">Lütfen geçerli bir tutar girin (min. ₺1.000)</p>
+            <!-- Quick amounts -->
+            <div class="flex gap-2 mt-2.5 flex-wrap">
+              <button onclick="setTutar(100000)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">₺100K</button>
+              <button onclick="setTutar(250000)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">₺250K</button>
+              <button onclick="setTutar(500000)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">₺500K</button>
+              <button onclick="setTutar(1000000)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">₺1M</button>
+            </div>
+          </div>
+
+          <!-- Faiz Oranı -->
+          <div class="mb-5">
+            <label for="faiz" class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+              Yıllık Faiz Oranı
+              <span class="ml-1.5 text-slate-500 font-normal normal-case">(KKDF ve BSMV dahil değil)</span>
+            </label>
+            <div class="relative">
+              <input type="number" id="faiz" class="finput pr-10" placeholder="3.50"
+                min="0.1" max="200" step="0.1" oninput="clearError('faiz')" />
+              <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">%</span>
+            </div>
+            <p id="faiz-err" class="text-xs text-rose-400 mt-1.5 hidden">Lütfen geçerli bir faiz oranı girin (0.1 – 200)</p>
+            <!-- Quick rates -->
+            <div class="flex gap-2 mt-2.5 flex-wrap">
+              <button onclick="setFaiz(2.5)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">%2.5</button>
+              <button onclick="setFaiz(3.5)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">%3.5</button>
+              <button onclick="setFaiz(5.0)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">%5.0</button>
+              <button onclick="setFaiz(7.5)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">%7.5</button>
+            </div>
+          </div>
+
+          <!-- Vade -->
+          <div class="mb-7">
+            <label for="vade" class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+              Vade Süresi
+            </label>
+            <div class="relative">
+              <input type="number" id="vade" class="finput pr-12" placeholder="36"
+                min="1" max="360" step="1" oninput="clearError('vade'); updateVadeLabel()" />
+              <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">Ay</span>
+            </div>
+            <p id="vade-label" class="text-xs text-slate-500 mt-1.5"></p>
+            <p id="vade-err" class="text-xs text-rose-400 mt-1.5 hidden">Lütfen geçerli bir vade girin (1 – 360 ay)</p>
+            <!-- Quick tenors -->
+            <div class="flex gap-2 mt-2.5 flex-wrap">
+              <button onclick="setVade(12)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">12 Ay</button>
+              <button onclick="setVade(24)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">24 Ay</button>
+              <button onclick="setVade(36)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">36 Ay</button>
+              <button onclick="setVade(60)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">60 Ay</button>
+              <button onclick="setVade(120)" class="quick-btn text-xs px-3 py-1 rounded-lg bg-navy-700 text-slate-400 hover:bg-emerald-500/15 hover:text-emerald-400 border border-white/6 transition-all">120 Ay</button>
+            </div>
+          </div>
+
+          <!-- Calculate button -->
+          <button onclick="hesapla()"
+            id="hesapla-btn"
+            class="w-full flex items-center justify-center gap-2 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-base rounded-xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            </svg>
+            Hesapla
+          </button>
+
+          <!-- Info note -->
+          <p class="text-xs text-slate-500 text-center mt-4 leading-relaxed">
+            Bu hesaplama yalnızca bilgilendirme amaçlıdır. Bankalar ek masraf uygulayabilir.
+          </p>
+        </div>
+
+        <!-- ── RIGHT: Results Card ── -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl flex flex-col">
+          <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            Hesaplama Sonuçları
+          </h2>
+
+          <!-- Empty state -->
+          <div id="empty-state" class="flex-1 flex flex-col items-center justify-center py-10 text-center">
+            <div class="w-16 h-16 rounded-2xl bg-emerald-500/8 flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-emerald-500/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <p class="text-slate-400 text-sm font-medium mb-1">Sonuç bekleniyor</p>
+            <p class="text-slate-600 text-xs">Kredi bilgilerini girin ve Hesapla butonuna tıklayın</p>
+          </div>
+
+          <!-- Results (hidden until calculated) -->
+          <div id="results-area" class="hidden flex-1 flex flex-col gap-4">
+
+            <!-- Main result: Aylık Taksit -->
+            <div class="bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border border-emerald-500/25 rounded-xl p-5 text-center">
+              <p class="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">Aylık Taksit Tutarı</p>
+              <p id="aylik-taksit" class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">—</p>
+              <p class="text-slate-400 text-xs mt-1.5">Her ay ödemeniz gereken tutar</p>
+            </div>
+
+            <!-- Secondary results row -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+                <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-2">Toplam Ödeme</p>
+                <p id="toplam-odeme" class="text-xl font-extrabold text-white">—</p>
+                <p class="text-slate-500 text-xs mt-1">Anapara + Faiz</p>
+              </div>
+              <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+                <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-2">Toplam Faiz</p>
+                <p id="toplam-faiz" class="text-xl font-extrabold text-rose-400">—</p>
+                <p class="text-slate-500 text-xs mt-1">Fazladan ödenen</p>
+              </div>
+            </div>
+
+            <!-- Cost breakdown bar -->
+            <div class="bg-navy-700/40 border border-white/5 rounded-xl p-4">
+              <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Maliyet Dağılımı</p>
+              <div class="h-3 rounded-full bg-navy-600 overflow-hidden flex mb-3">
+                <div id="bar-anapara" class="progress-bar h-full bg-emerald-500 rounded-l-full" style="width:0%"></div>
+                <div id="bar-faiz" class="progress-bar h-full bg-rose-400 rounded-r-full" style="width:0%"></div>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="flex items-center gap-1.5 text-slate-400">
+                  <span class="w-2.5 h-2.5 rounded-sm bg-emerald-500 inline-block"></span>
+                  Anapara: <span id="pct-anapara" class="text-white font-semibold ml-0.5">—</span>
+                </span>
+                <span class="flex items-center gap-1.5 text-slate-400">
+                  <span class="w-2.5 h-2.5 rounded-sm bg-rose-400 inline-block"></span>
+                  Faiz: <span id="pct-faiz" class="text-white font-semibold ml-0.5">—</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Aylık faiz bilgisi -->
+            <div class="flex items-center justify-between bg-navy-700/40 border border-white/5 rounded-xl px-4 py-3">
+              <span class="text-xs text-slate-400 font-medium">Aylık Faiz Oranı</span>
+              <span id="aylik-faiz-oran" class="text-sm font-bold text-emerald-400">—</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ CHART + AMORTIZATION ═══════════════ -->
+      <div id="alt-bolum" class="hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+
+          <!-- Pasta grafik -->
+          <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+            <h3 class="text-base font-bold text-white mb-1 flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
+              </svg>
+              Ödeme Dağılımı
+            </h3>
+            <p class="text-xs text-slate-500 mb-6">Toplam ödemede anapara ve faiz oranları</p>
+            <div class="relative h-56 sm:h-64">
+              <canvas id="pie-chart"></canvas>
+            </div>
+            <div class="mt-5 grid grid-cols-2 gap-3">
+              <div class="bg-navy-700/50 rounded-xl p-3 text-center border border-white/4">
+                <div class="w-3 h-3 rounded-sm bg-emerald-500 mx-auto mb-1.5"></div>
+                <p class="text-xs text-slate-400 mb-0.5">Anapara</p>
+                <p id="legend-anapara" class="text-sm font-bold text-white">—</p>
+              </div>
+              <div class="bg-navy-700/50 rounded-xl p-3 text-center border border-white/4">
+                <div class="w-3 h-3 rounded-sm bg-rose-400 mx-auto mb-1.5"></div>
+                <p class="text-xs text-slate-400 mb-0.5">Toplam Faiz</p>
+                <p id="legend-faiz" class="text-sm font-bold text-white">—</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Yıllık özet -->
+          <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+            <h3 class="text-base font-bold text-white mb-1 flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+              </svg>
+              Yıllık Kalan Borç
+            </h3>
+            <p class="text-xs text-slate-500 mb-5">Her yıl sonundaki kalan anaparanız</p>
+            <div class="relative h-56 sm:h-64">
+              <canvas id="bar-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amortization table -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 shadow-xl overflow-hidden mb-4">
+          <div class="px-6 sm:px-8 py-5 border-b border-white/5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                </svg>
+                Ödeme Planı
+              </h3>
+              <p class="text-xs text-slate-500 mt-0.5">Aya göre taksit detayları</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <label class="text-xs text-slate-400">Göster:</label>
+              <select id="show-count" onchange="renderTable()"
+                class="bg-navy-700 border border-white/8 text-slate-300 text-xs rounded-lg px-3 py-1.5 outline-none focus:border-emerald-500">
+                <option value="12">İlk 12 ay</option>
+                <option value="24">İlk 24 ay</option>
+                <option value="all">Tümü</option>
+              </select>
+            </div>
+          </div>
+          <div class="overflow-x-auto table-scroll">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-navy-700/50">
+                  <th class="text-left text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3">Ay</th>
+                  <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-3 sm:px-5 py-3">Taksit</th>
+                  <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-3 sm:px-5 py-3">Anapara</th>
+                  <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-3 sm:px-5 py-3">Faiz</th>
+                  <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3">Kalan Borç</th>
+                </tr>
+              </thead>
+              <tbody id="amort-tbody" class="divide-y divide-white/4">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="bg-navy-950 border-t border-white/5 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-xs text-slate-600">
+        © 2025 FinansKolay · Bu hesaplama yalnızca bilgilendirme amaçlıdır. Bankalar ek ücret uygulayabilir.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+  <script>
+    let pieChart = null;
+    let barChart = null;
+    let amortData = [];
+
+    // ── Kredi türü preset ──
+    const presets = {
+      konut:   { faiz: 3.00, vade: 120 },
+      tasit:   { faiz: 4.50, vade:  48 },
+      ihtiyac: { faiz: 6.50, vade:  36 },
+    };
+    let currentTuru = 'konut';
+
+    function setKrediTuru(btn, turu) {
+      document.querySelectorAll('.kredi-turu-btn').forEach(b => {
+        b.classList.remove('active-turu','border-emerald-500/40','bg-emerald-500/10','text-emerald-400');
+        b.classList.add('border-white/8','bg-navy-700','text-slate-400');
+      });
+      btn.classList.add('active-turu','border-emerald-500/40','bg-emerald-500/10','text-emerald-400');
+      btn.classList.remove('border-white/8','bg-navy-700','text-slate-400');
+      currentTuru = turu;
+      const p = presets[turu];
+      document.getElementById('faiz').value = p.faiz;
+      document.getElementById('vade').value = p.vade;
+      updateVadeLabel();
+    }
+
+    function setTutar(v) { document.getElementById('tutar').value = v; clearError('tutar'); }
+    function setFaiz(v) { document.getElementById('faiz').value = v; clearError('faiz'); }
+    function setVade(v) { document.getElementById('vade').value = v; clearError('vade'); updateVadeLabel(); }
+
+    function updateVadeLabel() {
+      const v = parseInt(document.getElementById('vade').value);
+      const el = document.getElementById('vade-label');
+      if (!isNaN(v) && v > 0) {
+        const yil = Math.floor(v / 12);
+        const ay = v % 12;
+        let txt = '';
+        if (yil > 0) txt += yil + ' yıl ';
+        if (ay > 0) txt += ay + ' ay';
+        el.textContent = '≈ ' + txt;
+      } else {
+        el.textContent = '';
+      }
+    }
+
+    function clearError(id) {
+      const inp = document.getElementById(id);
+      const err = document.getElementById(id + '-err');
+      if (inp) inp.classList.remove('error');
+      if (err) err.classList.add('hidden');
+    }
+
+    function showError(id, msg) {
+      const inp = document.getElementById(id);
+      const err = document.getElementById(id + '-err');
+      if (inp) inp.classList.add('error');
+      if (err) { err.textContent = msg || err.textContent; err.classList.remove('hidden'); }
+      return false;
+    }
+
+    function fmt(n) {
+      return '₺' + n.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function hesapla() {
+      const tutarVal = parseFloat(document.getElementById('tutar').value);
+      const faizVal  = parseFloat(document.getElementById('faiz').value);
+      const vadeVal  = parseInt(document.getElementById('vade').value);
+
+      let valid = true;
+      if (isNaN(tutarVal) || tutarVal < 1000)
+        valid = showError('tutar', 'Lütfen geçerli bir tutar girin (min. ₺1.000)');
+      if (isNaN(faizVal) || faizVal < 0.01 || faizVal > 200)
+        valid = showError('faiz', 'Lütfen geçerli bir faiz oranı girin (0.1 – 200)');
+      if (isNaN(vadeVal) || vadeVal < 1 || vadeVal > 360)
+        valid = showError('vade', 'Lütfen geçerli bir vade girin (1 – 360 ay)');
+
+      if (!valid) return;
+
+      const aylikFaiz = (faizVal / 100) / 12;
+      let aylikTaksit;
+
+      if (aylikFaiz === 0) {
+        aylikTaksit = tutarVal / vadeVal;
+      } else {
+        aylikTaksit = tutarVal * (aylikFaiz * Math.pow(1 + aylikFaiz, vadeVal)) /
+                      (Math.pow(1 + aylikFaiz, vadeVal) - 1);
+      }
+
+      const toplamOdeme = aylikTaksit * vadeVal;
+      const toplamFaiz  = toplamOdeme - tutarVal;
+      const pctAnapara  = (tutarVal / toplamOdeme * 100).toFixed(1);
+      const pctFaiz     = (toplamFaiz / toplamOdeme * 100).toFixed(1);
+
+      // Build amortization schedule
+      amortData = [];
+      let kalan = tutarVal;
+      for (let i = 1; i <= vadeVal; i++) {
+        const faizKismi    = kalan * aylikFaiz;
+        const anapara = aylikTaksit - faizKismi;
+        kalan -= anapara;
+        amortData.push({
+          ay: i,
+          taksit: aylikTaksit,
+          anapara: anapara,
+          faiz: faizKismi,
+          kalan: Math.max(0, kalan),
+        });
+      }
+
+      // ── Show results ──
+      document.getElementById('empty-state').classList.add('hidden');
+      const ra = document.getElementById('results-area');
+      ra.classList.remove('hidden');
+      ra.classList.add('result-animate');
+
+      document.getElementById('aylik-taksit').textContent  = fmt(aylikTaksit);
+      document.getElementById('toplam-odeme').textContent  = fmt(toplamOdeme);
+      document.getElementById('toplam-faiz').textContent   = fmt(toplamFaiz);
+      document.getElementById('aylik-faiz-oran').textContent = '%' + (faizVal / 12).toFixed(4);
+      document.getElementById('pct-anapara').textContent   = '%' + pctAnapara;
+      document.getElementById('pct-faiz').textContent      = '%' + pctFaiz;
+
+      // Progress bar (use setTimeout for CSS transition)
+      setTimeout(() => {
+        document.getElementById('bar-anapara').style.width = pctAnapara + '%';
+        document.getElementById('bar-faiz').style.width    = pctFaiz + '%';
+      }, 50);
+
+      // Show bottom section
+      document.getElementById('alt-bolum').classList.remove('hidden');
+
+      // Legends
+      document.getElementById('legend-anapara').textContent = fmt(tutarVal);
+      document.getElementById('legend-faiz').textContent    = fmt(toplamFaiz);
+
+      renderPieChart(tutarVal, toplamFaiz);
+      renderBarChart(vadeVal, aylikFaiz, tutarVal, aylikTaksit);
+      renderTable();
+
+      // Scroll to results on mobile
+      if (window.innerWidth < 1024) {
+        document.getElementById('results-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // ── Pie chart ──
+    function renderPieChart(anapara, faiz) {
+      const ctx = document.getElementById('pie-chart').getContext('2d');
+      if (pieChart) pieChart.destroy();
+      pieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Anapara', 'Toplam Faiz'],
+          datasets: [{
+            data: [anapara, faiz],
+            backgroundColor: ['#10B981', '#f43f5e'],
+            borderColor: ['#10B981', '#f43f5e'],
+            borderWidth: 0,
+            hoverOffset: 8,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          cutout: '68%',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => ' ' + fmt(ctx.raw) + '  (%' + (ctx.raw / (anapara + faiz) * 100).toFixed(1) + ')'
+              },
+              backgroundColor: '#1E293B',
+              borderColor: 'rgba(255,255,255,0.1)',
+              borderWidth: 1,
+              titleColor: '#94a3b8',
+              bodyColor: '#f1f5f9',
+              padding: 10,
+              cornerRadius: 8,
+            }
+          },
+          animation: { animateScale: true, duration: 700 }
+        }
+      });
+    }
+
+    // ── Bar chart (yıllık kalan borç) ──
+    function renderBarChart(vade, aylikFaiz, tutar, taksit) {
+      const ctx = document.getElementById('bar-chart').getContext('2d');
+      if (barChart) barChart.destroy();
+
+      const labels = [];
+      const values = [];
+      let kalan = tutar;
+
+      for (let ay = 1; ay <= vade; ay++) {
+        const faizKismi = kalan * aylikFaiz;
+        kalan -= (taksit - faizKismi);
+        if (ay % 12 === 0 || ay === vade) {
+          labels.push(ay === vade ? 'Bitiş' : ay / 12 + '. Yıl');
+          values.push(Math.max(0, kalan));
+        }
+      }
+
+      barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Kalan Borç',
+            data: values,
+            backgroundColor: 'rgba(16,185,129,0.25)',
+            borderColor: '#10B981',
+            borderWidth: 1.5,
+            borderRadius: 6,
+            hoverBackgroundColor: 'rgba(16,185,129,0.45)',
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: { label: ctx => ' ' + fmt(ctx.raw) },
+              backgroundColor: '#1E293B',
+              borderColor: 'rgba(255,255,255,0.1)',
+              borderWidth: 1,
+              titleColor: '#94a3b8',
+              bodyColor: '#f1f5f9',
+              padding: 10,
+              cornerRadius: 8,
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255,255,255,0.04)' },
+              ticks: { color: '#64748b', font: { size: 10 } }
+            },
+            y: {
+              grid: { color: 'rgba(255,255,255,0.04)' },
+              ticks: {
+                color: '#64748b',
+                font: { size: 10 },
+                callback: v => '₺' + (v >= 1000000 ? (v/1000000).toFixed(1)+'M' : v >= 1000 ? (v/1000).toFixed(0)+'K' : v)
+              }
+            }
+          },
+          animation: { duration: 700 }
+        }
+      });
+    }
+
+    // ── Amortization table ──
+    function renderTable() {
+      const showVal = document.getElementById('show-count').value;
+      const limit = showVal === 'all' ? amortData.length : parseInt(showVal);
+      const rows = amortData.slice(0, limit);
+      const tbody = document.getElementById('amort-tbody');
+
+      tbody.innerHTML = rows.map((r, i) => `
+        <tr class="amort-row transition-colors ${i % 2 === 0 ? '' : 'bg-white/[0.015]'}">
+          <td class="px-4 sm:px-6 py-3 text-sm text-slate-300 font-medium whitespace-nowrap">${r.ay}</td>
+          <td class="px-3 sm:px-5 py-3 text-sm text-white font-semibold text-right whitespace-nowrap">${fmt(r.taksit)}</td>
+          <td class="px-3 sm:px-5 py-3 text-sm text-emerald-400 text-right whitespace-nowrap">${fmt(r.anapara)}</td>
+          <td class="px-3 sm:px-5 py-3 text-sm text-rose-400 text-right whitespace-nowrap">${fmt(r.faiz)}</td>
+          <td class="px-4 sm:px-6 py-3 text-sm text-slate-300 text-right whitespace-nowrap">${fmt(r.kalan)}</td>
+        </tr>
+      `).join('');
+
+      // Summary row
+      if (showVal !== 'all' && amortData.length > limit) {
+        const remaining = amortData.length - limit;
+        tbody.innerHTML += `
+          <tr>
+            <td colspan="5" class="text-center py-3 text-xs text-slate-500">
+              … ve ${remaining} ay daha
+              <button onclick="document.getElementById('show-count').value='all'; renderTable();"
+                class="ml-2 text-emerald-400 hover:text-emerald-300 font-medium transition-colors">Tümünü Göster →</button>
+            </td>
+          </tr>`;
+      }
+    }
+
+    // ── Enter key support ──
+    ['tutar','faiz','vade'].forEach(id => {
+      document.getElementById(id).addEventListener('keydown', e => {
+        if (e.key === 'Enter') hesapla();
+      });
+    });
+
+    // ── Init with default preset hint ──
+    updateVadeLabel();
+  </script>
+</body>
+</html>

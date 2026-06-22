@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vergi Dilimi Hesaplayıcı (2026) – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { navy: { 950:'#070E1A', 900:'#0F172A', 800:'#1E293B', 700:'#263348', 600:'#334155' } },
+          fontFamily: { sans:['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .navbar-blur {
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,.92); border-bottom: 1px solid rgba(16,185,129,.12);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    .finput {
+      background:#1E293B; border:1.5px solid rgba(255,255,255,.08); color:#f1f5f9;
+      border-radius:.75rem; padding:.75rem 1rem; width:100%; font-size:.9375rem;
+      outline:none; transition:border-color .18s,box-shadow .18s;
+    }
+    .finput:focus { border-color:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,.15); }
+    .finput::placeholder { color:#475569; }
+    .finput.err { border-color:#f43f5e; box-shadow:0 0 0 3px rgba(244,63,94,.12); }
+
+    .toggle-btn {
+      flex:1; padding:.7rem 0; border-radius:.625rem; font-size:.875rem; font-weight:600;
+      transition:all .2s; border:1.5px solid transparent; cursor:pointer;
+      display:flex; align-items:center; justify-content:center; gap:.375rem;
+    }
+    .toggle-btn.inactive { background:#263348; color:#64748b; border-color:rgba(255,255,255,.05); }
+    .toggle-btn.inactive:hover { color:#94a3b8; border-color:rgba(255,255,255,.1); }
+    .toggle-btn.active { background:rgba(16,185,129,.14); color:#10B981; border-color:rgba(16,185,129,.4); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { animation: fadeUp .42s ease forwards; }
+    .prog { transition: width .9s cubic-bezier(.4,0,.2,1); }
+
+    .qtag {
+      font-size:.6875rem; padding:.2rem .65rem; border-radius:9999px; font-weight:600;
+      transition:all .18s; cursor:pointer; border:1px solid rgba(255,255,255,.06);
+      background:#263348; color:#64748b; white-space:nowrap; display:inline-block;
+    }
+    .qtag:hover { color:#10B981; border-color:rgba(16,185,129,.3); background:rgba(16,185,129,.08); }
+
+    .child-btn {
+      width:36px; height:36px; border-radius:.625rem; font-weight:700; font-size:.875rem;
+      display:flex; align-items:center; justify-content:center; cursor:pointer;
+      transition:all .18s; border:1.5px solid transparent;
+    }
+    .child-btn.inactive { background:#263348; color:#64748b; border-color:rgba(255,255,255,.05); }
+    .child-btn.inactive:hover { color:#94a3b8; border-color:rgba(255,255,255,.12); }
+    .child-btn.active { background:rgba(16,185,129,.16); color:#10B981; border-color:rgba(16,185,129,.4); }
+
+    ::-webkit-scrollbar { width:4px; }
+    ::-webkit-scrollbar-track { background:#0F172A; }
+    ::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+<!-- NAVBAR -->
+<header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+    <a href="finanskolay.html" class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+      <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <span class="hidden sm:inline">Geri Dön</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-lg bg-amber-500/15 flex items-center justify-center">
+        <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+        </svg>
+      </div>
+      <span class="font-semibold text-white text-sm sm:text-base">Vergi Dilimi Hesaplayıcı</span>
+    </div>
+    <a href="finanskolay.html" class="flex items-center gap-2 group">
+      <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span></span>
+    </a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="pt-16 pb-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Page header -->
+    <div class="py-8 sm:py-12 text-center">
+      <p class="text-amber-400 text-xs font-semibold tracking-widest uppercase mb-2">Finans Aracı · 2026</p>
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
+        Vergi Diliminizi ve Net Maaşınızı Öğrenin
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        Brüt maaşınızı girin; hangi gelir vergisi diliminde olduğunuzu, ödeyeceğiniz vergiyi ve
+        net maaşınızı anında hesaplayın.
+      </p>
+    </div>
+
+    <!-- FORM + RESULTS grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+
+      <!-- FORM -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+        <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+          </svg>
+          Maaş Bilgileri
+        </h2>
+
+        <!-- Maaş türü -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Maaş Türü</label>
+          <div class="flex gap-2 p-1.5 bg-navy-700/60 rounded-xl border border-white/5">
+            <button id="btn-aylik" onclick="setMaasTuru('aylik')" class="toggle-btn active">Aylık</button>
+            <button id="btn-yillik" onclick="setMaasTuru('yillik')" class="toggle-btn inactive">Yıllık</button>
+          </div>
+        </div>
+
+        <!-- Brüt maaş -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+            <span id="maas-label">Brüt Aylık Maaş</span>
+          </label>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+            <input type="number" id="maas" class="finput pl-8" placeholder="35.000" min="1" oninput="clearErr('maas')"/>
+          </div>
+          <p id="maas-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir maaş tutarı girin.</p>
+          <div id="maas-quick" class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('maas',25000)">₺25K</span>
+            <span class="qtag" onclick="sv('maas',35000)">₺35K</span>
+            <span class="qtag" onclick="sv('maas',50000)">₺50K</span>
+            <span class="qtag" onclick="sv('maas',80000)">₺80K</span>
+          </div>
+        </div>
+
+        <!-- Medeni durum -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Medeni Durum</label>
+          <div class="flex gap-2 p-1.5 bg-navy-700/60 rounded-xl border border-white/5">
+            <button id="btn-bekar" onclick="setMedeni('bekar')" class="toggle-btn active">Bekar</button>
+            <button id="btn-evli" onclick="setMedeni('evli')" class="toggle-btn inactive">Evli</button>
+          </div>
+        </div>
+
+        <!-- Çocuk sayısı -->
+        <div class="mb-7">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Çocuk Sayısı</label>
+          <div class="flex gap-2">
+            <button class="child-btn active" data-val="0" onclick="setCocuk(0,this)">0</button>
+            <button class="child-btn inactive" data-val="1" onclick="setCocuk(1,this)">1</button>
+            <button class="child-btn inactive" data-val="2" onclick="setCocuk(2,this)">2</button>
+            <button class="child-btn inactive" data-val="3" onclick="setCocuk(3,this)">3</button>
+            <button class="child-btn inactive" data-val="4" onclick="setCocuk(4,this)">4</button>
+            <button class="child-btn inactive" data-val="5" onclick="setCocuk(5,this)">5</button>
+          </div>
+        </div>
+
+        <button onclick="hesapla()"
+          class="w-full flex items-center justify-center gap-2 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-base rounded-xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          Hesapla
+        </button>
+        <p class="text-xs text-slate-600 text-center mt-3 leading-relaxed">
+          2026 gelir vergisi dilimlerine göre hesaplama yapılmaktadır. SGK ve damga vergisi kesintileri dahil değildir.
+        </p>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl flex flex-col">
+        <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          Sonuçlar
+        </h2>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="flex-1 flex flex-col items-center justify-center py-10 text-center">
+          <div class="w-16 h-16 rounded-2xl bg-amber-500/8 flex items-center justify-center mb-4">
+            <svg class="w-8 h-8 text-amber-500/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <p class="text-slate-400 text-sm font-medium mb-1">Sonuç bekleniyor</p>
+          <p class="text-slate-600 text-xs">Maaş bilgilerinizi girin ve Hesapla butonuna tıklayın</p>
+        </div>
+
+        <!-- Results -->
+        <div id="results-area" class="hidden flex-1 flex flex-col gap-4">
+
+          <!-- Vergi dilimi rozeti -->
+          <div id="dilim-card" class="rounded-xl p-4 border text-center">
+            <p class="text-xs font-semibold uppercase tracking-widest mb-1.5" id="dilim-label-top">Vergi Diliminiz</p>
+            <p id="dilim-oran" class="text-2xl font-extrabold mb-1">—</p>
+            <p id="dilim-aralik" class="text-xs text-slate-400">—</p>
+          </div>
+
+          <!-- HERO: Aylık net maaş -->
+          <div class="bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border border-emerald-500/25 rounded-xl p-5 text-center">
+            <p class="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">Aylık Net Maaş</p>
+            <p id="res-aylik-net" class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">—</p>
+            <p id="res-agi-not" class="text-slate-400 text-xs mt-2">—</p>
+          </div>
+
+          <!-- 2 metrik -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Yıllık Brüt</p>
+              <p id="res-yillik-brut" class="text-lg font-extrabold text-white">—</p>
+            </div>
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Yıllık Vergi</p>
+              <p id="res-yillik-vergi" class="text-lg font-extrabold text-rose-400">—</p>
+            </div>
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Yıllık Net</p>
+              <p id="res-yillik-net" class="text-lg font-extrabold text-emerald-400">—</p>
+            </div>
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Efektif Oran</p>
+              <p id="res-efektif" class="text-lg font-extrabold text-amber-400">—</p>
+            </div>
+          </div>
+
+          <!-- Vergi dağılımı bar -->
+          <div class="bg-navy-700/40 border border-white/5 rounded-xl p-4">
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Brüt Maaş Dağılımı</p>
+            <div class="h-3 rounded-full bg-navy-600 overflow-hidden flex">
+              <div id="bar-net"   class="prog h-full bg-emerald-500" style="width:0%"></div>
+              <div id="bar-vergi" class="prog h-full bg-rose-400" style="width:0%"></div>
+            </div>
+            <div class="flex justify-between text-xs text-slate-500 mt-2">
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span>Net: <span id="pct-net" class="text-white font-semibold ml-0.5">—</span></span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-rose-400"></span>Vergi: <span id="pct-vergi" class="text-white font-semibold ml-0.5">—</span></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- VERGİ DİLİMİ KIRILIM TABLOSU -->
+    <div id="kirilim-section" class="hidden mb-8">
+      <div class="bg-navy-800 rounded-2xl border border-white/5 shadow-xl overflow-hidden">
+        <div class="px-5 sm:px-6 py-4 border-b border-white/5">
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+            </svg>
+            Vergi Dilimi Kırılımı
+          </h3>
+          <p class="text-xs text-slate-500 mt-0.5">Yıllık matrahınızın hangi dilimlerden ne kadar vergilendirildiği</p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-navy-700/50">
+                <th class="text-left text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3">Dilim Aralığı</th>
+                <th class="text-center text-xs font-semibold text-slate-400 uppercase tracking-wide px-3 py-3">Oran</th>
+                <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-3 sm:px-5 py-3">Bu Dilime Giren Tutar</th>
+                <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3">Ödenen Vergi</th>
+              </tr>
+            </thead>
+            <tbody id="kirilim-tbody" class="divide-y divide-white/4"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- AÇIKLAMA -->
+    <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl mb-4">
+      <h3 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        2026 Gelir Vergisi Dilimleri
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+        <div class="bg-navy-700/40 rounded-xl p-4 border border-white/4">
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Dilim Tablosu</p>
+          <div class="space-y-1.5 text-xs">
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20"><span class="font-bold text-emerald-300">%15</span><span class="text-slate-400">0 – 170.000 TL</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20"><span class="font-bold text-sky-300">%20</span><span class="text-slate-400">170.001 – 350.000 TL</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20"><span class="font-bold text-amber-300">%27</span><span class="text-slate-400">350.001 – 850.000 TL</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-orange-500/10 border border-orange-500/20"><span class="font-bold text-orange-300">%35</span><span class="text-slate-400">850.001 – 4.500.000 TL</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/20"><span class="font-bold text-rose-300">%40</span><span class="text-slate-400">4.500.001 TL ve üzeri</span></div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3">
+          <div class="flex gap-3 bg-navy-700/40 rounded-xl p-4 border border-white/4 flex-1">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white mb-1">Artan Oranlı Sistem</p>
+              <p class="text-xs text-slate-400 leading-relaxed">Tüm gelirinize en yüksek dilimin oranı uygulanmaz; her dilime giren kısım kendi oranıyla vergilenir.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 bg-navy-700/40 rounded-xl p-4 border border-white/4 flex-1">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white mb-1">Asgari Geçim İndirimi</p>
+              <p class="text-xs text-slate-400 leading-relaxed">Evli ve çocuklu çalışanlar için basit bir indirim modeli uygulanır; gerçek AGİ hesaplaması daha karmaşıktır.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="text-xs text-slate-600 leading-relaxed">
+        Bu hesaplama eğitim ve bilgilendirme amaçlıdır. SGK primi, işsizlik sigortası ve damga vergisi gibi diğer kesintiler dahil değildir.
+        Kesin maaş hesaplaması için bordro uzmanınıza veya muhasebecinize danışın.
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<footer class="bg-navy-950 border-t border-white/5 py-6">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p class="text-xs text-slate-600">© 2025 FinansKolay · Hesaplama tahminidir, resmi vergi danışmanlığı değildir.</p>
+  </div>
+</footer>
+
+<script>
+var maasTuru = 'aylik';
+var medeniDurum = 'bekar';
+var cocukSayisi = 0;
+
+// 2026 vergi dilimleri (verilen tarife)
+var DILIMLER = [
+  { min:0,        max:170000,    oran:0.15 },
+  { min:170000,   max:350000,    oran:0.20 },
+  { min:350000,   max:850000,    oran:0.27 },
+  { min:850000,   max:4500000,   oran:0.35 },
+  { min:4500000,  max:Infinity,  oran:0.40 },
+];
+
+function setMaasTuru(t) {
+  maasTuru = t;
+  document.getElementById('btn-aylik').className = 'toggle-btn ' + (t==='aylik'?'active':'inactive');
+  document.getElementById('btn-yillik').className = 'toggle-btn ' + (t==='yillik'?'active':'inactive');
+  document.getElementById('maas-label').textContent = t==='aylik' ? 'Brüt Aylık Maaş' : 'Brüt Yıllık Maaş';
+  var quick = document.getElementById('maas-quick');
+  if (t === 'aylik') {
+    quick.innerHTML = '<span class="qtag" onclick="sv(\'maas\',25000)">₺25K</span>' +
+      '<span class="qtag" onclick="sv(\'maas\',35000)">₺35K</span>' +
+      '<span class="qtag" onclick="sv(\'maas\',50000)">₺50K</span>' +
+      '<span class="qtag" onclick="sv(\'maas\',80000)">₺80K</span>';
+    document.getElementById('maas').placeholder = '35.000';
+  } else {
+    quick.innerHTML = '<span class="qtag" onclick="sv(\'maas\',300000)">₺300K</span>' +
+      '<span class="qtag" onclick="sv(\'maas\',420000)">₺420K</span>' +
+      '<span class="qtag" onclick="sv(\'maas\',600000)">₺600K</span>' +
+      '<span class="qtag" onclick="sv(\'maas\',960000)">₺960K</span>';
+    document.getElementById('maas').placeholder = '420.000';
+  }
+}
+
+function setMedeni(m) {
+  medeniDurum = m;
+  document.getElementById('btn-bekar').className = 'toggle-btn ' + (m==='bekar'?'active':'inactive');
+  document.getElementById('btn-evli').className = 'toggle-btn ' + (m==='evli'?'active':'inactive');
+}
+
+function setCocuk(n, btn) {
+  cocukSayisi = n;
+  document.querySelectorAll('.child-btn').forEach(function(b) {
+    b.className = 'child-btn ' + (parseInt(b.getAttribute('data-val'))===n ? 'active' : 'inactive');
+  });
+}
+
+function sv(id, v) { document.getElementById(id).value = v; clearErr(id); }
+
+function clearErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.remove('err');
+  if (er) er.classList.add('hidden');
+}
+function showErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.add('err');
+  if (er) er.classList.remove('hidden');
+  return false;
+}
+
+function fmt(n) { return '₺' + Math.round(n).toLocaleString('tr-TR'); }
+function fmtPct(n) { return '%' + n.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
+
+// Basit AGİ benzeri yıllık indirim modeli
+function agiIndirimi(medeni, cocuk) {
+  var indirim = 0;
+  if (medeni === 'evli') indirim += 6000;   // yıllık
+  indirim += Math.min(cocuk, 5) * 3000;     // çocuk başına yıllık, max 5 çocuk
+  return indirim;
+}
+
+// Dilimlere göre kademeli vergi hesabı + kırılım
+function vergiHesaplaKirilimli(matrah) {
+  var toplamVergi = 0;
+  var kirilim = [];
+  for (var i = 0; i < DILIMLER.length; i++) {
+    var d = DILIMLER[i];
+    if (matrah <= d.min) break;
+    var dilimUst = Math.min(matrah, d.max);
+    var dilimTutar = dilimUst - d.min;
+    if (dilimTutar <= 0) continue;
+    var dilimVergi = dilimTutar * d.oran;
+    toplamVergi += dilimVergi;
+    kirilim.push({ dilim:d, tutar:dilimTutar, vergi:dilimVergi });
+  }
+  return { vergi: toplamVergi, kirilim: kirilim };
+}
+
+function dilimEtiket(d) {
+  var maxTxt = d.max === Infinity ? 've üzeri' : '– ' + fmt(d.max);
+  return fmt(d.min) + ' ' + maxTxt;
+}
+
+function hangiDilimde(matrah) {
+  for (var i = 0; i < DILIMLER.length; i++) {
+    if (matrah <= DILIMLER[i].max) return DILIMLER[i];
+  }
+  return DILIMLER[DILIMLER.length-1];
+}
+
+function dilimRenk(oran) {
+  if (oran === 0.15) return { tc:'text-emerald-300', bg:'bg-emerald-500/12', bd:'border-emerald-500/25', top:'text-emerald-400' };
+  if (oran === 0.20) return { tc:'text-sky-300',     bg:'bg-sky-500/12',     bd:'border-sky-500/25',     top:'text-sky-400' };
+  if (oran === 0.27) return { tc:'text-amber-300',   bg:'bg-amber-500/12',   bd:'border-amber-500/25',   top:'text-amber-400' };
+  if (oran === 0.35) return { tc:'text-orange-300',  bg:'bg-orange-500/12',  bd:'border-orange-500/25',  top:'text-orange-400' };
+  return { tc:'text-rose-300', bg:'bg-rose-500/12', bd:'border-rose-500/25', top:'text-rose-400' };
+}
+
+function hesapla() {
+  var maasV = parseFloat(document.getElementById('maas').value);
+
+  if (isNaN(maasV) || maasV <= 0) { showErr('maas'); return; }
+  clearErr('maas');
+
+  var yillikBrut = maasTuru === 'aylik' ? maasV * 12 : maasV;
+
+  var indirim = agiIndirimi(medeniDurum, cocukSayisi);
+  var matrah = Math.max(0, yillikBrut - indirim);
+
+  var sonuc = vergiHesaplaKirilimli(matrah);
+  var yillikVergi = sonuc.vergi;
+  var yillikNet = yillikBrut - yillikVergi;
+  var aylikNet = yillikNet / 12;
+  var efektifOran = yillikBrut > 0 ? (yillikVergi / yillikBrut * 100) : 0;
+
+  var dilim = hangiDilimde(matrah);
+  var renk = dilimRenk(dilim.oran);
+
+  // ── Render ──
+  document.getElementById('empty-state').classList.add('hidden');
+  var ra = document.getElementById('results-area');
+  ra.classList.remove('hidden');
+  ra.classList.add('fade-up');
+
+  var dCard = document.getElementById('dilim-card');
+  dCard.className = 'rounded-xl p-4 border text-center ' + renk.bg + ' ' + renk.bd;
+  document.getElementById('dilim-label-top').className = 'text-xs font-semibold uppercase tracking-widest mb-1.5 ' + renk.top;
+  document.getElementById('dilim-oran').className = 'text-2xl font-extrabold mb-1 ' + renk.tc;
+  document.getElementById('dilim-oran').textContent = '%' + (dilim.oran*100).toFixed(0) + ' Diliminde';
+  document.getElementById('dilim-aralik').textContent = dilimEtiket(dilim) + ' TL aralığı (yıllık matrah)';
+
+  document.getElementById('res-aylik-net').textContent = fmt(aylikNet);
+  document.getElementById('res-agi-not').textContent = indirim > 0
+    ? 'Yıllık ₺' + fmt(indirim).replace('₺','') + ' indirim uygulandı'
+    : 'İndirim uygulanmadı (bekar, çocuksuz)';
+
+  document.getElementById('res-yillik-brut').textContent  = fmt(yillikBrut);
+  document.getElementById('res-yillik-vergi').textContent = fmt(yillikVergi);
+  document.getElementById('res-yillik-net').textContent   = fmt(yillikNet);
+  document.getElementById('res-efektif').textContent      = fmtPct(efektifOran);
+
+  var pctNet   = yillikNet   / yillikBrut * 100;
+  var pctVergi = yillikVergi / yillikBrut * 100;
+  document.getElementById('pct-net').textContent   = fmtPct(pctNet);
+  document.getElementById('pct-vergi').textContent = fmtPct(pctVergi);
+  setTimeout(function(){
+    document.getElementById('bar-net').style.width   = pctNet   + '%';
+    document.getElementById('bar-vergi').style.width = pctVergi + '%';
+  }, 70);
+
+  // Kırılım tablosu
+  document.getElementById('kirilim-section').classList.remove('hidden');
+  var tbody = document.getElementById('kirilim-tbody');
+  tbody.innerHTML = sonuc.kirilim.map(function(k) {
+    var r = dilimRenk(k.dilim.oran);
+    return '<tr class="transition-colors hover:bg-white/[0.02]">' +
+      '<td class="px-4 sm:px-6 py-2.5 text-sm text-slate-300 font-medium whitespace-nowrap">' + dilimEtiket(k.dilim) + ' TL</td>' +
+      '<td class="px-3 py-2.5 text-center"><span class="text-xs font-bold px-2 py-0.5 rounded-full ' + r.bg + ' ' + r.tc + '">%' + (k.dilim.oran*100).toFixed(0) + '</span></td>' +
+      '<td class="px-3 sm:px-5 py-2.5 text-sm text-white font-semibold text-right whitespace-nowrap">' + fmt(k.tutar) + '</td>' +
+      '<td class="px-4 sm:px-6 py-2.5 text-sm text-rose-400 font-bold text-right whitespace-nowrap">' + fmt(k.vergi) + '</td>' +
+    '</tr>';
+  }).join('');
+
+  if (window.innerWidth < 1024) {
+    ra.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+document.getElementById('maas').addEventListener('keydown', function(e){ if (e.key==='Enter') hesapla(); });
+</script>
+</body>
+</html>

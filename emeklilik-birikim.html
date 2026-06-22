@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emeklilik Birikim Tahmini – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#070E1A',
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#263348',
+              600: '#334155',
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .navbar-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,0.92);
+      border-bottom: 1px solid rgba(16,185,129,0.12);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    .finput {
+      background: #1E293B;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      color: #f1f5f9;
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+    .finput:focus { border-color: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
+    .finput::placeholder { color: #475569; }
+    .finput.error { border-color: #f43f5e; box-shadow: 0 0 0 3px rgba(244,63,94,0.12); }
+
+    .fselect {
+      background: #1E293B;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      color: #f1f5f9;
+      border-radius: 0.75rem;
+      padding: 0.75rem 2.5rem 0.75rem 1rem;
+      font-size: 0.9375rem;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.875rem center;
+      background-size: 1rem;
+      cursor: pointer;
+    }
+    .fselect:focus { border-color: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
+    .fselect option { background: #1E293B; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.42s ease forwards; }
+
+    .prog-bar { transition: width 0.9s cubic-bezier(0.4,0,0.2,1); }
+
+    .qtag {
+      font-size: 0.6875rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.18s;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: #263348;
+      color: #64748b;
+      white-space: nowrap;
+      display: inline-block;
+    }
+    .qtag:hover { color: #10B981; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.08); }
+
+    /* Timeline */
+    .milestone-line { background: linear-gradient(to bottom, #10B981, rgba(16,185,129,0.1)); }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0F172A; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    /* Animated counter */
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .count-anim { animation: countUp 0.5s ease forwards; }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+      <a href="finanskolay.html"
+        class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+        <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <span class="hidden sm:inline">Geri Dön</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-violet-500/15 flex items-center justify-center">
+          <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <span class="font-semibold text-white text-sm sm:text-base">Emeklilik Birikim Tahmini</span>
+      </div>
+      <a href="finanskolay.html" class="flex items-center gap-2 group">
+        <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">
+          Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="pt-16 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Page header -->
+      <div class="py-8 sm:py-12 text-center">
+        <p class="text-violet-400 text-xs font-semibold tracking-widest uppercase mb-2">Finansal Planlama</p>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
+          Emekliliğinde Ne Kadar Birikir?
+        </h1>
+        <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+          Aylık tasarrufunuzu, beklenen getiriyi ve emeklilik yaşınızı girerek bileşik faizin gücüyle
+          emekliliğinizdeki birikimizi tahmin edin.
+        </p>
+      </div>
+
+      <!-- ── Form + Results ── -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+
+        <!-- ══ LEFT: Form ══ -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+          <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+            </svg>
+            Plan Bilgileri
+          </h2>
+
+          <!-- Yaşlar: 2 col -->
+          <div class="grid grid-cols-2 gap-4 mb-5">
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Şu Anki Yaş</label>
+              <div class="relative">
+                <input type="number" id="su-yas" class="finput pr-14" placeholder="30"
+                  min="18" max="80" oninput="clearErr('su-yas')" />
+                <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">yaş</span>
+              </div>
+              <p id="su-yas-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli yaş girin (18–80).</p>
+              <div class="flex gap-1.5 mt-2 flex-wrap">
+                <span class="qtag" onclick="setVal('su-yas',25)">25</span>
+                <span class="qtag" onclick="setVal('su-yas',30)">30</span>
+                <span class="qtag" onclick="setVal('su-yas',35)">35</span>
+                <span class="qtag" onclick="setVal('su-yas',40)">40</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Emeklilik Yaşı</label>
+              <div class="relative">
+                <input type="number" id="em-yas" class="finput pr-14" placeholder="65"
+                  min="40" max="90" oninput="clearErr('em-yas')" />
+                <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">yaş</span>
+              </div>
+              <p id="em-yas-err" class="text-xs text-rose-400 mt-1.5 hidden">Emeklilik yaşı şu anki yaştan büyük olmalı.</p>
+              <div class="flex gap-1.5 mt-2 flex-wrap">
+                <span class="qtag" onclick="setVal('em-yas',55)">55</span>
+                <span class="qtag" onclick="setVal('em-yas',60)">60</span>
+                <span class="qtag" onclick="setVal('em-yas',65)">65</span>
+                <span class="qtag" onclick="setVal('em-yas',70)">70</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aylık Tasarruf -->
+          <div class="mb-5">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Aylık Tasarruf Miktarı</label>
+            <div class="relative">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+              <input type="number" id="aylik-tasarruf" class="finput pl-8" placeholder="5.000"
+                min="1" oninput="clearErr('aylik-tasarruf')" />
+            </div>
+            <p id="aylik-tasarruf-err" class="text-xs text-rose-400 mt-1.5 hidden">Lütfen geçerli bir tutar girin.</p>
+            <div class="flex gap-1.5 mt-2 flex-wrap">
+              <span class="qtag" onclick="setVal('aylik-tasarruf',1000)">₺1.000</span>
+              <span class="qtag" onclick="setVal('aylik-tasarruf',3000)">₺3.000</span>
+              <span class="qtag" onclick="setVal('aylik-tasarruf',5000)">₺5.000</span>
+              <span class="qtag" onclick="setVal('aylik-tasarruf',10000)">₺10.000</span>
+            </div>
+          </div>
+
+          <!-- Yıllık Getiri -->
+          <div class="mb-5">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+              Yıllık Getiri Oranı
+              <span class="ml-1 text-slate-500 font-normal normal-case">(enflasyona göre reel getiri)</span>
+            </label>
+            <div class="relative">
+              <input type="number" id="getiri" class="finput pr-10" placeholder="9"
+                min="0.1" max="50" step="0.5" oninput="clearErr('getiri'); updateGetiriLabel()" />
+              <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">%</span>
+            </div>
+            <p id="getiri-label" class="text-xs text-emerald-400 mt-1.5 hidden"></p>
+            <p id="getiri-err" class="text-xs text-rose-400 mt-1.5 hidden">Lütfen geçerli bir oran girin (0.1–50).</p>
+            <div class="flex gap-1.5 mt-2 flex-wrap">
+              <span class="qtag" onclick="setValF('getiri',5)">%5 (muhafazakâr)</span>
+              <span class="qtag" onclick="setValF('getiri',8)">%8 (dengeli)</span>
+              <span class="qtag" onclick="setValF('getiri',10)">%10 (büyüme)</span>
+              <span class="qtag" onclick="setValF('getiri',12)">%12 (agresif)</span>
+            </div>
+          </div>
+
+          <!-- Mevcut Birikim (opsiyonel) -->
+          <div class="mb-7">
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+              Mevcut Birikim
+              <span class="ml-1 text-slate-500 font-normal normal-case">(opsiyonel, yoksa 0 bırakın)</span>
+            </label>
+            <div class="relative">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+              <input type="number" id="mevcut" class="finput pl-8" placeholder="0"
+                min="0" oninput="clearErr('mevcut')" value="0" />
+            </div>
+            <p id="mevcut-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir değer girin.</p>
+            <div class="flex gap-1.5 mt-2 flex-wrap">
+              <span class="qtag" onclick="setVal('mevcut',0)">₺0</span>
+              <span class="qtag" onclick="setVal('mevcut',50000)">₺50.000</span>
+              <span class="qtag" onclick="setVal('mevcut',100000)">₺100.000</span>
+              <span class="qtag" onclick="setVal('mevcut',250000)">₺250.000</span>
+            </div>
+          </div>
+
+          <!-- Calculate -->
+          <button onclick="hesapla()"
+            class="w-full flex items-center justify-center gap-2 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-base rounded-xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Emekliliği Hesapla
+          </button>
+          <p class="text-xs text-slate-600 text-center mt-3 leading-relaxed">
+            Bileşik faiz (aylık döngüsel) formülü kullanılmaktadır. Sonuçlar tahmini nitelikte olup yatırım tavsiyesi değildir.
+          </p>
+        </div>
+
+        <!-- ══ RIGHT: Results ══ -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl flex flex-col">
+          <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            Tahmin Sonuçları
+          </h2>
+
+          <!-- Empty state -->
+          <div id="empty-state" class="flex-1 flex flex-col items-center justify-center py-10 text-center">
+            <div class="w-16 h-16 rounded-2xl bg-violet-500/8 flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-violet-500/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <p class="text-slate-400 text-sm font-medium mb-1">Sonuç bekleniyor</p>
+            <p class="text-slate-600 text-xs">Bilgilerinizi girin ve Hesapla butonuna tıklayın</p>
+          </div>
+
+          <!-- Results -->
+          <div id="results-area" class="hidden flex-1 flex flex-col gap-4">
+
+            <!-- Kalan yıl + özet narrative -->
+            <div id="narrative"
+              class="bg-violet-500/8 border border-violet-500/20 rounded-xl px-4 py-3 text-sm text-slate-300 leading-relaxed text-center">
+            </div>
+
+            <!-- HERO: Toplam Birikim -->
+            <div class="bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border border-emerald-500/25 rounded-xl p-5 text-center">
+              <p class="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">Tahmini Toplam Birikim</p>
+              <p id="res-toplam" class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">—</p>
+              <p id="res-toplam-sub" class="text-slate-400 text-xs mt-2">emeklilik yaşında toplam varlık</p>
+            </div>
+
+            <!-- 3 secondary metrics -->
+            <div class="grid grid-cols-3 gap-3">
+              <div class="bg-navy-700/60 border border-white/5 rounded-xl p-3 sm:p-4 text-center">
+                <div class="w-7 h-7 rounded-lg bg-sky-500/15 flex items-center justify-center mx-auto mb-2">
+                  <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                  </svg>
+                </div>
+                <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-1 leading-tight">Toplam Katkı</p>
+                <p id="res-katki" class="text-base font-extrabold text-sky-300">—</p>
+                <p class="text-slate-600 text-xs mt-0.5">yatırdığınız</p>
+              </div>
+              <div class="bg-navy-700/60 border border-white/5 rounded-xl p-3 sm:p-4 text-center">
+                <div class="w-7 h-7 rounded-lg bg-amber-500/15 flex items-center justify-center mx-auto mb-2">
+                  <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                  </svg>
+                </div>
+                <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-1 leading-tight">Getiri Kazancı</p>
+                <p id="res-getiri" class="text-base font-extrabold text-amber-400">—</p>
+                <p class="text-slate-600 text-xs mt-0.5">faizden gelen</p>
+              </div>
+              <div class="bg-navy-700/60 border border-white/5 rounded-xl p-3 sm:p-4 text-center">
+                <div class="w-7 h-7 rounded-lg bg-violet-500/15 flex items-center justify-center mx-auto mb-2">
+                  <svg class="w-3.5 h-3.5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-1 leading-tight">Kalan Yıl</p>
+                <p id="res-yil" class="text-base font-extrabold text-violet-400">—</p>
+                <p class="text-slate-600 text-xs mt-0.5">birikime</p>
+              </div>
+            </div>
+
+            <!-- Bileşim bar -->
+            <div class="bg-navy-700/40 border border-white/5 rounded-xl p-4">
+              <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Birikim Bileşimi</p>
+              <div class="h-3 rounded-full bg-navy-600 overflow-hidden flex">
+                <div id="bar-mevcut" class="prog-bar h-full bg-violet-400" style="width:0%"></div>
+                <div id="bar-katki" class="prog-bar h-full bg-sky-400" style="width:0%"></div>
+                <div id="bar-getiri" class="prog-bar h-full bg-amber-400" style="width:0%"></div>
+              </div>
+              <div class="flex flex-wrap gap-x-4 gap-y-1 mt-2.5 text-xs text-slate-500">
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-sm bg-violet-400 inline-block"></span>
+                  Mevcut: <span id="pct-mevcut" class="text-white font-semibold ml-0.5">—</span>
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-sm bg-sky-400 inline-block"></span>
+                  Katkı: <span id="pct-katki" class="text-white font-semibold ml-0.5">—</span>
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-sm bg-amber-400 inline-block"></span>
+                  Getiri: <span id="pct-getiri" class="text-white font-semibold ml-0.5">—</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Aylık emeklilik geliri -->
+            <div class="bg-gradient-to-br from-violet-500/12 to-violet-500/4 border border-violet-500/20 rounded-xl px-4 py-3.5 flex items-center justify-between gap-3">
+              <div>
+                <p class="text-xs text-violet-300 font-semibold uppercase tracking-wide">Tahmini Aylık Emeklilik Geliri</p>
+                <p class="text-xs text-slate-500 mt-0.5">25 yıl boyunca çekilirse (300 ay)</p>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <p id="res-aylik" class="text-xl font-extrabold text-white">—</p>
+                <p class="text-xs text-slate-500">/ ay</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ Milestone Timeline + Bilgi ══ -->
+      <div id="alt-bolum" class="hidden mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+
+          <!-- Milestone timeline -->
+          <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+            <h3 class="text-base font-bold text-white mb-1 flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+              </svg>
+              Birikim Dönüm Noktaları
+            </h3>
+            <p class="text-xs text-slate-500 mb-6">10, 20, 30 yıl ve emeklilikteki tahmini birikim</p>
+            <div id="milestone-list" class="space-y-0"></div>
+          </div>
+
+          <!-- Info / Bileşik faiz açıklaması -->
+          <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+            <h3 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Bileşik Faizin Gücü
+            </h3>
+            <div class="space-y-4">
+              <div class="flex gap-3">
+                <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-white mb-1">Erken başlamak fark yaratır</p>
+                  <p class="text-xs text-slate-400 leading-relaxed">25 yaşında başlayan biri, 35 yaşında başlayandan emekliliğe çok daha fazla birikim ile ulaşır — yıllık katkı aynı olsa bile.</p>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-white mb-1">Getiri üstüne getiri</p>
+                  <p class="text-xs text-slate-400 leading-relaxed">Bileşik faizde kazancınız da kazanmaya başlar. Uzun vadede getiri katkıdan çok daha büyük hâle gelebilir.</p>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <div class="w-8 h-8 rounded-lg bg-sky-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-white mb-1">Tutarlılık şart</p>
+                  <p class="text-xs text-slate-400 leading-relaxed">Küçük ama düzenli tasarruflar, ara sıra yapılan büyük katkılardan daha etkili sonuç verir.</p>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <div class="w-8 h-8 rounded-lg bg-violet-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-white mb-1">Gerçekçi oran seçin</p>
+                  <p class="text-xs text-slate-400 leading-relaxed">Türkiye'de enflasyon etkisini düşündüğünüzde reel getiriyi %5–10 arası tahmin etmek makul sayılabilir.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-navy-950 border-t border-white/5 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-xs text-slate-600">
+        © 2025 FinansKolay · Sonuçlar tahmini niteliktedir, yatırım tavsiyesi değildir. Finansal kararlar için uzman görüşü alınız.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ═══════════ JAVASCRIPT ═══════════ -->
+  <script>
+    function setVal(id, v) { document.getElementById(id).value = v; clearErr(id); }
+    function setValF(id, v) { document.getElementById(id).value = v; clearErr(id); updateGetiriLabel(); }
+
+    function clearErr(id) {
+      const el = document.getElementById(id);
+      const er = document.getElementById(id + '-err');
+      if (el) el.classList.remove('error');
+      if (er) er.classList.add('hidden');
+    }
+    function showErr(id, msg) {
+      const el = document.getElementById(id);
+      const er = document.getElementById(id + '-err');
+      if (el) el.classList.add('error');
+      if (er) { if (msg) er.textContent = msg; er.classList.remove('hidden'); }
+      return false;
+    }
+
+    function updateGetiriLabel() {
+      const v = parseFloat(document.getElementById('getiri').value);
+      const lbl = document.getElementById('getiri-label');
+      if (isNaN(v)) { lbl.classList.add('hidden'); return; }
+      lbl.classList.remove('hidden');
+      if (v < 5) lbl.textContent = '⚠️ Düşük getiri — devlet tahvili benzeri muhafazakâr getiri';
+      else if (v <= 8) lbl.textContent = '✓ Dengeli portföy için makul aralık';
+      else if (v <= 12) lbl.textContent = '📈 Büyüme odaklı hisse ağırlıklı portföy';
+      else lbl.textContent = '🔥 Agresif/yüksek riskli getiri varsayımı';
+    }
+
+    function fmt(n) {
+      return '₺' + n.toLocaleString('tr-TR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    }
+    function fmtB(n) {
+      if (n >= 1_000_000_000) return '₺' + (n / 1_000_000_000).toLocaleString('tr-TR', { minimumFractionDigits: 1, maximumFractionDigits: 2 }) + ' Milyar';
+      if (n >= 1_000_000)     return '₺' + (n / 1_000_000).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Milyon';
+      return fmt(n);
+    }
+
+    // Future value of lump sum + annuity (monthly compounding)
+    function fvHesapla(mevcut, aylikKatki, yillikGetiri, yil) {
+      const n = yil * 12;           // months
+      const r = yillikGetiri / 12;  // monthly rate
+
+      // Lump sum grows: PV * (1+r)^n
+      const lumpSum = mevcut * Math.pow(1 + r, n);
+
+      // Annuity: PMT * [(1+r)^n - 1] / r
+      let annuity = 0;
+      if (r === 0) {
+        annuity = aylikKatki * n;
+      } else {
+        annuity = aylikKatki * (Math.pow(1 + r, n) - 1) / r;
+      }
+
+      return lumpSum + annuity;
+    }
+
+    function hesapla() {
+      const suYas  = parseInt(document.getElementById('su-yas').value);
+      const emYas  = parseInt(document.getElementById('em-yas').value);
+      const aylik  = parseFloat(document.getElementById('aylik-tasarruf').value);
+      const getiri = parseFloat(document.getElementById('getiri').value);
+      const mevcut = parseFloat(document.getElementById('mevcut').value) || 0;
+
+      let valid = true;
+      if (isNaN(suYas) || suYas < 18 || suYas > 80) valid = showErr('su-yas');
+      if (isNaN(emYas) || emYas <= suYas)            valid = showErr('em-yas', 'Emeklilik yaşı şu anki yaştan büyük olmalı.');
+      if (isNaN(aylik) || aylik <= 0)                valid = showErr('aylik-tasarruf');
+      if (isNaN(getiri) || getiri < 0.1 || getiri > 50) valid = showErr('getiri');
+      if (isNaN(mevcut) || mevcut < 0)               valid = showErr('mevcut');
+      if (!valid) return;
+
+      const yilFarki  = emYas - suYas;
+      const r         = getiri / 100;
+      const toplamAy  = yilFarki * 12;
+      const toplamKatki = aylik * toplamAy + mevcut;
+
+      const toplamBirikim = fvHesapla(mevcut, aylik, r, yilFarki);
+      const getiriKazanc  = toplamBirikim - toplamKatki;
+      const aylikEmeklilik = toplamBirikim / 300; // 25 yıl = 300 ay
+
+      // Percentages for bar
+      const pctM = (mevcut / toplamBirikim * 100);
+      const pctK = ((aylik * toplamAy) / toplamBirikim * 100);
+      const pctG = (getiriKazanc / toplamBirikim * 100);
+
+      // ── Render ──
+      document.getElementById('empty-state').classList.add('hidden');
+      const ra = document.getElementById('results-area');
+      ra.classList.remove('hidden');
+      ra.classList.add('fade-up');
+
+      document.getElementById('narrative').innerHTML =
+        `<span class="font-semibold text-white">${yilFarki} yıl</span> boyunca aylık ` +
+        `<span class="font-semibold text-emerald-400">${fmt(aylik)}</span> tasarruf ederek ` +
+        `<span class="font-semibold text-white">%${getiri}</span> getiriyle emekliliğinizde ` +
+        `<span class="font-semibold text-emerald-400">${fmtB(toplamBirikim)}</span> biriktirebilirsiniz.`;
+
+      document.getElementById('res-toplam').textContent   = fmtB(toplamBirikim);
+      document.getElementById('res-toplam-sub').textContent = `${emYas} yaşında toplam varlık`;
+      document.getElementById('res-katki').textContent    = fmtB(toplamKatki);
+      document.getElementById('res-getiri').textContent   = fmtB(getiriKazanc);
+      document.getElementById('res-yil').textContent      = yilFarki + ' Yıl';
+      document.getElementById('res-aylik').textContent    = fmt(aylikEmeklilik);
+
+      // Bars
+      setTimeout(() => {
+        document.getElementById('bar-mevcut').style.width = pctM + '%';
+        document.getElementById('bar-katki').style.width  = pctK + '%';
+        document.getElementById('bar-getiri').style.width = pctG + '%';
+      }, 60);
+      document.getElementById('pct-mevcut').textContent = '%' + pctM.toFixed(1);
+      document.getElementById('pct-katki').textContent  = '%' + pctK.toFixed(1);
+      document.getElementById('pct-getiri').textContent = '%' + pctG.toFixed(1);
+
+      // Milestones
+      renderMilestones(mevcut, aylik, r, suYas, yilFarki);
+
+      document.getElementById('alt-bolum').classList.remove('hidden');
+
+      if (window.innerWidth < 1024) {
+        document.getElementById('results-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function renderMilestones(mevcut, aylik, r, suYas, toplamYil) {
+      const checkpoints = [];
+      const steps = [5, 10, 15, 20, 25, 30];
+      steps.forEach(y => { if (y < toplamYil) checkpoints.push(y); });
+      checkpoints.push(toplamYil);
+
+      const maxVal = fvHesapla(mevcut, aylik, r, toplamYil);
+
+      const container = document.getElementById('milestone-list');
+      container.innerHTML = '';
+
+      checkpoints.forEach((y, i) => {
+        const val = fvHesapla(mevcut, aylik, r, y);
+        const yas = suYas + y;
+        const isLast = i === checkpoints.length - 1;
+        const barW = Math.round(val / maxVal * 100);
+
+        const div = document.createElement('div');
+        div.className = 'flex gap-4 items-start ' + (isLast ? '' : 'pb-5');
+        div.innerHTML = `
+          <div class="flex flex-col items-center flex-shrink-0 pt-1">
+            <div class="w-3 h-3 rounded-full ${isLast ? 'bg-emerald-500 shadow-lg shadow-emerald-500/40' : 'bg-navy-600 border-2 border-violet-400/60'}"></div>
+            ${!isLast ? '<div class="w-px flex-1 bg-gradient-to-b from-violet-400/30 to-transparent mt-1 min-h-[2.5rem]"></div>' : ''}
+          </div>
+          <div class="flex-1 pb-1">
+            <div class="flex items-center justify-between mb-1">
+              <div>
+                <span class="text-sm font-bold ${isLast ? 'text-emerald-400' : 'text-slate-200'}">${yas} yaş</span>
+                <span class="text-xs text-slate-500 ml-2">${y} yıl sonra</span>
+              </div>
+              <span class="text-sm font-extrabold ${isLast ? 'text-emerald-400' : 'text-white'}">${fmtB(val)}</span>
+            </div>
+            <div class="h-1.5 bg-navy-700 rounded-full overflow-hidden">
+              <div class="h-full ${isLast ? 'bg-emerald-500' : 'bg-violet-400/60'} rounded-full" style="width:${barW}%"></div>
+            </div>
+          </div>`;
+        container.appendChild(div);
+      });
+    }
+
+    // Enter key
+    ['su-yas','em-yas','aylik-tasarruf','getiri','mevcut'].forEach(id => {
+      document.getElementById(id).addEventListener('keydown', e => {
+        if (e.key === 'Enter') hesapla();
+      });
+    });
+  </script>
+</body>
+</html>

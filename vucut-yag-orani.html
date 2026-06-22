@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vücut Yağ Oranı Tahmini – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { navy: { 950:'#070E1A', 900:'#0F172A', 800:'#1E293B', 700:'#263348', 600:'#334155' } },
+          fontFamily: { sans:['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .navbar-blur {
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,.92); border-bottom: 1px solid rgba(16,185,129,.12);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    .finput {
+      background:#1E293B; border:1.5px solid rgba(255,255,255,.08); color:#f1f5f9;
+      border-radius:.75rem; padding:.75rem 1rem; width:100%; font-size:.9375rem;
+      outline:none; transition:border-color .18s,box-shadow .18s;
+    }
+    .finput:focus { border-color:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,.15); }
+    .finput::placeholder { color:#475569; }
+    .finput.err { border-color:#f43f5e; box-shadow:0 0 0 3px rgba(244,63,94,.12); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { animation: fadeUp .42s ease forwards; }
+    .prog { transition: width .9s cubic-bezier(.4,0,.2,1); }
+
+    .qtag {
+      font-size:.6875rem; padding:.2rem .65rem; border-radius:9999px; font-weight:600;
+      transition:all .18s; cursor:pointer; border:1px solid rgba(255,255,255,.06);
+      background:#263348; color:#64748b; white-space:nowrap; display:inline-block;
+    }
+    .qtag:hover { color:#10B981; border-color:rgba(16,185,129,.3); background:rgba(16,185,129,.08); }
+
+    /* Gender toggle */
+    .gender-btn {
+      flex:1; padding:.625rem 0; border-radius:.625rem; font-size:.875rem; font-weight:600;
+      transition:all .2s; border:1.5px solid transparent; cursor:pointer;
+      display:flex; align-items:center; justify-content:center; gap:.375rem;
+    }
+    .gender-btn.inactive { background:#263348; color:#64748b; border-color:rgba(255,255,255,.05); }
+    .gender-btn.inactive:hover { color:#94a3b8; border-color:rgba(255,255,255,.1); }
+    .gender-btn.active-m { background:rgba(59,130,246,.15); color:#60a5fa; border-color:rgba(59,130,246,.35); }
+    .gender-btn.active-f { background:rgba(236,72,153,.15); color:#f472b6; border-color:rgba(236,72,153,.35); }
+
+    /* Body fat ruler */
+    .bf-ruler {
+      position:relative; height:10px; border-radius:9999px; overflow:visible;
+    }
+    .bf-needle {
+      position:absolute; top:50%; transform:translate(-50%,-50%);
+      width:18px; height:18px; border-radius:50%; background:white;
+      border:3px solid #0F172A; box-shadow:0 0 0 2px white, 0 2px 8px rgba(0,0,0,.5);
+      transition:left .7s cubic-bezier(.4,0,.2,1);
+    }
+
+    ::-webkit-scrollbar { width:4px; }
+    ::-webkit-scrollbar-track { background:#0F172A; }
+    ::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+<!-- NAVBAR -->
+<header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+    <a href="finanskolay.html" class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+      <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <span class="hidden sm:inline">Geri Dön</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-lg bg-rose-500/15 flex items-center justify-center">
+        <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+        </svg>
+      </div>
+      <span class="font-semibold text-white text-sm sm:text-base">Vücut Yağ Oranı Tahmini</span>
+    </div>
+    <a href="finanskolay.html" class="flex items-center gap-2 group">
+      <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span></span>
+    </a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="pt-16 pb-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Page header -->
+    <div class="py-8 sm:py-12 text-center">
+      <p class="text-rose-400 text-xs font-semibold tracking-widest uppercase mb-2">Sağlık & Fitness</p>
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
+        Vücut Yağ Oranınızı Öğrenin
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        ABD Donanması (US Navy) yöntemiyle, sadece bir mezura kullanarak vücut yağ oranınızı,
+        yağsız kütlenizi ve yağ kütlenizi tahmin edin.
+      </p>
+    </div>
+
+    <!-- FORM + RESULTS grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+
+      <!-- FORM -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+        <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+          </svg>
+          Ölçüm Bilgileri
+        </h2>
+
+        <!-- Cinsiyet -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Cinsiyet</label>
+          <div class="flex gap-2 p-1.5 bg-navy-700/60 rounded-xl border border-white/5">
+            <button id="btn-erkek" onclick="setCinsiyet('erkek')" class="gender-btn active-m">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+              Erkek
+            </button>
+            <button id="btn-kadin" onclick="setCinsiyet('kadin')" class="gender-btn inactive">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+              Kadın
+            </button>
+          </div>
+        </div>
+
+        <!-- Yaş -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Yaş</label>
+          <div class="relative">
+            <input type="number" id="yas" class="finput pr-14" placeholder="28" min="10" max="100" oninput="clearErr('yas')"/>
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">yaş</span>
+          </div>
+          <p id="yas-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir yaş girin (10–100).</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('yas',20)">20</span>
+            <span class="qtag" onclick="sv('yas',28)">28</span>
+            <span class="qtag" onclick="sv('yas',35)">35</span>
+            <span class="qtag" onclick="sv('yas',45)">45</span>
+          </div>
+        </div>
+
+        <!-- Boy + Kilo -->
+        <div class="grid grid-cols-2 gap-4 mb-5">
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Boy</label>
+            <div class="relative">
+              <input type="number" id="boy" class="finput pr-10" placeholder="175" min="100" max="250" oninput="clearErr('boy')"/>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">cm</span>
+            </div>
+            <p id="boy-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli boy girin.</p>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Kilo</label>
+            <div class="relative">
+              <input type="number" id="kilo" class="finput pr-10" placeholder="75" min="30" max="300" oninput="clearErr('kilo')"/>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">kg</span>
+            </div>
+            <p id="kilo-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli kilo girin.</p>
+          </div>
+        </div>
+
+        <!-- Bel çevresi -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+            Bel Çevresi <span class="text-slate-500 font-normal normal-case">(göbek deliği hizasından ölçün)</span>
+          </label>
+          <div class="relative">
+            <input type="number" id="bel" class="finput pr-10" placeholder="85" min="40" max="200" oninput="clearErr('bel')"/>
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">cm</span>
+          </div>
+          <p id="bel-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bel ölçüsü girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('bel',75)">75 cm</span>
+            <span class="qtag" onclick="sv('bel',85)">85 cm</span>
+            <span class="qtag" onclick="sv('bel',95)">95 cm</span>
+            <span class="qtag" onclick="sv('bel',105)">105 cm</span>
+          </div>
+        </div>
+
+        <!-- Boyun çevresi -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+            Boyun Çevresi <span class="text-slate-500 font-normal normal-case">(adem elmasının altından ölçün)</span>
+          </label>
+          <div class="relative">
+            <input type="number" id="boyun" class="finput pr-10" placeholder="38" min="20" max="80" oninput="clearErr('boyun')"/>
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">cm</span>
+          </div>
+          <p id="boyun-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli boyun ölçüsü girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('boyun',34)">34 cm</span>
+            <span class="qtag" onclick="sv('boyun',38)">38 cm</span>
+            <span class="qtag" onclick="sv('boyun',42)">42 cm</span>
+          </div>
+        </div>
+
+        <!-- Kalça (kadın için) -->
+        <div id="kalca-field" class="mb-7 hidden">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+            Kalça Çevresi <span class="text-slate-500 font-normal normal-case">(en geniş noktadan ölçün — kadınlar için gerekli)</span>
+          </label>
+          <div class="relative">
+            <input type="number" id="kalca" class="finput pr-10" placeholder="98" min="50" max="200" oninput="clearErr('kalca')"/>
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">cm</span>
+          </div>
+          <p id="kalca-err" class="text-xs text-rose-400 mt-1.5 hidden">Kadınlar için kalça ölçüsü gereklidir.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('kalca',90)">90 cm</span>
+            <span class="qtag" onclick="sv('kalca',98)">98 cm</span>
+            <span class="qtag" onclick="sv('kalca',108)">108 cm</span>
+          </div>
+        </div>
+
+        <button onclick="hesapla()"
+          class="w-full flex items-center justify-center gap-2 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-base rounded-xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          Hesapla
+        </button>
+        <p class="text-xs text-slate-600 text-center mt-3 leading-relaxed">
+          US Navy yöntemi kullanılmaktadır. Sonuçlar tahminidir; kesin ölçüm için DEXA veya biyoelektrik empedans testi önerilir.
+        </p>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl flex flex-col">
+        <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          Sonuçlar
+        </h2>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="flex-1 flex flex-col items-center justify-center py-10 text-center">
+          <div class="w-16 h-16 rounded-2xl bg-rose-500/8 flex items-center justify-center mb-4">
+            <svg class="w-8 h-8 text-rose-500/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+          </div>
+          <p class="text-slate-400 text-sm font-medium mb-1">Sonuç bekleniyor</p>
+          <p class="text-slate-600 text-xs">Ölçümlerinizi girin ve Hesapla butonuna tıklayın</p>
+        </div>
+
+        <!-- Results -->
+        <div id="results-area" class="hidden flex-1 flex flex-col gap-4">
+
+          <!-- HERO: vücut yağ oranı -->
+          <div id="bf-card" class="rounded-xl p-5 border text-center">
+            <p id="bf-label-top" class="text-xs font-semibold uppercase tracking-widest mb-2">Vücut Yağ Oranı</p>
+            <p id="bf-val" class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-2">—</p>
+            <span id="bf-kategori" class="inline-block px-4 py-1 rounded-full text-sm font-bold">—</span>
+
+            <!-- BF Ruler -->
+            <div class="mt-4 px-2">
+              <div class="bf-ruler" id="bf-ruler">
+                <div class="bf-needle" id="bf-needle" style="left:0%"></div>
+              </div>
+              <div id="bf-ruler-labels" class="flex justify-between text-xs text-slate-500 mt-2 px-0.5"></div>
+            </div>
+          </div>
+
+          <!-- Yağsız kütle + Yağ kütlesi -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+              <div class="w-8 h-8 rounded-lg bg-sky-500/15 flex items-center justify-center mx-auto mb-2">
+                <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Yağsız Kütle</p>
+              <p id="res-yagsiz" class="text-xl font-extrabold text-sky-300">—</p>
+              <p class="text-xs text-slate-600 mt-0.5">kas, kemik, organ</p>
+            </div>
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+              <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center mx-auto mb-2">
+                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Yağ Kütlesi</p>
+              <p id="res-yag" class="text-xl font-extrabold text-amber-400">—</p>
+              <p class="text-xs text-slate-600 mt-0.5">toplam vücut yağı</p>
+            </div>
+          </div>
+
+          <!-- Composition bar -->
+          <div class="bg-navy-700/40 border border-white/5 rounded-xl p-4">
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Vücut Bileşimi</p>
+            <div class="h-3 rounded-full bg-navy-600 overflow-hidden flex">
+              <div id="bar-yagsiz" class="prog h-full bg-sky-400" style="width:0%"></div>
+              <div id="bar-yag"    class="prog h-full bg-amber-400" style="width:0%"></div>
+            </div>
+            <div class="flex justify-between text-xs text-slate-500 mt-2">
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-sky-400"></span>Yağsız: <span id="pct-yagsiz" class="text-white font-semibold ml-0.5">—</span></span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-amber-400"></span>Yağ: <span id="pct-yag" class="text-white font-semibold ml-0.5">—</span></span>
+            </div>
+          </div>
+
+          <!-- Yorum -->
+          <div id="yorum" class="bg-navy-700/40 border border-white/5 rounded-xl px-4 py-3 text-sm text-slate-300 leading-relaxed"></div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- AÇIKLAMA -->
+    <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl mb-4">
+      <h3 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Vücut Yağ Oranı Kategorileri
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+        <!-- Erkek tablosu -->
+        <div class="bg-navy-700/40 rounded-xl p-4 border border-white/4">
+          <p class="text-xs font-semibold text-sky-400 uppercase tracking-wide mb-3 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            Erkekler İçin
+          </p>
+          <div class="space-y-1.5 text-xs">
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20"><span class="font-bold text-sky-300">Düşük</span><span class="text-slate-400">%2 – %5</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20"><span class="font-bold text-emerald-300">Sağlıklı</span><span class="text-slate-400">%6 – %17</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20"><span class="font-bold text-amber-300">Kabul Edilebilir</span><span class="text-slate-400">%18 – %24</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/20"><span class="font-bold text-rose-300">Obez</span><span class="text-slate-400">%25 ve üzeri</span></div>
+          </div>
+        </div>
+
+        <!-- Kadın tablosu -->
+        <div class="bg-navy-700/40 rounded-xl p-4 border border-white/4">
+          <p class="text-xs font-semibold text-pink-400 uppercase tracking-wide mb-3 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            Kadınlar İçin
+          </p>
+          <div class="space-y-1.5 text-xs">
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20"><span class="font-bold text-sky-300">Düşük</span><span class="text-slate-400">%10 – %13</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20"><span class="font-bold text-emerald-300">Sağlıklı</span><span class="text-slate-400">%14 – %24</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20"><span class="font-bold text-amber-300">Kabul Edilebilir</span><span class="text-slate-400">%25 – %31</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/20"><span class="font-bold text-rose-300">Obez</span><span class="text-slate-400">%32 ve üzeri</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="text-xs text-slate-600 mt-4 leading-relaxed">
+        US Navy yöntemi, vücut yağ oranını boyun, bel (ve kadınlar için kalça) çevre ölçümlerinden tahmin eder.
+        Kaslı bireylerde gerçek değerden farklı sonuç verebilir; en kesin ölçüm için DEXA taraması önerilir.
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<footer class="bg-navy-950 border-t border-white/5 py-6">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p class="text-xs text-slate-600">© 2025 FinansKolay · Hesaplama tahminidir; tıbbi tavsiye değildir. Sağlık kararları için uzmana danışın.</p>
+  </div>
+</footer>
+
+<script>
+var cinsiyet = 'erkek';
+
+function setCinsiyet(c) {
+  cinsiyet = c;
+  var bE = document.getElementById('btn-erkek');
+  var bK = document.getElementById('btn-kadin');
+  var kalcaField = document.getElementById('kalca-field');
+  if (c === 'erkek') {
+    bE.className = 'gender-btn active-m';
+    bK.className = 'gender-btn inactive';
+    kalcaField.classList.add('hidden');
+  } else {
+    bK.className = 'gender-btn active-f';
+    bE.className = 'gender-btn inactive';
+    kalcaField.classList.remove('hidden');
+  }
+}
+
+function sv(id, v) { document.getElementById(id).value = v; clearErr(id); }
+
+function clearErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.remove('err');
+  if (er) er.classList.add('hidden');
+}
+function showErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.add('err');
+  if (er) er.classList.remove('hidden');
+  return false;
+}
+
+function fmt1(n) { return n.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
+function fmtPct(n) { return '%' + fmt1(n); }
+
+// US Navy formula (metric, cm)
+// Male:   BF% = 495 / (1.0324 - 0.19077*log10(waist-neck) + 0.15456*log10(height)) - 450
+// Female: BF% = 495 / (1.29579 - 0.35004*log10(waist+hip-neck) + 0.22100*log10(height)) - 450
+function usNavyBF(gender, waist, neck, height, hip) {
+  var bf;
+  if (gender === 'erkek') {
+    bf = 495 / (1.0324 - 0.19077*Math.log10(waist - neck) + 0.15456*Math.log10(height)) - 450;
+  } else {
+    bf = 495 / (1.29579 - 0.35004*Math.log10(waist + hip - neck) + 0.22100*Math.log10(height)) - 450;
+  }
+  return bf;
+}
+
+function bfKategori(gender, bf) {
+  if (gender === 'erkek') {
+    if (bf < 6)  return { label:'Düşük', tc:'text-sky-300', bg:'bg-sky-500/12', bd:'border-sky-500/25', top:'text-sky-400', badge:'bg-sky-500/20 text-sky-300' };
+    if (bf < 18) return { label:'Sağlıklı', tc:'text-emerald-300', bg:'bg-emerald-500/12', bd:'border-emerald-500/25', top:'text-emerald-400', badge:'bg-emerald-500/20 text-emerald-300' };
+    if (bf < 25) return { label:'Kabul Edilebilir', tc:'text-amber-300', bg:'bg-amber-500/12', bd:'border-amber-500/25', top:'text-amber-400', badge:'bg-amber-500/20 text-amber-300' };
+    return { label:'Obez', tc:'text-rose-300', bg:'bg-rose-500/12', bd:'border-rose-500/25', top:'text-rose-400', badge:'bg-rose-500/20 text-rose-300' };
+  } else {
+    if (bf < 14) return { label:'Düşük', tc:'text-sky-300', bg:'bg-sky-500/12', bd:'border-sky-500/25', top:'text-sky-400', badge:'bg-sky-500/20 text-sky-300' };
+    if (bf < 25) return { label:'Sağlıklı', tc:'text-emerald-300', bg:'bg-emerald-500/12', bd:'border-emerald-500/25', top:'text-emerald-400', badge:'bg-emerald-500/20 text-emerald-300' };
+    if (bf < 32) return { label:'Kabul Edilebilir', tc:'text-amber-300', bg:'bg-amber-500/12', bd:'border-amber-500/25', top:'text-amber-400', badge:'bg-amber-500/20 text-amber-300' };
+    return { label:'Obez', tc:'text-rose-300', bg:'bg-rose-500/12', bd:'border-rose-500/25', top:'text-rose-400', badge:'bg-rose-500/20 text-rose-300' };
+  }
+}
+
+function bfRulerGradient(gender) {
+  if (gender === 'erkek') {
+    return 'linear-gradient(to right, #38bdf8 0%, #10B981 22%, #f59e0b 65%, #ef4444 100%)';
+  }
+  return 'linear-gradient(to right, #38bdf8 0%, #10B981 30%, #f59e0b 75%, #ef4444 100%)';
+}
+
+function bfRulerLabels(gender) {
+  if (gender === 'erkek') return ['2','6','18','25','40+'];
+  return ['10','14','25','32','45+'];
+}
+
+function bfToPct(gender, bf) {
+  var MIN = gender==='erkek' ? 2 : 10;
+  var MAX = gender==='erkek' ? 40 : 45;
+  return Math.min(100, Math.max(0, (bf-MIN)/(MAX-MIN)*100));
+}
+
+function hesapla() {
+  var yasV   = parseFloat(document.getElementById('yas').value);
+  var boyV   = parseFloat(document.getElementById('boy').value);
+  var kiloV  = parseFloat(document.getElementById('kilo').value);
+  var belV   = parseFloat(document.getElementById('bel').value);
+  var boyunV = parseFloat(document.getElementById('boyun').value);
+  var kalcaV = parseFloat(document.getElementById('kalca').value);
+
+  var ok = true;
+  if (isNaN(yasV) || yasV<10||yasV>100)   ok = showErr('yas');
+  if (isNaN(boyV) || boyV<100||boyV>250)  ok = showErr('boy');
+  if (isNaN(kiloV) || kiloV<30||kiloV>300) ok = showErr('kilo');
+  if (isNaN(belV) || belV<40||belV>200)   ok = showErr('bel');
+  if (isNaN(boyunV) || boyunV<20||boyunV>80) ok = showErr('boyun');
+  if (cinsiyet === 'kadin' && (isNaN(kalcaV) || kalcaV<50||kalcaV>200)) ok = showErr('kalca');
+  if (!ok) return;
+
+  // Sanity check: waist must be greater than neck for the formula to work (men)
+  if (cinsiyet === 'erkek' && belV <= boyunV) {
+    showErr('bel');
+    document.getElementById('bel-err').textContent = 'Bel çevresi boyun çevresinden büyük olmalıdır.';
+    return;
+  }
+  if (cinsiyet === 'kadin' && (belV + kalcaV) <= boyunV) {
+    showErr('bel');
+    document.getElementById('bel-err').textContent = 'Ölçümler formülle uyumlu değil, lütfen kontrol edin.';
+    return;
+  }
+
+  var bf = usNavyBF(cinsiyet, belV, boyunV, boyV, kalcaV);
+  bf = Math.max(2, Math.min(60, bf)); // clamp to sane range
+
+  var yagKg    = kiloV * (bf/100);
+  var yagsizKg = kiloV - yagKg;
+
+  // ── Render ──
+  document.getElementById('empty-state').classList.add('hidden');
+  var ra = document.getElementById('results-area');
+  ra.classList.remove('hidden');
+  ra.classList.add('fade-up');
+
+  var kat = bfKategori(cinsiyet, bf);
+  var card = document.getElementById('bf-card');
+  card.className = 'rounded-xl p-5 border text-center ' + kat.bg + ' ' + kat.bd;
+  document.getElementById('bf-label-top').className = 'text-xs font-semibold uppercase tracking-widest mb-2 ' + kat.top;
+  document.getElementById('bf-val').className = 'text-4xl sm:text-5xl font-extrabold tracking-tight mb-2 ' + kat.tc;
+  document.getElementById('bf-val').textContent = fmtPct(bf);
+  var katEl = document.getElementById('bf-kategori');
+  katEl.className = 'inline-block px-4 py-1 rounded-full text-sm font-bold ' + kat.badge;
+  katEl.textContent = kat.label;
+
+  // Ruler
+  document.getElementById('bf-ruler').style.background = bfRulerGradient(cinsiyet);
+  var labels = bfRulerLabels(cinsiyet);
+  document.getElementById('bf-ruler-labels').innerHTML = labels.map(function(l){ return '<span>'+l+'</span>'; }).join('');
+  setTimeout(function(){
+    document.getElementById('bf-needle').style.left = bfToPct(cinsiyet, bf) + '%';
+  }, 60);
+
+  document.getElementById('res-yagsiz').textContent = fmt1(yagsizKg) + ' kg';
+  document.getElementById('res-yag').textContent    = fmt1(yagKg) + ' kg';
+
+  var pctYagsiz = yagsizKg/kiloV*100;
+  var pctYag    = yagKg/kiloV*100;
+  document.getElementById('pct-yagsiz').textContent = fmtPct(pctYagsiz);
+  document.getElementById('pct-yag').textContent    = fmtPct(pctYag);
+  setTimeout(function(){
+    document.getElementById('bar-yagsiz').style.width = pctYagsiz + '%';
+    document.getElementById('bar-yag').style.width    = pctYag + '%';
+  }, 80);
+
+  // Yorum
+  var yorumTxt = '';
+  if (kat.label === 'Düşük') {
+    yorumTxt = 'Vücut yağ oranınız oldukça düşük. Bu seviye genellikle yarışmacı sporcularda görülür; uzun süre bu seviyede kalmak hormonal dengesizliklere yol açabilir.';
+  } else if (kat.label === 'Sağlıklı') {
+    yorumTxt = 'Vücut yağ oranınız sağlıklı aralıkta. Mevcut beslenme ve aktivite düzeninizi sürdürmeniz yeterli olabilir.';
+  } else if (kat.label === 'Kabul Edilebilir') {
+    yorumTxt = 'Vücut yağ oranınız kabul edilebilir aralıkta ancak ideal seviyenin biraz üzerinde. Düzenli egzersiz ve dengeli beslenme ile iyileştirilebilir.';
+  } else {
+    yorumTxt = 'Vücut yağ oranınız yüksek seviyede. Beslenme düzeninizi gözden geçirmeniz ve düzenli fiziksel aktivite eklemeniz faydalı olacaktır. Bir uzmana danışmanız önerilir.';
+  }
+  document.getElementById('yorum').innerHTML =
+    '<strong class="text-white">Yorum:</strong> ' + yorumTxt;
+
+  if (window.innerWidth < 1024) {
+    ra.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+// Enter key
+['yas','boy','kilo','bel','boyun','kalca'].forEach(function(id){
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('keydown', function(e){ if (e.key==='Enter') hesapla(); });
+});
+</script>
+</body>
+</html>

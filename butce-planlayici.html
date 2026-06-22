@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Basit Bütçe Planlayıcı – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { navy: { 950:'#070E1A', 900:'#0F172A', 800:'#1E293B', 700:'#263348', 600:'#334155' } },
+          fontFamily: { sans:['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .navbar-blur {
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,.92); border-bottom: 1px solid rgba(16,185,129,.12);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    .finput {
+      background:#1E293B; border:1.5px solid rgba(255,255,255,.08); color:#f1f5f9;
+      border-radius:.75rem; padding:.7rem 1rem; width:100%; font-size:.9375rem;
+      outline:none; transition:border-color .18s,box-shadow .18s;
+    }
+    .finput:focus { border-color:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,.15); }
+    .finput::placeholder { color:#475569; }
+    .finput.err { border-color:#f43f5e; box-shadow:0 0 0 3px rgba(244,63,94,.12); }
+
+    .fselect {
+      background:#1E293B; border:1.5px solid rgba(255,255,255,.08); color:#f1f5f9;
+      border-radius:.75rem; padding:.7rem 2.25rem .7rem 1rem; font-size:.9375rem;
+      width:100%; outline:none; appearance:none; -webkit-appearance:none; cursor:pointer;
+      transition:border-color .18s,box-shadow .18s;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat:no-repeat; background-position:right .75rem center; background-size:.875rem;
+    }
+    .fselect:focus { border-color:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,.15); }
+    .fselect option { background:#1E293B; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { animation: fadeUp .38s ease forwards; }
+    @keyframes rowIn { from{opacity:0;transform:translateX(-8px)} to{opacity:1;transform:translateX(0)} }
+    .row-in { animation: rowIn .22s ease forwards; }
+
+    .prog { transition: width .8s cubic-bezier(.4,0,.2,1); }
+
+    .delbtn {
+      width:28px; height:28px; border-radius:50%; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      background:rgba(244,63,94,.1); color:#f87171;
+      border:1px solid rgba(244,63,94,.2);
+      transition:all .18s; cursor:pointer;
+    }
+    .delbtn:hover { background:rgba(244,63,94,.28); transform:scale(1.12); color:#fff; }
+
+    .erow { transition: background .15s; }
+    .erow:hover { background: rgba(255,255,255,.025); }
+
+    ::-webkit-scrollbar { width:4px; }
+    ::-webkit-scrollbar-track { background:#0F172A; }
+    ::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+<!-- NAVBAR -->
+<header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+    <a href="finanskolay.html" class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+      <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <span class="hidden sm:inline">Geri Dön</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-lg bg-emerald-500/15 flex items-center justify-center">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+        </svg>
+      </div>
+      <span class="font-semibold text-white text-sm sm:text-base">Basit Bütçe Planlayıcı</span>
+    </div>
+    <a href="finanskolay.html" class="flex items-center gap-2 group">
+      <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span></span>
+    </a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="pt-16 pb-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Page header -->
+    <div class="py-8 sm:py-12 text-center">
+      <p class="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-2">Finans Aracı</p>
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
+        Aylık Bütçenizi Planlayın
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        Gelirinizi girin, giderlerinizi ekleyin; ne kadar tasarruf ettiğinizi anında görün.
+      </p>
+    </div>
+
+    <!-- ÖZET KARTLARI -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-4 sm:p-5 shadow-xl text-center">
+        <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1.5">Toplam Gelir</p>
+        <p id="ozet-gelir" class="text-lg sm:text-2xl font-extrabold text-sky-400">₺0</p>
+      </div>
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-4 sm:p-5 shadow-xl text-center">
+        <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1.5">Toplam Gider</p>
+        <p id="ozet-gider" class="text-lg sm:text-2xl font-extrabold text-rose-400">₺0</p>
+      </div>
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-4 sm:p-5 shadow-xl text-center" id="kalan-card">
+        <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1.5">Kalan Para</p>
+        <p id="ozet-kalan" class="text-lg sm:text-2xl font-extrabold text-emerald-400">₺0</p>
+      </div>
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-4 sm:p-5 shadow-xl text-center">
+        <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1.5">Tasarruf Oranı</p>
+        <p id="ozet-oran" class="text-lg sm:text-2xl font-extrabold text-white">%0</p>
+      </div>
+    </div>
+
+    <!-- Uyarı: negatif bakiye -->
+    <div id="negatif-uyari" class="hidden mb-6 px-4 py-3 bg-rose-500/10 border border-rose-500/25 rounded-xl text-sm text-rose-400 flex items-center gap-2">
+      <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+      </svg>
+      <span>Giderleriniz gelirinizi aşıyor! Bütçenizi dengelemek için giderlerinizi gözden geçirin.</span>
+    </div>
+
+    <!-- FORM + LİSTE + GRAFİK grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+
+      <!-- SOL: Gelir + Gider formu -->
+      <div class="flex flex-col gap-6">
+
+        <!-- Gelir kartı -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+          <h2 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+            <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+            </svg>
+            Aylık Gelir
+          </h2>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+            <input type="number" id="gelir" class="finput pl-8" placeholder="20.000" min="0" oninput="onGelirChange()"/>
+          </div>
+          <p id="gelir-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir gelir tutarı girin.</p>
+        </div>
+
+        <!-- Gider ekleme kartı -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+          <h2 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+            <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m9-1.5a9 9 0 11-18 0 9 9 0 0118 0zM12 18h.01"/>
+            </svg>
+            Gider Ekle
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+            <select id="kategori" class="fselect">
+              <option value="Kira">🏠 Kira</option>
+              <option value="Market">🛒 Market</option>
+              <option value="Ulaşım">🚗 Ulaşım</option>
+              <option value="Faturalar">💡 Faturalar</option>
+              <option value="Eğlence">🎬 Eğlence</option>
+              <option value="Diğer">📦 Diğer</option>
+            </select>
+            <div class="relative">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+              <input type="number" id="gider-tutar" class="finput pl-8" placeholder="1.500" min="1" oninput="clearErr('gider-tutar')"/>
+            </div>
+          </div>
+          <p id="gider-tutar-err" class="text-xs text-rose-400 mb-3 hidden">Geçerli bir gider tutarı girin.</p>
+
+          <button onclick="giderEkle()"
+            class="w-full flex items-center justify-center gap-2 py-3 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-emerald-500/25 hover:-translate-y-0.5 active:translate-y-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            Gider Ekle
+          </button>
+        </div>
+
+        <!-- Gider listesi -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 shadow-xl overflow-hidden flex-1">
+          <div class="px-5 sm:px-6 py-4 border-b border-white/5 flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-white">Giderleriniz</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Eklediğiniz tüm giderler burada listelenir</p>
+            </div>
+            <button onclick="giderleriTemizle()" class="text-xs font-semibold text-slate-400 hover:text-rose-400 transition-colors">Tümünü Sil</button>
+          </div>
+          <div id="gider-listesi" class="divide-y divide-white/4 max-h-80 overflow-y-auto"></div>
+        </div>
+      </div>
+
+      <!-- SAĞ: Grafik + dağılım -->
+      <div class="flex flex-col gap-6">
+
+        <!-- Grafik kartı -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+          <h3 class="text-base font-bold text-white mb-1 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            Gelir vs Gider
+          </h3>
+          <p class="text-xs text-slate-500 mb-5">Aylık gelir ve gider karşılaştırması</p>
+          <div class="relative h-56 sm:h-64">
+            <canvas id="bar-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Kategori dağılımı -->
+        <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl flex-1">
+          <h3 class="text-base font-bold text-white mb-1 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
+            </svg>
+            Kategori Dağılımı
+          </h3>
+          <p class="text-xs text-slate-500 mb-5">Giderlerinizin kategorilere göre payı</p>
+          <div id="kategori-bars" class="space-y-3">
+            <p class="text-sm text-slate-600 text-center py-6">Henüz gider eklenmedi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AÇIKLAMA -->
+    <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl mb-4">
+      <h3 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Sağlıklı Bütçe İçin İpuçları
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">50/30/20 Kuralı</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Gelirinizin %50'sini ihtiyaçlara, %30'unu isteklere, %20'sini tasarrufa ayırmayı hedefleyin.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-sky-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">Sabit ve Değişken Giderleri Ayırın</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Kira gibi sabit giderlerle market gibi değişken giderleri ayrı takip etmek bütçenizi netleştirir.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">Her Ay Gözden Geçirin</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Düzenli takip, fazla harcama yaptığınız kategorileri fark etmenizi sağlar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="bg-navy-950 border-t border-white/5 py-6">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p class="text-xs text-slate-600">© 2025 FinansKolay · Bu araç yalnızca kişisel bütçe takibine yardımcı olmak içindir.</p>
+  </div>
+</footer>
+
+<script>
+var uid = 0;
+var giderler = []; // [{id, kategori, tutar}]
+var barChart = null;
+
+var kategoriRenkler = {
+  'Kira':       { bg:'rgba(56,189,248,0.7)',  solid:'#38bdf8', text:'text-sky-300',     barCls:'bg-sky-400' },
+  'Market':     { bg:'rgba(16,185,129,0.7)',  solid:'#10B981', text:'text-emerald-300', barCls:'bg-emerald-400' },
+  'Ulaşım':     { bg:'rgba(251,191,36,0.7)',  solid:'#fbbf24', text:'text-amber-300',   barCls:'bg-amber-400' },
+  'Faturalar':  { bg:'rgba(167,139,250,0.7)', solid:'#a78bfa', text:'text-violet-300',  barCls:'bg-violet-400' },
+  'Eğlence':    { bg:'rgba(244,114,182,0.7)', solid:'#f472b6', text:'text-pink-300',    barCls:'bg-pink-400' },
+  'Diğer':      { bg:'rgba(148,163,184,0.7)', solid:'#94a3b8', text:'text-slate-300',   barCls:'bg-slate-400' },
+};
+
+var kategoriEmoji = {
+  'Kira':'🏠','Market':'🛒','Ulaşım':'🚗','Faturalar':'💡','Eğlence':'🎬','Diğer':'📦'
+};
+
+function fmt(n) { return '₺' + Math.round(n).toLocaleString('tr-TR'); }
+function fmtPct(n) { return '%' + n.toLocaleString('tr-TR', { minimumFractionDigits:1, maximumFractionDigits:1 }); }
+
+function clearErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.remove('err');
+  if (er) er.classList.add('hidden');
+}
+function showErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.add('err');
+  if (er) er.classList.remove('hidden');
+}
+
+function onGelirChange() {
+  clearErr('gelir');
+  hesapla();
+}
+
+function giderEkle() {
+  var kategori = document.getElementById('kategori').value;
+  var tutarVal = parseFloat(document.getElementById('gider-tutar').value);
+
+  if (isNaN(tutarVal) || tutarVal <= 0) {
+    showErr('gider-tutar');
+    return;
+  }
+  clearErr('gider-tutar');
+
+  var id = ++uid;
+  giderler.push({ id:id, kategori:kategori, tutar:tutarVal });
+  document.getElementById('gider-tutar').value = '';
+  document.getElementById('gider-tutar').focus();
+
+  renderGiderListesi();
+  hesapla();
+}
+
+function giderSil(id) {
+  giderler = giderler.filter(function(g){ return g.id !== id; });
+  renderGiderListesi();
+  hesapla();
+}
+
+function giderleriTemizle() {
+  giderler = [];
+  renderGiderListesi();
+  hesapla();
+}
+
+function renderGiderListesi() {
+  var c = document.getElementById('gider-listesi');
+  if (!giderler.length) {
+    c.innerHTML = '<div class="px-5 sm:px-6 py-10 text-center text-slate-600 text-sm">Henüz gider eklenmedi.<br/>Yukarıdaki formdan ekleyebilirsiniz.</div>';
+    return;
+  }
+
+  // Sort newest first
+  var sorted = giderler.slice().reverse();
+
+  c.innerHTML = sorted.map(function(g) {
+    var rc = kategoriRenkler[g.kategori] || kategoriRenkler['Diğer'];
+    var emoji = kategoriEmoji[g.kategori] || '📦';
+    return '<div class="erow row-in flex items-center gap-3 px-5 sm:px-6 py-3">' +
+      '<div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-base" style="background:' + rc.bg.replace('0.7','0.15') + '">' + emoji + '</div>' +
+      '<div class="flex-1 min-w-0">' +
+        '<p class="text-sm font-semibold text-white truncate">' + g.kategori + '</p>' +
+      '</div>' +
+      '<span class="text-sm font-bold ' + rc.text + ' flex-shrink-0">' + fmt(g.tutar) + '</span>' +
+      '<button onclick="giderSil(' + g.id + ')" class="delbtn">' +
+        '<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>' +
+      '</button>' +
+    '</div>';
+  }).join('');
+}
+
+function hesapla() {
+  var gelirV = parseFloat(document.getElementById('gelir').value) || 0;
+  var toplamGider = giderler.reduce(function(sum, g){ return sum + g.tutar; }, 0);
+  var kalan = gelirV - toplamGider;
+  var tasarrufOrani = gelirV > 0 ? (kalan / gelirV * 100) : 0;
+
+  document.getElementById('ozet-gelir').textContent = fmt(gelirV);
+  document.getElementById('ozet-gider').textContent = fmt(toplamGider);
+  document.getElementById('ozet-kalan').textContent = fmt(kalan);
+  document.getElementById('ozet-oran').textContent  = fmtPct(tasarrufOrani);
+
+  var kalanEl = document.getElementById('ozet-kalan');
+  var oranEl  = document.getElementById('ozet-oran');
+  var kalanCard = document.getElementById('kalan-card');
+  var uyari = document.getElementById('negatif-uyari');
+
+  if (kalan < 0) {
+    kalanEl.className = 'text-lg sm:text-2xl font-extrabold text-rose-400';
+    oranEl.className  = 'text-lg sm:text-2xl font-extrabold text-rose-400';
+    kalanCard.className = 'bg-rose-500/10 rounded-2xl border border-rose-500/30 p-4 sm:p-5 shadow-xl text-center';
+    uyari.classList.remove('hidden');
+  } else {
+    kalanEl.className = 'text-lg sm:text-2xl font-extrabold text-emerald-400';
+    oranEl.className  = 'text-lg sm:text-2xl font-extrabold ' + (tasarrufOrani >= 20 ? 'text-emerald-400' : tasarrufOrani >= 10 ? 'text-amber-400' : 'text-white');
+    kalanCard.className = 'bg-navy-800 rounded-2xl border border-white/5 p-4 sm:p-5 shadow-xl text-center';
+    uyari.classList.add('hidden');
+  }
+
+  renderChart(gelirV, toplamGider);
+  renderKategoriDagilimi(toplamGider);
+}
+
+function renderChart(gelir, gider) {
+  var ctx = document.getElementById('bar-chart').getContext('2d');
+  if (barChart) barChart.destroy();
+
+  var barColor = gider > gelir ? 'rgba(244,63,94,0.7)' : 'rgba(16,185,129,0.7)';
+  var barBorder = gider > gelir ? '#f43f5e' : '#10B981';
+
+  barChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Gelir', 'Gider'],
+      datasets: [{
+        data: [gelir, gider],
+        backgroundColor: ['rgba(56,189,248,0.7)', barColor],
+        borderColor: ['#38bdf8', barBorder],
+        borderWidth: 1.5,
+        borderRadius: 8,
+        maxBarThickness: 90,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: { label: function(ctx){ return ' ' + fmt(ctx.raw); } },
+          backgroundColor: '#1E293B', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
+          titleColor: '#94a3b8', bodyColor: '#f1f5f9', padding: 10, cornerRadius: 8,
+        }
+      },
+      scales: {
+        x: { grid: { display:false }, ticks: { color:'#94a3b8', font:{ size:13, weight:'600' } } },
+        y: {
+          grid: { color: 'rgba(255,255,255,0.04)' },
+          ticks: { color:'#64748b', font:{ size:10 },
+            callback: function(v){ return '₺' + (v>=1000000?(v/1000000).toFixed(1)+'M':v>=1000?(v/1000).toFixed(0)+'K':v); } }
+        }
+      },
+      animation: { duration: 600 }
+    }
+  });
+}
+
+function renderKategoriDagilimi(toplamGider) {
+  var c = document.getElementById('kategori-bars');
+  if (!giderler.length || toplamGider <= 0) {
+    c.innerHTML = '<p class="text-sm text-slate-600 text-center py-6">Henüz gider eklenmedi</p>';
+    return;
+  }
+
+  // Group by category
+  var grouped = {};
+  giderler.forEach(function(g) {
+    grouped[g.kategori] = (grouped[g.kategori] || 0) + g.tutar;
+  });
+
+  var sortedCats = Object.keys(grouped).sort(function(a,b){ return grouped[b] - grouped[a]; });
+
+  c.innerHTML = sortedCats.map(function(cat) {
+    var tutar = grouped[cat];
+    var pct = (tutar / toplamGider * 100);
+    var rc = kategoriRenkler[cat] || kategoriRenkler['Diğer'];
+    var emoji = kategoriEmoji[cat] || '📦';
+    return '<div>' +
+      '<div class="flex items-center justify-between text-xs mb-1.5">' +
+        '<span class="font-semibold ' + rc.text + ' flex items-center gap-1.5">' + emoji + ' ' + cat + '</span>' +
+        '<span class="text-white font-bold">' + fmt(tutar) + ' (' + pct.toFixed(0) + '%)</span>' +
+      '</div>' +
+      '<div class="h-2.5 bg-navy-700 rounded-full overflow-hidden">' +
+        '<div class="prog h-full ' + rc.barCls + ' rounded-full" style="width:0%" data-w="' + pct + '"></div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  setTimeout(function() {
+    document.querySelectorAll('[data-w]').forEach(function(el) {
+      el.style.width = el.getAttribute('data-w') + '%';
+    });
+  }, 60);
+}
+
+// Enter key for gider tutarı
+document.getElementById('gider-tutar').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') giderEkle();
+});
+
+// Init
+renderGiderListesi();
+hesapla();
+</script>
+</body>
+</html>

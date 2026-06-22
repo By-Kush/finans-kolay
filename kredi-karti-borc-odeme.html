@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kredi Kartı Borç Ödeme Planı – FinansKolay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { navy: { 950:'#070E1A', 900:'#0F172A', 800:'#1E293B', 700:'#263348', 600:'#334155' } },
+          fontFamily: { sans:['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .navbar-blur {
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,.92); border-bottom: 1px solid rgba(16,185,129,.12);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    .finput {
+      background:#1E293B; border:1.5px solid rgba(255,255,255,.08); color:#f1f5f9;
+      border-radius:.75rem; padding:.75rem 1rem; width:100%; font-size:.9375rem;
+      outline:none; transition:border-color .18s,box-shadow .18s;
+    }
+    .finput:focus { border-color:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,.15); }
+    .finput::placeholder { color:#475569; }
+    .finput.err { border-color:#f43f5e; box-shadow:0 0 0 3px rgba(244,63,94,.12); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { animation: fadeUp .42s ease forwards; }
+    .prog { transition: width .9s cubic-bezier(.4,0,.2,1); }
+
+    .qtag {
+      font-size:.6875rem; padding:.2rem .65rem; border-radius:9999px; font-weight:600;
+      transition:all .18s; cursor:pointer; border:1px solid rgba(255,255,255,.06);
+      background:#263348; color:#64748b; white-space:nowrap; display:inline-block;
+    }
+    .qtag:hover { color:#10B981; border-color:rgba(16,185,129,.3); background:rgba(16,185,129,.08); }
+
+    .warn-pulse {
+      animation: warnPulse 2.2s infinite;
+    }
+    @keyframes warnPulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(244,63,94,.25); }
+      50% { box-shadow: 0 0 0 6px rgba(244,63,94,0); }
+    }
+
+    ::-webkit-scrollbar { width:4px; }
+    ::-webkit-scrollbar-track { background:#0F172A; }
+    ::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+
+<!-- NAVBAR -->
+<header class="navbar-blur fixed top-0 left-0 right-0 z-50 h-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+    <a href="finanskolay.html" class="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-medium transition-colors group">
+      <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <span class="hidden sm:inline">Geri Dön</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-lg bg-rose-500/15 flex items-center justify-center">
+        <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+        </svg>
+      </div>
+      <span class="font-semibold text-white text-sm sm:text-base">Kredi Kartı Borç Ödeme Planı</span>
+    </div>
+    <a href="finanskolay.html" class="flex items-center gap-2 group">
+      <div class="w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <span class="hidden sm:inline font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span></span>
+    </a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="pt-16 pb-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Page header -->
+    <div class="py-8 sm:py-12 text-center">
+      <p class="text-rose-400 text-xs font-semibold tracking-widest uppercase mb-2">Finans Aracı</p>
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
+        Kredi Kartı Borcunuz Ne Zaman Biter?
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        Mevcut borcunuzu, faiz oranını ve aylık ödeme planınızı girerek borcunuzun
+        ne zaman kapanacağını ve ne kadar faiz ödeyeceğinizi öğrenin.
+      </p>
+    </div>
+
+    <!-- FORM + RESULTS grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+
+      <!-- FORM -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl">
+        <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+          </svg>
+          Borç Bilgileri
+        </h2>
+
+        <!-- Mevcut borç -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Mevcut Borç Tutarı</label>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+            <input type="number" id="borc" class="finput pl-8" placeholder="15.000" min="1" oninput="clearErr('borc')"/>
+          </div>
+          <p id="borc-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir borç tutarı girin.</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('borc',5000)">₺5K</span>
+            <span class="qtag" onclick="sv('borc',15000)">₺15K</span>
+            <span class="qtag" onclick="sv('borc',30000)">₺30K</span>
+            <span class="qtag" onclick="sv('borc',50000)">₺50K</span>
+          </div>
+        </div>
+
+        <!-- Aylık faiz -->
+        <div class="mb-5">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
+            Aylık Faiz Oranı <span class="text-slate-500 font-normal normal-case">(kredi kartı akdi faizi)</span>
+          </label>
+          <div class="relative">
+            <input type="number" id="faiz" class="finput pr-10" placeholder="3.50" min="0.1" max="20" step="0.1" oninput="clearErr('faiz')"/>
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">%</span>
+          </div>
+          <p id="faiz-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir oran girin (0.1–20).</p>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('faiz',2.5)">%2.5</span>
+            <span class="qtag" onclick="sv('faiz',3.0)">%3.0</span>
+            <span class="qtag" onclick="sv('faiz',3.5)">%3.5</span>
+            <span class="qtag" onclick="sv('faiz',4.25)">%4.25</span>
+          </div>
+        </div>
+
+        <!-- Aylık ödeme -->
+        <div class="mb-7">
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Aylık Ödeme Miktarı</label>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
+            <input type="number" id="odeme" class="finput pl-8" placeholder="1.500" min="1" oninput="clearErr('odeme')"/>
+          </div>
+          <p id="odeme-err" class="text-xs text-rose-400 mt-1.5 hidden">Geçerli bir tutar girin.</p>
+          <div id="odeme-hint" class="text-xs text-amber-400 mt-1.5 hidden"></div>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <span class="qtag" onclick="sv('odeme',500)">₺500</span>
+            <span class="qtag" onclick="sv('odeme',1000)">₺1.000</span>
+            <span class="qtag" onclick="sv('odeme',1500)">₺1.500</span>
+            <span class="qtag" onclick="sv('odeme',3000)">₺3.000</span>
+          </div>
+        </div>
+
+        <button onclick="hesapla()"
+          class="w-full flex items-center justify-center gap-2 py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold text-base rounded-xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          Ödeme Planını Hesapla
+        </button>
+
+        <!-- Sabit uyarı -->
+        <div class="mt-4 flex items-start gap-2.5 bg-rose-500/8 border border-rose-500/20 rounded-xl px-4 py-3">
+          <svg class="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+          </svg>
+          <p class="text-xs text-rose-300 leading-relaxed">Sadece asgari ödeme yaparsanız borcunuz çok uzun sürede kapanır ve toplam faiz katlanarak büyür.</p>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl flex flex-col">
+        <h2 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          Ödeme Planı Sonuçları
+        </h2>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="flex-1 flex flex-col items-center justify-center py-10 text-center">
+          <div class="w-16 h-16 rounded-2xl bg-rose-500/8 flex items-center justify-center mb-4">
+            <svg class="w-8 h-8 text-rose-500/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+            </svg>
+          </div>
+          <p class="text-slate-400 text-sm font-medium mb-1">Sonuç bekleniyor</p>
+          <p class="text-slate-600 text-xs">Borç bilgilerinizi girin ve Hesapla butonuna tıklayın</p>
+        </div>
+
+        <!-- Sonsuz döngü uyarısı -->
+        <div id="infinite-warning" class="hidden flex-1 flex flex-col items-center justify-center py-8 text-center">
+          <div class="w-16 h-16 rounded-2xl bg-rose-500/15 flex items-center justify-center mb-4 warn-pulse">
+            <svg class="w-8 h-8 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+            </svg>
+          </div>
+          <p class="text-rose-400 text-base font-bold mb-2">Bu ödeme tutarıyla borç hiç kapanmaz!</p>
+          <p class="text-slate-400 text-sm max-w-xs leading-relaxed">
+            Aylık ödemeniz, faiz tutarından düşük veya ona çok yakın. Borcunuzun azalması için
+            ödemenizi artırmanız gerekiyor.
+          </p>
+          <p id="min-odeme-gerek" class="text-xs text-amber-400 mt-3 font-semibold"></p>
+        </div>
+
+        <!-- Results -->
+        <div id="results-area" class="hidden flex-1 flex flex-col gap-4">
+
+          <!-- Narrative -->
+          <div id="narrative" class="bg-rose-500/8 border border-rose-500/20 rounded-xl px-4 py-3 text-sm text-slate-300 leading-relaxed"></div>
+
+          <!-- HERO: kapanma süresi -->
+          <div class="bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border border-emerald-500/25 rounded-xl p-5 text-center">
+            <p class="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">Borcun Kapanma Süresi</p>
+            <p id="res-sure" class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">—</p>
+            <p id="res-sure-sub" class="text-slate-400 text-xs mt-2">—</p>
+          </div>
+
+          <!-- 2 metrik -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Toplam Ödenecek</p>
+              <p id="res-toplam" class="text-xl font-extrabold text-white">—</p>
+              <p class="text-xs text-slate-600 mt-1">anapara + faiz</p>
+            </div>
+            <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Toplam Faiz</p>
+              <p id="res-faiz" class="text-xl font-extrabold text-rose-400">—</p>
+              <p class="text-xs text-slate-600 mt-1">fazladan ödenen</p>
+            </div>
+          </div>
+
+          <!-- Maliyet dağılımı -->
+          <div class="bg-navy-700/40 border border-white/5 rounded-xl p-4">
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Ödeme Dağılımı</p>
+            <div class="h-3 rounded-full bg-navy-600 overflow-hidden flex">
+              <div id="bar-ana"  class="prog h-full bg-emerald-500" style="width:0%"></div>
+              <div id="bar-faiz" class="prog h-full bg-rose-400" style="width:0%"></div>
+            </div>
+            <div class="flex justify-between text-xs text-slate-500 mt-2">
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span>Anapara: <span id="pct-ana" class="text-white font-semibold ml-0.5">—</span></span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-rose-400"></span>Faiz: <span id="pct-faiz" class="text-white font-semibold ml-0.5">—</span></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ÖDEME PLANI TABLOSU -->
+    <div id="tablo-section" class="hidden mb-8">
+      <div class="bg-navy-800 rounded-2xl border border-white/5 shadow-xl overflow-hidden">
+        <div class="px-5 sm:px-6 py-4 border-b border-white/5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+              </svg>
+              Aylık Ödeme Planı
+            </h3>
+            <p class="text-xs text-slate-500 mt-0.5">İlk 12 ay detaylı, sonrası özetlenmiştir</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <label class="text-xs text-slate-400">Göster:</label>
+            <select id="show-count" onchange="renderTablo()"
+              class="bg-navy-700 border border-white/8 text-slate-300 text-xs rounded-lg px-3 py-1.5 outline-none focus:border-emerald-500">
+              <option value="12">İlk 12 ay</option>
+              <option value="24">İlk 24 ay</option>
+              <option value="all">Tümü</option>
+            </select>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-navy-700/50">
+                <th class="text-left text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3">Ay</th>
+                <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-3 sm:px-5 py-3">Ödeme</th>
+                <th class="text-right text-xs font-semibold text-emerald-400 uppercase tracking-wide px-3 sm:px-5 py-3">Anapara</th>
+                <th class="text-right text-xs font-semibold text-rose-400 uppercase tracking-wide px-3 sm:px-5 py-3">Faiz</th>
+                <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3">Kalan Borç</th>
+              </tr>
+            </thead>
+            <tbody id="tablo-tbody" class="divide-y divide-white/4"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- AÇIKLAMA -->
+    <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl mb-4">
+      <h3 class="text-base font-bold text-white mb-5 flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Kredi Kartı Borcunu Hızlı Kapatma İpuçları
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">Asgari Ödemeden Fazlasını Yapın</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Asgari ödeme yalnızca faizi karşılamaya yakındır; anaparayı eritmek için daha fazlasını ödemelisiniz.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">Yeni Borç Eklemeyin</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Kartı borç kapanana kadar harcama için kullanmamak, faiz yükünü artırmamanın en etkili yoludur.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-sky-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white mb-1">Daha Düşük Faizli Krediye Aktarın</p>
+            <p class="text-xs text-slate-400 leading-relaxed">İhtiyaç kredisi veya kredi kartı borç birleştirme seçenekleri genellikle daha düşük faiz sunar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="bg-navy-950 border-t border-white/5 py-6">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p class="text-xs text-slate-600">© 2025 FinansKolay · Hesaplama tahmini niteliktedir, banka politikaları değişkenlik gösterebilir.</p>
+  </div>
+</footer>
+
+<script>
+var tabloData = [];
+
+function sv(id, v) { document.getElementById(id).value = v; clearErr(id); }
+
+function clearErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.remove('err');
+  if (er) er.classList.add('hidden');
+}
+function showErr(id) {
+  var el = document.getElementById(id);
+  var er = document.getElementById(id + '-err');
+  if (el) el.classList.add('err');
+  if (er) er.classList.remove('hidden');
+  return false;
+}
+
+function fmt(n) { return '₺' + Math.round(n).toLocaleString('tr-TR'); }
+function fmtPct(n) { return '%' + n.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
+
+function hesapla() {
+  var borcV  = parseFloat(document.getElementById('borc').value);
+  var faizV  = parseFloat(document.getElementById('faiz').value);
+  var odemeV = parseFloat(document.getElementById('odeme').value);
+
+  var ok = true;
+  if (isNaN(borcV) || borcV <= 0)  ok = showErr('borc');
+  if (isNaN(faizV) || faizV<0.1||faizV>20) ok = showErr('faiz');
+  if (isNaN(odemeV) || odemeV<=0) ok = showErr('odeme');
+  if (!ok) return;
+
+  var rAylik = faizV/100;
+  var ilkFaiz = borcV * rAylik;
+
+  // Hide all panels first
+  document.getElementById('empty-state').classList.add('hidden');
+  document.getElementById('infinite-warning').classList.add('hidden');
+  document.getElementById('results-area').classList.add('hidden');
+  document.getElementById('tablo-section').classList.add('hidden');
+
+  // Check if payment covers interest (otherwise infinite loop)
+  if (odemeV <= ilkFaiz) {
+    document.getElementById('infinite-warning').classList.remove('hidden');
+    var minGerek = ilkFaiz * 1.05; // need at least 5% above pure interest to make progress
+    document.getElementById('min-odeme-gerek').textContent =
+      'Önerilen minimum ödeme: ' + fmt(minGerek) + ' (ilk ay faizi: ' + fmt(ilkFaiz) + ')';
+    return;
+  }
+
+  // ── Simulate amortization ──
+  tabloData = [];
+  var kalan = borcV;
+  var ay = 0;
+  var toplamFaiz = 0;
+  var toplamOdenen = 0;
+  var maxAy = 1200; // safety cap (100 yıl)
+
+  while (kalan > 0.5 && ay < maxAy) {
+    ay++;
+    var faizTutar = kalan * rAylik;
+    var odemeBu = Math.min(odemeV, kalan + faizTutar);
+    var anaparaTutar = odemeBu - faizTutar;
+    kalan = kalan - anaparaTutar;
+    if (kalan < 0) kalan = 0;
+
+    toplamFaiz += faizTutar;
+    toplamOdenen += odemeBu;
+
+    tabloData.push({
+      ay: ay,
+      odeme: odemeBu,
+      anapara: anaparaTutar,
+      faiz: faizTutar,
+      kalan: kalan
+    });
+  }
+
+  var tamamlandi = kalan <= 0.5;
+
+  // ── Render ──
+  if (!tamamlandi) {
+    document.getElementById('infinite-warning').classList.remove('hidden');
+    document.getElementById('min-odeme-gerek').textContent =
+      '100 yıl içinde borç kapanmıyor. Ödeme tutarınızı artırmanız gerekiyor.';
+    return;
+  }
+
+  var ra = document.getElementById('results-area');
+  ra.classList.remove('hidden');
+  ra.classList.add('fade-up');
+  document.getElementById('tablo-section').classList.remove('hidden');
+
+  var yil = Math.floor(ay/12);
+  var ayKalan = ay % 12;
+  var sureTxt = (yil>0 ? yil+' yıl ' : '') + (ayKalan>0 || yil===0 ? ayKalan+' ay' : '');
+
+  document.getElementById('narrative').innerHTML =
+    '<span class="font-semibold text-white">' + fmt(borcV) + '</span> borcunuzu ayda ' +
+    '<span class="font-semibold text-white">' + fmt(odemeV) + '</span> öderseniz, ' +
+    '<span class="font-bold text-emerald-400">' + sureTxt + '</span> içinde tamamen kapatırsınız. ' +
+    'Bu süreçte toplam <span class="font-semibold text-rose-400">' + fmt(toplamFaiz) + '</span> faiz ödersiniz.';
+
+  document.getElementById('res-sure').textContent = sureTxt;
+  document.getElementById('res-sure-sub').textContent = ay + ' ay sürecek';
+  document.getElementById('res-toplam').textContent = fmt(toplamOdenen);
+  document.getElementById('res-faiz').textContent   = fmt(toplamFaiz);
+
+  var pctAna  = borcV / toplamOdenen * 100;
+  var pctFaiz = toplamFaiz / toplamOdenen * 100;
+  document.getElementById('pct-ana').textContent  = fmtPct(pctAna);
+  document.getElementById('pct-faiz').textContent = fmtPct(pctFaiz);
+  setTimeout(function(){
+    document.getElementById('bar-ana').style.width  = pctAna  + '%';
+    document.getElementById('bar-faiz').style.width = pctFaiz + '%';
+  }, 70);
+
+  renderTablo();
+
+  if (window.innerWidth < 1024) {
+    ra.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function renderTablo() {
+  var sel = document.getElementById('show-count').value;
+  var limit = sel === 'all' ? tabloData.length : parseInt(sel);
+  var rows = tabloData.slice(0, limit);
+  var tbody = document.getElementById('tablo-tbody');
+
+  tbody.innerHTML = rows.map(function(r, i) {
+    return '<tr class="transition-colors hover:bg-white/[0.02] ' + (i%2?'bg-white/[0.012]':'') + '">' +
+      '<td class="px-4 sm:px-6 py-2.5 text-sm text-slate-300 font-medium whitespace-nowrap">' + r.ay + '</td>' +
+      '<td class="px-3 sm:px-5 py-2.5 text-sm text-white font-semibold text-right whitespace-nowrap">' + fmt(r.odeme) + '</td>' +
+      '<td class="px-3 sm:px-5 py-2.5 text-sm text-emerald-400 text-right whitespace-nowrap">' + fmt(r.anapara) + '</td>' +
+      '<td class="px-3 sm:px-5 py-2.5 text-sm text-rose-400 text-right whitespace-nowrap">' + fmt(r.faiz) + '</td>' +
+      '<td class="px-4 sm:px-6 py-2.5 text-sm text-slate-300 text-right whitespace-nowrap">' + fmt(r.kalan) + '</td>' +
+    '</tr>';
+  }).join('');
+
+  if (sel !== 'all' && tabloData.length > limit) {
+    var rem = tabloData.length - limit;
+    tbody.innerHTML += '<tr><td colspan="5" class="text-center py-3 text-xs text-slate-500">… ve ' + rem + ' ay daha ' +
+      '<button onclick="document.getElementById(\'show-count\').value=\'all\';renderTablo();" ' +
+      'class="ml-2 text-emerald-400 hover:text-emerald-300 font-medium transition-colors">Tümünü Göster →</button></td></tr>';
+  }
+}
+
+// Live hint: warn if payment too close to interest
+function checkOdemeHint() {
+  var borcV = parseFloat(document.getElementById('borc').value);
+  var faizV = parseFloat(document.getElementById('faiz').value);
+  var odemeV = parseFloat(document.getElementById('odeme').value);
+  var hint = document.getElementById('odeme-hint');
+
+  if (!isNaN(borcV) && !isNaN(faizV) && !isNaN(odemeV)) {
+    var ilkFaiz = borcV * (faizV/100);
+    if (odemeV <= ilkFaiz) {
+      hint.textContent = '⚠ Bu ödeme tutarı ilk ay faizini (' + fmt(ilkFaiz) + ') karşılamıyor — borç kapanmaz!';
+      hint.classList.remove('hidden');
+    } else {
+      hint.classList.add('hidden');
+    }
+  } else {
+    hint.classList.add('hidden');
+  }
+}
+
+['borc','faiz','odeme'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', checkOdemeHint);
+  document.getElementById(id).addEventListener('keydown', function(e){ if (e.key==='Enter') hesapla(); });
+});
+</script>
+</body>
+</html>
