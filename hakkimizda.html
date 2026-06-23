@@ -2,196 +2,265 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hakkımızda | FinansKolay</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="https://cdn.tailwindcss.com"></script>
+  <title>Hakkımızda | FinansKolay</title>
+  <meta name="description" content="FinansKolay hakkında bilgi alın. Ücretsiz finans araçları, sade hesaplama deneyimi ve kullanıcı odaklı yaklaşım." />
 
-    <style>
-        html {
-            scroll-behavior: smooth;
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#070E1A',
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#263348',
+              600: '#334155'
+            },
+            emerald: {
+              400: '#34D399',
+              500: '#10B981',
+              600: '#059669'
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif']
+          }
         }
-    </style>
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    .navbar-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid rgba(16,185,129,0.12);
+    }
+
+    .hero-bg {
+      background-color: #0F172A;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 60% -10%, rgba(16,185,129,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(16,185,129,0.08) 0%, transparent 50%);
+    }
+  </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0F172A]/95 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex items-center justify-between h-16">
+  <!-- NAVBAR -->
+  <header class="navbar-blur fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
 
-                <a href="index.html" class="text-2xl font-bold text-white">
-                    Finans<span class="text-[#10B981]">Kolay</span>
-                </a>
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <span class="text-lg font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+            Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+          </span>
+        </a>
 
-                <div class="flex items-center gap-8 text-sm font-medium">
-                    <a href="index.html"
-                       class="text-slate-300 hover:text-[#10B981] transition">
-                        Ana Sayfa
-                    </a>
+        <nav class="flex items-center gap-1">
+          <a href="index.html" class="px-3 sm:px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">
+            Ana Sayfa
+          </a>
+          <a href="hakkimizda.html" class="px-3 sm:px-4 py-2 rounded-lg text-sm font-medium text-emerald-400 bg-emerald-500/10 transition-all">
+            Hakkımızda
+          </a>
+        </nav>
 
-                    <a href="hakkimizda.html"
-                       class="text-[#10B981]">
-                        Hakkımızda
-                    </a>
-                </div>
+      </div>
+    </div>
+  </header>
 
-            </div>
-        </div>
-    </nav>
+  <main class="pt-16">
 
-    <!-- Hero -->
-    <section class="bg-[#0F172A] pt-32 pb-24">
-        <div class="max-w-5xl mx-auto px-6 text-center">
+    <!-- HERO -->
+    <section class="hero-bg border-b border-white/5">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
+        <p class="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4">
+          FinansKolay
+        </p>
 
-            <span class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-500/10 text-[#10B981] text-sm font-semibold mb-6">
-                Finansal bilgiye kolay erişim
-            </span>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+          FinansKolay Hakkında
+        </h1>
 
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-                FinansKolay Hakkında
-            </h1>
-
-            <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-                FinansKolay; finansal hesaplamaları, temel ekonomi bilgilerini ve
-                günlük finans araçlarını herkes için daha erişilebilir hale getirmek amacıyla geliştirilmiş ücretsiz bir platformdur.
-                Öğrencilerden çalışanlara, yatırımcı adaylarından işletme sahiplerine kadar
-                finansal kararlarını daha bilinçli vermek isteyen herkes için tasarlanmıştır.
-            </p>
-
-        </div>
+        <p class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">
+          FinansKolay; kredi, vergi, bütçe, yatırım, emeklilik ve günlük hesaplama ihtiyaçlarını
+          sade bir arayüzle sunan ücretsiz bir finans araçları platformudur.
+          Karmaşık hesaplamaları herkes için anlaşılır hale getirmek amacıyla tasarlanmıştır.
+        </p>
+      </div>
     </section>
 
-    <!-- Hakkımızda -->
-    <section class="py-20">
-        <div class="max-w-6xl mx-auto px-6">
+    <!-- INTRO -->
+    <section class="py-16 sm:py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
 
-                <div>
-                    <h2 class="text-3xl font-bold text-[#0F172A] mb-6">
-                        Finansı Daha Anlaşılır Hale Getiriyoruz
-                    </h2>
-
-                    <p class="text-slate-600 leading-8 mb-4">
-                        Finans dünyası çoğu zaman karmaşık ve teknik görünebilir.
-                        FinansKolay'ın amacı, bu karmaşıklığı azaltarak kullanıcıların
-                        ihtiyaç duyduğu bilgilere hızlı ve kolay şekilde ulaşmasını sağlamaktır.
-                    </p>
-
-                    <p class="text-slate-600 leading-8">
-                        Platformumuz ücretsizdir çünkü finansal bilgiye erişimin bir ayrıcalık değil,
-                        herkes için ulaşılabilir bir kaynak olması gerektiğine inanıyoruz.
-                    </p>
-                </div>
-
-                <div class="bg-white rounded-3xl p-8 shadow-lg border border-slate-200">
-                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center mb-6">
-                        <span class="text-2xl">🎯</span>
-                    </div>
-
-                    <h3 class="text-2xl font-bold text-[#0F172A] mb-4">
-                        Misyonumuz
-                    </h3>
-
-                    <p class="text-slate-600 leading-8">
-                        Finansal bilgiyi herkes için sade, anlaşılır ve erişilebilir hale getirerek
-                        daha bilinçli finansal kararlar alınmasına katkı sağlamak.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Neden FinansKolay -->
-    <section class="py-20 bg-white border-y border-slate-200">
-        <div class="max-w-6xl mx-auto px-6">
-
-            <h2 class="text-3xl font-bold text-center text-[#0F172A] mb-14">
-                Neden FinansKolay?
+          <div class="bg-navy-800 rounded-3xl border border-white/5 p-6 sm:p-8 shadow-2xl">
+            <h2 class="text-2xl sm:text-3xl font-bold text-white mb-5">
+              Neden ücretsiz?
             </h2>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <p class="text-slate-400 leading-relaxed mb-4">
+              Finansal bilgiye erişimin kolay ve ulaşılabilir olması gerektiğine inanıyoruz.
+              Bu nedenle FinansKolay, temel hesaplama araçlarını kayıt gerektirmeden ve ücretsiz olarak sunar.
+            </p>
 
-                <div class="p-7 rounded-3xl bg-slate-50 border border-slate-200">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-[#10B981] flex items-center justify-center font-bold mb-5">
-                        01
-                    </div>
-                    <h3 class="font-bold text-lg mb-3">Kolay Kullanım</h3>
-                    <p class="text-slate-600 text-sm leading-7">
-                        Her seviyeden kullanıcı için sade ve anlaşılır arayüz.
-                    </p>
-                </div>
+            <p class="text-slate-400 leading-relaxed">
+              Platform; bireysel kullanıcılar, öğrenciler, çalışanlar, küçük işletme sahipleri ve finansal
+              kararlarını daha bilinçli vermek isteyen herkes için hazırlanmıştır.
+            </p>
+          </div>
 
-                <div class="p-7 rounded-3xl bg-slate-50 border border-slate-200">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-[#10B981] flex items-center justify-center font-bold mb-5">
-                        02
-                    </div>
-                    <h3 class="font-bold text-lg mb-3">Ücretsiz Erişim</h3>
-                    <p class="text-slate-600 text-sm leading-7">
-                        Finansal araçlara ve bilgilere ücretsiz erişim imkanı.
-                    </p>
-                </div>
+          <div class="bg-navy-800 rounded-3xl border border-emerald-500/15 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
 
-                <div class="p-7 rounded-3xl bg-slate-50 border border-slate-200">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-[#10B981] flex items-center justify-center font-bold mb-5">
-                        03
-                    </div>
-                    <h3 class="font-bold text-lg mb-3">Mobil Uyumlu</h3>
-                    <p class="text-slate-600 text-sm leading-7">
-                        Telefon, tablet ve masaüstünde kusursuz deneyim.
-                    </p>
-                </div>
+            <div class="relative">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 flex items-center justify-center mb-6">
+                <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
 
-                <div class="p-7 rounded-3xl bg-slate-50 border border-slate-200">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-[#10B981] flex items-center justify-center font-bold mb-5">
-                        04
-                    </div>
-                    <h3 class="font-bold text-lg mb-3">Güvenilir İçerik</h3>
-                    <p class="text-slate-600 text-sm leading-7">
-                        Doğru ve anlaşılır bilgilerle kullanıcı odaklı yaklaşım.
-                    </p>
-                </div>
+              <h2 class="text-2xl sm:text-3xl font-bold text-white mb-5">
+                Misyonumuz
+              </h2>
 
+              <p class="text-slate-400 leading-relaxed">
+                Finansal hesaplamaları sade, hızlı ve güvenilir hale getirerek kullanıcıların günlük
+                kararlarını daha bilinçli vermesine yardımcı olmak.
+              </p>
             </div>
+          </div>
 
         </div>
+
+      </div>
     </section>
 
-    <!-- İletişim -->
-    <section class="py-20">
-        <div class="max-w-4xl mx-auto px-6">
+    <!-- WHY -->
+    <section class="py-16 sm:py-20 bg-navy-950 border-y border-white/5">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div class="bg-[#0F172A] rounded-3xl p-10 md:p-14 text-center">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <p class="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-3">
+            Avantajlar
+          </p>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+            Neden FinansKolay?
+          </h2>
+        </div>
 
-                <h2 class="text-3xl font-bold text-white mb-4">
-                    İletişim
-                </h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
 
-                <p class="text-slate-300 mb-8 max-w-2xl mx-auto">
-                    Sorularınız, önerileriniz veya iş birliği talepleriniz için bizimle iletişime geçebilirsiniz.
-                </p>
-
-                <a href="mailto:info@finanskolay.com"
-                   class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#10B981] text-white font-semibold hover:bg-emerald-600 transition">
-                    info@finanskolay.com
-                </a>
-
+          <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 hover:border-emerald-500/30 transition-all">
+            <div class="w-11 h-11 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold mb-5">
+              01
             </div>
+            <h3 class="text-white font-bold mb-3">
+              Kolay Kullanım
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Teknik bilgi gerektirmeyen sade ve anlaşılır hesaplama ekranları.
+            </p>
+          </div>
+
+          <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 hover:border-emerald-500/30 transition-all">
+            <div class="w-11 h-11 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold mb-5">
+              02
+            </div>
+            <h3 class="text-white font-bold mb-3">
+              Ücretsiz Erişim
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Hesaplama araçlarını kayıt olmadan ve ücret ödemeden kullanabilirsiniz.
+            </p>
+          </div>
+
+          <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 hover:border-emerald-500/30 transition-all">
+            <div class="w-11 h-11 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold mb-5">
+              03
+            </div>
+            <h3 class="text-white font-bold mb-3">
+              Mobil Uyumlu
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Telefon, tablet ve masaüstünde temiz ve rahat kullanım deneyimi.
+            </p>
+          </div>
+
+          <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 hover:border-emerald-500/30 transition-all">
+            <div class="w-11 h-11 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold mb-5">
+              04
+            </div>
+            <h3 class="text-white font-bold mb-3">
+              Güven Veren Yapı
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Gereksiz karmaşadan uzak, hızlı ve kullanıcı odaklı bir platform.
+            </p>
+          </div>
 
         </div>
+
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-200 py-8">
-        <div class="max-w-6xl mx-auto px-6 text-center text-slate-500 text-sm">
-            © 2026 FinansKolay. Tüm hakları saklıdır.
+    <!-- CONTACT -->
+    <section class="py-16 sm:py-20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="rounded-3xl bg-navy-800 border border-white/5 p-8 sm:p-10 text-center shadow-2xl">
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">
+            İletişim
+          </h2>
+
+          <p class="text-slate-400 leading-relaxed max-w-2xl mx-auto mb-7">
+            FinansKolay hakkında soru, öneri veya iş birliği talepleriniz için bizimle iletişime geçebilirsiniz.
+          </p>
+
+          <a href="mailto:info@finanskolay.com"
+             class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold transition-all shadow-lg shadow-emerald-500/25">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            info@finanskolay.com
+          </a>
         </div>
-    </footer>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-navy-950 border-t border-white/5 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-xs text-slate-600">
+        © 2026 FinansKolay. Tüm hakları saklıdır.
+      </p>
+    </div>
+  </footer>
 
 </body>
 </html>
