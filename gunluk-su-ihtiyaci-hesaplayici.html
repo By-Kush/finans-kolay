@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X8YD5QMW20"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X8YD5QMW20');
+</script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- AdSense Doğrulama Kodu -->
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1884839489288952"
+       crossorigin="anonymous"></script>
+
+  <!-- Diğer meta etiketleri -->
+
+  <!-- Title -->
+  <title>Günlük Su İhtiyacı Hesaplayıcı | FinansKolay</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Kilo, cinsiyet, aktivite seviyesi, iklim ve özel durumlara göre günlük su ihtiyacınızı litre ve bardak cinsinden ücretsiz hesaplayın." />
+  <meta name="keywords" content="günlük su ihtiyacı hesaplama, su hesaplayıcı, kaç litre su içmeliyim, kilo başına su ihtiyacı, su tüketimi hesaplama" />
+  <meta name="author" content="FinansKolay" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.finanskolay.com/gunluk-su-ihtiyaci-hesaplayici.html" />
+
+  <!-- Open Graph / Facebook, LinkedIn, WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FinansKolay" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:url" content="https://www.finanskolay.com/gunluk-su-ihtiyaci-hesaplayici.html" />
+  <meta property="og:title" content="Günlük Su İhtiyacı Hesaplayıcı | FinansKolay" />
+  <meta property="og:description" content="Günlük su ihtiyacınızı kilo, aktivite, iklim ve özel durumlara göre ücretsiz hesaplayın." />
+  <meta property="og:image" content="https://www.finanskolay.com/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="FinansKolay - Türkiye'nin Ücretsiz Finans Araçları" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Günlük Su İhtiyacı Hesaplayıcı | FinansKolay" />
+  <meta name="twitter:description" content="Günlük su ihtiyacınızı litre ve bardak cinsinden saniyeler içinde öğrenin." />
+  <meta name="twitter:image" content="https://www.finanskolay.com/assets/og-image.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Crect width='24' height='24' rx='5' fill='%230F172A'/%3E%3Cpath d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' stroke='%2310B981' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#070E1A',
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#263348',
+              600: '#334155',
+            },
+            emerald: {
+              400: '#34D399',
+              500: '#10B981',
+              600: '#059669',
+              700: '#047857',
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Inter', 'Roboto', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* Gradient mesh background for hero */
+    .hero-bg {
+      background-color: #0F172A;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 60% -10%, rgba(16,185,129,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(16,185,129,0.08) 0%, transparent 50%);
+    }
+
+    /* Subtle grid overlay */
+    .grid-overlay {
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Navbar blur */
+    .navbar-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid rgba(16,185,129,0.12);
+    }
+
+    /* Card hover lift */
+    .card-lift {
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(16,185,129,0.18);
+    }
+
+    /* Tool card hover */
+    .tool-card:hover .tool-icon {
+      background-color: rgba(16,185,129,0.18);
+      transform: scale(1.06);
+    }
+    .tool-icon {
+      transition: background-color 0.22s ease, transform 0.22s ease;
+    }
+
+    /* Green text gradient */
+    .text-gradient {
+      background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Badge pulse */
+    .badge-pulse::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    /* Mobile menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    /* Tool filter pills */
+    .filter-pill {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .filter-pill.active {
+      background: rgba(16,185,129,0.15);
+      color: #34D399;
+      border-color: rgba(16,185,129,0.4);
+    }
+    .filter-pill.inactive {
+      background: rgba(255,255,255,0.03);
+      color: #94a3b8;
+      border-color: rgba(255,255,255,0.08);
+    }
+    .filter-pill.inactive:hover {
+      background: rgba(255,255,255,0.06);
+      color: #e2e8f0;
+    }
+  </style>
+
+  <style>
+    .form-label {
+      display: block;
+      color: #e2e8f0;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.625rem;
+    }
+    .form-control {
+      width: 100%;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(15,23,42,0.72);
+      color: #f8fafc;
+      padding: 0.8rem 0.95rem;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+    }
+    .form-control:hover { border-color: rgba(255,255,255,0.16); }
+    .form-control:focus {
+      border-color: rgba(16,185,129,0.75);
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.12);
+      background: rgba(15,23,42,0.95);
+    }
+    .form-control option { background: #0F172A; color: #f8fafc; }
+    .choice-input { position: absolute; opacity: 0; pointer-events: none; }
+    .choice-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(15,23,42,0.72);
+      color: #94a3b8;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .choice-label:hover { color: #e2e8f0; border-color: rgba(255,255,255,0.17); }
+    .choice-input:checked + .choice-label {
+      color: #6ee7b7;
+      border-color: rgba(16,185,129,0.55);
+      background: rgba(16,185,129,0.12);
+      box-shadow: inset 0 0 0 1px rgba(16,185,129,0.12);
+    }
+    .result-reveal { animation: resultReveal .42s ease both; }
+    @keyframes resultReveal {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .water-orb {
+      background: radial-gradient(circle at 35% 25%, rgba(110,231,183,.95), rgba(16,185,129,.82) 42%, rgba(5,150,105,.55) 72%, rgba(15,23,42,.1) 100%);
+      box-shadow: 0 20px 60px rgba(16,185,129,.22), inset 0 0 25px rgba(255,255,255,.12);
+    }
+    .metric-card { min-height: 142px; }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { opacity: .55; }
+  </style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased">
+
+  <!-- =================== NAVBAR =================== -->
+  <header class="navbar-blur fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <span class="text-lg font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+            Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+          </span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-1">
+      	    <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
+		    <a href="index.html#araclar" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
+		    <a href="index.html#kategoriler" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
+		    <a href="hakkimizda.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+		    </nav>
+
+
+        <!-- CTA + Mobile burger -->
+        <div class="flex items-center gap-3">
+          <a href="index.html#araclar" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Araçlara Göz At
+          </a>
+          <button id="burger" onclick="toggleMenu()" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path id="burger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden pb-4 border-t border-white/5 mt-1">
+        <nav class="flex flex-col gap-1 pt-3">
+          <a href="index.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
+          <a href="index.html#araclar" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
+          <a href="index.html#kategoriler" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
+          <a href="hakkimizda.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+          <a href="gizlilik-politikasi.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Gizlilik Politikası</a>
+          <a href="kullanim-sartlari.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kullanım Şartları</a>
+		  <a href="kvkk-aydinlatma-metni.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">KVKK Aydınlatma Metni</a>
+          <a href="index.html#araclar" class="mt-2 mx-0 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all text-center">Araçlara Göz At</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="pt-16">
+    <!-- =================== HERO =================== -->
+    <section class="hero-bg grid-overlay relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div class="grid lg:grid-cols-[1.12fr_.88fr] gap-12 items-center">
+          <div>
+            <a href="index.html#araclar" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors mb-7">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Tüm araçlara dön
+            </a>
+
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-500/10 border border-emerald-500/25 rounded-full mb-5">
+              <span class="text-emerald-400 text-xs font-semibold tracking-wide uppercase">Sağlık &amp; Fitness</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white mb-6">
+              Günlük Su İhtiyacı<br>
+              <span class="text-gradient">Hesaplayıcı</span>
+            </h1>
+            <p class="text-lg text-slate-400 leading-relaxed max-w-2xl mb-8">
+              Kilonuz, aktivite seviyeniz, bulunduğunuz ortam ve özel durumlarınıza göre günlük tahmini su ihtiyacınızı litre ve bardak cinsinden öğrenin.
+            </p>
+
+            <div class="flex flex-wrap gap-3 text-xs text-slate-300">
+              <span class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/8">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Ücretsiz ve kayıt gerektirmez
+              </span>
+              <span class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/8">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Sonuçlar anında hesaplanır
+              </span>
+            </div>
+          </div>
+
+          <div class="relative hidden lg:flex justify-center">
+            <div class="water-orb w-72 h-72 rounded-full flex flex-col items-center justify-center text-center border border-emerald-300/20">
+              <span class="text-6xl mb-3" aria-hidden="true">💧</span>
+              <span class="text-sm text-emerald-50/80">Dengeli sıvı tüketimi</span>
+              <strong class="text-2xl text-white mt-1">güne yayılmalı</strong>
+            </div>
+            <div class="absolute -inset-8 bg-emerald-500/5 rounded-full blur-3xl -z-10"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== CALCULATOR =================== -->
+    <section class="py-16 sm:py-20 bg-navy-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[minmax(0,1.02fr)_minmax(360px,.98fr)] gap-7 lg:gap-8 items-start">
+
+          <section class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-5 sm:p-7 lg:p-8" aria-labelledby="calculator-title">
+            <div class="flex items-start gap-4 mb-7">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/15 flex items-center justify-center text-2xl flex-shrink-0" aria-hidden="true">💧</div>
+              <div>
+                <h2 id="calculator-title" class="text-xl sm:text-2xl font-extrabold text-white">Bilgilerinizi Girin</h2>
+                <p class="text-sm text-slate-400 mt-1">Bu araç 18 yaş ve üzerindeki sağlıklı yetişkinler için genel bir tahmin üretir.</p>
+              </div>
+            </div>
+
+            <form id="water-form" novalidate>
+              <div class="space-y-6">
+                <fieldset>
+                  <legend class="form-label">Cinsiyet</legend>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div class="relative">
+                      <input class="choice-input" type="radio" name="gender" id="gender-male" value="male" checked>
+                      <label class="choice-label" for="gender-male">Erkek</label>
+                    </div>
+                    <div class="relative">
+                      <input class="choice-input" type="radio" name="gender" id="gender-female" value="female">
+                      <label class="choice-label" for="gender-female">Kadın</label>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <div class="grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="weight" class="form-label">Kilo (kg)</label>
+                    <div class="relative">
+                      <input id="weight" name="weight" class="form-control pr-12" type="number" min="35" max="250" step="0.1" value="70" inputmode="decimal" required aria-describedby="weight-help">
+                      <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-slate-500 pointer-events-none">kg</span>
+                    </div>
+                    <p id="weight-help" class="text-xs text-slate-500 mt-2">35–250 kg arasında bir değer girin.</p>
+                  </div>
+
+                  <div>
+                    <label for="age" class="form-label">Yaş</label>
+                    <input id="age" name="age" class="form-control" type="number" min="18" max="100" step="1" value="30" inputmode="numeric" required aria-describedby="age-help">
+                    <p id="age-help" class="text-xs text-slate-500 mt-2">Hesaplayıcı yetişkinler içindir.</p>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="activity" class="form-label">Aktivite Seviyesi</label>
+                  <select id="activity" name="activity" class="form-control">
+                    <option value="sedentary">Hareketsiz — düzenli egzersiz yok</option>
+                    <option value="light">Hafif Aktif — haftada 1–3 gün</option>
+                    <option value="moderate">Orta Aktif — haftada 3–5 gün</option>
+                    <option value="very">Çok Aktif — haftada 6–7 gün</option>
+                    <option value="athlete">Sporcu — yoğun/antrenmanlı yaşam</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="climate" class="form-label">İklim / Ortam</label>
+                  <select id="climate" name="climate" class="form-control">
+                    <option value="normal">Normal</option>
+                    <option value="hot">Sıcak / Nemli</option>
+                    <option value="cold">Soğuk</option>
+                  </select>
+                </div>
+
+                <fieldset class="rounded-2xl border border-amber-500/15 bg-amber-500/5 p-4 sm:p-5">
+                  <legend class="px-2 text-sm font-bold text-amber-300">Çay ve Kahve Telafi Suyu</legend>
+                  <p class="text-xs text-slate-400 leading-relaxed mb-5">
+                    Çay için içilen miktar kadar, kahve için içilen miktarın iki katı ek su hesaplanır. Bu telafi suyu temel günlük su ihtiyacından ayrı tutulur.
+                  </p>
+
+                  <div class="grid sm:grid-cols-2 gap-5">
+                    <div class="rounded-xl border border-white/5 bg-navy-900/45 p-4">
+                      <div class="flex items-center gap-2 mb-4">
+                        <span class="text-xl" aria-hidden="true">🍵</span>
+                        <h3 class="text-sm font-bold text-white">Günlük Çay Tüketimi</h3>
+                      </div>
+                      <div class="grid grid-cols-2 gap-3">
+                        <div>
+                          <label for="tea-count" class="form-label">Bardak</label>
+                          <input id="tea-count" name="teaCount" class="form-control" type="number" min="0" max="30" step="1" value="0" inputmode="numeric">
+                        </div>
+                        <div>
+                          <label for="tea-size" class="form-label">Bardak hacmi</label>
+                          <div class="relative">
+                            <input id="tea-size" name="teaSize" class="form-control pr-11" type="number" min="50" max="500" step="10" value="200" inputmode="numeric">
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-slate-500 pointer-events-none">ml</span>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="text-xs text-slate-500 mt-3">Telafi oranı: Çay hacminin 1 katı.</p>
+                    </div>
+
+                    <div class="rounded-xl border border-white/5 bg-navy-900/45 p-4">
+                      <div class="flex items-center gap-2 mb-4">
+                        <span class="text-xl" aria-hidden="true">☕</span>
+                        <h3 class="text-sm font-bold text-white">Günlük Kahve Tüketimi</h3>
+                      </div>
+                      <div class="grid grid-cols-2 gap-3">
+                        <div>
+                          <label for="coffee-count" class="form-label">Fincan</label>
+                          <input id="coffee-count" name="coffeeCount" class="form-control" type="number" min="0" max="20" step="1" value="0" inputmode="numeric">
+                        </div>
+                        <div>
+                          <label for="coffee-size" class="form-label">Fincan hacmi</label>
+                          <div class="relative">
+                            <input id="coffee-size" name="coffeeSize" class="form-control pr-11" type="number" min="30" max="500" step="10" value="100" inputmode="numeric">
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-slate-500 pointer-events-none">ml</span>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="text-xs text-slate-500 mt-3">Telafi oranı: Kahve hacminin 2 katı.</p>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <fieldset id="pregnancy-field" class="hidden">
+                  <legend class="form-label">Hamile / Emziriyor mu?</legend>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="relative">
+                      <input class="choice-input" type="radio" name="pregnancy" id="pregnancy-no" value="none" checked>
+                      <label class="choice-label" for="pregnancy-no">Hayır</label>
+                    </div>
+                    <div class="relative">
+                      <input class="choice-input" type="radio" name="pregnancy" id="pregnancy-yes" value="pregnant">
+                      <label class="choice-label" for="pregnancy-yes">Hamile</label>
+                    </div>
+                    <div class="relative">
+                      <input class="choice-input" type="radio" name="pregnancy" id="breastfeeding" value="lactating">
+                      <label class="choice-label" for="breastfeeding">Emziriyor</label>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <div id="form-error" class="hidden rounded-xl border border-rose-500/25 bg-rose-500/10 px-4 py-3 text-sm text-rose-300" role="alert"></div>
+
+                <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/35 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-emerald-500/20">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                  </svg>
+                  Su İhtiyacımı Hesapla
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <aside id="result-panel" class="lg:sticky lg:top-24" aria-live="polite">
+            <div id="result-placeholder" class="bg-navy-800 rounded-2xl border border-white/5 p-8 min-h-[430px] flex flex-col items-center justify-center text-center">
+              <div class="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-4xl mb-5" aria-hidden="true">🥤</div>
+              <h2 class="text-xl font-bold text-white mb-2">Sonucunuz burada görünecek</h2>
+              <p class="text-sm text-slate-400 leading-relaxed max-w-sm">Formdaki bilgileri doldurup hesaplama butonuna basın. Temel günlük su hedefiniz ile çay ve kahve için gereken ek telafi suyu ayrı kartlarda gösterilir.</p>
+            </div>
+
+            <div id="results" class="hidden result-reveal space-y-5">
+              <div class="bg-gradient-to-br from-emerald-500/20 to-navy-800 rounded-2xl border border-emerald-500/25 p-6 sm:p-7 overflow-hidden relative">
+                <div class="absolute -right-8 -top-10 w-36 h-36 bg-emerald-400/10 rounded-full blur-2xl"></div>
+                <p class="text-xs font-semibold text-emerald-300 tracking-widest uppercase mb-2">Tahmini Günlük Hedef</p>
+                <div class="flex items-end gap-3">
+                  <strong id="total-liters" class="text-5xl sm:text-6xl font-extrabold text-white tracking-tight">0,0</strong>
+                  <span class="text-xl font-bold text-emerald-300 pb-2">litre</span>
+                </div>
+                <p id="total-summary" class="text-sm text-slate-300 mt-4 leading-relaxed"></p>
+              </div>
+
+              <div class="grid sm:grid-cols-3 lg:grid-cols-3 gap-4">
+                <div class="metric-card card-lift bg-navy-800 rounded-2xl border border-white/5 p-5">
+                  <div class="text-2xl mb-3" aria-hidden="true">🥛</div>
+                  <p class="text-xs text-slate-500 mb-1">250 ml bardak</p>
+                  <strong id="glass-count" class="text-2xl font-extrabold text-white">0</strong>
+                  <p class="text-xs text-slate-400 mt-1">bardak / gün</p>
+                </div>
+                <div class="metric-card card-lift bg-navy-800 rounded-2xl border border-white/5 p-5">
+                  <div class="text-2xl mb-3" aria-hidden="true">⏱️</div>
+                  <p class="text-xs text-slate-500 mb-1">Saatlik öneri</p>
+                  <strong id="hourly-amount" class="text-2xl font-extrabold text-white">0</strong>
+                  <p class="text-xs text-slate-400 mt-1">ml / saat</p>
+                </div>
+                <div class="metric-card card-lift bg-navy-800 rounded-2xl border border-white/5 p-5">
+                  <div class="text-2xl mb-3" aria-hidden="true">🏃</div>
+                  <p class="text-xs text-slate-500 mb-1">Aktivite eki</p>
+                  <strong id="activity-extra" class="text-2xl font-extrabold text-white">0</strong>
+                  <p class="text-xs text-slate-400 mt-1">ml / gün</p>
+                </div>
+              </div>
+
+              <div id="caffeine-result" class="bg-gradient-to-br from-amber-500/12 to-navy-800 rounded-2xl border border-amber-500/20 p-6">
+                <div class="flex items-start justify-between gap-4 mb-5">
+                  <div>
+                    <p class="text-xs font-semibold text-amber-300 tracking-widest uppercase mb-2">Temel Hedeften Ayrı</p>
+                    <h3 class="font-bold text-white">Çay ve Kahve Telafi Suyu</h3>
+                  </div>
+                  <div class="w-11 h-11 rounded-xl bg-amber-500/12 flex items-center justify-center text-xl flex-shrink-0" aria-hidden="true">☕</div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+                  <div class="rounded-xl border border-white/5 bg-navy-900/45 p-4">
+                    <p class="text-xs text-slate-500 mb-1">Çay için ek su</p>
+                    <strong id="tea-extra-water" class="text-xl font-extrabold text-white">0 ml</strong>
+                    <p id="tea-extra-detail" class="text-xs text-slate-400 mt-1">Çay tüketilmedi</p>
+                  </div>
+                  <div class="rounded-xl border border-white/5 bg-navy-900/45 p-4">
+                    <p class="text-xs text-slate-500 mb-1">Kahve için ek su</p>
+                    <strong id="coffee-extra-water" class="text-xl font-extrabold text-white">0 ml</strong>
+                    <p id="coffee-extra-detail" class="text-xs text-slate-400 mt-1">Kahve tüketilmedi</p>
+                  </div>
+                  <div class="rounded-xl border border-amber-500/15 bg-amber-500/8 p-4">
+                    <p class="text-xs text-amber-200/70 mb-1">Toplam telafi suyu</p>
+                    <strong id="caffeine-extra-liters" class="text-xl font-extrabold text-amber-300">0,00 litre</strong>
+                    <p id="caffeine-extra-glasses" class="text-xs text-slate-400 mt-1">0 bardak su</p>
+                  </div>
+                </div>
+
+                <div class="rounded-xl border border-white/5 bg-navy-900/45 p-4">
+                  <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+                    <div>
+                      <p class="text-xs text-slate-500">Temel hedef + telafi suyu</p>
+                      <p id="grand-total-formula" class="text-sm text-slate-300 mt-1">0 litre + 0 litre</p>
+                    </div>
+                    <strong id="grand-total-liters" class="text-3xl font-extrabold text-emerald-400">0,00 litre</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-navy-800 rounded-2xl border border-white/5 p-6">
+                <h3 class="font-bold text-white mb-4">Temel Su İhtiyacı Dağılımı</h3>
+                <div class="space-y-3 text-sm">
+                  <div class="flex justify-between gap-4 text-slate-400"><span>Temel ihtiyaç</span><strong id="base-amount" class="text-slate-200">0 ml</strong></div>
+                  <div class="flex justify-between gap-4 text-slate-400"><span>Aktivite ilavesi</span><strong id="activity-breakdown" class="text-slate-200">0 ml</strong></div>
+                  <div class="flex justify-between gap-4 text-slate-400"><span>İklim / ortam ilavesi</span><strong id="climate-breakdown" class="text-slate-200">0 ml</strong></div>
+                  <div class="flex justify-between gap-4 text-slate-400"><span>Özel durum ilavesi</span><strong id="special-breakdown" class="text-slate-200">0 ml</strong></div>
+                  <div class="border-t border-white/6 pt-3 flex justify-between gap-4"><span class="font-semibold text-white">Toplam</span><strong id="total-breakdown" class="text-emerald-400">0 ml</strong></div>
+                </div>
+              </div>
+
+              <div id="personal-note" class="rounded-2xl border border-sky-500/20 bg-sky-500/8 p-5 text-sm text-slate-300 leading-relaxed"></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== INFORMATION =================== -->
+    <section class="py-16 sm:py-20 bg-navy-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-10">
+          <p class="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-3">Bilgilendirme</p>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">Su tüketimini gün içine yayın</h2>
+          <p class="text-slate-400 mt-4 leading-relaxed">Tek seferde çok miktarda su içmek yerine, hedefinizi gün boyunca küçük porsiyonlara bölmek genellikle daha pratiktir.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5">
+          <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-emerald-500/12 flex items-center justify-center text-xl mb-5" aria-hidden="true">🌅</div>
+            <h3 class="font-bold text-white mb-2">Güne dengeli başlayın</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Sabah saatlerinde su tüketmeye başlamak, günlük hedefin tamamını akşam saatlerine bırakmanızı önler.</p>
+          </article>
+          <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-sky-500/12 flex items-center justify-center text-xl mb-5" aria-hidden="true">🏃</div>
+            <h3 class="font-bold text-white mb-2">Egzersizde kaybı izleyin</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Yoğun terleme, uzun antrenman veya sıcak ortamda ihtiyaç kişiden kişiye değişir. Ter kaybı belirginse yalnızca su değil elektrolit dengesi de önem kazanabilir.</p>
+          </article>
+          <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-amber-500/12 flex items-center justify-center text-xl mb-5" aria-hidden="true">⚕️</div>
+            <h3 class="font-bold text-white mb-2">Özel durumlarda danışın</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Böbrek, kalp veya karaciğer hastalığı olanlar; sıvı kısıtlaması uygulananlar ve düzenli ilaç kullananlar hedefini hekim önerisine göre belirlemelidir.</p>
+          </article>
+        </div>
+
+        <div class="mt-8 rounded-2xl border border-white/5 bg-navy-800/60 p-5 sm:p-6">
+          <p class="text-xs text-slate-500 leading-relaxed">
+            <strong class="text-slate-300">Hesaplama yöntemi:</strong> Temel tahmin erkeklerde kilo başına 35 ml, kadınlarda kilo başına 31 ml yaklaşımını kullanır; genel yetişkin referanslarına uyum için alt sınır uygulanır. Aktivite, iklim ve hamilelik/emzirme ilaveleri temel hedefe eklenir. Çay için tüketilen hacim kadar, kahve için tüketilen hacmin iki katı telafi suyu ise temel hedeften bağımsız hesaplanır. Bu telafi oranı pratik takip kuralıdır; tıbbi zorunluluk veya kişisel tedavi önerisi değildir.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =================== FOOTER =================== -->
+  <footer class="bg-navy-950 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
+
+        <!-- Brand column -->
+        <div class="lg:col-span-2">
+          <a href="index.html" class="flex items-center gap-2.5 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <span class="font-bold text-white text-lg">Finans<span class="text-emerald-400">Kolay</span></span>
+          </a>
+          <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+            Türkiye'nin ücretsiz finans ve hayat araçları platformu. Kredi, vergi, emeklilik ve
+            daha fazlasını saniyeler içinde hesaplayın — kayıt gerekmez, tamamen ücretsiz.
+          </p>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">Hızlı Bağlantılar</h4>
+          <nav class="flex flex-col gap-3">
+		    <a href="index.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Ana Sayfa</a>
+		    <a href="index.html#araclar" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Araçlar</a>
+		    <a href="index.html#kategoriler" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kategoriler</a>
+		    <a href="hakkimizda.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Hakkımızda</a>
+		    <a href="gizlilik-politikasi.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Gizlilik Politikası</a>
+			<a href="kullanim-sartlari.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kullanım Şartları</a>
+            <a href="kvkk-aydinlatma-metni.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">KVKK Aydınlatma Metni</a>
+</nav>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">İletişim</h4>
+          <div class="flex flex-col gap-3 text-sm text-slate-400">
+            <p class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              info@finans-kolay.com
+            </p>
+            <p class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              İstanbul, Türkiye
+            </p>
+            <div class="flex items-center gap-3 mt-1">
+              <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="18" height="18" rx="5" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="3.5" stroke-width="2"/>
+                  <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="X / Twitter" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.26 10.99h-6.466l-5.07-6.62-5.793 6.62H1.943l7.73-8.83-7.93-10.42h6.622l4.58 6.05 5.792-6.05Z"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-white/5 pt-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-sm text-slate-600 order-2 sm:order-1">
+            © 2026 FinansKolay. Tüm hakları saklıdır.
+          </p>
+          <nav class="flex items-center gap-6 text-sm text-slate-500 order-1 sm:order-2">
+		    <a href="hakkimizda.html" class="hover:text-slate-300 transition-colors">Hakkımızda</a>
+		    <a href="gizlilik-politikasi.html" class="hover:text-slate-300 transition-colors">Gizlilik Politikası</a>
+		    <a href="kullanim-sartlari.html" class="hover:text-slate-300 transition-colors">Kullanım Şartları</a>
+		    <a href="kvkk-aydinlatma-metni.html" class="hover:text-slate-300 transition-colors">KVKK Aydınlatma Metni</a>
+</nav>
+        </div>
+        <p class="text-xs text-slate-600 mt-6 text-center leading-relaxed">
+          FinansKolay'daki hesaplamalar yalnızca bilgilendirme amaçlıdır. Finansal kararlarınız için uzman görüşü alınız.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('open');
+    }
+
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.remove('open');
+      });
+    });
+
+    const siteHeader = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      siteHeader.style.boxShadow = window.scrollY > 10 ? '0 4px 32px rgba(0,0,0,0.4)' : 'none';
+    });
+
+    const form = document.getElementById('water-form');
+    const femaleRadio = document.getElementById('gender-female');
+    const pregnancyField = document.getElementById('pregnancy-field');
+    const formError = document.getElementById('form-error');
+    const placeholder = document.getElementById('result-placeholder');
+    const results = document.getElementById('results');
+
+    const activityData = {
+      sedentary: { extra: 0, label: 'hareketsiz' },
+      light: { extra: 350, label: 'hafif aktif' },
+      moderate: { extra: 600, label: 'orta aktif' },
+      very: { extra: 900, label: 'çok aktif' },
+      athlete: { extra: 1200, label: 'sporcu' }
+    };
+
+    const climateData = {
+      normal: { extra: 0, label: 'normal ortam' },
+      hot: { extra: 500, label: 'sıcak veya nemli ortam' },
+      cold: { extra: 250, label: 'soğuk ortam' }
+    };
+
+    const specialData = {
+      none: { extra: 0, label: '' },
+      pregnant: { extra: 300, label: 'hamilelik' },
+      lactating: { extra: 700, label: 'emzirme' }
+    };
+
+    function updatePregnancyVisibility() {
+      const isFemale = femaleRadio.checked;
+      pregnancyField.classList.toggle('hidden', !isFemale);
+      if (!isFemale) document.getElementById('pregnancy-no').checked = true;
+    }
+
+    document.querySelectorAll('input[name="gender"]').forEach(input => {
+      input.addEventListener('change', updatePregnancyVisibility);
+    });
+
+    function trNumber(value, digits = 0) {
+      return new Intl.NumberFormat('tr-TR', {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      }).format(value);
+    }
+
+    function setText(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+
+      const gender = form.elements.gender.value;
+      const weight = Number(form.elements.weight.value);
+      const age = Number(form.elements.age.value);
+      const activity = activityData[form.elements.activity.value];
+      const climate = climateData[form.elements.climate.value];
+      const specialKey = gender === 'female' ? form.elements.pregnancy.value : 'none';
+      const special = specialData[specialKey];
+      const teaCount = Number(form.elements.teaCount.value);
+      const teaSize = Number(form.elements.teaSize.value);
+      const coffeeCount = Number(form.elements.coffeeCount.value);
+      const coffeeSize = Number(form.elements.coffeeSize.value);
+
+      const errors = [];
+      if (!Number.isFinite(weight) || weight < 35 || weight > 250) errors.push('Kilo 35 ile 250 kg arasında olmalıdır.');
+      if (!Number.isInteger(age) || age < 18 || age > 100) errors.push('Yaş 18 ile 100 arasında tam sayı olmalıdır.');
+      if (!Number.isInteger(teaCount) || teaCount < 0 || teaCount > 30) errors.push('Çay miktarı 0 ile 30 bardak arasında tam sayı olmalıdır.');
+      if (!Number.isFinite(teaSize) || teaSize < 50 || teaSize > 500) errors.push('Çay bardağı hacmi 50 ile 500 ml arasında olmalıdır.');
+      if (!Number.isInteger(coffeeCount) || coffeeCount < 0 || coffeeCount > 20) errors.push('Kahve miktarı 0 ile 20 fincan arasında tam sayı olmalıdır.');
+      if (!Number.isFinite(coffeeSize) || coffeeSize < 30 || coffeeSize > 500) errors.push('Kahve fincanı hacmi 30 ile 500 ml arasında olmalıdır.');
+
+      if (errors.length) {
+        formError.textContent = errors.join(' ');
+        formError.classList.remove('hidden');
+        return;
+      }
+      formError.classList.add('hidden');
+
+      // General adult estimate. Effective weight is capped because hydration need does not rise linearly at very high body weights.
+      const effectiveWeight = Math.min(weight, 120);
+      const mlPerKg = gender === 'male' ? 35 : 31;
+      const referenceFloor = gender === 'male' ? 2500 : 2000;
+      const base = Math.max(effectiveWeight * mlPerKg, referenceFloor);
+      const total = Math.round((base + activity.extra + climate.extra + special.extra) / 50) * 50;
+      const liters = total / 1000;
+      const glasses = Math.ceil(total / 250);
+      const hourly = Math.round((total / 14) / 10) * 10;
+
+      // Çay telafisi tüketilen hacmin 1 katı, kahve telafisi tüketilen hacmin 2 katıdır.
+      // Bu değerler temel günlük su ihtiyacına dahil edilmez; ayrı ek hedef olarak gösterilir.
+      const teaExtra = Math.round(teaCount * teaSize);
+      const coffeeExtra = Math.round(coffeeCount * coffeeSize * 2);
+      const caffeineExtra = teaExtra + coffeeExtra;
+      const caffeineLiters = caffeineExtra / 1000;
+      const caffeineGlasses = caffeineExtra === 0 ? 0 : Math.ceil(caffeineExtra / 250);
+      const grandTotal = total + caffeineExtra;
+      const grandTotalLiters = grandTotal / 1000;
+
+      setText('total-liters', trNumber(liters, 2));
+      setText('glass-count', trNumber(glasses));
+      setText('hourly-amount', trNumber(hourly));
+      setText('activity-extra', trNumber(activity.extra));
+      setText('base-amount', trNumber(Math.round(base / 50) * 50) + ' ml');
+      setText('activity-breakdown', '+' + trNumber(activity.extra) + ' ml');
+      setText('climate-breakdown', '+' + trNumber(climate.extra) + ' ml');
+      setText('special-breakdown', '+' + trNumber(special.extra) + ' ml');
+      setText('total-breakdown', trNumber(total) + ' ml');
+      setText('tea-extra-water', trNumber(teaExtra) + ' ml');
+      setText('coffee-extra-water', trNumber(coffeeExtra) + ' ml');
+      setText('tea-extra-detail', teaCount > 0
+        ? `${trNumber(teaCount)} bardak × ${trNumber(teaSize)} ml × 1`
+        : 'Çay tüketilmedi');
+      setText('coffee-extra-detail', coffeeCount > 0
+        ? `${trNumber(coffeeCount)} fincan × ${trNumber(coffeeSize)} ml × 2`
+        : 'Kahve tüketilmedi');
+      setText('caffeine-extra-liters', trNumber(caffeineLiters, 2) + ' litre');
+      setText('caffeine-extra-glasses', caffeineExtra > 0
+        ? `Yaklaşık ${trNumber(caffeineGlasses)} adet 250 ml su bardağı`
+        : 'Ek telafi suyu gerekmiyor');
+      setText('grand-total-formula', `${trNumber(liters, 2)} litre temel hedef + ${trNumber(caffeineLiters, 2)} litre telafi`);
+      setText('grand-total-liters', trNumber(grandTotalLiters, 2) + ' litre');
+
+      const summaryParts = [
+        `${trNumber(glasses)} adet 250 ml'lik bardağa`,
+        `yaklaşık saatte ${trNumber(hourly)} ml tüketime karşılık gelir`
+      ];
+      setText('total-summary', `Bu hedef ${summaryParts.join(' ve ')}.`);
+
+      const notes = [];
+      notes.push(`Seçtiğiniz “${activity.label}” düzeyi için günlük ${trNumber(activity.extra)} ml aktivite ilavesi kullanıldı.`);
+      if (climate.extra > 0) notes.push(`“${climate.label}” seçimi hedefe ${trNumber(climate.extra)} ml ekledi.`);
+      if (special.extra > 0) notes.push(`${special.label.charAt(0).toUpperCase() + special.label.slice(1)} için ${trNumber(special.extra)} ml ilave edildi.`);
+      if (teaExtra > 0) notes.push(`${trNumber(teaCount)} bardak çay için temel hedeften ayrı ${trNumber(teaExtra)} ml telafi suyu hesaplandı.`);
+      if (coffeeExtra > 0) notes.push(`${trNumber(coffeeCount)} fincan kahve için temel hedeften ayrı ${trNumber(coffeeExtra)} ml telafi suyu hesaplandı.`);
+      if (age >= 65) notes.push('65 yaş ve üzerinde susama hissi azalabileceği için sıvıyı düzenli aralıklarla tüketmek önemlidir.');
+      if (weight > 120) notes.push('Kilonuz 120 kg üzerinde olduğu için aşırı yüksek sonuçları önlemek amacıyla temel hesaplamada 120 kg üst sınırı kullanıldı.');
+      if (total >= 5000) notes.push('Hesaplanan hedef yüksektir. Bu miktarı kısa sürede tüketmeyin; yoğun egzersiz, terleme veya tıbbi durumlar için kişisel uzman değerlendirmesi alın.');
+      setText('personal-note', notes.join(' '));
+
+      placeholder.classList.add('hidden');
+      results.classList.remove('hidden');
+      results.classList.remove('result-reveal');
+      void results.offsetWidth;
+      results.classList.add('result-reveal');
+
+      if (window.innerWidth < 1024) {
+        document.getElementById('result-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    updatePregnancyVisibility();
+  </script>
+</body>
+</html>

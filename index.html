@@ -276,7 +276,7 @@
         <!-- Stats row -->
         <div class="mt-16 grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto">
           <div class="text-center">
-            <p class="text-2xl sm:text-3xl font-extrabold text-white">18</p>
+            <p class="text-2xl sm:text-3xl font-extrabold text-white">24</p>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">Ücretsiz Araç</p>
           </div>
           <div class="text-center border-x border-white/8">
@@ -284,7 +284,7 @@
             <p class="text-xs sm:text-sm text-slate-400 mt-1">Ücretsiz</p>
           </div>
           <div class="text-center">
-            <p class="text-2xl sm:text-3xl font-extrabold text-white">3</p>
+            <p class="text-2xl sm:text-3xl font-extrabold text-white">4</p>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">Kategori</p>
           </div>
         </div>
@@ -306,12 +306,12 @@
         <p class="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-3">Kategoriler</p>
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">İhtiyacına Göre Keşfet</h2>
-          <p class="text-slate-400 max-w-sm text-sm leading-relaxed">Finans, sağlık veya eğitim — her alanda işini kolaylaştıracak araçlar seni bekliyor.</p>
+          <p class="text-slate-400 max-w-sm text-sm leading-relaxed">Finans, sağlık, eğitim veya günlük yaşam — her alanda işini kolaylaştıracak araçlar seni bekliyor.</p>
         </div>
       </div>
 
       <!-- Category grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
 
         <!-- Finans -->
         <div class="card-lift group bg-navy-800 rounded-2xl p-6 border border-white/5 cursor-pointer" onclick="filterByCategory('finans')">
@@ -333,8 +333,8 @@
             </svg>
           </div>
           <h3 class="text-base font-bold text-white mb-2">Sağlık & Fitness</h3>
-          <p class="text-sm text-slate-400 leading-relaxed mb-4">BMI, kalori ihtiyacı ve vücut yağ oranı hesaplama araçları.</p>
-          <span class="text-xs font-semibold text-rose-400 bg-rose-400/10 px-3 py-1 rounded-full">2 araç</span>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">BMI, su ihtiyacı, uyku, ideal kilo ve gebelik takibi araçları.</p>
+          <span class="text-xs font-semibold text-rose-400 bg-rose-400/10 px-3 py-1 rounded-full">6 araç</span>
         </div>
 
         <!-- Eğitim -->
@@ -345,8 +345,20 @@
             </svg>
           </div>
           <h3 class="text-base font-bold text-white mb-2">Eğitim & Kariyer</h3>
-          <p class="text-sm text-slate-400 leading-relaxed mb-4">Not ortalaması hesaplama ve öğrenci araçları.</p>
-          <span class="text-xs font-semibold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full">1 araç</span>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">Not ortalaması, not dönüşümü ve öğrenci araçları.</p>
+          <span class="text-xs font-semibold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full">2 araç</span>
+        </div>
+
+        <!-- Hayat -->
+        <div class="card-lift group bg-navy-800 rounded-2xl p-6 border border-white/5 cursor-pointer" onclick="filterByCategory('hayat')">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/15 flex items-center justify-center mb-5 group-hover:bg-cyan-500/25 transition-colors">
+            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2">Hayat & Verimlilik</h3>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">Günlük zamanı planlama, denge kurma ve verimlilik analizi araçları.</p>
+          <span class="text-xs font-semibold text-cyan-400 bg-cyan-400/10 px-3 py-1 rounded-full">1 araç</span>
         </div>
 
       </div>
@@ -362,16 +374,17 @@
         <p class="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-3">Popüler Araçlar</p>
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">En Çok Kullanılanlar</h2>
-          <p class="text-slate-400 max-w-sm text-sm leading-relaxed">18 ücretsiz aracımızdan birini seçin ve hemen hesaplamaya başlayın.</p>
+          <p class="text-slate-400 max-w-sm text-sm leading-relaxed">24 ücretsiz aracımızdan birini seçin ve hemen hesaplamaya başlayın.</p>
         </div>
       </div>
 
       <!-- Category filter pills -->
       <div class="flex flex-wrap gap-2 mb-10">
-        <span class="filter-pill active text-xs font-semibold px-4 py-2 rounded-full border" data-filter="all">Tümü <span class="opacity-60">(18)</span></span>
+        <span class="filter-pill active text-xs font-semibold px-4 py-2 rounded-full border" data-filter="all">Tümü <span class="opacity-60">(24)</span></span>
         <span class="filter-pill inactive text-xs font-semibold px-4 py-2 rounded-full border" data-filter="finans">💰 Finans <span class="opacity-60">(15)</span></span>
-        <span class="filter-pill inactive text-xs font-semibold px-4 py-2 rounded-full border" data-filter="saglik">🏋️ Sağlık <span class="opacity-60">(2)</span></span>
-        <span class="filter-pill inactive text-xs font-semibold px-4 py-2 rounded-full border" data-filter="egitim">🎓 Eğitim <span class="opacity-60">(1)</span></span>
+        <span class="filter-pill inactive text-xs font-semibold px-4 py-2 rounded-full border" data-filter="saglik">🏋️ Sağlık <span class="opacity-60">(6)</span></span>
+        <span class="filter-pill inactive text-xs font-semibold px-4 py-2 rounded-full border" data-filter="egitim">🎓 Eğitim <span class="opacity-60">(2)</span></span>
+        <span class="filter-pill inactive text-xs font-semibold px-4 py-2 rounded-full border" data-filter="hayat">⏱️ Hayat <span class="opacity-60">(1)</span></span>
       </div>
 
       <!-- No-results message (hidden by default) -->
@@ -863,6 +876,168 @@
           </div>
         </a>
 
+
+        <!-- 19. Günlük Su İhtiyacı -->
+        <a href="gunluk-su-ihtiyaci-hesaplayici.html" data-category="saglik"
+          class="tool-card card-lift bg-navy-800 rounded-2xl p-6 border border-white/5 cursor-pointer group block">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="tool-icon w-12 h-12 rounded-xl bg-sky-500/12 flex items-center justify-center flex-shrink-0 text-2xl">
+              💧
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-3">
+                <h3 class="font-bold text-white text-sm">Günlük Su İhtiyacı</h3>
+                <span class="text-xs text-rose-400 bg-rose-400/10 px-2 py-0.5 rounded-full font-medium flex-shrink-0">Sağlık</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">Kişisel sıvı hedefinizi hesaplayın</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">Kilo, yaş, aktivite ve ortam koşullarına göre günlük su ihtiyacınızı litre ve bardak olarak öğrenin.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500">İlk kullananlardan ol</span>
+            <span class="text-xs font-semibold text-emerald-400 group-hover:text-emerald-300 transition-colors flex items-center gap-1">
+              Hesapla
+              <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- 20. Uyku İhtiyacı + Uyanma Saati -->
+        <a href="uyku-ihtiyaci-uyanma-saati.html" data-category="saglik"
+          class="tool-card card-lift bg-navy-800 rounded-2xl p-6 border border-white/5 cursor-pointer group block">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="tool-icon w-12 h-12 rounded-xl bg-indigo-500/12 flex items-center justify-center flex-shrink-0 text-2xl">
+              🌙
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-3">
+                <h3 class="font-bold text-white text-sm">Uyku İhtiyacı + Uyanma Saati</h3>
+                <span class="text-xs text-rose-400 bg-rose-400/10 px-2 py-0.5 rounded-full font-medium flex-shrink-0">Sağlık</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">Uyku döngünüze uygun saatler</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">Yaşınıza ve hedef saatinize göre önerilen uyku süresini, yatma ve uyanma seçeneklerini planlayın.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500">İlk kullananlardan ol</span>
+            <span class="text-xs font-semibold text-emerald-400 group-hover:text-emerald-300 transition-colors flex items-center gap-1">
+              Hesapla
+              <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- 21. İdeal Kilo + Vücut Tipi -->
+        <a href="ideal-kilo-vucut-tipi.html" data-category="saglik"
+          class="tool-card card-lift bg-navy-800 rounded-2xl p-6 border border-white/5 cursor-pointer group block">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="tool-icon w-12 h-12 rounded-xl bg-emerald-500/12 flex items-center justify-center flex-shrink-0 text-2xl">
+              ⚖️
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-3">
+                <h3 class="font-bold text-white text-sm">İdeal Kilo + Vücut Tipi</h3>
+                <span class="text-xs text-rose-400 bg-rose-400/10 px-2 py-0.5 rounded-full font-medium flex-shrink-0">Sağlık</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">Sağlıklı kilo aralığınızı görün</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">BMI ve yaygın ideal kilo formülleriyle sağlıklı kilo aralığınızı ve hedef kilo farkınızı hesaplayın.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500">İlk kullananlardan ol</span>
+            <span class="text-xs font-semibold text-emerald-400 group-hover:text-emerald-300 transition-colors flex items-center gap-1">
+              Hesapla
+              <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- 22. Hamilelik Haftası Hesaplayıcı -->
+        <a href="hamilelik-haftasi-hesaplayici.html" data-category="saglik"
+          class="tool-card card-lift bg-navy-800 rounded-2xl p-6 border border-white/5 cursor-pointer group block">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="tool-icon w-12 h-12 rounded-xl bg-pink-500/12 flex items-center justify-center flex-shrink-0 text-2xl">
+              🤰
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-3">
+                <h3 class="font-bold text-white text-sm">Hamilelik Haftası Hesaplayıcı</h3>
+                <span class="text-xs text-rose-400 bg-rose-400/10 px-2 py-0.5 rounded-full font-medium flex-shrink-0">Sağlık</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">Hafta, trimester ve doğum tarihi</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">Son adet veya tahmini doğum tarihine göre gebelik haftasını, trimesteri ve önemli dönüm noktalarını görün.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500">İlk kullananlardan ol</span>
+            <span class="text-xs font-semibold text-emerald-400 group-hover:text-emerald-300 transition-colors flex items-center gap-1">
+              Hesapla
+              <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- 23. Üniversite Not Dönüştürücü -->
+        <a href="universite-not-donusturucu.html" data-category="egitim"
+          class="tool-card card-lift bg-navy-800 rounded-2xl p-6 border border-white/5 cursor-pointer group block">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="tool-icon w-12 h-12 rounded-xl bg-amber-500/12 flex items-center justify-center flex-shrink-0 text-2xl">
+              🔄
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-3">
+                <h3 class="font-bold text-white text-sm">Üniversite Not Dönüştürücü</h3>
+                <span class="text-xs text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-full font-medium flex-shrink-0">Eğitim</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">100’lük, 4’lük ve harf notu</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">Notunuzu 100’lük, 4’lük ve AA–FF sistemleri arasında dönüştürün; derslerin ağırlıklı ortalamasını hesaplayın.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500">İlk kullananlardan ol</span>
+            <span class="text-xs font-semibold text-emerald-400 group-hover:text-emerald-300 transition-colors flex items-center gap-1">
+              Hesapla
+              <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- 24. Günlük Zaman Dağılımı -->
+        <a href="gunluk-zaman-dagilimi.html" data-category="hayat"
+          class="tool-card card-lift bg-navy-800 rounded-2xl p-6 border border-white/5 cursor-pointer group block">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="tool-icon w-12 h-12 rounded-xl bg-cyan-500/12 flex items-center justify-center flex-shrink-0 text-2xl">
+              ⏱️
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-3">
+                <h3 class="font-bold text-white text-sm">Günlük Zaman Dağılımı</h3>
+                <span class="text-xs text-cyan-400 bg-cyan-400/10 px-2 py-0.5 rounded-full font-medium flex-shrink-0">Hayat</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">24 saatinizi analiz edin</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">Uyku, iş, sosyal yaşam, spor ve ekran süresinin günlük dağılımını analiz ederek zaman dengenizi görün.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500">İlk kullananlardan ol</span>
+            <span class="text-xs font-semibold text-emerald-400 group-hover:text-emerald-300 transition-colors flex items-center gap-1">
+              Hesapla
+              <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </span>
+          </div>
+        </a>
       </div><!-- /grid -->
     </div>
   </section>

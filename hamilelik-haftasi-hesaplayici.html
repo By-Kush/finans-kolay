@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X8YD5QMW20"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-X8YD5QMW20');
+</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- AdSense Doğrulama Kodu -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1884839489288952"
+     crossorigin="anonymous"></script>
+
+<title>Hamilelik Haftası Hesaplayıcı | FinansKolay</title>
+<meta name="description" content="Son adet tarihi veya tahmini doğum tarihine göre hamilelik haftanızı, kalan gün sayısını, trimester bilgisini ve bebeğinizin yaklaşık gelişimini hesaplayın." />
+<meta name="keywords" content="hamilelik haftası hesaplama, gebelik haftası hesaplama, tahmini doğum tarihi, Naegele kuralı, trimester hesaplama, gebelik takvimi" />
+<meta name="author" content="FinansKolay" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.finanskolay.com/hamilelik-haftasi-hesaplayici.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="FinansKolay" />
+<meta property="og:locale" content="tr_TR" />
+<meta property="og:url" content="https://www.finanskolay.com/hamilelik-haftasi-hesaplayici.html" />
+<meta property="og:title" content="Hamilelik Haftası Hesaplayıcı | FinansKolay" />
+<meta property="og:description" content="Gebelik haftanızı, tahmini doğum tarihinizi, trimesterinizi ve haftaya göre yaklaşık gelişim bilgilerini ücretsiz hesaplayın." />
+<meta property="og:image" content="https://www.finanskolay.com/assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="FinansKolay Hamilelik Haftası Hesaplayıcı" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Hamilelik Haftası Hesaplayıcı | FinansKolay" />
+<meta name="twitter:description" content="Son adet tarihi veya doğum tarihine göre gebelik haftanızı ve önemli tarihleri hesaplayın." />
+<meta name="twitter:image" content="https://www.finanskolay.com/assets/og-image.png" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Crect width='24' height='24' rx='5' fill='%230F172A'/%3E%3Cpath d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' stroke='%2310B981' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: {
+            950: '#070E1A',
+            900: '#0F172A',
+            800: '#1E293B',
+            700: '#263348',
+            600: '#334155',
+          },
+          emerald: {
+            400: '#34D399',
+            500: '#10B981',
+            600: '#059669',
+            700: '#047857',
+          }
+        },
+        fontFamily: {
+          sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Inter', 'Roboto', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  .hero-bg {
+    background-color: #0F172A;
+    background-image:
+      radial-gradient(ellipse 70% 60% at 70% -5%, rgba(244,114,182,0.11) 0%, transparent 58%),
+      radial-gradient(ellipse 60% 55% at 8% 85%, rgba(16,185,129,0.12) 0%, transparent 54%);
+  }
+  .grid-overlay {
+    background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .navbar-blur {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background-color: rgba(15, 23, 42, 0.9);
+    border-bottom: 1px solid rgba(16,185,129,0.12);
+  }
+  .card-lift { transition: transform 0.22s ease, box-shadow 0.22s ease; }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(16,185,129,0.18);
+  }
+  .text-gradient {
+    background: linear-gradient(90deg, #10B981 0%, #6EE7B7 52%, #F9A8D4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  #mobile-menu { display: none; }
+  #mobile-menu.open { display: block; }
+  .input-field {
+    width: 100%;
+    border-radius: .8rem;
+    border: 1px solid rgba(255,255,255,.09);
+    background: rgba(15,23,42,.76);
+    color: #f8fafc;
+    padding: .84rem .95rem;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  }
+  .input-field:focus {
+    border-color: rgba(16,185,129,.65);
+    box-shadow: 0 0 0 3px rgba(16,185,129,.11);
+    background: rgba(15,23,42,.94);
+  }
+  .input-field::-webkit-calendar-picker-indicator { filter: invert(.9); cursor: pointer; }
+  .mode-input { position: absolute; opacity: 0; pointer-events: none; }
+  .mode-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    min-height: 48px;
+    padding: .65rem .8rem;
+    border-radius: .8rem;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(15,23,42,.65);
+    color: #94a3b8;
+    font-size: .82rem;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  .mode-label:hover { color: #e2e8f0; border-color: rgba(255,255,255,.17); }
+  .mode-input:checked + .mode-label {
+    color: #a7f3d0;
+    border-color: rgba(16,185,129,.5);
+    background: rgba(16,185,129,.12);
+    box-shadow: inset 0 0 0 1px rgba(16,185,129,.06);
+  }
+  .result-reveal { animation: resultReveal .42s ease both; }
+  @keyframes resultReveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .progress-glow { box-shadow: 0 0 20px rgba(16,185,129,.3); }
+  .soft-heart {
+    background: radial-gradient(circle at 35% 28%, rgba(251,207,232,.95), rgba(244,114,182,.62) 35%, rgba(16,185,129,.26) 72%, rgba(15,23,42,.92) 100%);
+    box-shadow: 0 22px 70px rgba(244,114,182,.14), inset 0 0 32px rgba(255,255,255,.1);
+  }
+  .metric-card { min-height: 158px; }
+  .timeline-line::before {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 34px;
+    bottom: -18px;
+    width: 1px;
+    background: linear-gradient(to bottom, rgba(16,185,129,.5), rgba(255,255,255,.04));
+  }
+  .timeline-line:last-child::before { display: none; }
+  @media (max-width: 640px) {
+    .metric-card { min-height: auto; }
+  }
+</style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased">
+  <!-- =================== NAVBAR =================== -->
+  <header class="navbar-blur fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <span class="text-lg font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+            Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+          </span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-1">
+      	    <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
+		    <a href="index.html#araclar" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
+		    <a href="index.html#kategoriler" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
+		    <a href="hakkimizda.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+		    </nav>
+
+
+        <!-- CTA + Mobile burger -->
+        <div class="flex items-center gap-3">
+          <a href="index.html#araclar" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Araçlara Göz At
+          </a>
+          <button id="burger" onclick="toggleMenu()" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path id="burger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden pb-4 border-t border-white/5 mt-1">
+        <nav class="flex flex-col gap-1 pt-3">
+          <a href="index.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
+          <a href="index.html#araclar" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
+          <a href="index.html#kategoriler" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
+          <a href="hakkimizda.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+          <a href="gizlilik-politikasi.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Gizlilik Politikası</a>
+          <a href="kullanim-sartlari.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kullanım Şartları</a>
+		  <a href="kvkk-aydinlatma-metni.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">KVKK Aydınlatma Metni</a>
+          <a href="index.html#araclar" class="mt-2 mx-0 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all text-center">Araçlara Göz At</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16">
+    <!-- =================== HERO =================== -->
+    <section class="hero-bg grid-overlay relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div class="grid lg:grid-cols-[1.15fr_.85fr] gap-12 items-center">
+          <div>
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-rose-400/10 border border-rose-300/20 rounded-full mb-6">
+              <span class="text-rose-200 text-xs font-semibold tracking-wide uppercase">Gebelik Takvimi</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white">
+              Hamilelik Haftası<br/><span class="text-gradient">Hesaplayıcı</span>
+            </h1>
+            <p class="mt-6 text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl">
+              Son adet tarihinize veya tahmini doğum tarihinize göre gebelik haftanızı, trimesterinizi ve önemli dönüm noktalarını tek ekranda görün.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3 text-xs text-slate-300">
+              <span class="px-3 py-2 rounded-lg bg-white/5 border border-white/7">40 haftalık takvim</span>
+              <span class="px-3 py-2 rounded-lg bg-white/5 border border-white/7">Döngü uzunluğu düzeltmesi</span>
+              <span class="px-3 py-2 rounded-lg bg-white/5 border border-white/7">Haftalık gelişim özeti</span>
+            </div>
+          </div>
+
+          <div class="relative flex justify-center lg:justify-end">
+            <div class="soft-heart w-64 h-64 sm:w-72 sm:h-72 rounded-[42%_58%_52%_48%/46%_42%_58%_54%] flex items-center justify-center border border-white/10">
+              <div class="text-center">
+                <span class="block text-5xl mb-3" aria-hidden="true">🤍</span>
+                <p class="text-xs uppercase tracking-[.2em] text-slate-300">Yeni Bir Başlangıç</p>
+                <p class="mt-2 text-lg font-bold text-white">Her hafta ayrı bir adım</p>
+              </div>
+            </div>
+            <div class="absolute -inset-5 bg-rose-400/5 rounded-full blur-3xl -z-10"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== CALCULATOR =================== -->
+    <section class="py-20 bg-navy-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[1.08fr_.92fr] gap-6 lg:gap-8 items-start">
+          <div class="bg-navy-800 rounded-2xl border border-white/5 p-5 sm:p-7 lg:p-8 shadow-2xl">
+            <div class="flex items-start justify-between gap-4 mb-7">
+              <div>
+                <p class="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-2">Bilgilerinizi Girin</p>
+                <h2 id="calculator-title" class="text-2xl sm:text-3xl font-extrabold text-white">Gebelik takviminizi oluşturun</h2>
+              </div>
+              <div class="w-11 h-11 rounded-xl bg-rose-400/10 border border-rose-300/15 flex items-center justify-center text-xl flex-shrink-0">🌸</div>
+            </div>
+
+            <form id="pregnancyForm" novalidate>
+              <fieldset>
+                <legend class="block text-sm font-semibold text-slate-200 mb-3">Hesaplama yöntemi</legend>
+                <div class="grid sm:grid-cols-2 gap-3">
+                  <div class="relative">
+                    <input class="mode-input" type="radio" name="calculationMode" id="modeLmp" value="lmp" checked />
+                    <label class="mode-label" for="modeLmp"><span>🗓️</span> Son Adet Tarihi</label>
+                  </div>
+                  <div class="relative">
+                    <input class="mode-input" type="radio" name="calculationMode" id="modeDue" value="due" />
+                    <label class="mode-label" for="modeDue"><span>🎀</span> Tahmini Doğum Tarihi</label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div id="lmpFields" class="mt-6 space-y-5">
+                <div>
+                  <label for="lmpDate" class="block text-sm font-semibold text-slate-200 mb-2">Son Adet Tarihinin İlk Günü</label>
+                  <input id="lmpDate" type="date" class="input-field" />
+                  <p class="text-xs text-slate-500 mt-2 leading-relaxed">Son adet kanamasının başladığı ilk günü seçin.</p>
+                </div>
+                <div>
+                  <label for="cycleLength" class="block text-sm font-semibold text-slate-200 mb-2">Döngü Uzunluğu</label>
+                  <div class="relative">
+                    <input id="cycleLength" type="number" min="21" max="45" step="1" value="28" inputmode="numeric" class="input-field pr-16" />
+                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500">gün</span>
+                  </div>
+                  <p class="text-xs text-slate-500 mt-2 leading-relaxed">Varsayılan 28 gündür. Daha kısa veya uzun döngülerde doğum tarihi buna göre düzeltilir.</p>
+                </div>
+              </div>
+
+              <div id="dueFields" class="mt-6 hidden">
+                <label for="dueDateInput" class="block text-sm font-semibold text-slate-200 mb-2">Tahmini Doğum Tarihi</label>
+                <input id="dueDateInput" type="date" class="input-field" />
+                <p class="text-xs text-slate-500 mt-2 leading-relaxed">Doktorunuzun veya ultrason değerlendirmesinin verdiği tahmini tarihi kullanabilirsiniz.</p>
+              </div>
+
+              <div id="formError" role="alert" class="hidden mt-5 rounded-xl border border-rose-500/25 bg-rose-500/10 px-4 py-3 text-sm text-rose-200"></div>
+
+              <button type="submit" class="mt-7 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M5 11h14M5 5h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/>
+                </svg>
+                Hamilelik Haftamı Hesapla
+              </button>
+            </form>
+          </div>
+
+          <aside class="space-y-6">
+            <div class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-7">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/12 flex items-center justify-center text-xl">📅</div>
+                <div>
+                  <h3 class="text-base font-bold text-white">Nasıl hesaplanır?</h3>
+                  <p class="text-xs text-slate-500 mt-1">Naegele kuralı ve standart gebelik takvimi</p>
+                </div>
+              </div>
+              <div class="space-y-4 text-sm text-slate-400 leading-relaxed">
+                <div class="flex gap-3"><span class="text-emerald-400 font-bold">01</span><p>28 günlük döngüde tahmini doğum tarihi, son adet tarihinin ilk gününe 280 gün eklenerek hesaplanır.</p></div>
+                <div class="flex gap-3"><span class="text-emerald-400 font-bold">02</span><p>Döngü 28 günden farklıysa aradaki gün farkı tahmini doğum tarihine eklenir veya çıkarılır.</p></div>
+                <div class="flex gap-3"><span class="text-emerald-400 font-bold">03</span><p>Gebelik haftası, düzeltilmiş takvim başlangıcından bugüne kadar geçen süre üzerinden gösterilir.</p></div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-amber-400/15 bg-amber-400/5 p-6">
+              <div class="flex items-start gap-3">
+                <span class="text-xl" aria-hidden="true">🩺</span>
+                <div>
+                  <h3 class="text-sm font-bold text-amber-100">Önemli sağlık notu</h3>
+                  <p class="text-xs text-slate-400 leading-relaxed mt-2">Bu araç yaklaşık bir takvim sunar; tanı veya tıbbi takip yerine geçmez. Özellikle adet tarihi belirsizse, döngüler düzensizse veya yardımcı üreme yöntemi kullanıldıysa doktorunuzun belirlediği tarih esas alınmalıdır.</p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== RESULTS =================== -->
+    <section id="results" class="hidden py-20 bg-navy-900 scroll-mt-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 result-reveal">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+          <div>
+            <p class="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-3">Gebelik Takviminiz</p>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Bugünkü tahmini durum</h2>
+          </div>
+          <button id="recalculateButton" type="button" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-white/10 bg-white/5 text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all">
+            Bilgileri Değiştir
+          </button>
+        </div>
+
+        <div class="rounded-3xl border border-white/6 bg-gradient-to-br from-navy-800 via-navy-800 to-rose-950/20 p-6 sm:p-8 lg:p-10 shadow-2xl overflow-hidden relative">
+          <div class="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-rose-400/8 blur-3xl"></div>
+          <div class="relative grid lg:grid-cols-[1fr_auto] gap-8 items-center">
+            <div>
+              <p class="text-sm font-semibold text-rose-200">Şu anki hamilelik haftası</p>
+              <div class="mt-3 flex flex-wrap items-end gap-x-3 gap-y-1">
+                <span id="weekValue" class="text-5xl sm:text-6xl font-extrabold text-white">—</span>
+                <span class="text-xl sm:text-2xl font-bold text-slate-300 pb-1">hafta</span>
+                <span id="dayValue" class="text-3xl sm:text-4xl font-extrabold text-emerald-400">—</span>
+                <span class="text-lg font-semibold text-slate-400 pb-1">gün</span>
+              </div>
+              <p id="weekSummary" class="mt-4 text-sm text-slate-400 leading-relaxed max-w-2xl"></p>
+              <div class="mt-7">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                  <span>Gebelik ilerlemesi</span><span id="progressText">%0</span>
+                </div>
+                <div class="h-3 bg-navy-950/80 rounded-full overflow-hidden border border-white/5">
+                  <div id="progressBar" class="h-full bg-gradient-to-r from-emerald-500 to-rose-400 rounded-full progress-glow transition-all duration-700" style="width:0%"></div>
+                </div>
+                <div class="flex justify-between text-[11px] text-slate-600 mt-2"><span>1. hafta</span><span>40. hafta</span></div>
+              </div>
+            </div>
+            <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-white/5 border border-white/10 flex flex-col items-center justify-center text-center shadow-xl">
+              <span class="text-3xl" aria-hidden="true">🫶</span>
+              <span id="trimesterBadge" class="mt-2 text-xs font-bold text-rose-100">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-6">
+          <article class="metric-card card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-emerald-500/12 flex items-center justify-center text-xl mb-5">🎀</div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Tahmini Doğum Tarihi</p>
+            <p id="dueDateResult" class="text-lg font-extrabold text-white mt-2">—</p>
+            <p class="text-xs text-slate-500 mt-2">Takvimsel tahmindir; doğum bu tarihten önce veya sonra gerçekleşebilir.</p>
+          </article>
+
+          <article class="metric-card card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-sky-500/12 flex items-center justify-center text-xl mb-5">⏳</div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Kalan Süre</p>
+            <p id="remainingDays" class="text-2xl font-extrabold text-white mt-2">—</p>
+            <p id="remainingNote" class="text-xs text-slate-500 mt-2">Tahmini doğum tarihine göre.</p>
+          </article>
+
+          <article class="metric-card card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-violet-500/12 flex items-center justify-center text-xl mb-5">🌙</div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Trimester</p>
+            <p id="trimesterResult" class="text-2xl font-extrabold text-white mt-2">—</p>
+            <p id="trimesterRange" class="text-xs text-slate-500 mt-2">—</p>
+          </article>
+
+          <article class="metric-card card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-rose-500/12 flex items-center justify-center text-xl mb-5">👶</div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Yaklaşık Gelişim</p>
+            <p id="babySizeResult" class="text-lg font-extrabold text-white mt-2">—</p>
+            <p id="babyWeightResult" class="text-xs text-slate-500 mt-2">—</p>
+          </article>
+        </div>
+
+        <div class="grid lg:grid-cols-[.9fr_1.1fr] gap-6 mt-6">
+          <article class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-11 h-11 rounded-xl bg-rose-400/10 flex items-center justify-center text-xl">🌱</div>
+              <div>
+                <h3 class="text-lg font-bold text-white">Bebeğiniz bu hafta</h3>
+                <p id="sizeWeekLabel" class="text-xs text-slate-500 mt-1">Haftaya göre yaklaşık değerler</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="rounded-xl bg-navy-900/65 border border-white/5 p-4">
+                <p class="text-xs text-slate-500">Yaklaşık boy</p>
+                <p id="babyLengthLarge" class="text-2xl font-extrabold text-emerald-300 mt-2">—</p>
+              </div>
+              <div class="rounded-xl bg-navy-900/65 border border-white/5 p-4">
+                <p class="text-xs text-slate-500">Yaklaşık kilo</p>
+                <p id="babyWeightLarge" class="text-2xl font-extrabold text-rose-200 mt-2">—</p>
+              </div>
+            </div>
+            <p id="developmentNote" class="text-sm text-slate-400 leading-relaxed mt-5"></p>
+            <p class="text-[11px] text-slate-600 leading-relaxed mt-4">Boy ve kilo değerleri genel ortalamalardır. Erken haftalarda boy ölçüm yöntemi, ileri haftalarda ise genetik ve gelişim farklılıkları sonucu belirgin biçimde etkileyebilir.</p>
+          </article>
+
+          <article class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-11 h-11 rounded-xl bg-emerald-500/12 flex items-center justify-center text-xl">✨</div>
+              <div>
+                <h3 class="text-lg font-bold text-white">Yaklaşan dönüm noktaları</h3>
+                <p class="text-xs text-slate-500 mt-1">Standart gebelik takvimine göre</p>
+              </div>
+            </div>
+            <div id="milestoneList" class="space-y-5"></div>
+          </article>
+        </div>
+
+        <div class="mt-6 rounded-2xl border border-emerald-500/15 bg-emerald-500/5 p-6 sm:p-7">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/12 flex items-center justify-center flex-shrink-0">💚</div>
+            <div>
+              <h3 class="text-sm font-bold text-emerald-100">Sonucunuzu nasıl kullanmalısınız?</h3>
+              <p class="text-sm text-slate-400 leading-relaxed mt-2">Bu tarihleri randevu ve kişisel planlama için yaklaşık bir rehber olarak kullanın. Erken ultrasonla belirlenen gebelik yaşı, son adet tarihine dayalı tahminden farklı çıkabilir; klinik takipte sağlık uzmanınızın verdiği tarih önceliklidir.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== INFORMATION =================== -->
+    <section class="py-20 bg-navy-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-5">
+          <article class="card-lift rounded-2xl border border-white/5 bg-navy-800 p-6">
+            <span class="text-2xl" aria-hidden="true">🌷</span>
+            <h3 class="text-base font-bold text-white mt-4">1. Trimester</h3>
+            <p class="text-sm text-slate-400 leading-relaxed mt-2">Başlangıçtan 13 hafta 6 güne kadar olan dönemdir. Organların temel gelişimi bu dönemde hızla ilerler.</p>
+          </article>
+          <article class="card-lift rounded-2xl border border-white/5 bg-navy-800 p-6">
+            <span class="text-2xl" aria-hidden="true">🌼</span>
+            <h3 class="text-base font-bold text-white mt-4">2. Trimester</h3>
+            <p class="text-sm text-slate-400 leading-relaxed mt-2">14. haftadan 27 hafta 6 güne kadar sürer. Büyüme hızlanır ve hareketler çoğu kişide bu dönemde hissedilir.</p>
+          </article>
+          <article class="card-lift rounded-2xl border border-white/5 bg-navy-800 p-6">
+            <span class="text-2xl" aria-hidden="true">🌺</span>
+            <h3 class="text-base font-bold text-white mt-4">3. Trimester</h3>
+            <p class="text-sm text-slate-400 leading-relaxed mt-2">28. haftada başlar. Bebeğin büyümesi ve doğuma hazırlık süreci bu dönemde devam eder.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- =================== FOOTER =================== -->
+  <footer class="bg-navy-950 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
+
+        <!-- Brand column -->
+        <div class="lg:col-span-2">
+          <a href="index.html" class="flex items-center gap-2.5 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <span class="font-bold text-white text-lg">Finans<span class="text-emerald-400">Kolay</span></span>
+          </a>
+          <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+            Türkiye'nin ücretsiz finans ve hayat araçları platformu. Kredi, vergi, emeklilik ve
+            daha fazlasını saniyeler içinde hesaplayın — kayıt gerekmez, tamamen ücretsiz.
+          </p>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">Hızlı Bağlantılar</h4>
+          <nav class="flex flex-col gap-3">
+		    <a href="index.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Ana Sayfa</a>
+		    <a href="index.html#araclar" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Araçlar</a>
+		    <a href="index.html#kategoriler" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kategoriler</a>
+		    <a href="hakkimizda.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Hakkımızda</a>
+		    <a href="gizlilik-politikasi.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Gizlilik Politikası</a>
+			<a href="kullanim-sartlari.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kullanım Şartları</a>
+            <a href="kvkk-aydinlatma-metni.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">KVKK Aydınlatma Metni</a>
+</nav>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">İletişim</h4>
+          <div class="flex flex-col gap-3 text-sm text-slate-400">
+            <p class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              info@finans-kolay.com
+            </p>
+            <p class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              İstanbul, Türkiye
+            </p>
+            <div class="flex items-center gap-3 mt-1">
+              <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="18" height="18" rx="5" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="3.5" stroke-width="2"/>
+                  <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="X / Twitter" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.26 10.99h-6.466l-5.07-6.62-5.793 6.62H1.943l7.73-8.83-7.93-10.42h6.622l4.58 6.05 5.792-6.05Z"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-white/5 pt-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-sm text-slate-600 order-2 sm:order-1">
+            © 2026 FinansKolay. Tüm hakları saklıdır.
+          </p>
+          <nav class="flex items-center gap-6 text-sm text-slate-500 order-1 sm:order-2">
+		    <a href="hakkimizda.html" class="hover:text-slate-300 transition-colors">Hakkımızda</a>
+		    <a href="gizlilik-politikasi.html" class="hover:text-slate-300 transition-colors">Gizlilik Politikası</a>
+		    <a href="kullanim-sartlari.html" class="hover:text-slate-300 transition-colors">Kullanım Şartları</a>
+		    <a href="kvkk-aydinlatma-metni.html" class="hover:text-slate-300 transition-colors">KVKK Aydınlatma Metni</a>
+</nav>
+        </div>
+        <p class="text-xs text-slate-600 mt-6 text-center leading-relaxed">
+          FinansKolay'daki hesaplamalar yalnızca bilgilendirme amaçlıdır. Finansal kararlarınız için uzman görüşü alınız.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('open');
+  }
+
+  document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.remove('open');
+    });
+  });
+
+  const headerElement = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    headerElement.style.boxShadow = window.scrollY > 10 ? '0 8px 30px rgba(0,0,0,0.22)' : 'none';
+  });
+
+  const DAY = 86400000;
+  const form = document.getElementById('pregnancyForm');
+  const results = document.getElementById('results');
+  const errorBox = document.getElementById('formError');
+  const lmpFields = document.getElementById('lmpFields');
+  const dueFields = document.getElementById('dueFields');
+  const lmpDateInput = document.getElementById('lmpDate');
+  const dueDateInput = document.getElementById('dueDateInput');
+
+  const now = new Date();
+  const todayUtc = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  lmpDateInput.max = toInputDate(todayUtc);
+
+  const fetalGrowth = {
+    4:[0.2,'1 gramdan az'], 5:[0.3,'1 gramdan az'], 6:[0.6,'1 gramdan az'], 7:[1.0,'1 gramdan az'],
+    8:[1.6,'1 g'], 9:[2.3,'2 g'], 10:[3.1,'4 g'], 11:[4.1,'7 g'], 12:[5.4,'14 g'],
+    13:[7.4,'23 g'], 14:[8.7,'43 g'], 15:[10.1,'70 g'], 16:[11.6,'100 g'], 17:[13.0,'140 g'],
+    18:[14.2,'190 g'], 19:[15.3,'240 g'], 20:[25.6,'300 g'], 21:[26.7,'360 g'], 22:[27.8,'430 g'],
+    23:[28.9,'500 g'], 24:[30.0,'600 g'], 25:[34.6,'660 g'], 26:[35.6,'760 g'], 27:[36.6,'875 g'],
+    28:[37.6,'1,0 kg'], 29:[38.6,'1,15 kg'], 30:[39.9,'1,32 kg'], 31:[41.1,'1,50 kg'],
+    32:[42.4,'1,70 kg'], 33:[43.7,'1,92 kg'], 34:[45.0,'2,15 kg'], 35:[46.2,'2,38 kg'],
+    36:[47.4,'2,62 kg'], 37:[48.6,'2,86 kg'], 38:[49.8,'3,08 kg'], 39:[50.7,'3,29 kg'],
+    40:[51.2,'3,46 kg'], 41:[51.7,'3,60 kg'], 42:[52.0,'3,70 kg']
+  };
+
+  const developmentNotes = [
+    [4, 'Yerleşme ve çok erken embriyonik gelişim dönemi devam eder.'],
+    [6, 'Erken kalp hareketleri bazı ultrason incelemelerinde görülebilir; zamanlama kişiden kişiye değişir.'],
+    [8, 'Temel organ sistemlerinin oluşumu hızla ilerler.'],
+    [10, 'Embriyonik dönemden fetal döneme geçiş yaklaşır; küçük hareketler başlamıştır.'],
+    [12, 'İlk trimesterin sonuna yaklaşılır; yüz ve uzuv gelişimi daha belirgin hale gelir.'],
+    [14, 'İkinci trimester başlar ve büyüme dönemi hız kazanır.'],
+    [16, 'Kas ve iskelet gelişimi sürer; hareketler giderek daha koordineli hale gelir.'],
+    [18, 'İşitme yapıları ve sinir sistemi gelişmeye devam eder.'],
+    [20, 'Gebelik takviminin yaklaşık yarısı tamamlanmıştır.'],
+    [22, 'Duyular ve hareketler gelişirken vücut oranları giderek dengelenir.'],
+    [24, 'Akciğer gelişimi devam eder; cilt hâlâ ince ve hassastır.'],
+    [26, 'Göz kapakları açılmaya başlayabilir ve uyku-uyanıklık düzenleri gelişir.'],
+    [28, 'Üçüncü trimester başlar; beyin ve akciğer gelişimi hızla sürer.'],
+    [30, 'Kilo alımı hızlanır ve vücut ısısını düzenleyecek yağ dokusu artar.'],
+    [32, 'Kemikler gelişmiş olsa da kafatası doğuma uyum sağlayacak biçimde esnektir.'],
+    [34, 'Akciğer olgunlaşması ve yağ depolama süreci devam eder.'],
+    [36, 'Bebek doğuma hazırlanırken baş aşağı pozisyona geçebilir.'],
+    [37, 'Erken term döneme girilir; gelişim ve kilo alımı sürer.'],
+    [39, 'Tam term dönem başlar; doğum herhangi bir zamanda gerçekleşebilir.'],
+    [40, 'Tahmini doğum haftasına ulaşılmıştır. Takip planı için sağlık uzmanınızın önerilerini izleyin.'],
+    [42, 'Gebelik 42. haftaya ulaştıysa yakın klinik takip önemlidir.']
+  ];
+
+  const milestones = [
+    {week: 6, title: 'Erken kalp hareketleri', text: 'Ultrasonla kalp hareketlerinin görülmeye başlayabildiği dönem.'},
+    {week: 8, title: 'İlk değerlendirme dönemi', text: 'Gebelik yaşı ve yerleşimin ultrasonla değerlendirilmesi sık görülür.'},
+    {week: 12, title: 'İlk trimester sonu', text: '11–14. haftalar arasında ilk trimester tarama süreci planlanabilir.'},
+    {week: 14, title: 'İkinci trimester', text: 'Büyümenin hızlandığı yeni döneme geçilir.'},
+    {week: 18, title: 'Hareketlerin hissedilmesi', text: 'İlk hareketler çoğu kişide 18–22. haftalar civarında fark edilebilir.'},
+    {week: 20, title: 'Yolun yarısı', text: 'Gebelik takviminin yaklaşık yarısı tamamlanır.'},
+    {week: 22, title: 'Detaylı ultrason dönemi', text: 'Anatomik değerlendirme çoğunlukla 18–22. haftalar arasında yapılır.'},
+    {week: 24, title: 'Büyüme ve akciğer gelişimi', text: 'Bebeğin kilo alımı ve akciğer gelişimi belirgin biçimde sürer.'},
+    {week: 28, title: 'Üçüncü trimester', text: 'Doğuma hazırlık döneminin son üç aylık bölümü başlar.'},
+    {week: 32, title: 'Hızlı kilo alımı', text: 'Bebek yağ depolamaya ve hızla kilo almaya devam eder.'},
+    {week: 36, title: 'Doğuma hazırlık', text: 'Pozisyon, büyüme ve doğum planı daha yakından değerlendirilir.'},
+    {week: 37, title: 'Erken term dönem', text: '37 hafta tamamlandığında erken term dönem başlar.'},
+    {week: 39, title: 'Tam term dönem', text: '39 hafta tamamlandığında tam term dönem başlar.'},
+    {week: 40, title: 'Tahmini doğum haftası', text: 'Naegele takvimindeki 280 günlük hedefe ulaşılır.'},
+    {week: 42, title: 'Geç dönem takibi', text: '42. haftaya yaklaşan gebeliklerde klinik takip planı özellikle önemlidir.'}
+  ];
+
+  document.querySelectorAll('input[name="calculationMode"]').forEach(input => {
+    input.addEventListener('change', updateMode);
+  });
+
+  function updateMode() {
+    const mode = document.querySelector('input[name="calculationMode"]:checked').value;
+    const isLmp = mode === 'lmp';
+    lmpFields.classList.toggle('hidden', !isLmp);
+    dueFields.classList.toggle('hidden', isLmp);
+    clearError();
+  }
+
+  function parseInputDate(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+    const [year, month, day] = value.split('-').map(Number);
+    const timestamp = Date.UTC(year, month - 1, day);
+    const date = new Date(timestamp);
+    if (date.getUTCFullYear() !== year || date.getUTCMonth() !== month - 1 || date.getUTCDate() !== day) return null;
+    return timestamp;
+  }
+
+  function toInputDate(timestamp) {
+    const date = new Date(timestamp);
+    return `${date.getUTCFullYear()}-${String(date.getUTCMonth()+1).padStart(2,'0')}-${String(date.getUTCDate()).padStart(2,'0')}`;
+  }
+
+  function formatDate(timestamp) {
+    return new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(timestamp));
+  }
+
+  function showError(message) {
+    errorBox.textContent = message;
+    errorBox.classList.remove('hidden');
+  }
+
+  function clearError() {
+    errorBox.textContent = '';
+    errorBox.classList.add('hidden');
+  }
+
+  function getTrimester(gestationalDays) {
+    if (gestationalDays < 14 * 7) return {number: 1, label: '1. Trimester', range: '0 hafta – 13 hafta 6 gün'};
+    if (gestationalDays < 28 * 7) return {number: 2, label: '2. Trimester', range: '14 hafta – 27 hafta 6 gün'};
+    return {number: 3, label: '3. Trimester', range: '28. haftadan doğuma kadar'};
+  }
+
+  function growthForWeek(week) {
+    if (week < 4) return {length: 'Milimetre düzeyi', weight: '1 gramdan az'};
+    const safeWeek = Math.min(42, Math.max(4, week));
+    const [length, weight] = fetalGrowth[safeWeek] || fetalGrowth[40];
+    return {length: `${String(length).replace('.', ',')} cm`, weight};
+  }
+
+  function developmentForWeek(week) {
+    let selected = developmentNotes[0][1];
+    developmentNotes.forEach(([threshold, text]) => {
+      if (week >= threshold) selected = text;
+    });
+    return selected;
+  }
+
+  function renderMilestones(currentWeek) {
+    const upcoming = milestones.filter(item => item.week >= currentWeek).slice(0, 4);
+    const neededPast = Math.max(0, 4 - upcoming.length);
+    const recentPast = milestones.filter(item => item.week < currentWeek).slice(-neededPast);
+    const selected = [...recentPast, ...upcoming].slice(-4);
+    document.getElementById('milestoneList').innerHTML = selected.map((item, index) => {
+      const reached = currentWeek >= item.week;
+      const current = item.week === currentWeek || (index === 0 && item.week > currentWeek);
+      const status = item.week === currentWeek ? 'Bu hafta' : reached ? 'Tamamlandı' : `${Math.max(0, item.week-currentWeek)} hafta sonra`;
+      return `
+        <div class="timeline-line relative flex gap-4">
+          <div class="relative z-10 w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 border ${current ? 'bg-emerald-500/20 border-emerald-400/40 text-emerald-200' : 'bg-navy-900 border-white/8 text-slate-500'}">
+            <span class="text-xs font-bold">${item.week}</span>
+          </div>
+          <div class="pb-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-2">
+              <h4 class="text-sm font-bold text-white">${item.title}</h4>
+              <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full ${current ? 'text-emerald-200 bg-emerald-500/12' : 'text-slate-500 bg-white/5'}">${status}</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed mt-1.5">${item.text}</p>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    clearError();
+
+    const mode = document.querySelector('input[name="calculationMode"]:checked').value;
+    let dueDate;
+    let gestationalDays;
+
+    if (mode === 'lmp') {
+      const lmpDate = parseInputDate(lmpDateInput.value);
+      const cycleLength = Number(document.getElementById('cycleLength').value);
+      if (lmpDate === null) return showError('Lütfen son adet tarihinin ilk gününü seçin.');
+      if (lmpDate > todayUtc) return showError('Son adet tarihi bugünden ileri bir tarih olamaz.');
+      if (!Number.isInteger(cycleLength) || cycleLength < 21 || cycleLength > 45) return showError('Döngü uzunluğunu 21 ile 45 gün arasında girin.');
+
+      const cycleCorrection = cycleLength - 28;
+      dueDate = lmpDate + (280 + cycleCorrection) * DAY;
+      gestationalDays = Math.round((todayUtc - lmpDate) / DAY) - cycleCorrection;
+    } else {
+      dueDate = parseInputDate(dueDateInput.value);
+      if (dueDate === null) return showError('Lütfen tahmini doğum tarihini seçin.');
+      gestationalDays = 280 - Math.round((dueDate - todayUtc) / DAY);
+    }
+
+    if (gestationalDays < 0) return showError('Girilen tarih gebelik başlangıcının henüz gerçekleşmediğini gösteriyor. Tarihi kontrol edin.');
+    if (gestationalDays > 308) return showError('Girilen tarih 44 haftayı aşan bir sonuç veriyor. Tarihi kontrol edin veya sağlık uzmanınıza danışın.');
+
+    const week = Math.floor(gestationalDays / 7);
+    const day = gestationalDays % 7;
+    const remaining = Math.round((dueDate - todayUtc) / DAY);
+    const trimester = getTrimester(gestationalDays);
+    const growth = growthForWeek(week);
+    const progress = Math.min(100, Math.max(0, (gestationalDays / 280) * 100));
+
+    document.getElementById('weekValue').textContent = week;
+    document.getElementById('dayValue').textContent = day;
+    document.getElementById('weekSummary').textContent = `Tahmini gebelik süreniz ${week} hafta ${day} gündür. Bu hesaplama, seçtiğiniz tarihe göre oluşturulmuş yaklaşık bir takvimdir.`;
+    document.getElementById('progressText').textContent = `%${Math.round(progress)}`;
+    document.getElementById('progressBar').style.width = `${progress}%`;
+    document.getElementById('trimesterBadge').textContent = trimester.label;
+
+    document.getElementById('dueDateResult').textContent = formatDate(dueDate);
+    const remainingElement = document.getElementById('remainingDays');
+    const remainingNote = document.getElementById('remainingNote');
+    if (remaining > 0) {
+      remainingElement.textContent = `${remaining} gün`;
+      remainingNote.textContent = `Yaklaşık ${Math.floor(remaining/7)} hafta ${remaining%7} gün kaldı.`;
+    } else if (remaining === 0) {
+      remainingElement.textContent = 'Bugün';
+      remainingNote.textContent = 'Bugün tahmini doğum tarihi.';
+    } else {
+      remainingElement.textContent = `${Math.abs(remaining)} gün geçti`;
+      remainingNote.textContent = 'Tahmini tarih geçti; klinik takip önerileri önemlidir.';
+    }
+
+    document.getElementById('trimesterResult').textContent = trimester.label;
+    document.getElementById('trimesterRange').textContent = trimester.range;
+    document.getElementById('babySizeResult').textContent = growth.length;
+    document.getElementById('babyWeightResult').textContent = `Yaklaşık ağırlık: ${growth.weight}`;
+    document.getElementById('sizeWeekLabel').textContent = `${week}. gebelik haftası için yaklaşık değerler`;
+    document.getElementById('babyLengthLarge').textContent = growth.length;
+    document.getElementById('babyWeightLarge').textContent = growth.weight;
+    document.getElementById('developmentNote').textContent = developmentForWeek(week);
+
+    renderMilestones(week);
+    results.classList.remove('hidden');
+    results.scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
+
+  document.getElementById('recalculateButton').addEventListener('click', () => {
+    document.getElementById('calculator-title').scrollIntoView({behavior: 'smooth', block: 'center'});
+    const mode = document.querySelector('input[name="calculationMode"]:checked').value;
+    (mode === 'lmp' ? lmpDateInput : dueDateInput).focus({preventScroll: true});
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X8YD5QMW20"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-X8YD5QMW20');
+</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- AdSense Doğrulama Kodu -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1884839489288952"
+     crossorigin="anonymous"></script>
+
+<title>Günlük Zaman Dağılımı | FinansKolay</title>
+<meta name="description" content="Gününüzü 24 saat üzerinden analiz edin. Uyku, iş, spor, sosyal yaşam, hobiler ve ekran süresinin yüzdesini görün; denge puanı ve kişisel öneriler alın." />
+<meta name="keywords" content="günlük zaman dağılımı, zaman yönetimi, 24 saat planlama, verimlilik skoru, ekran süresi analizi, günlük planlayıcı" />
+<meta name="author" content="FinansKolay" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.finanskolay.com/gunluk-zaman-dagilimi.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="FinansKolay" />
+<meta property="og:locale" content="tr_TR" />
+<meta property="og:url" content="https://www.finanskolay.com/gunluk-zaman-dagilimi.html" />
+<meta property="og:title" content="Günlük Zaman Dağılımı | FinansKolay" />
+<meta property="og:description" content="24 saatinizi kategorilere ayırın, zaman dengenizi analiz edin ve kişisel öneriler alın." />
+<meta property="og:image" content="https://www.finanskolay.com/assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="FinansKolay Günlük Zaman Dağılımı Aracı" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Günlük Zaman Dağılımı | FinansKolay" />
+<meta name="twitter:description" content="Gününüzün yüzde dağılımını ve denge puanını ücretsiz hesaplayın." />
+<meta name="twitter:image" content="https://www.finanskolay.com/assets/og-image.png" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Crect width='24' height='24' rx='5' fill='%230F172A'/%3E%3Cpath d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' stroke='%2310B981' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: { 950: '#070E1A', 900: '#0F172A', 800: '#1E293B', 700: '#263348', 600: '#334155' },
+          emerald: { 400: '#34D399', 500: '#10B981', 600: '#059669', 700: '#047857' }
+        },
+        fontFamily: { sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Inter', 'Roboto', 'sans-serif'] }
+      }
+    }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  .hero-bg {
+    background-color: #0F172A;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 60% -10%, rgba(16,185,129,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 80%, rgba(16,185,129,0.08) 0%, transparent 50%);
+  }
+  .grid-overlay {
+    background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .navbar-blur {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background-color: rgba(15, 23, 42, 0.9);
+    border-bottom: 1px solid rgba(16,185,129,0.12);
+  }
+  .card-lift { transition: transform 0.22s ease, box-shadow 0.22s ease; }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(16,185,129,0.18);
+  }
+  .tool-card:hover .tool-icon { background-color: rgba(16,185,129,0.18); transform: scale(1.06); }
+  .tool-icon { transition: background-color 0.22s ease, transform 0.22s ease; }
+  .text-gradient {
+    background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .badge-pulse::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10B981;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.3); } }
+  #mobile-menu { display: none; }
+  #mobile-menu.open { display: block; }
+  .form-label { display: flex; align-items: center; justify-content: space-between; gap: .75rem; color: #e2e8f0; font-size: .875rem; font-weight: 600; margin-bottom: .55rem; }
+  .form-control {
+    width: 100%; border-radius: .75rem; border: 1px solid rgba(255,255,255,.08);
+    background: rgba(15,23,42,.78); color: #f8fafc; padding: .8rem .9rem; outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  }
+  .form-control:hover { border-color: rgba(255,255,255,.16); }
+  .form-control:focus { border-color: rgba(16,185,129,.65); box-shadow: 0 0 0 3px rgba(16,185,129,.12); background: rgba(15,23,42,.98); }
+  .input-wrap { position: relative; }
+  .input-unit { position: absolute; right: .9rem; top: 50%; transform: translateY(-50%); color: #64748b; font-size: .75rem; pointer-events: none; }
+  .input-wrap .form-control { padding-right: 3.6rem; }
+  .result-reveal { animation: resultReveal .42s ease both; }
+  @keyframes resultReveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .donut-chart {
+    width: 250px; height: 250px; border-radius: 9999px; position: relative;
+    background: conic-gradient(#334155 0deg 360deg);
+    box-shadow: 0 22px 55px rgba(0,0,0,.34), inset 0 0 0 1px rgba(255,255,255,.05);
+    transition: background .35s ease;
+  }
+  .donut-chart::after {
+    content: ''; position: absolute; inset: 44px; border-radius: 9999px;
+    background: #1E293B; box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+  .donut-center { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .score-ring { position: relative; width: 112px; height: 112px; border-radius: 9999px; display: grid; place-items: center; background: conic-gradient(#10B981 0deg, #263348 0deg); }
+  .score-ring::after { content: ''; position: absolute; inset: 9px; border-radius: 9999px; background: #1E293B; }
+  .score-ring-content { position: relative; z-index: 1; text-align: center; }
+  .progress-track { background: rgba(255,255,255,.055); overflow: hidden; border-radius: 9999px; }
+  .progress-fill { height: 100%; border-radius: inherit; min-width: 0; transition: width .55s ease; }
+  .notice-item { animation: noticeReveal .3s ease both; }
+  @keyframes noticeReveal { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { opacity: .55; }
+  @media (max-width: 420px) {
+    .donut-chart { width: 218px; height: 218px; }
+    .donut-chart::after { inset: 39px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Günlük Zaman Dağılımı",
+  "url": "https://www.finanskolay.com/gunluk-zaman-dagilimi.html",
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "tr-TR",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
+}
+</script>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased">
+
+  <!-- =================== NAVBAR =================== -->
+  <header class="navbar-blur fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <span class="text-lg font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+            Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+          </span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-1">
+      	    <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
+		    <a href="index.html#araclar" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
+		    <a href="index.html#kategoriler" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
+		    <a href="hakkimizda.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+		    </nav>
+
+
+        <!-- CTA + Mobile burger -->
+        <div class="flex items-center gap-3">
+          <a href="index.html#araclar" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Araçlara Göz At
+          </a>
+          <button id="burger" onclick="toggleMenu()" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path id="burger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden pb-4 border-t border-white/5 mt-1">
+        <nav class="flex flex-col gap-1 pt-3">
+          <a href="index.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
+          <a href="index.html#araclar" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
+          <a href="index.html#kategoriler" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
+          <a href="hakkimizda.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+          <a href="gizlilik-politikasi.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Gizlilik Politikası</a>
+          <a href="kullanim-sartlari.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kullanım Şartları</a>
+		  <a href="kvkk-aydinlatma-metni.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">KVKK Aydınlatma Metni</a>
+          <a href="index.html#araclar" class="mt-2 mx-0 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all text-center">Araçlara Göz At</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16">
+    <!-- =================== HERO =================== -->
+    <section class="hero-bg grid-overlay relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div class="grid lg:grid-cols-[1.08fr_.92fr] gap-12 items-center">
+          <div>
+            <a href="index.html#araclar" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors mb-7">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Tüm araçlara dön
+            </a>
+
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-500/10 border border-emerald-500/25 rounded-full mb-5">
+              <span class="badge-pulse text-emerald-400 text-xs font-semibold tracking-wide uppercase">Yaşam Aracı</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6">
+              Gününü Gör,<br/><span class="text-gradient">Zamanını Dengele</span>
+            </h1>
+            <p class="text-lg text-slate-400 leading-relaxed max-w-2xl mb-8">
+              Günlük alışkanlıklarınızı 24 saatlik tek bir tabloda görün. Zaman dağılımınızı analiz edin, denge puanınızı öğrenin ve gününüzü iyileştirecek uygulanabilir öneriler alın.
+            </p>
+
+            <div class="flex flex-wrap gap-3 text-xs sm:text-sm">
+              <span class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-slate-300">✓ 24 saat kontrolü</span>
+              <span class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-slate-300">✓ Görsel dağılım</span>
+              <span class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-slate-300">✓ Kişisel öneriler</span>
+            </div>
+          </div>
+
+          <div class="relative max-w-lg w-full mx-auto">
+            <div class="card-lift bg-navy-800/95 rounded-3xl border border-white/10 p-6 sm:p-8 shadow-2xl">
+              <div class="flex items-center justify-between mb-7">
+                <div>
+                  <p class="text-xs uppercase tracking-widest text-slate-500 font-semibold">Örnek günlük denge</p>
+                  <p class="text-white font-bold mt-1">24 saatin görünür özeti</p>
+                </div>
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/15 flex items-center justify-center text-xl">⏱️</div>
+              </div>
+
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between text-xs mb-1.5"><span class="text-slate-400">Uyku</span><span class="font-semibold text-white">8 saat</span></div>
+                  <div class="h-2.5 progress-track"><div class="h-full rounded-full bg-indigo-400" style="width:33.33%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs mb-1.5"><span class="text-slate-400">İş / Okul</span><span class="font-semibold text-white">8 saat</span></div>
+                  <div class="h-2.5 progress-track"><div class="h-full rounded-full bg-sky-400" style="width:33.33%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs mb-1.5"><span class="text-slate-400">Kişisel ve sosyal zaman</span><span class="font-semibold text-white">6 saat</span></div>
+                  <div class="h-2.5 progress-track"><div class="h-full rounded-full bg-emerald-400" style="width:25%"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs mb-1.5"><span class="text-slate-400">Ekran süresi</span><span class="font-semibold text-white">2 saat</span></div>
+                  <div class="h-2.5 progress-track"><div class="h-full rounded-full bg-rose-400" style="width:8.33%"></div></div>
+                </div>
+              </div>
+
+              <div class="mt-7 pt-5 border-t border-white/10 grid grid-cols-2 gap-4">
+                <div class="rounded-xl bg-navy-900/70 border border-white/5 p-4">
+                  <p class="text-xs text-slate-500">Planlanan</p>
+                  <p class="text-2xl font-extrabold text-white mt-1">24 sa.</p>
+                </div>
+                <div class="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4">
+                  <p class="text-xs text-emerald-300">Denge puanı</p>
+                  <p class="text-2xl font-extrabold text-emerald-400 mt-1">88/100</p>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -inset-5 bg-emerald-500/5 rounded-[2rem] blur-3xl -z-10"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== HESAPLAYICI =================== -->
+    <section class="py-20 sm:py-24 bg-navy-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[.92fr_1.08fr] gap-7 xl:gap-10 items-start">
+          <section class="bg-navy-800 rounded-3xl border border-white/5 p-5 sm:p-7 lg:sticky lg:top-24" aria-labelledby="calculator-title">
+            <div class="flex items-start justify-between gap-4 mb-7">
+              <div>
+                <p class="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-2">Günlük Plan</p>
+                <h2 id="calculator-title" class="text-2xl font-extrabold text-white">Saatlerini Gir</h2>
+                <p class="text-sm text-slate-400 mt-2 leading-relaxed">Her alan için günlük ortalama sürenizi saat cinsinden yazın.</p>
+              </div>
+              <div class="tool-icon w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-2xl flex-shrink-0">🕒</div>
+            </div>
+
+            <form id="timeForm" novalidate>
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="form-label" for="sleep"><span>🌙 Uyku süresi</span><span class="text-xs text-slate-500 font-normal">Örn. 8</span></label>
+                  <div class="input-wrap"><input id="sleep" class="form-control time-input" type="number" min="0" max="24" step="0.25" inputmode="decimal" value="8" required /><span class="input-unit">saat</span></div>
+                </div>
+                <div>
+                  <label class="form-label" for="work"><span>💼 İş / Okul</span><span class="text-xs text-slate-500 font-normal">Örn. 8</span></label>
+                  <div class="input-wrap"><input id="work" class="form-control time-input" type="number" min="0" max="24" step="0.25" inputmode="decimal" value="8" required /><span class="input-unit">saat</span></div>
+                </div>
+                <div>
+                  <label class="form-label" for="meals"><span>🍽️ Yemek + Dinlenme</span></label>
+                  <div class="input-wrap"><input id="meals" class="form-control time-input" type="number" min="0" max="24" step="0.25" inputmode="decimal" value="2" required /><span class="input-unit">saat</span></div>
+                </div>
+                <div>
+                  <label class="form-label" for="exercise"><span>🏃 Spor / Egzersiz</span></label>
+                  <div class="input-wrap"><input id="exercise" class="form-control time-input" type="number" min="0" max="24" step="0.25" inputmode="decimal" value="1" required /><span class="input-unit">saat</span></div>
+                </div>
+                <div>
+                  <label class="form-label" for="social"><span>👥 Aile / Sosyal</span></label>
+                  <div class="input-wrap"><input id="social" class="form-control time-input" type="number" min="0" max="24" step="0.25" inputmode="decimal" value="1.5" required /><span class="input-unit">saat</span></div>
+                </div>
+                <div>
+                  <label class="form-label" for="hobbies"><span>📚 Hobiler / Gelişim</span></label>
+                  <div class="input-wrap"><input id="hobbies" class="form-control time-input" type="number" min="0" max="24" step="0.25" inputmode="decimal" value="1" required /><span class="input-unit">saat</span></div>
+                </div>
+                <div>
+                  <label class="form-label" for="screen"><span>📱 Ekran süresi</span></label>
+                  <div class="input-wrap"><input id="screen" class="form-control time-input" type="number" min="0" max="24" step="0.25" inputmode="decimal" value="1.5" required /><span class="input-unit">saat</span></div>
+                </div>
+                <div>
+                  <label class="form-label" for="other"><span>🧩 Diğer</span></label>
+                  <div class="input-wrap"><input id="other" class="form-control time-input" type="number" min="0" max="24" step="0.25" inputmode="decimal" value="1" required /><span class="input-unit">saat</span></div>
+                </div>
+              </div>
+
+              <div id="liveTotalBox" class="mt-6 rounded-2xl bg-navy-900/70 border border-white/5 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3" aria-live="polite">
+                <div>
+                  <p class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Girilen toplam</p>
+                  <p id="liveTotalText" class="text-2xl font-extrabold text-white mt-1">24 saat</p>
+                </div>
+                <span id="liveTotalStatus" class="inline-flex w-fit px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">24 saat tamamlandı</span>
+              </div>
+
+              <div id="formError" class="hidden mt-4 rounded-xl border border-rose-500/25 bg-rose-500/10 text-rose-200 text-sm p-4" role="alert"></div>
+
+              <button type="submit" class="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
+                </svg>
+                Zaman Dağılımımı Analiz Et
+              </button>
+
+              <p class="text-xs text-slate-500 leading-relaxed mt-4 text-center">Puan, yalnızca genel zaman dengesi için oluşturulan basit bir göstergedir.</p>
+            </form>
+          </section>
+
+          <section id="emptyState" class="bg-navy-800 rounded-3xl border border-white/5 min-h-[560px] flex items-center justify-center p-8 text-center">
+            <div class="max-w-sm">
+              <div class="w-20 h-20 rounded-2xl bg-emerald-500/10 border border-emerald-500/15 flex items-center justify-center text-4xl mx-auto mb-6">📊</div>
+              <h2 class="text-xl font-bold text-white">Dağılımınız burada görünecek</h2>
+              <p class="text-sm text-slate-400 leading-relaxed mt-3">Saatlerinizi girip analiz düğmesine bastığınızda grafik, yüzdeler, denge puanı ve öneriler oluşturulur.</p>
+            </div>
+          </section>
+
+          <section id="results" class="hidden result-reveal space-y-6" aria-live="polite">
+            <div class="bg-navy-800 rounded-3xl border border-white/5 p-5 sm:p-7">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-7">
+                <div>
+                  <p class="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-2">Analiz Sonucu</p>
+                  <h2 class="text-2xl font-extrabold text-white">24 Saatlik Dağılımınız</h2>
+                </div>
+                <button id="editButton" type="button" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-sm font-semibold text-slate-300 hover:text-white transition-all">
+                  Değerleri Düzenle
+                </button>
+              </div>
+
+              <div class="grid xl:grid-cols-[300px_1fr] gap-8 items-center">
+                <div class="flex justify-center">
+                  <div id="donutChart" class="donut-chart" role="img" aria-label="Günlük zaman dağılımı pasta grafiği">
+                    <div class="donut-center">
+                      <span id="chartTotal" class="text-3xl font-extrabold text-white">24</span>
+                      <span class="text-xs text-slate-400 mt-1">saatlik gün</span>
+                    </div>
+                  </div>
+                </div>
+                <div id="legendList" class="grid sm:grid-cols-2 gap-x-6 gap-y-3"></div>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
+              <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-5">
+                <div class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center text-xl mb-4">🗓️</div>
+                <p class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Planlanan süre</p>
+                <p id="plannedTime" class="text-2xl font-extrabold text-white mt-2">—</p>
+                <p id="plannedTimeNote" class="text-xs text-slate-400 mt-2">—</p>
+              </article>
+              <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-5">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-xl mb-4">🎯</div>
+                <p class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Odaklı zaman</p>
+                <p id="focusedTime" class="text-2xl font-extrabold text-white mt-2">—</p>
+                <p class="text-xs text-slate-400 mt-2">İş/okul, egzersiz ve gelişim</p>
+              </article>
+              <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-5">
+                <div class="w-10 h-10 rounded-xl bg-violet-500/10 flex items-center justify-center text-xl mb-4">🌙</div>
+                <p class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Dinlenme payı</p>
+                <p id="restShare" class="text-2xl font-extrabold text-white mt-2">—</p>
+                <p class="text-xs text-slate-400 mt-2">Uyku + yemek/dinlenme</p>
+              </article>
+              <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-5">
+                <div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center text-xl mb-4">📱</div>
+                <p class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Ekran payı</p>
+                <p id="screenShare" class="text-2xl font-extrabold text-white mt-2">—</p>
+                <p class="text-xs text-slate-400 mt-2">24 saatin yüzdesi</p>
+              </article>
+            </div>
+
+            <div class="grid xl:grid-cols-[.75fr_1.25fr] gap-6">
+              <article class="bg-navy-800 rounded-3xl border border-white/5 p-6 sm:p-7">
+                <p class="text-xs uppercase tracking-widest text-slate-500 font-semibold">Denge göstergesi</p>
+                <div class="flex items-center gap-5 mt-6">
+                  <div id="scoreRing" class="score-ring flex-shrink-0">
+                    <div class="score-ring-content"><span id="scoreValue" class="text-2xl font-extrabold text-white">0</span><span class="block text-[10px] text-slate-500">/ 100</span></div>
+                  </div>
+                  <div>
+                    <h3 id="scoreLabel" class="text-lg font-bold text-white">—</h3>
+                    <p id="scoreDescription" class="text-sm text-slate-400 leading-relaxed mt-2">—</p>
+                  </div>
+                </div>
+                <div class="mt-7 pt-6 border-t border-white/5">
+                  <p class="text-xs text-slate-500 leading-relaxed">Bu puan; uyku, hareket, ekran, sosyal yaşam ve kişisel gelişim gibi alanların genel dengesine göre hesaplanır. Performans veya sağlık ölçümü değildir.</p>
+                </div>
+              </article>
+
+              <article class="bg-navy-800 rounded-3xl border border-white/5 p-6 sm:p-7">
+                <div class="flex items-center justify-between gap-4 mb-6">
+                  <div>
+                    <p class="text-xs uppercase tracking-widest text-slate-500 font-semibold">Yüzde dağılımı</p>
+                    <h3 class="text-lg font-bold text-white mt-1">Kategori Detayları</h3>
+                  </div>
+                  <span class="text-xs text-slate-500">24 saat üzerinden</span>
+                </div>
+                <div id="distributionBars" class="space-y-4"></div>
+              </article>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6">
+              <article class="bg-navy-800 rounded-3xl border border-white/5 p-6 sm:p-7">
+                <div class="flex items-center gap-3 mb-6">
+                  <div class="w-11 h-11 rounded-xl bg-amber-500/10 flex items-center justify-center text-xl">⚠️</div>
+                  <div><p class="text-xs uppercase tracking-wider text-amber-300 font-semibold">Kontrol Noktaları</p><h3 class="text-lg font-bold text-white">Eksik veya Fazla Süreler</h3></div>
+                </div>
+                <div id="warningList" class="space-y-3"></div>
+              </article>
+
+              <article class="bg-navy-800 rounded-3xl border border-white/5 p-6 sm:p-7">
+                <div class="flex items-center gap-3 mb-6">
+                  <div class="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center text-xl">💡</div>
+                  <div><p class="text-xs uppercase tracking-wider text-emerald-300 font-semibold">Denge Önerileri</p><h3 class="text-lg font-bold text-white">Gününüzü İyileştirin</h3></div>
+                </div>
+                <div id="suggestionList" class="space-y-3"></div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== BİLGİLENDİRME =================== -->
+    <section class="py-20 bg-navy-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-10">
+          <p class="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-3">Nasıl Kullanılır?</p>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Zamanı Saymak Değil, Görmek</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5">
+          <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-sky-500/10 flex items-center justify-center text-xl mb-5">1️⃣</div>
+            <h3 class="font-bold text-white mb-2">Gerçekçi süreleri yazın</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">İdeal gününüzü değil, sıradan bir gündeki gerçek kullanımınızı girin. Sonuç böylece daha anlamlı olur.</p>
+          </article>
+          <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center text-xl mb-5">2️⃣</div>
+            <h3 class="font-bold text-white mb-2">Boş kalan zamanı görün</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Toplam 24 saatin altındaysa kalan süre “planlanmamış zaman” olarak grafiğe eklenir. Bu süre ulaşım ve hazırlık gibi görünmeyen işleri gösterebilir.</p>
+          </article>
+          <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-violet-500/10 flex items-center justify-center text-xl mb-5">3️⃣</div>
+            <h3 class="font-bold text-white mb-2">Tek bir alanı iyileştirin</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Her şeyi aynı anda değiştirmek yerine, en belirgin dengesizlikten başlayıp küçük ve sürdürülebilir bir düzenleme yapın.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- =================== FOOTER =================== -->
+  <footer class="bg-navy-950 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
+
+        <!-- Brand column -->
+        <div class="lg:col-span-2">
+          <a href="index.html" class="flex items-center gap-2.5 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <span class="font-bold text-white text-lg">Finans<span class="text-emerald-400">Kolay</span></span>
+          </a>
+          <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+            Türkiye'nin ücretsiz finans ve hayat araçları platformu. Kredi, vergi, emeklilik ve
+            daha fazlasını saniyeler içinde hesaplayın — kayıt gerekmez, tamamen ücretsiz.
+          </p>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">Hızlı Bağlantılar</h4>
+          <nav class="flex flex-col gap-3">
+		    <a href="index.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Ana Sayfa</a>
+		    <a href="index.html#araclar" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Araçlar</a>
+		    <a href="index.html#kategoriler" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kategoriler</a>
+		    <a href="hakkimizda.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Hakkımızda</a>
+		    <a href="gizlilik-politikasi.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Gizlilik Politikası</a>
+			<a href="kullanim-sartlari.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kullanım Şartları</a>
+            <a href="kvkk-aydinlatma-metni.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">KVKK Aydınlatma Metni</a>
+</nav>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">İletişim</h4>
+          <div class="flex flex-col gap-3 text-sm text-slate-400">
+            <p class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              info@finans-kolay.com
+            </p>
+            <p class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              İstanbul, Türkiye
+            </p>
+            <div class="flex items-center gap-3 mt-1">
+              <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="18" height="18" rx="5" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="3.5" stroke-width="2"/>
+                  <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="X / Twitter" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.26 10.99h-6.466l-5.07-6.62-5.793 6.62H1.943l7.73-8.83-7.93-10.42h6.622l4.58 6.05 5.792-6.05Z"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-white/5 pt-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-sm text-slate-600 order-2 sm:order-1">
+            © 2026 FinansKolay. Tüm hakları saklıdır.
+          </p>
+          <nav class="flex items-center gap-6 text-sm text-slate-500 order-1 sm:order-2">
+		    <a href="hakkimizda.html" class="hover:text-slate-300 transition-colors">Hakkımızda</a>
+		    <a href="gizlilik-politikasi.html" class="hover:text-slate-300 transition-colors">Gizlilik Politikası</a>
+		    <a href="kullanim-sartlari.html" class="hover:text-slate-300 transition-colors">Kullanım Şartları</a>
+		    <a href="kvkk-aydinlatma-metni.html" class="hover:text-slate-300 transition-colors">KVKK Aydınlatma Metni</a>
+</nav>
+        </div>
+        <p class="text-xs text-slate-600 mt-6 text-center leading-relaxed">
+          FinansKolay'daki hesaplamalar yalnızca bilgilendirme amaçlıdır. Finansal kararlarınız için uzman görüşü alınız.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('open');
+    }
+
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+    });
+
+    const pageHeader = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      pageHeader.style.boxShadow = window.scrollY > 10 ? '0 8px 30px rgba(0,0,0,0.22)' : 'none';
+    });
+
+    const categories = [
+      { id: 'sleep', label: 'Uyku', icon: '🌙', color: '#818CF8' },
+      { id: 'work', label: 'İş / Okul', icon: '💼', color: '#38BDF8' },
+      { id: 'meals', label: 'Yemek + Dinlenme', icon: '🍽️', color: '#FBBF24' },
+      { id: 'exercise', label: 'Spor / Egzersiz', icon: '🏃', color: '#34D399' },
+      { id: 'social', label: 'Aile / Sosyal', icon: '👥', color: '#F472B6' },
+      { id: 'hobbies', label: 'Hobiler / Gelişim', icon: '📚', color: '#A78BFA' },
+      { id: 'screen', label: 'Ekran Süresi', icon: '📱', color: '#FB7185' },
+      { id: 'other', label: 'Diğer', icon: '🧩', color: '#94A3B8' }
+    ];
+
+    const unplannedCategory = { id: 'unplanned', label: 'Planlanmamış', icon: '◌', color: '#475569' };
+    const inputs = categories.map(category => document.getElementById(category.id));
+    const form = document.getElementById('timeForm');
+    const errorBox = document.getElementById('formError');
+    const emptyState = document.getElementById('emptyState');
+    const results = document.getElementById('results');
+
+    function readValue(input) {
+      const normalized = String(input.value).trim().replace(',', '.');
+      if (normalized === '') return 0;
+      const value = Number(normalized);
+      return Number.isFinite(value) ? value : NaN;
+    }
+
+    function formatHours(value) {
+      const rounded = Math.round(value * 100) / 100;
+      return `${new Intl.NumberFormat('tr-TR', { maximumFractionDigits: 2 }).format(rounded)} saat`;
+    }
+
+    function formatPercent(value) {
+      return `%${new Intl.NumberFormat('tr-TR', { maximumFractionDigits: 1 }).format(value)}`;
+    }
+
+    function totalEntered() {
+      return inputs.reduce((sum, input) => {
+        const value = readValue(input);
+        return sum + (Number.isFinite(value) ? Math.max(0, value) : 0);
+      }, 0);
+    }
+
+    function updateLiveTotal() {
+      const total = totalEntered();
+      const remaining = 24 - total;
+      const box = document.getElementById('liveTotalBox');
+      const totalText = document.getElementById('liveTotalText');
+      const status = document.getElementById('liveTotalStatus');
+      totalText.textContent = formatHours(total);
+
+      box.className = 'mt-6 rounded-2xl border p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+      status.className = 'inline-flex w-fit px-3 py-1.5 rounded-full text-xs font-semibold';
+      if (total > 24.0001) {
+        box.classList.add('bg-rose-500/10', 'border-rose-500/25');
+        totalText.className = 'text-2xl font-extrabold text-rose-300 mt-1';
+        status.classList.add('bg-rose-500/15', 'text-rose-300');
+        status.textContent = `${formatHours(total - 24)} aşım var`;
+      } else if (remaining > 0.0001) {
+        box.classList.add('bg-amber-500/10', 'border-amber-500/20');
+        totalText.className = 'text-2xl font-extrabold text-amber-200 mt-1';
+        status.classList.add('bg-amber-500/15', 'text-amber-300');
+        status.textContent = `${formatHours(remaining)} boşta`;
+      } else {
+        box.classList.add('bg-navy-900/70', 'border-white/5');
+        totalText.className = 'text-2xl font-extrabold text-white mt-1';
+        status.classList.add('bg-emerald-500/10', 'text-emerald-400');
+        status.textContent = '24 saat tamamlandı';
+      }
+    }
+
+    function validateValues(values) {
+      for (const category of categories) {
+        const value = values[category.id];
+        if (!Number.isFinite(value)) throw new Error(`${category.label} için geçerli bir sayı girin.`);
+        if (value < 0 || value > 24) throw new Error(`${category.label} süresi 0 ile 24 saat arasında olmalıdır.`);
+      }
+      const total = categories.reduce((sum, category) => sum + values[category.id], 0);
+      if (total <= 0) throw new Error('Analiz için en az bir kategoriye süre girin.');
+      if (total > 24.0001) throw new Error(`Toplam süre 24 saati ${formatHours(total - 24)} aşıyor. Bazı süreleri azaltın.`);
+      return total;
+    }
+
+    function calculateScore(values, total) {
+      let score = 100;
+      const sleep = values.sleep;
+      if (sleep < 5) score -= 30;
+      else if (sleep < 6) score -= 22;
+      else if (sleep < 7) score -= 10;
+      else if (sleep > 10) score -= 15;
+      else if (sleep > 9) score -= 5;
+
+      if (values.work > 12) score -= 22;
+      else if (values.work > 10) score -= 12;
+      else if (values.work > 9) score -= 5;
+
+      if (values.exercise === 0) score -= 14;
+      else if (values.exercise < 0.5) score -= 7;
+      else if (values.exercise > 3) score -= 4;
+
+      if (values.screen > 6) score -= 24;
+      else if (values.screen > 4) score -= 15;
+      else if (values.screen > 3) score -= 8;
+      else if (values.screen > 2) score -= 3;
+
+      if (values.social === 0) score -= 7;
+      else if (values.social < 0.5) score -= 3;
+
+      if (values.hobbies === 0) score -= 6;
+      else if (values.hobbies < 0.5) score -= 2;
+
+      if (values.meals < 1) score -= 8;
+      else if (values.meals > 5) score -= 6;
+
+      const unplanned = 24 - total;
+      if (unplanned > 6) score -= 10;
+      else if (unplanned > 3) score -= 5;
+
+      return Math.max(0, Math.min(100, Math.round(score)));
+    }
+
+    function scoreMeta(score) {
+      if (score >= 85) return { label: 'Dengeli bir gün', description: 'Temel alanlar arasında güçlü bir denge görünüyor. Küçük düzenlemelerle bu yapıyı sürdürülebilir tutabilirsiniz.', color: '#10B981' };
+      if (score >= 70) return { label: 'Genel olarak dengeli', description: 'Gününüzün temeli iyi durumda; birkaç kategoride yapılacak küçük değişiklikler dengeyi güçlendirebilir.', color: '#34D399' };
+      if (score >= 50) return { label: 'Geliştirilebilir denge', description: 'Bazı alanlar gününüzde fazla yer kaplıyor veya yeterince görünmüyor. Öncelikli uyarılardan başlayın.', color: '#FBBF24' };
+      return { label: 'Belirgin dengesizlik', description: 'Zaman dağılımınızda güçlü sapmalar var. Tek bir kategoriyi seçip küçük, uygulanabilir bir değişiklikle başlayın.', color: '#FB7185' };
+    }
+
+    function buildNotices(values, total) {
+      const warnings = [];
+      const suggestions = [];
+      const unplanned = 24 - total;
+
+      if (values.sleep < 7) {
+        warnings.push({ icon: '🌙', text: `Uyku süreniz ${formatHours(values.sleep)}. Günlük planınızda dinlenmeye ayrılan pay düşük görünüyor.` });
+        suggestions.push({ icon: '⏰', text: 'Yatma veya uyanma saatini 30 dakika değiştirerek uyku alanını kademeli büyütün.' });
+      } else if (values.sleep > 9) {
+        warnings.push({ icon: '🌙', text: `Uyku süreniz ${formatHours(values.sleep)}. Bu süre kişisel ihtiyacınızdan yüksekse gün içi enerjinizi gözlemleyin.` });
+      } else {
+        suggestions.push({ icon: '🌙', text: 'Uyku süreniz dengeli aralıkta görünüyor; düzenli saatlerle bu yapıyı koruyun.' });
+      }
+
+      if (values.work > 10) {
+        warnings.push({ icon: '💼', text: `İş/okul süresi ${formatHours(values.work)}. Uzun odak blokları kişisel ve sosyal alanları daraltabilir.` });
+        suggestions.push({ icon: '🧱', text: 'Uzun çalışma günlerinde kısa molaları planınıza açık bir kategori olarak ekleyin.' });
+      }
+
+      if (values.exercise < 0.5) {
+        warnings.push({ icon: '🏃', text: values.exercise === 0 ? 'Günlük planda spor veya hareket için süre görünmüyor.' : 'Spor / egzersiz süresi yarım saatin altında.' });
+        suggestions.push({ icon: '🚶', text: 'Başlangıç için 20–30 dakikalık yürüyüşü ulaşım veya mola zamanıyla birleştirin.' });
+      } else {
+        suggestions.push({ icon: '🏃', text: 'Hareket için ayırdığınız süreyi gün içine dağıtmak sürdürülebilirliği artırabilir.' });
+      }
+
+      if (values.screen > 4) {
+        warnings.push({ icon: '📱', text: `Ekran süresi ${formatHours(values.screen)} ile günün ${formatPercent(values.screen / 24 * 100)} kadarını kaplıyor.` });
+        suggestions.push({ icon: '🔕', text: 'Ekran kullanımından 30 dakikayı hobi, hareket veya sosyal zamana aktarmayı deneyin.' });
+      } else if (values.screen > 2) {
+        suggestions.push({ icon: '📵', text: 'Ekran süresinin belirli bir bölümünü amaçsız ve amaçlı kullanım olarak ayırarak daha net analiz yapın.' });
+      }
+
+      if (values.social < 0.5) {
+        warnings.push({ icon: '👥', text: 'Aile ve sosyal ilişkilere ayrılan süre oldukça sınırlı görünüyor.' });
+        suggestions.push({ icon: '💬', text: 'Günde 20–30 dakikalık kesintisiz bir görüşme veya ortak etkinlik alanı oluşturun.' });
+      }
+
+      if (values.hobbies < 0.5) {
+        warnings.push({ icon: '📚', text: 'Hobi veya kişisel gelişim alanı yarım saatin altında.' });
+        suggestions.push({ icon: '🧠', text: 'Kişisel gelişim için 20 dakikalık sabit bir günlük blok belirleyin.' });
+      }
+
+      if (values.meals < 1) {
+        warnings.push({ icon: '🍽️', text: 'Yemek ve dinlenme için ayrılan toplam süre düşük görünüyor.' });
+      }
+
+      if (unplanned > 0.01) {
+        warnings.push({ icon: '◌', text: `${formatHours(unplanned)} henüz bir kategoriye atanmadı. Ulaşım, hazırlanma ve ev işleri bu sürede saklı olabilir.` });
+        suggestions.push({ icon: '📝', text: 'Planlanmamış süreyi bir gün boyunca not alın; görünmeyen rutinleri sonraki analizde “Diğer” alanına ekleyin.' });
+      }
+
+      if (!warnings.length) warnings.push({ icon: '✓', text: 'Belirgin bir süre aşırılığı veya eksikliği tespit edilmedi.' });
+      if (suggestions.length < 3) suggestions.push({ icon: '🎯', text: 'Gelecek hafta yalnızca bir kategoriyi 15–30 dakika değiştirip etkisini yeniden ölçün.' });
+      return { warnings: warnings.slice(0, 5), suggestions: suggestions.slice(0, 5) };
+    }
+
+    function renderDonut(data) {
+      let currentDegree = 0;
+      const gradientParts = [];
+      data.forEach(item => {
+        if (item.value <= 0) return;
+        const nextDegree = currentDegree + (item.value / 24 * 360);
+        gradientParts.push(`${item.color} ${currentDegree.toFixed(2)}deg ${nextDegree.toFixed(2)}deg`);
+        currentDegree = nextDegree;
+      });
+      if (currentDegree < 360) gradientParts.push(`#334155 ${currentDegree.toFixed(2)}deg 360deg`);
+      const chart = document.getElementById('donutChart');
+      chart.style.background = `conic-gradient(${gradientParts.join(', ')})`;
+      chart.setAttribute('aria-label', data.filter(item => item.value > 0).map(item => `${item.label}: ${formatHours(item.value)}`).join(', '));
+    }
+
+    function renderLegend(data) {
+      document.getElementById('legendList').innerHTML = data.filter(item => item.value > 0).map(item => {
+        const percent = item.value / 24 * 100;
+        return `<div class="flex items-center justify-between gap-3 py-2 border-b border-white/5">
+          <div class="flex items-center gap-3 min-w-0"><span class="w-3 h-3 rounded-full flex-shrink-0" style="background:${item.color}"></span><span class="text-sm text-slate-300 truncate">${item.icon} ${item.label}</span></div>
+          <div class="text-right flex-shrink-0"><span class="text-sm font-bold text-white">${formatPercent(percent)}</span><span class="block text-[10px] text-slate-500">${formatHours(item.value)}</span></div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderBars(data) {
+      document.getElementById('distributionBars').innerHTML = data.filter(item => item.value > 0).map(item => {
+        const percent = item.value / 24 * 100;
+        return `<div>
+          <div class="flex items-center justify-between gap-4 text-xs mb-2"><span class="text-slate-300">${item.icon} ${item.label}</span><span class="font-semibold text-white">${formatHours(item.value)} · ${formatPercent(percent)}</span></div>
+          <div class="h-2.5 progress-track"><div class="progress-fill" style="width:${percent}%;background:${item.color}"></div></div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderNoticeList(elementId, items, tone) {
+      const classes = tone === 'warning'
+        ? 'border-amber-500/15 bg-amber-500/5 text-amber-100'
+        : 'border-emerald-500/15 bg-emerald-500/5 text-emerald-100';
+      document.getElementById(elementId).innerHTML = items.map((item, index) => `<div class="notice-item flex items-start gap-3 rounded-xl border ${classes} p-3.5" style="animation-delay:${index * 45}ms"><span class="text-lg leading-none mt-0.5">${item.icon}</span><p class="text-sm leading-relaxed text-slate-300">${item.text}</p></div>`).join('');
+    }
+
+    function renderResults(values, total) {
+      const unplanned = Math.max(0, 24 - total);
+      const data = categories.map(category => ({ ...category, value: values[category.id] }));
+      if (unplanned > 0.001) data.push({ ...unplannedCategory, value: unplanned });
+      renderDonut(data);
+      renderLegend(data);
+      renderBars(data);
+
+      document.getElementById('plannedTime').textContent = formatHours(total);
+      document.getElementById('plannedTimeNote').textContent = unplanned > 0.001 ? `${formatHours(unplanned)} planlanmamış` : 'Günün tamamı dağıtıldı';
+      document.getElementById('focusedTime').textContent = formatHours(values.work + values.exercise + values.hobbies);
+      document.getElementById('restShare').textContent = formatPercent((values.sleep + values.meals) / 24 * 100);
+      document.getElementById('screenShare').textContent = formatPercent(values.screen / 24 * 100);
+
+      const score = calculateScore(values, total);
+      const meta = scoreMeta(score);
+      document.getElementById('scoreValue').textContent = score;
+      document.getElementById('scoreLabel').textContent = meta.label;
+      document.getElementById('scoreDescription').textContent = meta.description;
+      document.getElementById('scoreRing').style.background = `conic-gradient(${meta.color} ${score * 3.6}deg, #263348 ${score * 3.6}deg 360deg)`;
+
+      const notices = buildNotices(values, total);
+      renderNoticeList('warningList', notices.warnings, 'warning');
+      renderNoticeList('suggestionList', notices.suggestions, 'suggestion');
+
+      emptyState.classList.add('hidden');
+      results.classList.remove('hidden');
+      results.classList.remove('result-reveal');
+      void results.offsetWidth;
+      results.classList.add('result-reveal');
+    }
+
+    inputs.forEach(input => input.addEventListener('input', updateLiveTotal));
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      errorBox.classList.add('hidden');
+      const values = {};
+      categories.forEach(category => { values[category.id] = readValue(document.getElementById(category.id)); });
+      try {
+        const total = validateValues(values);
+        renderResults(values, total);
+        results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (error) {
+        errorBox.textContent = error.message;
+        errorBox.classList.remove('hidden');
+      }
+    });
+
+    document.getElementById('editButton').addEventListener('click', () => {
+      document.getElementById('calculator-title').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => document.getElementById('sleep').focus({ preventScroll: true }), 350);
+    });
+
+    updateLiveTotal();
+  </script>
+</body>
+</html>
