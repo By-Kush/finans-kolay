@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X8YD5QMW20"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X8YD5QMW20');
+</script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- AdSense Doğrulama Kodu -->
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1884839489288952"
+       crossorigin="anonymous"></script>
+
+  <!-- Diğer meta etiketleri -->
+
+  <!-- Title -->
+  <title>Yatırım Araçlarının Gerçek Getirisi | FinansKolay</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Mevduat, altın, döviz, borsa ve diğer yatırım araçlarının nominal ve enflasyondan arındırılmış gerçek getirisini karşılaştırın." />
+  <meta name="keywords" content="gerçek getiri hesaplama, enflasyondan arındırılmış getiri, yatırım karşılaştırma, mevduat getirisi, altın getirisi, dolar getirisi, borsa getirisi" />
+  <meta name="author" content="FinansKolay" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.finanskolay.com/yatirim-araclarinin-gercek-getirisi.html" />
+
+  <!-- Open Graph / Facebook, LinkedIn, WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FinansKolay" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:url" content="https://www.finanskolay.com/yatirim-araclarinin-gercek-getirisi.html" />
+  <meta property="og:title" content="Yatırım Araçlarının Gerçek Getirisi | FinansKolay" />
+  <meta property="og:description" content="Yatırım araçlarının nominal ve enflasyondan arındırılmış gerçek getirisini tek ekranda karşılaştırın." />
+  <meta property="og:image" content="https://www.finanskolay.com/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="FinansKolay - Türkiye'nin Ücretsiz Finans Araçları" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Yatırım Araçlarının Gerçek Getirisi | FinansKolay" />
+  <meta name="twitter:description" content="Mevduat, altın, döviz ve borsa getirilerini enflasyondan arındırarak karşılaştırın." />
+  <meta name="twitter:image" content="https://www.finanskolay.com/assets/og-image.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Crect width='24' height='24' rx='5' fill='%230F172A'/%3E%3Cpath d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' stroke='%2310B981' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#070E1A',
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#263348',
+              600: '#334155',
+            },
+            emerald: {
+              400: '#34D399',
+              500: '#10B981',
+              600: '#059669',
+              700: '#047857',
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Inter', 'Roboto', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* Gradient mesh background for hero */
+    .hero-bg {
+      background-color: #0F172A;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 60% -10%, rgba(16,185,129,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(16,185,129,0.08) 0%, transparent 50%);
+    }
+
+    /* Subtle grid overlay */
+    .grid-overlay {
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Navbar blur */
+    .navbar-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid rgba(16,185,129,0.12);
+    }
+
+    /* Card hover lift */
+    .card-lift {
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(16,185,129,0.18);
+    }
+
+    /* Tool card hover */
+    .tool-card:hover .tool-icon {
+      background-color: rgba(16,185,129,0.18);
+      transform: scale(1.06);
+    }
+    .tool-icon {
+      transition: background-color 0.22s ease, transform 0.22s ease;
+    }
+
+    /* Green text gradient */
+    .text-gradient {
+      background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Badge pulse */
+    .badge-pulse::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    /* Mobile menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    /* Tool filter pills */
+    .filter-pill {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .filter-pill.active {
+      background: rgba(16,185,129,0.15);
+      color: #34D399;
+      border-color: rgba(16,185,129,0.4);
+    }
+    .filter-pill.inactive {
+      background: rgba(255,255,255,0.03);
+      color: #94a3b8;
+      border-color: rgba(255,255,255,0.08);
+    }
+    .filter-pill.inactive:hover {
+      background: rgba(255,255,255,0.06);
+      color: #e2e8f0;
+    }
+  
+
+    .form-field {
+      width: 100%;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(7,14,26,0.72);
+      color: #f8fafc;
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+    }
+    .form-field:focus {
+      border-color: rgba(16,185,129,.65);
+      box-shadow: 0 0 0 3px rgba(16,185,129,.12);
+      background: rgba(7,14,26,.95);
+    }
+    .form-field::placeholder { color: #64748b; }
+    .form-field option { background: #0F172A; color: #f8fafc; }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { opacity: .55; }
+    .result-card {
+      background: linear-gradient(145deg, rgba(30,41,59,.98), rgba(15,23,42,.98));
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .soft-glow { box-shadow: 0 24px 70px rgba(0,0,0,.28), 0 0 0 1px rgba(16,185,129,.04); }
+    .summary-number { font-variant-numeric: tabular-nums; }
+    .table-scroll::-webkit-scrollbar { height: 8px; }
+    .table-scroll::-webkit-scrollbar-track { background: #0f172a; border-radius: 999px; }
+    .table-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 999px; }
+    .table-scroll::-webkit-scrollbar-thumb:hover { background: #475569; }
+    .investment-row { transition: border-color .2s ease, background-color .2s ease; }
+    .investment-row:focus-within { border-color: rgba(16,185,129,.32); background: rgba(16,185,129,.035); }
+    .bar-track { background: rgba(51,65,85,.72); }
+    .bar-fill { min-width: 2px; transition: width .55s ease; }
+    .animate-in { animation: resultIn .45s ease both; }
+    @keyframes resultIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .animate-in { animation: none; }
+      .bar-fill { transition: none; }
+    }
+
+</style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased">
+  <!-- =================== NAVBAR =================== -->
+  <header class="navbar-blur fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <span class="text-lg font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+            Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+          </span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-1">
+      	    <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
+		    <a href="index.html#araclar" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
+		    <a href="index.html#kategoriler" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
+		    <a href="hakkimizda.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+		    </nav>
+
+
+        <!-- CTA + Mobile burger -->
+        <div class="flex items-center gap-3">
+          <a href="index.html#araclar" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Araçlara Göz At
+          </a>
+          <button id="burger" onclick="toggleMenu()" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path id="burger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden pb-4 border-t border-white/5 mt-1">
+        <nav class="flex flex-col gap-1 pt-3">
+          <a href="index.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
+          <a href="index.html#araclar" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
+          <a href="index.html#kategoriler" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
+          <a href="hakkimizda.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+          <a href="gizlilik-politikasi.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Gizlilik Politikası</a>
+          <a href="kullanim-sartlari.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kullanım Şartları</a>
+		  <a href="kvkk-aydinlatma-metni.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">KVKK Aydınlatma Metni</a>
+          <a href="index.html#araclar" class="mt-2 mx-0 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all text-center">Araçlara Göz At</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="pt-16">
+    <!-- =================== HERO =================== -->
+    <section class="hero-bg grid-overlay relative overflow-hidden border-b border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div class="max-w-4xl mx-auto text-center">
+          <a href="index.html#araclar" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-emerald-400 transition-colors mb-7">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            Tüm araçlara dön
+          </a>
+          <div class="w-16 h-16 rounded-2xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center mx-auto mb-6 text-3xl">📊</div>
+          <p class="text-emerald-400 text-xs sm:text-sm font-semibold tracking-widest uppercase mb-3">Yatırım Karşılaştırma Aracı</p>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-5">
+            Yatırım Araçlarının <span class="text-gradient">Gerçek Getirisi</span>
+          </h1>
+          <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-3xl mx-auto">
+            Nominal kazanç yanıltıcı olabilir. Mevduat, altın, döviz, borsa ve diğer yatırım araçlarını enflasyon etkisinden arındırarak gerçek satın alma gücü üzerinden karşılaştırın.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== CALCULATOR =================== -->
+    <section class="py-14 sm:py-20 bg-navy-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-7 lg:gap-10 items-start">
+          <section class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-5 sm:p-7 soft-glow lg:sticky lg:top-24" aria-labelledby="form-title">
+            <div class="flex items-start gap-3 mb-7">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0">🧮</div>
+              <div>
+                <h2 id="form-title" class="text-xl font-bold text-white">Yatırım Bilgileri</h2>
+                <p class="text-sm text-slate-400 mt-1">Oranları yıllık yüzde olarak girin.</p>
+              </div>
+            </div>
+
+            <form id="return-form" novalidate class="space-y-5">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="capital" class="block text-sm font-semibold text-slate-200 mb-2">Başlangıç sermayesi (₺)</label>
+                  <input id="capital" class="form-field" type="number" min="1" step="100" value="100000" inputmode="decimal" required />
+                </div>
+                <div>
+                  <label for="years" class="block text-sm font-semibold text-slate-200 mb-2">Yatırım süresi (yıl)</label>
+                  <input id="years" class="form-field" type="number" min="0.1" max="50" step="0.1" value="3" inputmode="decimal" required />
+                </div>
+              </div>
+
+              <div>
+                <label for="inflation" class="block text-sm font-semibold text-slate-200 mb-2">Yıllık enflasyon oranı (%)</label>
+                <div class="relative">
+                  <input id="inflation" class="form-field pr-12" type="number" min="-99" max="1000" step="0.01" value="30" inputmode="decimal" required />
+                  <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm">%</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-2">Aynı yıllık enflasyon oranının yatırım süresince geçerli olduğu varsayılır.</p>
+              </div>
+
+              <div class="pt-2">
+                <div class="flex items-center justify-between gap-3 mb-3">
+                  <div>
+                    <h3 class="text-sm font-bold text-white">Yatırım araçları</h3>
+                    <p class="text-xs text-slate-500 mt-1">En az bir araç için getiri oranı girin.</p>
+                  </div>
+                  <button type="button" id="add-investment" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-emerald-500/25 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/15 text-xs font-semibold transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    Araç ekle
+                  </button>
+                </div>
+
+                <div id="investment-list" class="space-y-3">
+                  <div class="investment-row grid grid-cols-[1fr_112px_36px] sm:grid-cols-[1fr_140px_40px] gap-2 rounded-xl border border-white/5 p-3" data-investment-row>
+                    <input class="form-field investment-name !py-3" type="text" value="Mevduat" aria-label="Yatırım aracı adı" />
+                    <div class="relative"><input class="form-field investment-rate !py-3 pr-8" type="number" step="0.01" value="45" aria-label="Yıllık getiri oranı" /><span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">%</span></div>
+                    <button type="button" class="remove-investment rounded-lg text-slate-600 hover:text-rose-400 hover:bg-rose-500/10 transition-all" aria-label="Yatırım aracını kaldır">×</button>
+                  </div>
+                  <div class="investment-row grid grid-cols-[1fr_112px_36px] sm:grid-cols-[1fr_140px_40px] gap-2 rounded-xl border border-white/5 p-3" data-investment-row>
+                    <input class="form-field investment-name !py-3" type="text" value="Altın" aria-label="Yatırım aracı adı" />
+                    <div class="relative"><input class="form-field investment-rate !py-3 pr-8" type="number" step="0.01" value="38" aria-label="Yıllık getiri oranı" /><span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">%</span></div>
+                    <button type="button" class="remove-investment rounded-lg text-slate-600 hover:text-rose-400 hover:bg-rose-500/10 transition-all" aria-label="Yatırım aracını kaldır">×</button>
+                  </div>
+                  <div class="investment-row grid grid-cols-[1fr_112px_36px] sm:grid-cols-[1fr_140px_40px] gap-2 rounded-xl border border-white/5 p-3" data-investment-row>
+                    <input class="form-field investment-name !py-3" type="text" value="Dolar" aria-label="Yatırım aracı adı" />
+                    <div class="relative"><input class="form-field investment-rate !py-3 pr-8" type="number" step="0.01" value="25" aria-label="Yıllık getiri oranı" /><span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">%</span></div>
+                    <button type="button" class="remove-investment rounded-lg text-slate-600 hover:text-rose-400 hover:bg-rose-500/10 transition-all" aria-label="Yatırım aracını kaldır">×</button>
+                  </div>
+                  <div class="investment-row grid grid-cols-[1fr_112px_36px] sm:grid-cols-[1fr_140px_40px] gap-2 rounded-xl border border-white/5 p-3" data-investment-row>
+                    <input class="form-field investment-name !py-3" type="text" value="Borsa" aria-label="Yatırım aracı adı" />
+                    <div class="relative"><input class="form-field investment-rate !py-3 pr-8" type="number" step="0.01" value="50" aria-label="Yıllık getiri oranı" /><span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">%</span></div>
+                    <button type="button" class="remove-investment rounded-lg text-slate-600 hover:text-rose-400 hover:bg-rose-500/10 transition-all" aria-label="Yatırım aracını kaldır">×</button>
+                  </div>
+                </div>
+              </div>
+
+              <div id="form-error" class="hidden rounded-xl border border-rose-500/25 bg-rose-500/10 px-4 py-3 text-sm text-rose-300" role="alert"></div>
+
+              <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6m4 6V7m4 10V4M5 21h14"/></svg>
+                Gerçek Getiriyi Hesapla
+              </button>
+            </form>
+          </section>
+
+          <section aria-live="polite" aria-labelledby="results-title">
+            <div id="empty-state" class="bg-navy-800/70 rounded-2xl border border-dashed border-white/10 p-8 sm:p-12 text-center min-h-[360px] flex flex-col items-center justify-center">
+              <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-3xl mb-5">📈</div>
+              <h2 class="text-xl font-bold text-white mb-2">Karşılaştırma sonuçları burada görünecek</h2>
+              <p class="text-sm text-slate-400 max-w-md leading-relaxed">Sermaye, süre, enflasyon ve beklenen yıllık getirileri girerek hangi aracın satın alma gücünüzü gerçekten artırdığını görün.</p>
+            </div>
+
+            <div id="results" class="hidden space-y-6">
+              <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+                <div>
+                  <p class="text-emerald-400 text-xs font-semibold tracking-widest uppercase mb-2">Hesaplama Sonucu</p>
+                  <h2 id="results-title" class="text-2xl sm:text-3xl font-extrabold text-white">Gerçek Getiri Karşılaştırması</h2>
+                </div>
+                <p id="result-context" class="text-xs text-slate-500"></p>
+              </div>
+
+              <div class="grid sm:grid-cols-3 gap-4">
+                <article class="result-card rounded-2xl p-5 card-lift">
+                  <p class="text-xs text-slate-400 mb-2">En yüksek nominal değer</p>
+                  <p id="best-nominal-name" class="text-sm font-semibold text-white truncate"></p>
+                  <p id="best-nominal-value" class="summary-number text-xl font-extrabold text-emerald-400 mt-1"></p>
+                </article>
+                <article class="result-card rounded-2xl p-5 card-lift">
+                  <p class="text-xs text-slate-400 mb-2">En yüksek gerçek değer</p>
+                  <p id="best-real-name" class="text-sm font-semibold text-white truncate"></p>
+                  <p id="best-real-value" class="summary-number text-xl font-extrabold text-sky-400 mt-1"></p>
+                </article>
+                <article class="result-card rounded-2xl p-5 card-lift">
+                  <p class="text-xs text-slate-400 mb-2">Enflasyonu geçen araç</p>
+                  <p id="beat-count" class="summary-number text-3xl font-extrabold text-white"></p>
+                  <p class="text-xs text-slate-500 mt-1">pozitif gerçek kazanç</p>
+                </article>
+              </div>
+
+              <article class="result-card rounded-2xl p-5 sm:p-7 soft-glow">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+                  <div>
+                    <h3 class="text-lg font-bold text-white">Karşılaştırmalı grafik</h3>
+                    <p class="text-xs text-slate-500 mt-1">Dönem sonu nominal değer ve bugünün satın alma gücüyle gerçek değer</p>
+                  </div>
+                  <div class="flex flex-wrap gap-3 text-xs">
+                    <span class="inline-flex items-center gap-2 text-slate-400"><span class="w-3 h-3 rounded-full bg-emerald-500"></span>Nominal</span>
+                    <span class="inline-flex items-center gap-2 text-slate-400"><span class="w-3 h-3 rounded-full bg-sky-500"></span>Gerçek</span>
+                  </div>
+                </div>
+                <div id="comparison-chart" class="space-y-5"></div>
+              </article>
+
+              <article class="result-card rounded-2xl overflow-hidden">
+                <div class="p-5 sm:p-6 border-b border-white/5">
+                  <h3 class="text-lg font-bold text-white">Detaylı karşılaştırma tablosu</h3>
+                  <p class="text-xs text-slate-500 mt-1">Gerçek değer, dönem sonu tutarın birikmiş enflasyona bölünmesiyle hesaplanır.</p>
+                </div>
+                <div class="table-scroll overflow-x-auto">
+                  <table class="w-full min-w-[920px] text-left">
+                    <thead class="bg-navy-950/55 text-xs uppercase tracking-wider text-slate-500">
+                      <tr>
+                        <th class="px-5 py-4">Yatırım aracı</th>
+                        <th class="px-5 py-4 text-right">Yıllık getiri</th>
+                        <th class="px-5 py-4 text-right">Nominal değer</th>
+                        <th class="px-5 py-4 text-right">Nominal kazanç</th>
+                        <th class="px-5 py-4 text-right">Gerçek değer</th>
+                        <th class="px-5 py-4 text-right">Gerçek kazanç</th>
+                        <th class="px-5 py-4 text-right">Gerçek yıllık getiri</th>
+                      </tr>
+                    </thead>
+                    <tbody id="results-table" class="divide-y divide-white/5 text-sm"></tbody>
+                  </table>
+                </div>
+              </article>
+
+              <article id="interpretation" class="rounded-2xl border p-5 sm:p-6"></article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== INFO =================== -->
+    <section class="py-16 sm:py-20 bg-navy-900 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-3 gap-5">
+          <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-emerald-500/15 flex items-center justify-center text-xl mb-4">💹</div>
+            <h3 class="font-bold text-white mb-2">Nominal getiri nedir?</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Yatırımın TL cinsinden görünen artışıdır. Paranın satın alma gücündeki kaybı tek başına dikkate almaz.</p>
+          </article>
+          <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-sky-500/15 flex items-center justify-center text-xl mb-4">🛒</div>
+            <h3 class="font-bold text-white mb-2">Gerçek getiri nedir?</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Enflasyondan arındırılmış getiridir. Yatırım sonunda başlangıca göre satın alma gücünüzün artıp artmadığını gösterir.</p>
+          </article>
+          <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="w-11 h-11 rounded-xl bg-amber-500/15 flex items-center justify-center text-xl mb-4">⚠️</div>
+            <h3 class="font-bold text-white mb-2">Hesaplamaya dahil olmayanlar</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Vergi, stopaj, komisyon, makas, fon gideri, temettü ve düzenli ek yatırım bu basit karşılaştırmaya dahil değildir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- =================== FOOTER =================== -->
+  <footer class="bg-navy-950 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
+
+        <!-- Brand column -->
+        <div class="lg:col-span-2">
+          <a href="index.html" class="flex items-center gap-2.5 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <span class="font-bold text-white text-lg">Finans<span class="text-emerald-400">Kolay</span></span>
+          </a>
+          <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+            Türkiye'nin ücretsiz finans ve hayat araçları platformu. Kredi, vergi, emeklilik ve
+            daha fazlasını saniyeler içinde hesaplayın — kayıt gerekmez, tamamen ücretsiz.
+          </p>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">Hızlı Bağlantılar</h4>
+          <nav class="flex flex-col gap-3">
+		    <a href="index.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Ana Sayfa</a>
+		    <a href="index.html#araclar" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Araçlar</a>
+		    <a href="index.html#kategoriler" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kategoriler</a>
+		    <a href="hakkimizda.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Hakkımızda</a>
+		    <a href="gizlilik-politikasi.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Gizlilik Politikası</a>
+			<a href="kullanim-sartlari.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kullanım Şartları</a>
+            <a href="kvkk-aydinlatma-metni.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">KVKK Aydınlatma Metni</a>
+</nav>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">İletişim</h4>
+          <div class="flex flex-col gap-3 text-sm text-slate-400">
+            <p class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              info@finans-kolay.com
+            </p>
+            <p class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              İstanbul, Türkiye
+            </p>
+            <div class="flex items-center gap-3 mt-1">
+              <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="18" height="18" rx="5" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="3.5" stroke-width="2"/>
+                  <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="X / Twitter" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.26 10.99h-6.466l-5.07-6.62-5.793 6.62H1.943l7.73-8.83-7.93-10.42h6.622l4.58 6.05 5.792-6.05Z"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-white/5 pt-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-sm text-slate-600 order-2 sm:order-1">
+            © 2026 FinansKolay. Tüm hakları saklıdır.
+          </p>
+          <nav class="flex items-center gap-6 text-sm text-slate-500 order-1 sm:order-2">
+		    <a href="hakkimizda.html" class="hover:text-slate-300 transition-colors">Hakkımızda</a>
+		    <a href="gizlilik-politikasi.html" class="hover:text-slate-300 transition-colors">Gizlilik Politikası</a>
+		    <a href="kullanim-sartlari.html" class="hover:text-slate-300 transition-colors">Kullanım Şartları</a>
+		    <a href="kvkk-aydinlatma-metni.html" class="hover:text-slate-300 transition-colors">KVKK Aydınlatma Metni</a>
+</nav>
+        </div>
+        <p class="text-xs text-slate-600 mt-6 text-center leading-relaxed">
+          FinansKolay'daki hesaplamalar yalnızca bilgilendirme amaçlıdır. Finansal kararlarınız için uzman görüşü alınız.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('open');
+    }
+
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+    });
+
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      header.style.boxShadow = window.scrollY > 10 ? '0 4px 32px rgba(0,0,0,0.4)' : 'none';
+    });
+
+    const form = document.getElementById('return-form');
+    const list = document.getElementById('investment-list');
+    const errorBox = document.getElementById('form-error');
+    const emptyState = document.getElementById('empty-state');
+    const results = document.getElementById('results');
+
+    const moneyFormatter = new Intl.NumberFormat('tr-TR', {
+      style: 'currency', currency: 'TRY', maximumFractionDigits: 0
+    });
+    const percentFormatter = new Intl.NumberFormat('tr-TR', {
+      minimumFractionDigits: 1, maximumFractionDigits: 2
+    });
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>'"]/g, character => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+      })[character]);
+    }
+
+    function showError(message) {
+      errorBox.textContent = message;
+      errorBox.classList.remove('hidden');
+    }
+
+    function clearError() {
+      errorBox.textContent = '';
+      errorBox.classList.add('hidden');
+    }
+
+    function createInvestmentRow(name = 'Yeni Araç', rate = '') {
+      const row = document.createElement('div');
+      row.className = 'investment-row grid grid-cols-[1fr_112px_36px] sm:grid-cols-[1fr_140px_40px] gap-2 rounded-xl border border-white/5 p-3';
+      row.setAttribute('data-investment-row', '');
+      row.innerHTML = `
+        <input class="form-field investment-name !py-3" type="text" value="${escapeHtml(name)}" aria-label="Yatırım aracı adı" />
+        <div class="relative"><input class="form-field investment-rate !py-3 pr-8" type="number" step="0.01" value="${escapeHtml(rate)}" aria-label="Yıllık getiri oranı" /><span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500">%</span></div>
+        <button type="button" class="remove-investment rounded-lg text-slate-600 hover:text-rose-400 hover:bg-rose-500/10 transition-all" aria-label="Yatırım aracını kaldır">×</button>`;
+      return row;
+    }
+
+    document.getElementById('add-investment').addEventListener('click', () => {
+      if (list.querySelectorAll('[data-investment-row]').length >= 10) {
+        showError('En fazla 10 yatırım aracı karşılaştırabilirsiniz.');
+        return;
+      }
+      clearError();
+      const row = createInvestmentRow();
+      list.appendChild(row);
+      row.querySelector('.investment-name').focus();
+    });
+
+    list.addEventListener('click', event => {
+      const button = event.target.closest('.remove-investment');
+      if (!button) return;
+      const rows = list.querySelectorAll('[data-investment-row]');
+      if (rows.length <= 1) {
+        showError('En az bir yatırım aracı bulunmalıdır.');
+        return;
+      }
+      clearError();
+      button.closest('[data-investment-row]').remove();
+    });
+
+    function collectInputs() {
+      const capital = Number(document.getElementById('capital').value);
+      const years = Number(document.getElementById('years').value);
+      const inflation = Number(document.getElementById('inflation').value);
+
+      if (!Number.isFinite(capital) || capital <= 0) throw new Error('Başlangıç sermayesi sıfırdan büyük olmalıdır.');
+      if (!Number.isFinite(years) || years <= 0 || years > 50) throw new Error('Yatırım süresi 0 ile 50 yıl arasında olmalıdır.');
+      if (!Number.isFinite(inflation) || inflation <= -100 || inflation > 1000) throw new Error('Enflasyon oranı -%100 ile %1000 arasında olmalıdır.');
+
+      const investments = [...list.querySelectorAll('[data-investment-row]')].map((row, index) => {
+        const name = row.querySelector('.investment-name').value.trim();
+        const rateValue = row.querySelector('.investment-rate').value.trim();
+        const rate = Number(rateValue);
+        if (!name) throw new Error(`${index + 1}. yatırım aracının adını girin.`);
+        if (rateValue === '' || !Number.isFinite(rate) || rate <= -100 || rate > 10000) {
+          throw new Error(`${name} için -%100 ile %10.000 arasında geçerli bir getiri oranı girin.`);
+        }
+        return { name, rate };
+      });
+      return { capital, years, inflation, investments };
+    }
+
+    function calculate(data) {
+      const inflationFactor = Math.pow(1 + data.inflation / 100, data.years);
+      return data.investments.map(item => {
+        const nominalFactor = Math.pow(1 + item.rate / 100, data.years);
+        const nominalValue = data.capital * nominalFactor;
+        const nominalGain = nominalValue - data.capital;
+        const realValue = nominalValue / inflationFactor;
+        const realGain = realValue - data.capital;
+        const realAnnualRate = ((1 + item.rate / 100) / (1 + data.inflation / 100) - 1) * 100;
+        const cumulativeNominal = (nominalFactor - 1) * 100;
+        const cumulativeReal = (nominalFactor / inflationFactor - 1) * 100;
+        return { ...item, nominalValue, nominalGain, realValue, realGain, realAnnualRate, cumulativeNominal, cumulativeReal };
+      }).sort((a, b) => b.realValue - a.realValue);
+    }
+
+    function renderChart(items) {
+      const maxValue = Math.max(...items.flatMap(item => [item.nominalValue, item.realValue]), 1);
+      document.getElementById('comparison-chart').innerHTML = items.map(item => {
+        const nominalWidth = Math.max(0.5, item.nominalValue / maxValue * 100);
+        const realWidth = Math.max(0.5, item.realValue / maxValue * 100);
+        return `
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-2">
+              <span class="text-sm font-semibold text-slate-200 truncate">${escapeHtml(item.name)}</span>
+              <span class="text-xs text-slate-500 whitespace-nowrap">Gerçek: ${moneyFormatter.format(item.realValue)}</span>
+            </div>
+            <div class="grid grid-cols-[62px_1fr] gap-x-3 gap-y-2 items-center">
+              <span class="text-xs text-slate-500">Nominal</span>
+              <div class="bar-track h-3 rounded-full overflow-hidden"><div class="bar-fill h-full bg-emerald-500 rounded-full" style="width:${nominalWidth}%"></div></div>
+              <span class="text-xs text-slate-500">Gerçek</span>
+              <div class="bar-track h-3 rounded-full overflow-hidden"><div class="bar-fill h-full bg-sky-500 rounded-full" style="width:${realWidth}%"></div></div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function renderTable(items) {
+      document.getElementById('results-table').innerHTML = items.map((item, index) => {
+        const positive = item.realGain >= 0;
+        return `
+          <tr class="hover:bg-white/[0.025] transition-colors">
+            <td class="px-5 py-4"><div class="flex items-center gap-3"><span class="w-7 h-7 rounded-lg ${index === 0 ? 'bg-emerald-500/15 text-emerald-400' : 'bg-white/5 text-slate-500'} flex items-center justify-center text-xs font-bold">${index + 1}</span><span class="font-semibold text-white">${escapeHtml(item.name)}</span></div></td>
+            <td class="px-5 py-4 text-right text-slate-300">%${percentFormatter.format(item.rate)}</td>
+            <td class="px-5 py-4 text-right font-semibold text-white">${moneyFormatter.format(item.nominalValue)}</td>
+            <td class="px-5 py-4 text-right text-emerald-400">${moneyFormatter.format(item.nominalGain)}</td>
+            <td class="px-5 py-4 text-right font-semibold text-sky-300">${moneyFormatter.format(item.realValue)}</td>
+            <td class="px-5 py-4 text-right ${positive ? 'text-emerald-400' : 'text-rose-400'}">${positive ? '+' : ''}${moneyFormatter.format(item.realGain)}</td>
+            <td class="px-5 py-4 text-right ${item.realAnnualRate >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${item.realAnnualRate >= 0 ? '+' : ''}%${percentFormatter.format(item.realAnnualRate)}</td>
+          </tr>`;
+      }).join('');
+    }
+
+    function renderInterpretation(items, data) {
+      const positiveItems = items.filter(item => item.realGain > 0);
+      const best = items[0];
+      const box = document.getElementById('interpretation');
+      const hasPositive = positiveItems.length > 0;
+      box.className = `rounded-2xl border p-5 sm:p-6 ${hasPositive ? 'border-emerald-500/25 bg-emerald-500/10' : 'border-amber-500/25 bg-amber-500/10'}`;
+      box.innerHTML = hasPositive
+        ? `<div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0 text-xl">✓</div><div><h3 class="font-bold text-white mb-2">${escapeHtml(best.name)} en yüksek gerçek değeri sağlıyor</h3><p class="text-sm text-slate-300 leading-relaxed">Bu varsayımlarla ${escapeHtml(best.name)}, ${data.years} yıl sonunda bugünün parasıyla <strong class="text-emerald-300">${moneyFormatter.format(best.realValue)}</strong> değerine ulaşıyor. Gerçek kazanç ${moneyFormatter.format(best.realGain)}. Geçmiş getiriler gelecekte aynı sonucun oluşacağını garanti etmez.</p></div></div>`
+        : `<div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-amber-500/15 flex items-center justify-center flex-shrink-0 text-xl">!</div><div><h3 class="font-bold text-white mb-2">Girilen araçların hiçbiri enflasyonu aşamıyor</h3><p class="text-sm text-slate-300 leading-relaxed">Tüm seçeneklerde dönem sonu nominal para artarken satın alma gücü başlangıç seviyesinin altında kalıyor. En iyi seçenek olan ${escapeHtml(best.name)} için gerçek değer ${moneyFormatter.format(best.realValue)}.</p></div></div>`;
+    }
+
+    function render(data, items) {
+      emptyState.classList.add('hidden');
+      results.classList.remove('hidden');
+      results.classList.remove('animate-in');
+      void results.offsetWidth;
+      results.classList.add('animate-in');
+
+      const bestNominal = [...items].sort((a, b) => b.nominalValue - a.nominalValue)[0];
+      const bestReal = items[0];
+      const beatCount = items.filter(item => item.realGain > 0).length;
+
+      document.getElementById('result-context').textContent = `${moneyFormatter.format(data.capital)} • ${data.years} yıl • yıllık %${percentFormatter.format(data.inflation)} enflasyon`;
+      document.getElementById('best-nominal-name').textContent = bestNominal.name;
+      document.getElementById('best-nominal-value').textContent = moneyFormatter.format(bestNominal.nominalValue);
+      document.getElementById('best-real-name').textContent = bestReal.name;
+      document.getElementById('best-real-value').textContent = moneyFormatter.format(bestReal.realValue);
+      document.getElementById('beat-count').textContent = `${beatCount}/${items.length}`;
+
+      renderChart(items);
+      renderTable(items);
+      renderInterpretation(items, data);
+    }
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      clearError();
+      try {
+        const data = collectInputs();
+        const calculated = calculate(data);
+        render(data, calculated);
+        if (window.innerWidth < 1024) results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (error) {
+        showError(error.message || 'Hesaplama sırasında bir hata oluştu.');
+      }
+    });
+
+    // Show an immediately useful default comparison.
+    form.requestSubmit();
+  </script>
+</body>
+</html>

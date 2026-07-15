@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X8YD5QMW20"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-X8YD5QMW20');
+</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- AdSense Doğrulama Kodu -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1884839489288952" crossorigin="anonymous"></script>
+
+<title>Acil Durum Fonu Hesaplayıcı | FinansKolay</title>
+<meta name="description" content="Aylık giderlerinize göre 3, 6 veya 12 aylık acil durum fonu hedefinizi, mevcut birikim açığınızı ve aylık birikim planınızı hesaplayın." />
+<meta name="keywords" content="acil durum fonu hesaplama, acil durum birikimi, finansal güvence, aylık gider, birikim hedefi" />
+<meta name="author" content="FinansKolay" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.finanskolay.com/acil-durum-fonu.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="FinansKolay" />
+<meta property="og:locale" content="tr_TR" />
+<meta property="og:title" content="Acil Durum Fonu Hesaplayıcı | FinansKolay" />
+<meta property="og:description" content="Giderlerinize uygun acil durum fonu hedefinizi ve aylık birikim planınızı oluşturun." />
+<meta property="og:url" content="https://www.finanskolay.com/acil-durum-fonu.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Acil Durum Fonu Hesaplayıcı | FinansKolay" />
+<meta name="twitter:description" content="3, 6 veya 12 aylık finansal güvence hedefinizi hesaplayın." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Crect width='24' height='24' rx='5' fill='%230F172A'/%3E%3Cpath d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' stroke='%2310B981' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: { 950: '#070E1A', 900: '#0F172A', 800: '#1E293B', 700: '#263348', 600: '#334155' },
+          emerald: { 400: '#34D399', 500: '#10B981', 600: '#059669', 700: '#047857' }
+        },
+        fontFamily: {
+          sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Inter', 'Roboto', 'sans-serif']
+        }
+      }
+    }
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  .hero-bg {
+    background-color: #0F172A;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 60% -10%, rgba(16,185,129,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 80%, rgba(16,185,129,0.08) 0%, transparent 50%);
+  }
+  .grid-overlay {
+    background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .navbar-blur {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background-color: rgba(15, 23, 42, 0.9);
+    border-bottom: 1px solid rgba(16,185,129,0.12);
+  }
+  .card-lift { transition: transform 0.22s ease, box-shadow 0.22s ease; }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(16,185,129,0.18);
+  }
+  .tool-card:hover .tool-icon { background-color: rgba(16,185,129,0.18); transform: scale(1.06); }
+  .tool-icon { transition: background-color 0.22s ease, transform 0.22s ease; }
+  .text-gradient {
+    background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .badge-pulse::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10B981;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+  #mobile-menu { display: none; }
+  #mobile-menu.open { display: block; }
+  .form-field {
+    width: 100%;
+    border-radius: .75rem;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(7,14,26,.72);
+    color: #f8fafc;
+    padding: .85rem 1rem;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  }
+  .form-field:focus {
+    border-color: rgba(16,185,129,.65);
+    box-shadow: 0 0 0 3px rgba(16,185,129,.12);
+    background: rgba(7,14,26,.95);
+  }
+  .form-field::placeholder { color: #64748b; }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { opacity: .55; }
+  .coverage-option { cursor: pointer; }
+  .coverage-option input { position: absolute; opacity: 0; pointer-events: none; }
+  .coverage-card {
+    transition: all .2s ease;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(7,14,26,.55);
+  }
+  .coverage-option input:checked + .coverage-card {
+    border-color: rgba(16,185,129,.65);
+    background: rgba(16,185,129,.12);
+    box-shadow: 0 0 0 3px rgba(16,185,129,.08);
+  }
+  .result-card {
+    background: linear-gradient(145deg, rgba(30,41,59,.98), rgba(15,23,42,.98));
+    border: 1px solid rgba(255,255,255,.06);
+  }
+  .soft-glow { box-shadow: 0 24px 70px rgba(0,0,0,.28), 0 0 0 1px rgba(16,185,129,.04); }
+  .summary-number { font-variant-numeric: tabular-nums; }
+  .progress-fill { transition: width .55s ease; }
+  .animate-in { animation: resultIn .45s ease both; }
+  @keyframes resultIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-in { animation: none; }
+    .progress-fill { transition: none; }
+  }
+</style>
+</head>
+<body class="bg-navy-900 text-slate-100 font-sans antialiased">
+
+<header class="navbar-blur fixed top-0 left-0 right-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo -->
+<a class="flex items-center gap-2.5 group" href="index.html">
+<div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<span class="text-lg font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+            Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+</span>
+</a>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-1">
+<a class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all" href="index.html">Ana Sayfa</a>
+<a class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all" href="index.html#araclar">Araçlar</a>
+<a class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all" href="index.html#kategoriler">Kategoriler</a>
+<a class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all" href="hakkimizda.html">Hakkımızda</a>
+</nav>
+<!-- CTA + Mobile burger -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5" href="index.html#araclar">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Araçlara Göz At
+          </a>
+<button class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all" id="burger" onclick="toggleMenu()">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 6h16M4 12h16M4 18h16" id="burger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+<!-- Mobile Menu -->
+<div class="md:hidden pb-4 border-t border-white/5 mt-1" id="mobile-menu">
+<nav class="flex flex-col gap-1 pt-3">
+<a class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all" href="index.html">Ana Sayfa</a>
+<a class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all" href="index.html#araclar">Araçlar</a>
+<a class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all" href="index.html#kategoriler">Kategoriler</a>
+<a class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all" href="hakkimizda.html">Hakkımızda</a>
+<a class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all" href="gizlilik-politikasi.html">Gizlilik Politikası</a>
+<a class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all" href="kullanim-sartlari.html">Kullanım Şartları</a>
+<a class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all" href="kvkk-aydinlatma-metni.html">KVKK Aydınlatma Metni</a>
+<a class="mt-2 mx-0 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all text-center" href="index.html#araclar">Araçlara Göz At</a>
+</nav>
+</div>
+</div>
+</header>
+
+<main>
+  <section class="hero-bg grid-overlay pt-28 pb-16 sm:pt-32 sm:pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <a href="index.html#araclar" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-emerald-400 transition-colors mb-7">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Tüm araçlara dön
+        </a>
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/25 rounded-full mb-6">
+          <span class="badge-pulse text-emerald-400 text-xs font-semibold tracking-wide uppercase">Finans Aracı</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-white mb-5">
+          Acil Durum Fonu<br class="hidden sm:block" />
+          <span class="text-gradient">Hesaplayıcı</span>
+        </h1>
+        <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
+          Beklenmedik gelir kaybı veya zorunlu harcamalar karşısında kaç aylık güvenceye ihtiyacınız olduğunu ve hedefe ulaşmak için gereken birikimi hesaplayın.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-navy-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-[minmax(0,.88fr)_minmax(0,1.12fr)] gap-7 lg:gap-8 items-start">
+        <div class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-5 sm:p-7 soft-glow lg:sticky lg:top-24">
+          <div class="flex items-start gap-4 mb-7">
+            <div class="tool-icon w-12 h-12 rounded-xl bg-emerald-500/15 flex items-center justify-center text-2xl flex-shrink-0">🛟</div>
+            <div>
+              <h2 class="text-xl font-bold text-white">Fon Bilgileri</h2>
+              <p class="text-sm text-slate-400 mt-1">Aylık zorunlu giderlerinizi ve güvence hedefinizi girin.</p>
+            </div>
+          </div>
+
+          <form id="emergency-form" class="space-y-6" novalidate>
+            <div>
+              <label for="monthly-expense" class="block text-sm font-semibold text-slate-200 mb-2">Aylık ortalama gider</label>
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-semibold">₺</span>
+                <input id="monthly-expense" type="number" min="1" step="500" value="35000" class="form-field pl-9" inputmode="decimal" required />
+              </div>
+              <p class="text-xs text-slate-500 mt-2">Kira, faturalar, gıda, ulaşım ve zorunlu borç ödemelerini dahil edin.</p>
+            </div>
+
+            <fieldset>
+              <legend class="block text-sm font-semibold text-slate-200 mb-3">Kaç aylık gideri karşılamak istiyorsunuz?</legend>
+              <div class="grid grid-cols-3 gap-2.5">
+                <label class="coverage-option relative">
+                  <input type="radio" name="coverage" value="3" />
+                  <span class="coverage-card block rounded-xl p-3 text-center">
+                    <strong class="block text-lg text-white">3 ay</strong>
+                    <span class="text-[11px] text-slate-400">Temel</span>
+                  </span>
+                </label>
+                <label class="coverage-option relative">
+                  <input type="radio" name="coverage" value="6" checked />
+                  <span class="coverage-card block rounded-xl p-3 text-center">
+                    <strong class="block text-lg text-white">6 ay</strong>
+                    <span class="text-[11px] text-emerald-400">Dengeli</span>
+                  </span>
+                </label>
+                <label class="coverage-option relative">
+                  <input type="radio" name="coverage" value="12" />
+                  <span class="coverage-card block rounded-xl p-3 text-center">
+                    <strong class="block text-lg text-white">12 ay</strong>
+                    <span class="text-[11px] text-slate-400">Güçlü</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div>
+              <label for="current-savings" class="block text-sm font-semibold text-slate-200 mb-2">Mevcut birikim <span class="text-slate-500 font-normal">(opsiyonel)</span></label>
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-semibold">₺</span>
+                <input id="current-savings" type="number" min="0" step="500" value="50000" class="form-field pl-9" inputmode="decimal" />
+              </div>
+            </div>
+
+            <div id="form-error" class="hidden rounded-xl border border-rose-500/25 bg-rose-500/10 px-4 py-3 text-sm text-rose-300" role="alert"></div>
+
+            <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              Hesapla
+            </button>
+          </form>
+        </div>
+
+        <div>
+          <div id="empty-state" class="bg-navy-800 rounded-2xl border border-white/5 p-8 sm:p-10 min-h-[430px] flex flex-col items-center justify-center text-center">
+            <div class="w-20 h-20 rounded-2xl bg-emerald-500/10 border border-emerald-500/15 flex items-center justify-center text-4xl mb-6">🛡️</div>
+            <h2 class="text-xl font-bold text-white mb-3">Finansal güvence planınızı oluşturun</h2>
+            <p class="text-sm text-slate-400 leading-relaxed max-w-md">Bilgilerinizi girip hesapladığınızda hedef fonunuz, mevcut durumunuz ve aylık birikim seçenekleri burada gösterilir.</p>
+          </div>
+
+          <div id="results" class="hidden space-y-5 animate-in" aria-live="polite">
+            <div class="result-card rounded-2xl p-5 sm:p-7 soft-glow overflow-hidden relative">
+              <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-emerald-500/10 blur-3xl"></div>
+              <div class="relative">
+                <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+                  <div>
+                    <p class="text-sm font-semibold text-emerald-400 mb-2">Önerilen acil durum fonu</p>
+                    <p id="target-fund" class="summary-number text-3xl sm:text-4xl font-extrabold text-white">₺0</p>
+                    <p id="coverage-summary" class="text-sm text-slate-400 mt-2"></p>
+                  </div>
+                  <span id="status-badge" class="self-start px-3 py-1.5 rounded-full text-xs font-bold"></span>
+                </div>
+
+                <div class="mb-2 flex items-center justify-between text-xs">
+                  <span class="text-slate-400">Fonun tamamlanma oranı</span>
+                  <span id="progress-text" class="font-bold text-white">%0</span>
+                </div>
+                <div class="h-3 rounded-full bg-navy-950/80 overflow-hidden border border-white/5">
+                  <div id="progress-fill" class="progress-fill h-full rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400" style="width:0%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div class="card-lift result-card rounded-2xl p-5 sm:p-6">
+                <div class="w-11 h-11 rounded-xl bg-sky-500/12 flex items-center justify-center text-xl mb-4">💼</div>
+                <p class="text-xs font-semibold text-sky-400 uppercase tracking-wider mb-2">Mevcut durum</p>
+                <p id="current-status-title" class="text-xl font-extrabold text-white mb-2"></p>
+                <p id="current-status-text" class="text-sm text-slate-400 leading-relaxed"></p>
+              </div>
+              <div class="card-lift result-card rounded-2xl p-5 sm:p-6">
+                <div class="w-11 h-11 rounded-xl bg-amber-500/12 flex items-center justify-center text-xl mb-4">📅</div>
+                <p class="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-2">12 aylık plan</p>
+                <p id="monthly-needed" class="summary-number text-2xl font-extrabold text-white mb-2">₺0</p>
+                <p id="monthly-needed-text" class="text-sm text-slate-400 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <div class="result-card rounded-2xl p-5 sm:p-7">
+              <div class="flex items-center justify-between gap-4 mb-5">
+                <div>
+                  <h3 class="font-bold text-white">Alternatif birikim planları</h3>
+                  <p class="text-xs text-slate-400 mt-1">Kalan açığı farklı sürelerde tamamlamak için aylık tutarlar.</p>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">📊</div>
+              </div>
+              <div id="plan-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+            </div>
+
+            <div id="recommendation-card" class="rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.07] p-5 sm:p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0">💡</div>
+                <div>
+                  <h3 id="recommendation-title" class="font-bold text-white mb-2"></h3>
+                  <p id="recommendation-text" class="text-sm text-slate-400 leading-relaxed"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20 bg-navy-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <p class="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-3">Kısa Rehber</p>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Acil durum fonunu nasıl yönetmelisiniz?</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+          <div class="w-11 h-11 rounded-xl bg-emerald-500/12 flex items-center justify-center text-xl mb-4">🏦</div>
+          <h3 class="font-bold text-white mb-2">Kolay erişilebilir tutun</h3>
+          <p class="text-sm text-slate-400 leading-relaxed">Fonun amacı beklenmedik anda kullanılabilmesidir. Günlük harcamadan ayrı, erişilebilir ve düşük riskli bir yerde tutulması daha uygundur.</p>
+        </article>
+        <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+          <div class="w-11 h-11 rounded-xl bg-sky-500/12 flex items-center justify-center text-xl mb-4">🧾</div>
+          <h3 class="font-bold text-white mb-2">Zorunlu giderleri esas alın</h3>
+          <p class="text-sm text-slate-400 leading-relaxed">Hedef hesabında ertelenebilir tüketimler yerine barınma, gıda, sağlık, ulaşım ve zorunlu borç ödemelerine odaklanın.</p>
+        </article>
+        <article class="card-lift bg-navy-800 rounded-2xl border border-white/5 p-6">
+          <div class="w-11 h-11 rounded-xl bg-amber-500/12 flex items-center justify-center text-xl mb-4">🔁</div>
+          <h3 class="font-bold text-white mb-2">Kullandıktan sonra yenileyin</h3>
+          <p class="text-sm text-slate-400 leading-relaxed">Acil bir harcama sonrasında fonu tekrar hedef seviyesine çıkarmayı öncelikli tasarruf hedefiniz haline getirin.</p>
+        </article>
+      </div>
+      <p class="text-xs text-slate-500 text-center leading-relaxed mt-8 max-w-3xl mx-auto">Bu araç genel planlama amacı taşır. Uygun fon büyüklüğü; gelir güvencesi, hane yapısı, sağlık durumu ve borç yüküne göre değişebilir.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-navy-950 border-t border-white/5">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
+<!-- Brand column -->
+<div class="lg:col-span-2">
+<a class="flex items-center gap-2.5 mb-4" href="index.html">
+<div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<span class="font-bold text-white text-lg">Finans<span class="text-emerald-400">Kolay</span></span>
+</a>
+<p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+            Türkiye'nin ücretsiz finans ve hayat araçları platformu. Kredi, vergi, emeklilik ve
+            daha fazlasını saniyeler içinde hesaplayın — kayıt gerekmez, tamamen ücretsiz.
+          </p>
+</div>
+<!-- Quick links -->
+<div>
+<h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">Hızlı Bağlantılar</h4>
+<nav class="flex flex-col gap-3">
+<a class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit" href="index.html">Ana Sayfa</a>
+<a class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit" href="index.html#araclar">Araçlar</a>
+<a class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit" href="index.html#kategoriler">Kategoriler</a>
+<a class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit" href="hakkimizda.html">Hakkımızda</a>
+<a class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit" href="gizlilik-politikasi.html">Gizlilik Politikası</a>
+<a class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit" href="kullanim-sartlari.html">Kullanım Şartları</a>
+<a class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit" href="kvkk-aydinlatma-metni.html">KVKK Aydınlatma Metni</a>
+</nav>
+</div>
+<!-- Contact -->
+<div>
+<h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">İletişim</h4>
+<div class="flex flex-col gap-3 text-sm text-slate-400">
+<p class="flex items-center gap-2">
+<svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+              info@finans-kolay.com
+            </p>
+<p class="flex items-center gap-2">
+<svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+              İstanbul, Türkiye
+            </p>
+<div class="flex items-center gap-3 mt-1">
+<a aria-label="Instagram" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all" href="index.html">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<rect height="18" rx="5" stroke-width="2" width="18" x="3" y="3"></rect>
+<circle cx="12" cy="12" r="3.5" stroke-width="2"></circle>
+<circle cx="17.2" cy="6.8" fill="currentColor" r="0.6" stroke="none"></circle>
+</svg>
+</a>
+<a aria-label="X / Twitter" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all" href="index.html">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+<path d="M18.244 2.25h3.308l-7.227 8.26 8.26 10.99h-6.466l-5.07-6.62-5.793 6.62H1.943l7.73-8.83-7.93-10.42h6.622l4.58 6.05 5.792-6.05Z"></path>
+</svg>
+</a>
+<a aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all" href="index.html">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Divider -->
+<div class="border-t border-white/5 pt-8">
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+<p class="text-sm text-slate-600 order-2 sm:order-1">
+            © 2026 FinansKolay. Tüm hakları saklıdır.
+          </p>
+<nav class="flex items-center gap-6 text-sm text-slate-500 order-1 sm:order-2">
+<a class="hover:text-slate-300 transition-colors" href="hakkimizda.html">Hakkımızda</a>
+<a class="hover:text-slate-300 transition-colors" href="gizlilik-politikasi.html">Gizlilik Politikası</a>
+<a class="hover:text-slate-300 transition-colors" href="kullanim-sartlari.html">Kullanım Şartları</a>
+<a class="hover:text-slate-300 transition-colors" href="kvkk-aydinlatma-metni.html">KVKK Aydınlatma Metni</a>
+</nav>
+</div>
+<p class="text-xs text-slate-600 mt-6 text-center leading-relaxed">
+          FinansKolay'daki hesaplamalar yalnızca bilgilendirme amaçlıdır. Finansal kararlarınız için uzman görüşü alınız.
+        </p>
+</div>
+</div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+  });
+
+  const siteHeader = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    siteHeader.style.boxShadow = window.scrollY > 10 ? '0 4px 32px rgba(0,0,0,0.4)' : 'none';
+  });
+
+  const form = document.getElementById('emergency-form');
+  const expenseInput = document.getElementById('monthly-expense');
+  const savingsInput = document.getElementById('current-savings');
+  const errorBox = document.getElementById('form-error');
+
+  const money = value => new Intl.NumberFormat('tr-TR', {
+    style: 'currency', currency: 'TRY', maximumFractionDigits: 0
+  }).format(value);
+
+  const number = value => new Intl.NumberFormat('tr-TR', { maximumFractionDigits: 1 }).format(value);
+
+  function showError(message) {
+    errorBox.textContent = message;
+    errorBox.classList.remove('hidden');
+  }
+
+  function clearError() {
+    errorBox.textContent = '';
+    errorBox.classList.add('hidden');
+  }
+
+  function statusFor(progress, gap, target, current, expense) {
+    if (gap <= 0) {
+      return {
+        badge: 'Hedef tamamlandı',
+        badgeClass: 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/25',
+        title: 'Birikiminiz yeterli',
+        text: `Mevcut birikiminiz hedef fonu karşılıyor ve ${money(current - target)} güvenlik payı bırakıyor.`
+      };
+    }
+    if (progress >= 75) {
+      return {
+        badge: 'Hedefe yakın',
+        badgeClass: 'bg-sky-500/15 text-sky-300 border border-sky-500/25',
+        title: `${money(gap)} eksik`,
+        text: `Şu an yaklaşık ${number(current / expense)} aylık zorunlu giderinizi karşılayabilirsiniz. Fonunuz tamamlanmaya yakın.`
+      };
+    }
+    if (progress >= 25) {
+      return {
+        badge: 'Geliştirilmeli',
+        badgeClass: 'bg-amber-500/15 text-amber-300 border border-amber-500/25',
+        title: `${money(gap)} eksik`,
+        text: `Mevcut birikiminiz yaklaşık ${number(current / expense)} aylık gideri karşılıyor. Düzenli aylık katkıyla açığı kapatabilirsiniz.`
+      };
+    }
+    return {
+      badge: 'Başlangıç aşaması',
+      badgeClass: 'bg-rose-500/15 text-rose-300 border border-rose-500/25',
+      title: `${money(gap)} eksik`,
+      text: current > 0
+        ? `Mevcut birikiminiz yaklaşık ${number(current / expense)} aylık gideri karşılıyor. Önce bir aylık gider seviyesine ulaşmayı hedefleyin.`
+        : 'Henüz ayrılmış bir fon görünmüyor. Küçük fakat düzenli katkılarla ilk bir aylık gider hedefinden başlayın.'
+    };
+  }
+
+  function recommendationFor(coverage, progress, gap, monthly12) {
+    if (gap <= 0) {
+      return {
+        title: 'Fonunuzu koruyun ve düzenli güncelleyin',
+        text: 'Hedefiniz tamamlandı. Aylık gideriniz arttıkça fon tutarını yeniden hesaplayın ve yalnızca gerçek acil durumlarda kullanın.'
+      };
+    }
+    if (progress < 25) {
+      return {
+        title: 'İlk kilometre taşı: bir aylık gider',
+        text: `Önce bir aylık temel giderinizi biriktirmeye odaklanın. Ardından aylık yaklaşık ${money(monthly12)} katkıyla 12 aylık tamamlama planına devam edebilirsiniz.`
+      };
+    }
+    const coverageText = coverage === 3 ? '3 aylık hedef temel bir güvenlik tamponudur' : coverage === 6 ? '6 aylık hedef çoğu bütçe için dengeli bir güvence sağlar' : '12 aylık hedef daha yüksek bir güvence düzeyi sunar';
+    return {
+      title: 'Otomatik ve düzenli birikim daha etkilidir',
+      text: `${coverageText}. Maaş gününde otomatik aktarım oluşturarak aylık ${money(monthly12)} hedefini diğer harcamalardan önce ayırın.`
+    };
+  }
+
+  function renderPlans(gap) {
+    const periods = [6, 12, 18, 24];
+    document.getElementById('plan-grid').innerHTML = periods.map(months => `
+      <div class="rounded-xl border ${months === 12 ? 'border-emerald-500/30 bg-emerald-500/[0.08]' : 'border-white/5 bg-navy-950/55'} p-4">
+        <p class="text-xs ${months === 12 ? 'text-emerald-400' : 'text-slate-500'} font-semibold mb-2">${months} ayda</p>
+        <p class="summary-number text-base sm:text-lg font-extrabold text-white">${money(gap > 0 ? gap / months : 0)}</p>
+        <p class="text-[11px] text-slate-500 mt-1">aylık birikim</p>
+      </div>
+    `).join('');
+  }
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    clearError();
+
+    const expense = Number(expenseInput.value);
+    const current = Math.max(0, Number(savingsInput.value) || 0);
+    const coverageNode = document.querySelector('input[name="coverage"]:checked');
+    const coverage = coverageNode ? Number(coverageNode.value) : 6;
+
+    if (!Number.isFinite(expense) || expense <= 0) return showError('Aylık ortalama gider sıfırdan büyük olmalıdır.');
+    if (expense > 100000000) return showError('Aylık gider tutarını kontrol edin.');
+    if (!Number.isFinite(current) || current < 0) return showError('Mevcut birikim sıfır veya daha büyük olmalıdır.');
+
+    const target = expense * coverage;
+    const gap = Math.max(0, target - current);
+    const progress = target > 0 ? Math.min(100, current / target * 100) : 0;
+    const monthly12 = gap / 12;
+    const status = statusFor(progress, gap, target, current, expense);
+    const recommendation = recommendationFor(coverage, progress, gap, monthly12);
+
+    document.getElementById('empty-state').classList.add('hidden');
+    document.getElementById('results').classList.remove('hidden');
+    document.getElementById('target-fund').textContent = money(target);
+    document.getElementById('coverage-summary').textContent = `${money(expense)} aylık gider × ${coverage} ay`;
+
+    const badge = document.getElementById('status-badge');
+    badge.textContent = status.badge;
+    badge.className = `self-start px-3 py-1.5 rounded-full text-xs font-bold ${status.badgeClass}`;
+
+    document.getElementById('progress-text').textContent = `%${number(progress)}`;
+    document.getElementById('progress-fill').style.width = `${progress}%`;
+    document.getElementById('current-status-title').textContent = status.title;
+    document.getElementById('current-status-text').textContent = status.text;
+    document.getElementById('monthly-needed').textContent = money(monthly12);
+    document.getElementById('monthly-needed-text').textContent = gap > 0
+      ? `Kalan ${money(gap)} açığı faiz/getiri varsaymadan 12 ayda tamamlamak için.`
+      : 'Hedef tamamlandığı için ek aylık katkı zorunlu değil.';
+
+    renderPlans(gap);
+    document.getElementById('recommendation-title').textContent = recommendation.title;
+    document.getElementById('recommendation-text').textContent = recommendation.text;
+
+    if (window.innerWidth < 1024) {
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+
+  form.requestSubmit();
+</script>
+</body>
+</html>
