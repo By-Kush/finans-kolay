@@ -232,6 +232,7 @@
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { opacity: .55; }
   </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Günlük Su İhtiyacı Hesaplayıcı","url":"https://www.finans-kolay.com/gunluk-su-ihtiyaci-hesaplayici.html","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"author":{"@type":"Organization","name":"FinansKolay","url":"https://www.finans-kolay.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ana Sayfa","item":"https://www.finans-kolay.com/"},{"@type":"ListItem","position":2,"name":"Sağlık Araçları","item":"https://www.finans-kolay.com/#araclar"},{"@type":"ListItem","position":3,"name":"Günlük Su İhtiyacı Hesaplayıcı","item":"https://www.finans-kolay.com/gunluk-su-ihtiyaci-hesaplayici.html"}]}]}</script>
 </head>
 <body class="bg-navy-900 text-slate-100 font-sans antialiased">
 
@@ -416,7 +417,7 @@
                 <fieldset class="rounded-2xl border border-amber-500/15 bg-amber-500/5 p-4 sm:p-5">
                   <legend class="px-2 text-sm font-bold text-amber-300">Çay ve Kahve Telafi Suyu</legend>
                   <p class="text-xs text-slate-400 leading-relaxed mb-5">
-                    Çay için içilen miktar kadar, kahve için içilen miktarın iki katı ek su hesaplanır. Bu telafi suyu temel günlük su ihtiyacından ayrı tutulur.
+                    Çay ve kahve de sıvı alımına katkıda bulunur. Kafeinli içecekler için sabit bir “telafi suyu” katsayısı uygulanmaz.
                   </p>
 
                   <div class="grid sm:grid-cols-2 gap-5">
@@ -498,7 +499,7 @@
             <div id="result-placeholder" class="bg-navy-800 rounded-2xl border border-white/5 p-8 min-h-[430px] flex flex-col items-center justify-center text-center">
               <div class="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-4xl mb-5" aria-hidden="true">🥤</div>
               <h2 class="text-xl font-bold text-white mb-2">Sonucunuz burada görünecek</h2>
-              <p class="text-sm text-slate-400 leading-relaxed max-w-sm">Formdaki bilgileri doldurup hesaplama butonuna basın. Temel günlük su hedefiniz ile çay ve kahve için gereken ek telafi suyu ayrı kartlarda gösterilir.</p>
+              <p class="text-sm text-slate-400 leading-relaxed max-w-sm">Formdaki bilgileri doldurup hesaplama butonuna basın. Temel günlük su hedefiniz ve girdiğiniz kafeinli içeceklerin toplam hacmi ayrı kartlarda gösterilir.</p>
             </div>
 
             <div id="results" class="hidden result-reveal space-y-5">
@@ -554,7 +555,7 @@
                     <p id="coffee-extra-detail" class="text-xs text-slate-400 mt-1">Kahve tüketilmedi</p>
                   </div>
                   <div class="rounded-xl border border-amber-500/15 bg-amber-500/8 p-4">
-                    <p class="text-xs text-amber-200/70 mb-1">Toplam telafi suyu</p>
+                    <p class="text-xs text-amber-200/70 mb-1">Kafeinli içecek hacmi</p>
                     <strong id="caffeine-extra-liters" class="text-xl font-extrabold text-amber-300">0,00 litre</strong>
                     <p id="caffeine-extra-glasses" class="text-xs text-slate-400 mt-1">0 bardak su</p>
                   </div>
@@ -563,7 +564,7 @@
                 <div class="rounded-xl border border-white/5 bg-navy-900/45 p-4">
                   <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
                     <div>
-                      <p class="text-xs text-slate-500">Temel hedef + telafi suyu</p>
+                      <p class="text-xs text-slate-500">Temel su hedefi</p>
                       <p id="grand-total-formula" class="text-sm text-slate-300 mt-1">0 litre + 0 litre</p>
                     </div>
                     <strong id="grand-total-liters" class="text-3xl font-extrabold text-emerald-400">0,00 litre</strong>
@@ -618,7 +619,7 @@
 
         <div class="mt-8 rounded-2xl border border-white/5 bg-navy-800/60 p-5 sm:p-6">
           <p class="text-xs text-slate-500 leading-relaxed">
-            <strong class="text-slate-300">Hesaplama yöntemi:</strong> Temel tahmin erkeklerde kilo başına 35 ml, kadınlarda kilo başına 31 ml yaklaşımını kullanır; genel yetişkin referanslarına uyum için alt sınır uygulanır. Aktivite, iklim ve hamilelik/emzirme ilaveleri temel hedefe eklenir. Çay için tüketilen hacim kadar, kahve için tüketilen hacmin iki katı telafi suyu ise temel hedeften bağımsız hesaplanır. Bu telafi oranı pratik takip kuralıdır; tıbbi zorunluluk veya kişisel tedavi önerisi değildir.
+            <strong class="text-slate-300">Hesaplama yöntemi:</strong> Temel tahmin erkeklerde kilo başına 35 ml, kadınlarda kilo başına 31 ml yaklaşımını kullanır; genel yetişkin referanslarına uyum için alt sınır uygulanır. Aktivite, iklim ve hamilelik/emzirme ilaveleri temel hedefe eklenir. Çay ve kahve hacmi yalnızca bilgi amaçlı gösterilir; sabit telafi katsayısı kullanılmaz. Toplam su ihtiyacı kişisel ve çevresel koşullara göre değişir.
           </p>
         </div>
       </div>
@@ -626,7 +627,8 @@
   </main>
 
   <!-- =================== FOOTER =================== -->
-  <footer class="bg-navy-950 border-t border-white/5">
+<section class="py-14 bg-navy-900 border-t border-white/5"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><p class="text-emerald-400 text-xs font-bold tracking-widest uppercase">Kaynak ve hesaplama şeffaflığı</p><h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-3">Yöntem, örnek ve sınırlar</h2><div class="grid md:grid-cols-3 gap-5 mt-7"><article class="bg-navy-800 rounded-2xl border border-white/5 p-6"><h3 class="font-bold text-white">Formül / yöntem</h3><p class="text-sm text-slate-400 mt-3 leading-relaxed">Araç kilo temelli pratik bir başlangıç tahmini üretir ve seçilen aktivite/iklim durumuna yaklaşık pay ekler.</p></article><article class="bg-navy-800 rounded-2xl border border-white/5 p-6"><h3 class="font-bold text-white">Çalışılmış örnek</h3><p class="text-sm text-slate-400 mt-3 leading-relaxed">70 kg bir yetişkinde temel tahmin yaklaşık 2,2–2,5 litre/gün aralığındadır; yiyeceklerden gelen su ayrıca toplam alıma katkı sağlar.</p></article><article class="bg-navy-800 rounded-2xl border border-white/5 p-6"><h3 class="font-bold text-white">Sınırlar</h3><p class="text-sm text-slate-400 mt-3 leading-relaxed">Tek bir evrensel “ml/kg” gereksinimi yoktur. Ulusal Akademiler referansları toplam suyu (yiyecek + tüm içecekler) kapsar; böbrek/kalp hastalığında hekim önerisi esastır.</p></article></div><div class="mt-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-xs text-slate-500"><a class="text-emerald-400 underline" href="https://nap.nationalacademies.org/catalog/10925/dietary-reference-intakes-for-water-potassium-sodium-chloride-and-sulfate" target="_blank" rel="noopener">Kaynak: National Academies, Su için Beslenme Referansları</a><span>Son güncelleme: 19 Temmuz 2026</span></div></div></section>
+<footer class="bg-navy-950 border-t border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
@@ -717,7 +719,7 @@
 </nav>
         </div>
         <p class="text-xs text-slate-600 mt-6 text-center leading-relaxed">
-          FinansKolay'daki hesaplamalar yalnızca bilgilendirme amaçlıdır. Finansal kararlarınız için uzman görüşü alınız.
+          FinansKolay'daki hesaplamalar yalnızca bilgilendirme amaçlıdır. Sağlık kararlarınız için uzman görüşü alınız.
         </p>
       </div>
 
@@ -830,14 +832,14 @@
       const glasses = Math.ceil(total / 250);
       const hourly = Math.round((total / 14) / 10) * 10;
 
-      // Çay telafisi tüketilen hacmin 1 katı, kahve telafisi tüketilen hacmin 2 katıdır.
+      // Kafeinli içecek hacimleri bilgi amaçlıdır; sabit telafi katsayısı uygulanmaz.
       // Bu değerler temel günlük su ihtiyacına dahil edilmez; ayrı ek hedef olarak gösterilir.
       const teaExtra = Math.round(teaCount * teaSize);
-      const coffeeExtra = Math.round(coffeeCount * coffeeSize * 2);
+      const coffeeExtra = Math.round(coffeeCount * coffeeSize);
       const caffeineExtra = teaExtra + coffeeExtra;
       const caffeineLiters = caffeineExtra / 1000;
       const caffeineGlasses = caffeineExtra === 0 ? 0 : Math.ceil(caffeineExtra / 250);
-      const grandTotal = total + caffeineExtra;
+      const grandTotal = total;
       const grandTotalLiters = grandTotal / 1000;
 
       setText('total-liters', trNumber(liters, 2));
@@ -855,13 +857,13 @@
         ? `${trNumber(teaCount)} bardak × ${trNumber(teaSize)} ml × 1`
         : 'Çay tüketilmedi');
       setText('coffee-extra-detail', coffeeCount > 0
-        ? `${trNumber(coffeeCount)} fincan × ${trNumber(coffeeSize)} ml × 2`
+        ? `${trNumber(coffeeCount)} fincan × ${trNumber(coffeeSize)} ml`
         : 'Kahve tüketilmedi');
       setText('caffeine-extra-liters', trNumber(caffeineLiters, 2) + ' litre');
       setText('caffeine-extra-glasses', caffeineExtra > 0
         ? `Yaklaşık ${trNumber(caffeineGlasses)} adet 250 ml su bardağı`
-        : 'Ek telafi suyu gerekmiyor');
-      setText('grand-total-formula', `${trNumber(liters, 2)} litre temel hedef + ${trNumber(caffeineLiters, 2)} litre telafi`);
+        : 'Kafeinli içecek girilmedi');
+      setText('grand-total-formula', `${trNumber(liters, 2)} litre temel hedef + ${trNumber(caffeineLiters, 2)} litre içecek hacmi`);
       setText('grand-total-liters', trNumber(grandTotalLiters, 2) + ' litre');
 
       const summaryParts = [
@@ -874,8 +876,8 @@
       notes.push(`Seçtiğiniz “${activity.label}” düzeyi için günlük ${trNumber(activity.extra)} ml aktivite ilavesi kullanıldı.`);
       if (climate.extra > 0) notes.push(`“${climate.label}” seçimi hedefe ${trNumber(climate.extra)} ml ekledi.`);
       if (special.extra > 0) notes.push(`${special.label.charAt(0).toUpperCase() + special.label.slice(1)} için ${trNumber(special.extra)} ml ilave edildi.`);
-      if (teaExtra > 0) notes.push(`${trNumber(teaCount)} bardak çay için temel hedeften ayrı ${trNumber(teaExtra)} ml telafi suyu hesaplandı.`);
-      if (coffeeExtra > 0) notes.push(`${trNumber(coffeeCount)} fincan kahve için temel hedeften ayrı ${trNumber(coffeeExtra)} ml telafi suyu hesaplandı.`);
+      if (teaExtra > 0) notes.push(`${trNumber(teaCount)} bardak çayın toplam hacmi ${trNumber(teaExtra)} ml olarak bilgi amaçlı gösterildi.`);
+      if (coffeeExtra > 0) notes.push(`${trNumber(coffeeCount)} fincan kahvenin toplam hacmi ${trNumber(coffeeExtra)} ml olarak bilgi amaçlı gösterildi.`);
       if (age >= 65) notes.push('65 yaş ve üzerinde susama hissi azalabileceği için sıvıyı düzenli aralıklarla tüketmek önemlidir.');
       if (weight > 120) notes.push('Kilonuz 120 kg üzerinde olduğu için aşırı yüksek sonuçları önlemek amacıyla temel hesaplamada 120 kg üst sınırı kullanıldı.');
       if (total >= 5000) notes.push('Hesaplanan hedef yüksektir. Bu miktarı kısa sürede tüketmeyin; yoğun egzersiz, terleme veya tıbbi durumlar için kişisel uzman değerlendirmesi alın.');
