@@ -189,7 +189,9 @@
     @media (max-width: 639px) {
       .hero-motion-grid { background-size: 48px 48px; }
       .hero-float-card { display: none; }
-      .hero-dashboard { animation-duration: 9s; }
+      .hero-motion-grid, .hero-orb, .hero-dashboard, .hero-chart-dot,
+      .hero-cta-primary::after, .badge-pulse::before { animation: none !important; }
+      .hero-chart-line { stroke-dashoffset: 0; animation: none !important; }
     }
     @media (prefers-reduced-motion: reduce) {
       .hero-motion-grid, .hero-orb, .hero-dashboard, .hero-float-card,
@@ -315,7 +317,7 @@
             </svg>
             Araçlara Göz At
           </a>
-          <button id="burger" onclick="toggleMenu()" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+          <button id="burger" type="button" aria-label="Menüyü aç veya kapat" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMenu()" class="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path id="burger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
@@ -1778,12 +1780,14 @@
     function toggleMenu() {
       const menu = document.getElementById('mobile-menu');
       menu.classList.toggle('open');
+      document.getElementById('burger').setAttribute('aria-expanded', menu.classList.contains('open'));
     }
 
     // Close mobile menu on link click
     document.querySelectorAll('#mobile-menu a').forEach(link => {
       link.addEventListener('click', () => {
         document.getElementById('mobile-menu').classList.remove('open');
+        document.getElementById('burger').setAttribute('aria-expanded', 'false');
       });
     });
 
