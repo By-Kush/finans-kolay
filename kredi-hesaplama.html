@@ -28,28 +28,7 @@
   <meta property="og:description" content="Aylık faiz oranıyla kredi taksitini, toplam faizi ve örnek ödeme planını hesaplayın.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.finans-kolay.com/kredi-hesaplama.html">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            navy: {
-              950: '#070E1A',
-              900: '#0F172A',
-              800: '#1E293B',
-              700: '#263348',
-              600: '#334155',
-            }
-          },
-          fontFamily: {
-            sans: ['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
+  <script src="assets/chart.umd.min.js"></script>
   <style>
     html { scroll-behavior: smooth; }
 
@@ -121,6 +100,7 @@
     .progress-bar { transition: width 0.7s cubic-bezier(0.4,0,0.2,1); }
   </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Kredi Hesaplama: Aylık Taksit ve Toplam Maliyet","url":"https://www.finans-kolay.com/kredi-hesaplama.html","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"author":{"@type":"Organization","name":"FinansKolay","url":"https://www.finans-kolay.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ana Sayfa","item":"https://www.finans-kolay.com/"},{"@type":"ListItem","position":2,"name":"Finans Araçları","item":"https://www.finans-kolay.com/#araclar"},{"@type":"ListItem","position":3,"name":"Kredi Hesaplama: Aylık Taksit ve Toplam Maliyet","item":"https://www.finans-kolay.com/kredi-hesaplama.html"}]}]}</script>
+  <link rel="stylesheet" href="assets/site.css">
 </head>
 <body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
 
@@ -492,7 +472,8 @@
   </main>
 
   <!-- ═══════════════ FOOTER ═══════════════ -->
-  <footer class="bg-navy-950 border-t border-white/5 py-6">
+<section class="py-10 bg-navy-900 border-t border-white/5"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="rounded-2xl border border-emerald-500/15 bg-navy-800 p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-5"><div><p class="text-xs text-emerald-400 font-bold uppercase tracking-widest">İlgili rehber</p><h2 class="text-xl sm:text-2xl font-extrabold text-white mt-2">Kredinin Toplam Maliyeti Nasıl Hesaplanır?</h2><p class="text-sm text-slate-400 mt-2">Formülü, örneği, hata noktalarını ve kaynakları ayrıntılı inceleyin.</p></div><a href="kredi-toplam-maliyeti-nasil-hesaplanir.html" class="inline-flex justify-center px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold whitespace-nowrap">Rehberi oku →</a></div></div></section>
+<footer class="bg-navy-950 border-t border-white/5 py-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-slate-500 mb-4">
         <a href="hakkimizda.html" class="hover:text-emerald-400">Hakkımızda</a><a href="kaynaklar-ve-hesaplama-yontemleri.html" class="hover:text-emerald-400">Kaynaklar ve Yöntem</a><a href="gizlilik-politikasi.html" class="hover:text-emerald-400">Gizlilik</a><a href="kullanim-sartlari.html" class="hover:text-emerald-400">Kullanım Şartları</a>
