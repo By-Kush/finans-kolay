@@ -128,7 +128,7 @@
   </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Detaylı Vergi + Net Maaş Hesaplayıcı","url":"https://www.finans-kolay.com/detayli-vergi-net-maas-hesaplayici.html","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"author":{"@type":"Organization","name":"FinansKolay","url":"https://www.finans-kolay.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ana Sayfa","item":"https://www.finans-kolay.com/"},{"@type":"ListItem","position":2,"name":"Finans Araçları","item":"https://www.finans-kolay.com/#araclar"},{"@type":"ListItem","position":3,"name":"Detaylı Vergi + Net Maaş Hesaplayıcı","item":"https://www.finans-kolay.com/detayli-vergi-net-maas-hesaplayici.html"}]}]}</script>
   <link rel="stylesheet" href="assets/site.css">
-</head>
+<style data-site-shell>.navbar-blur{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background-color:rgba(15,23,42,.92);border-bottom:1px solid rgba(16,185,129,.12)}#mobile-menu{display:none}#mobile-menu.open{display:block}</style></head>
 <body class="bg-navy-900 text-slate-100 font-sans antialiased">
 
   <!-- =================== NAVBAR =================== -->
@@ -154,7 +154,7 @@
           <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
           <a href="index.html#araclar" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
           <a href="index.html#kategoriler" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
-          <a href="index.html#hakkimizda" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+          <a href="rehberler.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Rehberler</a><a href="hakkimizda.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
         </nav>
 
         <!-- CTA + Mobile burger -->
@@ -165,7 +165,7 @@
             </svg>
             Araçlara Göz At
           </a>
-          <button id="burger" onclick="toggleMenu()" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+          <button id="burger" type="button" aria-label="Menüyü aç veya kapat" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMenu()" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path id="burger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
@@ -179,7 +179,7 @@
           <a href="index.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
           <a href="index.html#araclar" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
           <a href="index.html#kategoriler" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
-          <a href="index.html#hakkimizda" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+          <a href="rehberler.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Rehberler</a><a href="hakkimizda.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
           <a href="index.html#araclar" class="mt-2 mx-0 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all text-center">Araçlara Göz At</a>
         </nav>
       </div>
@@ -431,8 +431,8 @@
             <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">Hızlı Bağlantılar</h4>
             <nav class="flex flex-col gap-3">
   		    <a href="index.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Ana Sayfa</a>
-  		    <a href="#araclar" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Araçlar</a>
-  		    <a href="#kategoriler" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kategoriler</a>
+  		    <a href="index.html#araclar" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Araçlar</a>
+  		    <a href="index.html#kategoriler" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kategoriler</a>
   		    <a href="hakkimizda.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Hakkımızda</a>
   		    <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kaynaklar ve Yöntem</a>
   		    <a href="gizlilik-politikasi.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Gizlilik Politikası</a>
@@ -645,5 +645,6 @@
       results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
   </script>
-</body>
+<script data-site-shell>function toggleMenu(){const menu=document.getElementById('mobile-menu');if(!menu)return;menu.classList.toggle('open');const button=document.getElementById('burger');if(button)button.setAttribute('aria-expanded',menu.classList.contains('open'));}document.querySelectorAll('#mobile-menu a').forEach(link=>link.addEventListener('click',()=>{const menu=document.getElementById('mobile-menu');if(menu)menu.classList.remove('open');const button=document.getElementById('burger');if(button)button.setAttribute('aria-expanded','false');}));const siteHeader=document.querySelector('header');window.addEventListener('scroll',()=>{if(siteHeader)siteHeader.style.boxShadow=window.scrollY>10?'0 4px 32px rgba(0,0,0,.4)':'none';},{passive:true});</script></body>
 </html>
+

@@ -1,10 +1,158 @@
 <!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mevduat Faizi Net Getiri Hesaplama | FinansKolay</title><meta name="description" content="Anapara, yıllık brüt faiz, vade ve stopaj oranıyla brüt ve net mevduat getirisini hesaplayın."><link rel="canonical" href="https://www.finans-kolay.com/mevduat-faizi-net-getiri.html"><meta property="og:type" content="website"><meta property="og:title" content="Mevduat Faizi Net Getiri Hesaplama | FinansKolay"><meta property="og:description" content="Anapara, yıllık brüt faiz, vade ve stopaj oranıyla brüt ve net mevduat getirisini hesaplayın."><meta property="og:url" content="https://www.finans-kolay.com/mevduat-faizi-net-getiri.html"><meta property="og:image" content="https://www.finans-kolay.com/assets/og-image.png"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Mevduat Faizi Net Getiri Hesaplama","url":"https://www.finans-kolay.com/mevduat-faizi-net-getiri.html","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"author":{"@type":"Organization","name":"FinansKolay","url":"https://www.finans-kolay.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ana Sayfa","item":"https://www.finans-kolay.com/"},{"@type":"ListItem","position":2,"name":"Finans Araçları","item":"https://www.finans-kolay.com/#araclar"},{"@type":"ListItem","position":3,"name":"Mevduat Faizi Net Getiri Hesaplama","item":"https://www.finans-kolay.com/mevduat-faizi-net-getiri.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Stopaj oranı neden serbest giriliyor?","acceptedAnswer":{"@type":"Answer","text":"Oran; ürün, para birimi, açılış/yenileme tarihi ve vadeye göre değişebilir. Bu nedenle güncel banka bilgisini girmek daha güvenlidir."}},{"@type":"Question","name":"Banka sonucu neden farklı olabilir?","acceptedAnswer":{"@type":"Answer","text":"Valör, 360/365 gün esası, kampanya koşulları ve yuvarlama yöntemleri küçük farklar yaratabilir."}}]}]}</script><style>*{box-sizing:border-box}body{font-family:Inter,ui-sans-serif,system-ui;background:#07101f;color:#e2e8f0}label{display:block;font-size:.86rem;font-weight:700;color:#cbd5e1}input,select{width:100%;margin-top:.5rem;padding:.85rem 1rem;border-radius:.75rem;background:#0f172a;border:1px solid #334155;color:white;outline:none}input:focus,select:focus{border-color:#10b981;box-shadow:0 0 0 3px #10b98122}small{display:block;color:#64748b;margin-top:.45rem;font-weight:400}.card{background:#172033;border:1px solid #ffffff0d;border-radius:1rem}.result{background:#0f172a;border:1px solid #ffffff0d;border-radius:.8rem;padding:1rem}.hero{background:radial-gradient(circle at 15% 20%,#10b9811e,transparent 35%),linear-gradient(135deg,#07101f,#0f172a)}</style>  <link rel="stylesheet" href="assets/site.css">
-</head><body>
-<header class="sticky top-0 z-30 bg-navy-950/95 backdrop-blur border-b border-white/5"><div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between"><a href="index.html" class="flex items-center gap-2 font-extrabold text-xl text-white"><span class="w-9 h-9 rounded-lg bg-emerald-500 grid place-items-center">▥</span>Finans<span class="text-emerald-400 -ml-2">Kolay</span></a><nav class="hidden md:flex gap-2 text-sm"><a href="index.html#araclar" class="px-4 py-2 hover:bg-white/5 rounded-lg">Araçlar</a><a href="kaynaklar-ve-hesaplama-yontemleri.html" class="px-4 py-2 hover:bg-white/5 rounded-lg">Kaynaklar ve Yöntem</a><a href="hakkimizda.html" class="px-4 py-2 hover:bg-white/5 rounded-lg">Hakkımızda</a></nav></div></header>
-<main><section class="hero py-16 sm:py-24"><div class="max-w-5xl mx-auto px-4"><a href="index.html#araclar" class="text-sm text-emerald-400">← Finans araçlarına dön</a><div class="mt-8 grid lg:grid-cols-[1.1fr_.9fr] gap-10 items-center"><div><div class="text-5xl mb-5">🏦</div><p class="text-emerald-400 uppercase tracking-widest text-xs font-bold">Ücretsiz Finans Aracı</p><h1 class="text-4xl sm:text-5xl font-black text-white mt-3 leading-tight">Mevduat Faizi Net Getiri Hesaplama</h1><p class="text-slate-400 text-lg leading-relaxed mt-5">Stopaj oranını bankanızdaki ürün ve vadeye göre girerek net vade sonu tutarını görün.</p></div><form id="calc" class="card p-6 sm:p-8 space-y-5"><label>Anapara (TL)<input id="amount" type="number" min="1" step="0.01" value="100000" required></label><label>Yıllık brüt faiz (%)<input id="rate" type="number" min="0" max="500" step="0.01" value="45" required></label><label>Vade (gün)<input id="days" type="number" min="1" max="3660" step="1" value="32" required></label><label>Stopaj oranı (%)<input id="tax" type="number" min="0" max="100" step="0.01" value="17.5" required><small>Güncel ürün oranını bankanızdan doğrulayın.</small></label><div id="err" class="hidden text-rose-300 text-sm">Lütfen geçerli değerler girin.</div><button class="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold transition">Hesapla</button></form></div></div></section>
-<section class="py-16 bg-navy-900"><div class="max-w-5xl mx-auto px-4"><h2 class="text-3xl font-black text-white">Hesaplama sonucu</h2><div class="grid md:grid-cols-3 gap-4 mt-7"><div class="result"><p class="text-xs text-slate-500 uppercase tracking-wide">Brüt faiz getirisi</p><strong id="r0" class="block text-2xl text-white mt-2">—</strong></div><div class="result"><p class="text-xs text-slate-500 uppercase tracking-wide">Stopaj kesintisi</p><strong id="r1" class="block text-2xl text-white mt-2">—</strong></div><div class="result"><p class="text-xs text-slate-500 uppercase tracking-wide">Net vade sonu</p><strong id="r2" class="block text-2xl text-white mt-2">—</strong></div></div></div></section>
+<style data-site-shell>.navbar-blur{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background-color:rgba(15,23,42,.92);border-bottom:1px solid rgba(16,185,129,.12)}#mobile-menu{display:none}#mobile-menu.open{display:block}</style></head><body class="bg-navy-900 text-slate-100 font-sans antialiased">
+<header class="navbar-blur fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <span class="text-lg font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+            Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span>
+          </span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-1">
+          <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
+          <a href="index.html#araclar" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
+          <a href="index.html#kategoriler" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
+          <a href="rehberler.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Rehberler</a><a href="hakkimizda.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+        </nav>
+
+        <!-- CTA + Mobile burger -->
+        <div class="flex items-center gap-3">
+          <a href="index.html#araclar" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Araçlara Göz At
+          </a>
+          <button id="burger" type="button" aria-label="Menüyü aç veya kapat" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMenu()" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path id="burger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden pb-4 border-t border-white/5 mt-1">
+        <nav class="flex flex-col gap-1 pt-3">
+          <a href="index.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
+          <a href="index.html#araclar" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
+          <a href="index.html#kategoriler" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
+          <a href="rehberler.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Rehberler</a><a href="hakkimizda.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+          <a href="index.html#araclar" class="mt-2 mx-0 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all text-center">Araçlara Göz At</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+<main><section class="hero-bg grid-overlay pt-32 pb-16"><div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"><div class="text-5xl mb-5" aria-hidden="true">🏦</div><div class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/25 rounded-full mb-6"><span class="badge-pulse text-emerald-400 text-xs font-semibold tracking-wide uppercase">Ücretsiz Hesaplayıcı</span></div><h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-5">Mevduat Faizi Net Getiri Hesaplama</h1><p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">Stopaj oranını bankanızdaki ürün ve vadeye göre girerek net vade sonu tutarını görün.</p></div></section><section class="py-16 bg-navy-900"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-5 gap-8"><div class="lg:col-span-2"><form id="calc" class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl space-y-5"><label>Anapara (TL)<input id="amount" type="number" min="1" step="0.01" value="100000" required></label><label>Yıllık brüt faiz (%)<input id="rate" type="number" min="0" max="500" step="0.01" value="45" required></label><label>Vade (gün)<input id="days" type="number" min="1" max="3660" step="1" value="32" required></label><label>Stopaj oranı (%)<input id="tax" type="number" min="0" max="100" step="0.01" value="17.5" required><small>Güncel ürün oranını bankanızdan doğrulayın.</small></label><div id="err" class="hidden text-rose-300 text-sm">Lütfen geçerli değerler girin.</div><button class="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold transition">Hesapla</button></form></div><div class="lg:col-span-3 bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl"><h2 class="text-2xl font-extrabold text-white mb-6">Hesaplama sonucu</h2><div class="grid sm:grid-cols-2 gap-4"><div class="result"><p class="text-xs text-slate-500 uppercase tracking-wide">Brüt faiz getirisi</p><strong id="r0" class="block text-2xl text-white mt-2">—</strong></div><div class="result"><p class="text-xs text-slate-500 uppercase tracking-wide">Stopaj kesintisi</p><strong id="r1" class="block text-2xl text-white mt-2">—</strong></div><div class="result"><p class="text-xs text-slate-500 uppercase tracking-wide">Net vade sonu</p><strong id="r2" class="block text-2xl text-white mt-2">—</strong></div></div></div></div></div></section>
 <section class="py-16"><div class="max-w-5xl mx-auto px-4 grid lg:grid-cols-2 gap-6"><article class="card p-7"><h2 class="text-xl font-extrabold text-white">Yöntem ve örnek</h2><p class="mt-4 text-slate-400 leading-relaxed"><strong class="text-slate-200">Formül:</strong> Brüt faiz = anapara × yıllık faiz × gün / 365. Stopaj = brüt faiz × stopaj oranı. Net tutar = anapara + brüt faiz − stopaj.</p><p class="mt-4 text-slate-400 leading-relaxed"><strong class="text-slate-200">Örnek:</strong> 100.000 TL, %45 yıllık faiz, 32 gün ve %17,5 stopaj için brüt getiri yaklaşık 3.945 TL’dir; kesin tutarda banka valörü ve gün esası farklı olabilir.</p><p class="mt-4 text-xs text-slate-500">Son güncelleme: 19 Temmuz 2026</p><a href="https://www.gib.gov.tr/yardim-ve-kaynaklar/rehberler" target="_blank" rel="noopener" class="inline-block mt-4 text-sm text-emerald-400 underline">Kaynak: GİB — Gelir Vergisi Kanunu Geçici 67. madde rehberi</a></article><article class="card p-7"><h2 class="text-xl font-extrabold text-white">Önemli sınırlar</h2><p class="mt-4 text-slate-400 leading-relaxed">Sonuç bilgilendirme amaçlı yaklaşık hesaplamadır. Sözleşme, vergi, banka ürünü, yuvarlama ve kişisel koşullar sonucu değiştirebilir. İşlem yapmadan önce güncel resmi kaynak ve ilgili kurumla doğrulayın.</p></article></div></section>
 <section class="py-16 bg-navy-900"><div class="max-w-5xl mx-auto px-4"><h2 class="text-3xl font-black text-white">Sıkça sorulan sorular</h2><div class="grid md:grid-cols-2 gap-5 mt-7"><article class="card p-6"><h3 class="font-bold text-white">Stopaj oranı neden serbest giriliyor?</h3><p class="text-sm text-slate-400 mt-3 leading-relaxed">Oran; ürün, para birimi, açılış/yenileme tarihi ve vadeye göre değişebilir. Bu nedenle güncel banka bilgisini girmek daha güvenlidir.</p></article><article class="card p-6"><h3 class="font-bold text-white">Banka sonucu neden farklı olabilir?</h3><p class="text-sm text-slate-400 mt-3 leading-relaxed">Valör, 360/365 gün esası, kampanya koşulları ve yuvarlama yöntemleri küçük farklar yaratabilir.</p></article></div></div></section></main>
 <section class="py-10 bg-navy-900 border-t border-white/5"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="rounded-2xl border border-emerald-500/15 bg-navy-800 p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-5"><div><p class="text-xs text-emerald-400 font-bold uppercase tracking-widest">İlgili rehber</p><h2 class="text-xl sm:text-2xl font-extrabold text-white mt-2">Mevduat Faizi ve Net Getiri Rehberi</h2><p class="text-sm text-slate-400 mt-2">Formülü, örneği, hata noktalarını ve kaynakları ayrıntılı inceleyin.</p></div><a href="mevduat-faizi-net-getiri-rehberi.html" class="inline-flex justify-center px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold whitespace-nowrap">Rehberi oku →</a></div></div></section>
-<footer class="border-t border-white/5 py-10"><div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row gap-4 justify-between text-sm text-slate-500"><p>© 2026 FinansKolay. Tüm hakları saklıdır.</p><nav class="flex flex-wrap gap-4"><a href="hakkimizda.html">Hakkımızda</a><a href="gizlilik-politikasi.html">Gizlilik</a><a href="kullanim-sartlari.html">Kullanım Şartları</a></nav></div><p class="max-w-5xl mx-auto px-4 mt-5 text-xs text-slate-600">Hesaplamalar bilgilendirme amaçlıdır; finansal, hukuki veya vergisel danışmanlık değildir.</p></footer>
-<script>const num=id=>Number(document.getElementById(id).value),tr=n=>Number(n).toLocaleString('tr-TR',{maximumFractionDigits:2}),money=n=>tr(n)+' TL';function error(){document.getElementById('err').classList.remove('hidden')}function show(a,b,c){showText(money(a),b,c)}function showText(a,b,c){document.getElementById('err').classList.add('hidden');document.getElementById('r0').textContent=a;document.getElementById('r1').textContent=money(b);document.getElementById('r2').textContent=money(c)}document.getElementById('calc').addEventListener('submit',e=>{e.preventDefault();const a=num('amount'),r=num('rate'),d=num('days'),t=num('tax');if(a<=0||r<0||d<=0||t<0||t>100)return error();const gross=a*r/100*d/365,tax=gross*t/100;show(gross,tax,a+gross-tax);});const mode=document.getElementById('mode');if(mode&&document.getElementById('dynamicLabel'))mode.addEventListener('change',()=>{document.getElementById('dynamicLabel').childNodes[0].nodeValue=mode.value==='rate'?'Yeni maaş (TL)':'Zam oranı (%)'});document.getElementById('calc').requestSubmit();</script></body></html>
+<footer class="bg-navy-950 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
+
+          <!-- Brand column -->
+          <div class="lg:col-span-2">
+            <a href="index.html" class="flex items-center gap-2.5 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+              </div>
+              <span class="font-bold text-white text-lg">Finans<span class="text-emerald-400">Kolay</span></span>
+            </a>
+            <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+              Türkiye'nin ücretsiz finans ve hayat araçları platformu. Kredi, vergi, emeklilik ve
+              daha fazlasını saniyeler içinde hesaplayın — kayıt gerekmez, tamamen ücretsiz.
+            </p>
+          </div>
+
+          <!-- Quick links -->
+          <div>
+            <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">Hızlı Bağlantılar</h4>
+            <nav class="flex flex-col gap-3">
+  		    <a href="index.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Ana Sayfa</a>
+  		    <a href="index.html#araclar" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Araçlar</a>
+  		    <a href="index.html#kategoriler" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kategoriler</a>
+  		    <a href="hakkimizda.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Hakkımızda</a>
+  		    <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kaynaklar ve Yöntem</a>
+  		    <a href="gizlilik-politikasi.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Gizlilik Politikası</a>
+  			<a href="kullanim-sartlari.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kullanım Şartları</a>
+              <a href="kvkk-aydinlatma-metni.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">KVKK Aydınlatma Metni</a>
+  </nav>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">İletişim</h4>
+            <div class="flex flex-col gap-3 text-sm text-slate-400">
+              <p class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                info@finans-kolay.com
+              </p>
+              <p class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                İstanbul, Türkiye
+              </p>
+              <div class="flex items-center gap-3 mt-1">
+                <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="5" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="3.5" stroke-width="2"/>
+                    <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/>
+                  </svg>
+                </a>
+                <a href="#" aria-label="X / Twitter" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.26 10.99h-6.466l-5.07-6.62-5.793 6.62H1.943l7.73-8.83-7.93-10.42h6.622l4.58 6.05 5.792-6.05Z"/>
+                  </svg>
+                </a>
+                <a href="#" aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-white/5 pt-8">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-sm text-slate-600 order-2 sm:order-1">
+              © 2026 FinansKolay. Tüm hakları saklıdır.
+            </p>
+            <nav class="flex items-center gap-6 text-sm text-slate-500 order-1 sm:order-2">
+  		    <a href="hakkimizda.html" class="hover:text-slate-300 transition-colors">Hakkımızda</a>
+  		    <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="hover:text-slate-300 transition-colors">Kaynaklar ve Yöntem</a>
+  		    <a href="gizlilik-politikasi.html" class="hover:text-slate-300 transition-colors">Gizlilik Politikası</a>
+  		    <a href="kullanim-sartlari.html" class="hover:text-slate-300 transition-colors">Kullanım Şartları</a>
+  		    <a href="kvkk-aydinlatma-metni.html" class="hover:text-slate-300 transition-colors">KVKK Aydınlatma Metni</a>
+  </nav>
+          </div>
+          <p class="text-xs text-slate-600 mt-6 text-center leading-relaxed">
+            FinansKolay'daki hesaplamalar yalnızca bilgilendirme amaçlıdır. Finansal kararlarınız için uzman görüşü alınız.
+          </p>
+        </div>
+
+      </div>
+  </footer>
+<script>const num=id=>Number(document.getElementById(id).value),tr=n=>Number(n).toLocaleString('tr-TR',{maximumFractionDigits:2}),money=n=>tr(n)+' TL';function error(){document.getElementById('err').classList.remove('hidden')}function show(a,b,c){showText(money(a),b,c)}function showText(a,b,c){document.getElementById('err').classList.add('hidden');document.getElementById('r0').textContent=a;document.getElementById('r1').textContent=money(b);document.getElementById('r2').textContent=money(c)}document.getElementById('calc').addEventListener('submit',e=>{e.preventDefault();const a=num('amount'),r=num('rate'),d=num('days'),t=num('tax');if(a<=0||r<0||d<=0||t<0||t>100)return error();const gross=a*r/100*d/365,tax=gross*t/100;show(gross,tax,a+gross-tax);});const mode=document.getElementById('mode');if(mode&&document.getElementById('dynamicLabel'))mode.addEventListener('change',()=>{document.getElementById('dynamicLabel').childNodes[0].nodeValue=mode.value==='rate'?'Yeni maaş (TL)':'Zam oranı (%)'});document.getElementById('calc').requestSubmit();</script><script data-site-shell>function toggleMenu(){const menu=document.getElementById('mobile-menu');if(!menu)return;menu.classList.toggle('open');const button=document.getElementById('burger');if(button)button.setAttribute('aria-expanded',menu.classList.contains('open'));}document.querySelectorAll('#mobile-menu a').forEach(link=>link.addEventListener('click',()=>{const menu=document.getElementById('mobile-menu');if(menu)menu.classList.remove('open');const button=document.getElementById('burger');if(button)button.setAttribute('aria-expanded','false');}));const siteHeader=document.querySelector('header');window.addEventListener('scroll',()=>{if(siteHeader)siteHeader.style.boxShadow=window.scrollY>10?'0 4px 32px rgba(0,0,0,.4)':'none';},{passive:true});</script></body></html>
+

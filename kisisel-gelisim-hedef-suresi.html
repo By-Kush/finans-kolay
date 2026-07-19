@@ -253,17 +253,20 @@
 </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Kişisel Gelişim Hedef Süresi Hesaplayıcı","url":"https://www.finans-kolay.com/kisisel-gelisim-hedef-suresi.html","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"author":{"@type":"Organization","name":"FinansKolay","url":"https://www.finans-kolay.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ana Sayfa","item":"https://www.finans-kolay.com/"},{"@type":"ListItem","position":2,"name":"Finans Araçları","item":"https://www.finans-kolay.com/#araclar"},{"@type":"ListItem","position":3,"name":"Kişisel Gelişim Hedef Süresi Hesaplayıcı","item":"https://www.finans-kolay.com/kisisel-gelisim-hedef-suresi.html"}]}]}</script>
   <link rel="stylesheet" href="assets/site.css">
-</head>
+<style data-site-shell>.navbar-blur{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background-color:rgba(15,23,42,.92);border-bottom:1px solid rgba(16,185,129,.12)}#mobile-menu{display:none}#mobile-menu.open{display:block}</style></head>
 <body class="bg-navy-900 text-slate-100 font-sans antialiased">
 
   <!-- =================== NAVBAR =================== -->
   <header class="navbar-blur fixed top-0 left-0 right-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
         <a href="index.html" class="flex items-center gap-2.5 group">
           <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
             </svg>
           </div>
           <span class="text-lg font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
@@ -271,14 +274,15 @@
           </span>
         </a>
 
+        <!-- Desktop Nav -->
         <nav class="hidden md:flex items-center gap-1">
           <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
           <a href="index.html#araclar" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
           <a href="index.html#kategoriler" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
-          <a href="hakkimizda.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
-          <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kaynaklar ve Yöntem</a>
+          <a href="rehberler.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Rehberler</a><a href="hakkimizda.html" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
         </nav>
 
+        <!-- CTA + Mobile burger -->
         <div class="flex items-center gap-3">
           <a href="index.html#araclar" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -286,7 +290,7 @@
             </svg>
             Araçlara Göz At
           </a>
-          <button id="burger" onclick="toggleMenu()" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all" aria-label="Mobil menüyü aç veya kapat">
+          <button id="burger" type="button" aria-label="Menüyü aç veya kapat" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMenu()" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path id="burger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
@@ -294,16 +298,13 @@
         </div>
       </div>
 
+      <!-- Mobile Menu -->
       <div id="mobile-menu" class="md:hidden pb-4 border-t border-white/5 mt-1">
         <nav class="flex flex-col gap-1 pt-3">
           <a href="index.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
           <a href="index.html#araclar" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Araçlar</a>
           <a href="index.html#kategoriler" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kategoriler</a>
-          <a href="hakkimizda.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
-          <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kaynaklar ve Yöntem</a>
-          <a href="gizlilik-politikasi.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Gizlilik Politikası</a>
-          <a href="kullanim-sartlari.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Kullanım Şartları</a>
-          <a href="kvkk-aydinlatma-metni.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">KVKK Aydınlatma Metni</a>
+          <a href="rehberler.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Rehberler</a><a href="hakkimizda.html" class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
           <a href="index.html#araclar" class="mt-2 mx-0 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-all text-center">Araçlara Göz At</a>
         </nav>
       </div>
@@ -503,83 +504,101 @@
   </main>
 
   <footer class="bg-navy-950 border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
-        <div class="lg:col-span-2">
-          <a href="index.html" class="flex items-center gap-2.5 mb-4">
-            <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-              </svg>
-            </div>
-            <span class="font-bold text-white text-lg">Finans<span class="text-emerald-400">Kolay</span></span>
-          </a>
-          <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
-            Türkiye'nin ücretsiz finans ve hayat araçları platformu. Kredi, vergi, emeklilik ve daha fazlasını saniyeler içinde hesaplayın — kayıt gerekmez, tamamen ücretsiz.
-          </p>
-        </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
-        <div>
-          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">Hızlı Bağlantılar</h4>
-          <nav class="flex flex-col gap-3">
-            <a href="index.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Ana Sayfa</a>
-            <a href="index.html#araclar" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Araçlar</a>
-            <a href="index.html#kategoriler" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kategoriler</a>
-            <a href="hakkimizda.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Hakkımızda</a>
-            <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kaynaklar ve Yöntem</a>
-            <a href="gizlilik-politikasi.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Gizlilik Politikası</a>
-            <a href="kullanim-sartlari.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kullanım Şartları</a>
-            <a href="kvkk-aydinlatma-metni.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">KVKK Aydınlatma Metni</a>
-          </nav>
-        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
 
-        <div>
-          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">İletişim</h4>
-          <div class="flex flex-col gap-3 text-sm text-slate-400">
-            <p class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-              </svg>
-              info@finans-kolay.com
+          <!-- Brand column -->
+          <div class="lg:col-span-2">
+            <a href="index.html" class="flex items-center gap-2.5 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+              </div>
+              <span class="font-bold text-white text-lg">Finans<span class="text-emerald-400">Kolay</span></span>
+            </a>
+            <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+              Türkiye'nin ücretsiz finans ve hayat araçları platformu. Kredi, vergi, emeklilik ve
+              daha fazlasını saniyeler içinde hesaplayın — kayıt gerekmez, tamamen ücretsiz.
             </p>
-            <p class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-              </svg>
-              İstanbul, Türkiye
-            </p>
-            <div class="flex items-center gap-3 mt-1">
-              <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke-width="2"/><circle cx="12" cy="12" r="3.5" stroke-width="2"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
-              </a>
-              <a href="#" aria-label="X / Twitter" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.26 10.99h-6.466l-5.07-6.62-5.793 6.62H1.943l7.73-8.83-7.93-10.42h6.622l4.58 6.05 5.792-6.05Z"/></svg>
-              </a>
-              <a href="#" aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
-              </a>
+          </div>
+
+          <!-- Quick links -->
+          <div>
+            <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">Hızlı Bağlantılar</h4>
+            <nav class="flex flex-col gap-3">
+  		    <a href="index.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Ana Sayfa</a>
+  		    <a href="index.html#araclar" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Araçlar</a>
+  		    <a href="index.html#kategoriler" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kategoriler</a>
+  		    <a href="hakkimizda.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Hakkımızda</a>
+  		    <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kaynaklar ve Yöntem</a>
+  		    <a href="gizlilik-politikasi.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Gizlilik Politikası</a>
+  			<a href="kullanim-sartlari.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kullanım Şartları</a>
+              <a href="kvkk-aydinlatma-metni.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">KVKK Aydınlatma Metni</a>
+  </nav>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-4">İletişim</h4>
+            <div class="flex flex-col gap-3 text-sm text-slate-400">
+              <p class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                info@finans-kolay.com
+              </p>
+              <p class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                İstanbul, Türkiye
+              </p>
+              <div class="flex items-center gap-3 mt-1">
+                <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="5" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="3.5" stroke-width="2"/>
+                    <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/>
+                  </svg>
+                </a>
+                <a href="#" aria-label="X / Twitter" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.26 10.99h-6.466l-5.07-6.62-5.793 6.62H1.943l7.73-8.83-7.93-10.42h6.622l4.58 6.05 5.792-6.05Z"/>
+                  </svg>
+                </a>
+                <a href="#" aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-emerald-500/15 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/>
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="border-t border-white/5 pt-8">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p class="text-sm text-slate-600 order-2 sm:order-1">© 2026 FinansKolay. Tüm hakları saklıdır.</p>
-          <nav class="flex items-center gap-6 text-sm text-slate-500 order-1 sm:order-2">
-            <a href="hakkimizda.html" class="hover:text-slate-300 transition-colors">Hakkımızda</a>
-            <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="hover:text-slate-300 transition-colors">Kaynaklar ve Yöntem</a>
-            <a href="gizlilik-politikasi.html" class="hover:text-slate-300 transition-colors">Gizlilik Politikası</a>
-            <a href="kullanim-sartlari.html" class="hover:text-slate-300 transition-colors">Kullanım Şartları</a>
-            <a href="kvkk-aydinlatma-metni.html" class="hover:text-slate-300 transition-colors">KVKK Aydınlatma Metni</a>
-          </nav>
+        <!-- Divider -->
+        <div class="border-t border-white/5 pt-8">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-sm text-slate-600 order-2 sm:order-1">
+              © 2026 FinansKolay. Tüm hakları saklıdır.
+            </p>
+            <nav class="flex items-center gap-6 text-sm text-slate-500 order-1 sm:order-2">
+  		    <a href="hakkimizda.html" class="hover:text-slate-300 transition-colors">Hakkımızda</a>
+  		    <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="hover:text-slate-300 transition-colors">Kaynaklar ve Yöntem</a>
+  		    <a href="gizlilik-politikasi.html" class="hover:text-slate-300 transition-colors">Gizlilik Politikası</a>
+  		    <a href="kullanim-sartlari.html" class="hover:text-slate-300 transition-colors">Kullanım Şartları</a>
+  		    <a href="kvkk-aydinlatma-metni.html" class="hover:text-slate-300 transition-colors">KVKK Aydınlatma Metni</a>
+  </nav>
+          </div>
+          <p class="text-xs text-slate-600 mt-6 text-center leading-relaxed">
+            FinansKolay'daki hesaplamalar yalnızca bilgilendirme amaçlıdır. Finansal kararlarınız için uzman görüşü alınız.
+          </p>
         </div>
-        <p class="text-xs text-slate-600 mt-6 text-center leading-relaxed">
-          FinansKolay'daki hesaplamalar yalnızca bilgilendirme amaçlıdır. Finansal kararlarınız için uzman görüşü alınız.
-        </p>
+
       </div>
-    </div>
   </footer>
 
 
@@ -787,5 +806,6 @@
 
   form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
 </script>
-</body>
+<script data-site-shell>function toggleMenu(){const menu=document.getElementById('mobile-menu');if(!menu)return;menu.classList.toggle('open');const button=document.getElementById('burger');if(button)button.setAttribute('aria-expanded',menu.classList.contains('open'));}document.querySelectorAll('#mobile-menu a').forEach(link=>link.addEventListener('click',()=>{const menu=document.getElementById('mobile-menu');if(menu)menu.classList.remove('open');const button=document.getElementById('burger');if(button)button.setAttribute('aria-expanded','false');}));const siteHeader=document.querySelector('header');window.addEventListener('scroll',()=>{if(siteHeader)siteHeader.style.boxShadow=window.scrollY>10?'0 4px 32px rgba(0,0,0,.4)':'none';},{passive:true});</script></body>
 </html>
+
