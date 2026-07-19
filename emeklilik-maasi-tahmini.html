@@ -5,32 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Title -->
-  <title>Emeklilik Maaşı Tahmini | FinansKolay</title>
+  <title>Emeklilik Geliri Senaryosu | FinansKolay</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Yaşınız, prim gün sayınız ve ortalama kazancınıza göre tahmini emeklilik maaşınızı hesaplayın. Bugünkü ve gelecekteki değeri, kalan yılı ve toplam prim ödemesini görün." />
-  <meta name="keywords" content="emeklilik maaşı hesaplama, emeklilik tahmini, SGK emeklilik hesaplama, bağlama oranı hesaplama, prim gün sayısı hesaplama, emeklilik planlama" />
+  <meta name="description" content="Kazancınıza ve seçtiğiniz gelir oranına göre bugünkü ve gelecekteki emeklilik geliri senaryosu oluşturun; resmî SGK hesabının sınırlarını öğrenin." />
+  <meta name="keywords" content="emeklilik geliri senaryosu, emeklilik planlama, prim gün sayısı, emeklilik geliri oranı" />
   <meta name="author" content="FinansKolay" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.finanskolay.com/emeklilik-maasi-tahmini.html" />
+  <link rel="canonical" href="https://www.finans-kolay.com/emeklilik-maasi-tahmini.html" />
 
   <!-- Open Graph / Facebook, LinkedIn, WhatsApp -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="FinansKolay" />
   <meta property="og:locale" content="tr_TR" />
-  <meta property="og:url" content="https://www.finanskolay.com/emeklilik-maasi-tahmini.html" />
-  <meta property="og:title" content="Emeklilik Maaşı Tahmini | FinansKolay" />
-  <meta property="og:description" content="Yaşınız, prim gün sayınız ve ortalama kazancınıza göre tahmini emeklilik maaşınızı hesaplayın." />
-  <meta property="og:image" content="https://www.finanskolay.com/assets/og-image.png" />
+  <meta property="og:url" content="https://www.finans-kolay.com/emeklilik-maasi-tahmini.html" />
+  <meta property="og:title" content="Emeklilik Geliri Senaryosu | FinansKolay" />
+  <meta property="og:description" content="Kazancınız ve seçtiğiniz gelir oranıyla şeffaf bir emeklilik geliri senaryosu oluşturun." />
+  <meta property="og:image" content="https://www.finans-kolay.com/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="FinansKolay - Emeklilik Maaşı Tahmini" />
+  <meta property="og:image:alt" content="FinansKolay - Emeklilik Geliri Senaryosu" />
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Emeklilik Maaşı Tahmini | FinansKolay" />
-  <meta name="twitter:description" content="Tahmini emeklilik maaşınızı, kalan yılınızı ve toplam prim ödemenizi hesaplayın." />
-  <meta name="twitter:image" content="https://www.finanskolay.com/assets/og-image.png" />
+  <meta name="twitter:title" content="Emeklilik Geliri Senaryosu | FinansKolay" />
+  <meta name="twitter:description" content="Kazancınız ve seçtiğiniz oranla emeklilik geliri senaryosu oluşturun." />
+  <meta name="twitter:image" content="https://www.finans-kolay.com/assets/og-image.png" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Crect width='24' height='24' rx='5' fill='%230F172A'/%3E%3Cpath d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' stroke='%2310B981' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
@@ -213,11 +213,11 @@
         <span class="badge-pulse text-emerald-400 text-xs font-semibold tracking-wide uppercase">Ücretsiz Hesaplayıcı</span>
       </div>
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-5">
-        Emeklilik Maaşı <span class="text-gradient">Tahmini</span>
+        Emeklilik Geliri <span class="text-gradient">Senaryosu</span>
       </h1>
       <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
-        Yaşınızı, prim gün sayınızı ve ortalama kazancınızı girin; bugünkü ve gelecekteki
-        değeriyle tahmini emeklilik maaşınızı görün.
+        Ortalama kazancınızı ve emeklilikte hedeflediğiniz gelir oranını girin; bugünkü satın alma gücüyle
+        ve seçtiğiniz enflasyon varsayımıyla senaryo sonucunu görün.
       </p>
     </div>
   </section>
@@ -264,6 +264,13 @@
             </div>
 
             <div>
+              <label for="gelirOrani" class="block text-sm font-medium text-slate-300 mb-2">Emeklilik Geliri / Kazanç Oranı (%)</label>
+              <input type="number" id="gelirOrani" min="1" max="100" step="1" required value="50"
+                class="form-input w-full rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm" />
+              <p class="text-xs text-slate-500 mt-2">Planlama varsayımınızdır; SGK aylık bağlama oranı değildir.</p>
+            </div>
+
+            <div>
               <label for="enflasyon" class="block text-sm font-medium text-slate-300 mb-2">Beklenen Yıllık Enflasyon Oranı (%)</label>
               <input type="number" id="enflasyon" min="0" step="0.1" required placeholder="Örn: 30"
                 class="form-input w-full rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm" />
@@ -275,7 +282,7 @@
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3v-6m-3 6v-9m-2 9h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
               </svg>
-              Tahmin Et
+              Senaryoyu Hesapla
             </button>
             <p id="error-msg" class="hidden text-xs text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-lg px-4 py-2.5"></p>
           </form>
@@ -289,7 +296,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
               </svg>
             </div>
-            <p class="text-sm text-slate-400 leading-relaxed">Sonuçları görmek için soldaki formu doldurup <span class="text-emerald-400 font-semibold">Tahmin Et</span> butonuna basın.</p>
+            <p class="text-sm text-slate-400 leading-relaxed">Sonuçları görmek için soldaki formu doldurup <span class="text-emerald-400 font-semibold">Senaryoyu Hesapla</span> butonuna basın.</p>
           </div>
 
           <div id="results" class="hidden space-y-6">
@@ -297,11 +304,11 @@
             <!-- Ana maaş kartları -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="card-lift bg-navy-800 rounded-2xl p-6 border border-white/5">
-                <p class="text-xs text-slate-400 mb-1.5">Tahmini Emeklilik Maaşı (Bugünkü Değer)</p>
+                <p class="text-xs text-slate-400 mb-1.5">Senaryo Geliri (Bugünkü Alım Gücü)</p>
                 <p id="res-bugunku" class="text-xl sm:text-2xl font-extrabold text-white">—</p>
               </div>
               <div class="card-lift bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-6">
-                <p class="text-xs text-emerald-300 mb-1.5">Tahmini Emeklilik Maaşı (Gelecekteki / Nominal Değer)</p>
+                <p class="text-xs text-emerald-300 mb-1.5">Senaryo Geliri (Gelecekteki Nominal Tutar)</p>
                 <p id="res-gelecek" class="text-xl sm:text-2xl font-extrabold text-emerald-400">—</p>
               </div>
             </div>
@@ -338,7 +345,7 @@
                 <p id="res-kalanYil" class="text-lg font-extrabold text-white">—</p>
               </div>
               <div class="card-lift bg-navy-800 rounded-2xl p-5 border border-white/5">
-                <p class="text-xs text-slate-400 mb-1.5">Bağlama Oranı</p>
+                <p class="text-xs text-slate-400 mb-1.5">Seçilen Gelir Oranı</p>
                 <p id="res-baglama" class="text-lg font-extrabold text-white">—</p>
               </div>
               <div class="card-lift bg-navy-800 rounded-2xl p-5 border border-white/5">
@@ -346,7 +353,7 @@
                 <p id="res-toplamPrimGunu" class="text-lg font-extrabold text-white">—</p>
               </div>
               <div class="card-lift bg-navy-800 rounded-2xl p-5 border border-white/5">
-                <p class="text-xs text-slate-400 mb-1.5">Toplam Prim Ödemesi Tahmini</p>
+                <p class="text-xs text-slate-400 mb-1.5">Gelecek Dönem Varsayılan Prim Günü</p>
                 <p id="res-toplamPrim" class="text-lg font-extrabold text-white">—</p>
               </div>
             </div>
@@ -360,7 +367,7 @@
               <div class="w-full h-2.5 rounded-full bg-white/5 overflow-hidden">
                 <div id="prim-progress-bar" class="bar-fill h-full rounded-full bg-emerald-500" style="width:0%"></div>
               </div>
-              <p class="text-xs text-slate-500 mt-2">Referans olarak 7.200 gün (tam yıllara yayılan tipik prim günü hedefi) baz alınmıştır.</p>
+              <p class="text-xs text-slate-500 mt-2">7.200 gün yalnızca görsel ölçek referansıdır; emeklilik koşulu değildir. Gerekli gün sayısı sigortalılık statüsü ve başlangıç tarihine göre değişir.</p>
             </div>
 
           </div>
@@ -374,17 +381,17 @@
           <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
-          Bu Tahmin Nasıl Hesaplanıyor?
+          Bu Senaryo Nasıl Hesaplanıyor?
         </h3>
         <p class="text-sm text-slate-400 leading-relaxed">
-          Emeklilik yaşına kalan yıl, prim günü olarak yılda 360 gün varsayılarak mevcut prim gününüze eklenir.
-          Bağlama oranı basitleştirilmiş bir kuralla hesaplanır: ilk 3.600 gün için %35, sonraki her 360 gün için
-          +%2 (üst sınır %90). Bugünkü değer, ortalama kazancınızın bağlama oranıyla çarpımıdır; gelecekteki nominal
-          değer ise bu tutarın girdiğiniz enflasyon oranıyla emekliliğe kadar büyütülmüş halidir. Toplam prim ödemesi
-          tahmini, kazancınızın yaklaşık %20'sinin kalan çalışma süresi boyunca ödendiği varsayımıyla hesaplanır.
-          <strong class="text-slate-300 font-semibold">Bu rakamlar SGK'nın resmî hesaplama yöntemini birebir yansıtmaz</strong>;
-          gerçek emeklilik maaşınız yasal düzenlemelere, güncelleme katsayılarına ve kişisel sicil kayıtlarınıza göre
-          değişebilir. Kesin bilgi için e-Devlet üzerinden SGK hizmet dökümünüzü kontrol edin.
+          Bugünkü senaryo geliri, aylık ortalama kazanç ile sizin seçtiğiniz gelir oranının çarpımıdır. Gelecekteki
+          nominal tutar, bu sonucun seçtiğiniz enflasyon oranıyla kalan yıl boyunca bileşik büyütülmesidir. Kalan her
+          tam çalışma yılı için 360 prim günü varsayılır. Örnek olarak 40.000 TL kazanç ve %50 gelir oranı, bugünkü
+          alım gücüyle 20.000 TL senaryo geliri üretir.
+          <strong class="text-slate-300 font-semibold">Bu araç SGK aylığı veya emeklilik hakkı hesaplamaz.</strong>
+          Resmî sonuç; sigorta statüsü, ilk işe giriş, dönemsel kazançlar ve mevzuata bağlıdır.
+          <a href="https://www.turkiye.gov.tr/sosyal-guvenlik-4a-emekli-aylik-bilgisi-hesaplama" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300">e-Devlet 4A Emekli Aylık Bilgisi Hesaplama</a>
+          hizmetini ve SGK kayıtlarınızı esas alın. Son güncelleme: 19 Temmuz 2026.
         </p>
       </div>
     </div>
@@ -420,6 +427,7 @@
   		    <a href="#araclar" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Araçlar</a>
   		    <a href="#kategoriler" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kategoriler</a>
   		    <a href="hakkimizda.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Hakkımızda</a>
+  		    <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kaynaklar ve Yöntem</a>
   		    <a href="gizlilik-politikasi.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Gizlilik Politikası</a>
   			<a href="kullanim-sartlari.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">Kullanım Şartları</a>
               <a href="kvkk-aydinlatma-metni.html" class="text-sm text-slate-400 hover:text-emerald-400 transition-colors w-fit">KVKK Aydınlatma Metni</a>
@@ -474,6 +482,7 @@
             </p>
             <nav class="flex items-center gap-6 text-sm text-slate-500 order-1 sm:order-2">
   		    <a href="hakkimizda.html" class="hover:text-slate-300 transition-colors">Hakkımızda</a>
+  		    <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="hover:text-slate-300 transition-colors">Kaynaklar ve Yöntem</a>
   		    <a href="gizlilik-politikasi.html" class="hover:text-slate-300 transition-colors">Gizlilik Politikası</a>
   		    <a href="kullanim-sartlari.html" class="hover:text-slate-300 transition-colors">Kullanım Şartları</a>
   		    <a href="kvkk-aydinlatma-metni.html" class="hover:text-slate-300 transition-colors">KVKK Aydınlatma Metni</a>
@@ -522,10 +531,11 @@
       const emeklilikYasi = parseFloat(document.getElementById('emeklilikYasi').value);
       const kazanc = parseFloat(document.getElementById('kazanc').value);
       const primGunu = parseFloat(document.getElementById('primGunu').value);
+      const gelirOrani = parseFloat(document.getElementById('gelirOrani').value);
       const enflasyon = parseFloat(document.getElementById('enflasyon').value);
 
-      if ([mevcutYas, emeklilikYasi, kazanc, primGunu, enflasyon].some(v => isNaN(v)) ||
-          mevcutYas <= 0 || kazanc <= 0 || primGunu < 0 || enflasyon < 0) {
+      if ([mevcutYas, emeklilikYasi, kazanc, primGunu, gelirOrani, enflasyon].some(v => isNaN(v)) ||
+          mevcutYas <= 0 || kazanc <= 0 || primGunu < 0 || gelirOrani <= 0 || gelirOrani > 100 || enflasyon < 0) {
         errorMsg.textContent = 'Lütfen tüm alanları geçerli ve pozitif değerlerle doldurun.';
         errorMsg.classList.remove('hidden');
         return;
@@ -538,29 +548,21 @@
       }
 
       const kalanYil = emeklilikYasi - mevcutYas;
-      const kalanAy = kalanYil * 12;
       const primGunuKalan = kalanYil * 360;
       const toplamPrimGunu = primGunu + primGunuKalan;
 
-      // Basitleştirilmiş bağlama oranı: ilk 3600 gün %35, sonrası her 360 günde +%2, üst sınır %90
-      let baglamaOrani = 35;
-      if (toplamPrimGunu > 3600) {
-        baglamaOrani += ((toplamPrimGunu - 3600) / 360) * 2;
-      }
-      baglamaOrani = Math.min(baglamaOrani, 90);
+      // Kullanıcının planlama amacıyla seçtiği gelir oranı; SGK bağlama oranı değildir.
+      const baglamaOrani = gelirOrani;
 
       const bugunkuMaas = kazanc * (baglamaOrani / 100);
       const gelecekMaas = bugunkuMaas * Math.pow(1 + enflasyon / 100, kalanYil);
-
-      // Toplam prim ödemesi tahmini: yaklaşık %20 uzun vadeli sigorta prim oranı varsayımı
-      const toplamPrimOdemesi = kazanc * 0.20 * kalanAy;
 
       document.getElementById('res-bugunku').textContent = tl.format(bugunkuMaas) + ' / ay';
       document.getElementById('res-gelecek').textContent = tl.format(gelecekMaas) + ' / ay';
       document.getElementById('res-kalanYil').textContent = kalanYil.toFixed(0) + ' yıl';
       document.getElementById('res-baglama').textContent = '%' + baglamaOrani.toFixed(1).replace('.', ',');
       document.getElementById('res-toplamPrimGunu').textContent = Math.round(toplamPrimGunu).toLocaleString('tr-TR') + ' gün';
-      document.getElementById('res-toplamPrim').textContent = tl.format(toplamPrimOdemesi);
+      document.getElementById('res-toplamPrim').textContent = Math.round(primGunuKalan).toLocaleString('tr-TR') + ' gün';
 
       // Bar karşılaştırma
       const maxVal = Math.max(bugunkuMaas, gelecekMaas);

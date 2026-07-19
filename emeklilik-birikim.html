@@ -130,6 +130,7 @@
     }
     .count-anim { animation: countUp 0.5s ease forwards; }
   </style>
+  <link rel="canonical" href="https://www.finans-kolay.com/emeklilik-birikim.html" />
 </head>
 <body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
 
@@ -253,17 +254,17 @@
               <span class="ml-1 text-slate-500 font-normal normal-case">(enflasyona göre reel getiri)</span>
             </label>
             <div class="relative">
-              <input type="number" id="getiri" class="finput pr-10" placeholder="9"
+              <input type="number" id="getiri" class="finput pr-10" placeholder="4"
                 min="0.1" max="50" step="0.5" oninput="clearErr('getiri'); updateGetiriLabel()" />
               <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm select-none">%</span>
             </div>
             <p id="getiri-label" class="text-xs text-emerald-400 mt-1.5 hidden"></p>
             <p id="getiri-err" class="text-xs text-rose-400 mt-1.5 hidden">Lütfen geçerli bir oran girin (0.1–50).</p>
             <div class="flex gap-1.5 mt-2 flex-wrap">
-              <span class="qtag" onclick="setValF('getiri',5)">%5 (muhafazakâr)</span>
-              <span class="qtag" onclick="setValF('getiri',8)">%8 (dengeli)</span>
-              <span class="qtag" onclick="setValF('getiri',10)">%10 (büyüme)</span>
-              <span class="qtag" onclick="setValF('getiri',12)">%12 (agresif)</span>
+              <span class="qtag" onclick="setValF('getiri',2)">%2 senaryosu</span>
+              <span class="qtag" onclick="setValF('getiri',4)">%4 senaryosu</span>
+              <span class="qtag" onclick="setValF('getiri',6)">%6 senaryosu</span>
+              <span class="qtag" onclick="setValF('getiri',8)">%8 senaryosu</span>
             </div>
           </div>
 
@@ -399,7 +400,7 @@
             <div class="bg-gradient-to-br from-violet-500/12 to-violet-500/4 border border-violet-500/20 rounded-xl px-4 py-3.5 flex items-center justify-between gap-3">
               <div>
                 <p class="text-xs text-violet-300 font-semibold uppercase tracking-wide">Tahmini Aylık Emeklilik Geliri</p>
-                <p class="text-xs text-slate-500 mt-0.5">25 yıl boyunca çekilirse (300 ay)</p>
+                <p class="text-xs text-slate-500 mt-0.5">Getiri olmadan 300 aya eşit bölünürse</p>
               </div>
               <div class="text-right flex-shrink-0">
                 <p id="res-aylik" class="text-xl font-extrabold text-white">—</p>
@@ -479,12 +480,27 @@
                 </div>
                 <div>
                   <p class="text-sm font-semibold text-white mb-1">Gerçekçi oran seçin</p>
-                  <p class="text-xs text-slate-400 leading-relaxed">Türkiye'de enflasyon etkisini düşündüğünüzde reel getiriyi %5–10 arası tahmin etmek makul sayılabilir.</p>
+                  <p class="text-xs text-slate-400 leading-relaxed">Tek bir getiri oranı doğru kabul edilemez. Düşük, orta ve yüksek varsayımlarla ayrı sonuçlar deneyin; vergi, fon gideri ve oynaklığı ayrıca değerlendirin.</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl mb-4">
+        <h3 class="text-base font-bold text-white mb-3">Hesaplama yöntemi ve örnek</h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-3">
+          Yıllık reel getiri 12'ye bölünerek aylık oran kabul edilir. Mevcut birikim için
+          <span class="text-slate-300">PV × (1+r)<sup>n</sup></span>, ay sonu katkıları için
+          <span class="text-slate-300">PMT × ((1+r)<sup>n</sup>−1) / r</span> formülü kullanılır.
+          Katkıların enflasyonla artırılmadığı, kesinti ve vergi olmadığı varsayılır.
+        </p>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Örnek: 10 yıl boyunca ay sonunda 5.000 TL katkı ve yıllık %4 reel getiri varsayımıyla, mevcut birikim
+          sıfırken toplam katkı 600.000 TL olur; hesaplanan birikim yaklaşık 736.000 TL'dir. Bu bir piyasa getirisi
+          vaadi değil, yalnızca girilen senaryonun matematiksel sonucudur. Son güncelleme: 19 Temmuz 2026.
+        </p>
       </div>
 
     </div>
@@ -493,8 +509,11 @@
   <!-- Footer -->
   <footer class="bg-navy-950 border-t border-white/5 py-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-slate-500 mb-4">
+        <a href="hakkimizda.html" class="hover:text-emerald-400">Hakkımızda</a><a href="kaynaklar-ve-hesaplama-yontemleri.html" class="hover:text-emerald-400">Kaynaklar ve Yöntem</a><a href="gizlilik-politikasi.html" class="hover:text-emerald-400">Gizlilik</a><a href="kullanim-sartlari.html" class="hover:text-emerald-400">Kullanım Şartları</a>
+      </nav>
       <p class="text-xs text-slate-600">
-        © 2025 FinansKolay · Sonuçlar tahmini niteliktedir, yatırım tavsiyesi değildir. Finansal kararlar için uzman görüşü alınız.
+        © 2026 FinansKolay · Sonuçlar tahmini niteliktedir, yatırım tavsiyesi değildir. Finansal kararlar için uzman görüşü alınız.
       </p>
     </div>
   </footer>
@@ -523,10 +542,10 @@
       const lbl = document.getElementById('getiri-label');
       if (isNaN(v)) { lbl.classList.add('hidden'); return; }
       lbl.classList.remove('hidden');
-      if (v < 5) lbl.textContent = '⚠️ Düşük getiri — devlet tahvili benzeri muhafazakâr getiri';
-      else if (v <= 8) lbl.textContent = '✓ Dengeli portföy için makul aralık';
-      else if (v <= 12) lbl.textContent = '📈 Büyüme odaklı hisse ağırlıklı portföy';
-      else lbl.textContent = '🔥 Agresif/yüksek riskli getiri varsayımı';
+      if (v <= 3) lbl.textContent = 'Düşük reel getiri senaryosu';
+      else if (v <= 6) lbl.textContent = 'Orta reel getiri senaryosu';
+      else if (v <= 10) lbl.textContent = 'Yüksek reel getiri senaryosu';
+      else lbl.textContent = 'Çok yüksek varsayım — sonuç hassasiyetini ayrıca test edin';
     }
 
     function fmt(n) {

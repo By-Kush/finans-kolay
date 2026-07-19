@@ -141,6 +141,7 @@
     /* TÜFE table hover */
     .tufe-row:hover td { background: rgba(16,185,129,0.04); }
   </style>
+  <link rel="canonical" href="https://www.finans-kolay.com/enflasyon-duzeltme.html" />
 </head>
 <body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
 
@@ -191,8 +192,7 @@
           Paranız Nasıl Eridi?
         </h1>
         <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-          İki tarih arasındaki enflasyonu kullanarak paranızın satın alma gücünün nasıl değiştiğini hesaplayın.
-          Türkiye'nin yıllık TÜFE verileri baz alınmıştır.
+          TÜİK yıllık ortalama TÜFE verileriyle iki tarih arasındaki yaklaşık satın alma gücü değişimini hesaplayın.
         </p>
       </div>
 
@@ -281,7 +281,7 @@
             Hesapla
           </button>
           <p class="text-xs text-slate-600 text-center mt-3 leading-relaxed">
-            Yıllık TÜFE verileri TÜİK'e dayanmaktadır. Hesaplama bileşik enflasyon formülü ile yapılmaktadır.
+            Yıllık ortalama TÜFE oranları bileşik ve ay kesirleri oransal kabul edilerek yaklaşık sonuç üretilir.
           </p>
         </div>
 
@@ -317,9 +317,9 @@
 
             <!-- Bugünkü Değer — hero card -->
             <div class="bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border border-emerald-500/25 rounded-xl p-5 text-center">
-              <p class="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">Bugünkü Satın Alma Gücü</p>
+              <p class="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">Bitiş Tarihindeki Eşdeğer Tutar</p>
               <p id="res-bugunki" class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">—</p>
-              <p class="text-slate-400 text-xs mt-1.5" id="res-bugunki-sub">Başlangıç tutarıyla aynı ürünü bugün almak için</p>
+              <p class="text-slate-400 text-xs mt-1.5" id="res-bugunki-sub">Başlangıç tutarıyla aynı sepeti bitiş tarihinde almak için</p>
             </div>
 
             <!-- 3 secondary metrics -->
@@ -345,7 +345,7 @@
             <div class="bg-navy-700/40 border border-white/5 rounded-xl p-4">
               <div class="flex justify-between text-xs text-slate-400 mb-2">
                 <span>Başlangıç değeri</span>
-                <span>Bugünkü değer</span>
+                <span>Bitiş değerindeki alım gücü</span>
               </div>
               <div class="h-3 rounded-full bg-navy-600 overflow-hidden flex">
                 <div id="power-bar" class="prog-bar h-full bg-emerald-500 rounded-l-full" style="width:0%"></div>
@@ -384,7 +384,7 @@
             <thead>
               <tr class="bg-navy-700/50">
                 <th class="text-left text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3">Yıl</th>
-                <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3">Yıllık TÜFE (%)</th>
+                <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3">Yıllık Ortalama TÜFE (%)</th>
                 <th class="text-right text-xs font-semibold text-slate-400 uppercase tracking-wide px-4 sm:px-6 py-3 hidden sm:table-cell">Görsel</th>
               </tr>
             </thead>
@@ -433,10 +433,25 @@
             </div>
             <div>
               <p class="text-sm font-semibold text-white mb-1">Tasarrufu Korumak</p>
-              <p class="text-xs text-slate-400 leading-relaxed">Yastık altındaki para enflasyona yenik düşer. Getirisi enflasyonun üzerinde olan yatırımlar değer korur.</p>
+              <p class="text-xs text-slate-400 leading-relaxed">Nominal tutarın değişmemesi satın alma gücünün korunduğu anlamına gelmez. Yatırım getirileri ise vergi, masraf ve riskle birlikte değerlendirilmelidir.</p>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="bg-navy-800 rounded-2xl border border-white/5 p-6 sm:p-8 shadow-xl mb-4">
+        <h3 class="text-base font-bold text-white mb-3">Yöntem, kapsam ve kaynak</h3>
+        <p class="text-xs text-slate-400 leading-relaxed mb-3">
+          Araç, seçilen yılların yıllık ortalama TÜFE oranlarını bileşik olarak uygular. Ay içeren tarihlerde yıllık oranı
+          kesirli yıl yaklaşımıyla dağıtır. Bu nedenle sonuç yaklaşık bir karşılaştırmadır; TÜİK'in aylık endeks
+          seviyeleriyle yapılan kesin tarih bazlı endeksleme veya kira/ücret artışı hesabı değildir.
+        </p>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Örnek: 2024 ortalaması %58,51 ve 2025 ortalaması %34,88 ise iki tam yılın bileşik katsayısı
+          1,5851 × 1,3488 ≈ 2,138 olur; 10.000 TL'nin eşdeğer tutarı yaklaşık 21.380 TL'dir.
+          Kaynak: <a href="https://veriportali.tuik.gov.tr/tr/press/58294" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300">TÜİK Tüketici Fiyat Endeksi, Aralık 2025</a>.
+          Veri dönemi: 2003–2025 · Son güncelleme: 19 Temmuz 2026.
+        </p>
       </div>
 
     </div>
@@ -445,8 +460,11 @@
   <!-- Footer -->
   <footer class="bg-navy-950 border-t border-white/5 py-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-slate-500 mb-4">
+        <a href="hakkimizda.html" class="hover:text-emerald-400">Hakkımızda</a><a href="kaynaklar-ve-hesaplama-yontemleri.html" class="hover:text-emerald-400">Kaynaklar ve Yöntem</a><a href="gizlilik-politikasi.html" class="hover:text-emerald-400">Gizlilik</a><a href="kullanim-sartlari.html" class="hover:text-emerald-400">Kullanım Şartları</a>
+      </nav>
       <p class="text-xs text-slate-600">
-        © 2025 FinansKolay · TÜFE verileri TÜİK'e dayanmaktadır. Hesaplama yalnızca bilgilendirme amaçlıdır.
+        © 2026 FinansKolay · TÜFE verileri TÜİK'e dayanmaktadır. Hesaplama yalnızca bilgilendirme amaçlıdır.
       </p>
     </div>
   </footer>
@@ -459,7 +477,7 @@
     2008: 10.4, 2009: 6.3,  2010: 8.6,  2011: 6.5,  2012: 8.9,
     2013: 7.5,  2014: 8.9,  2015: 7.7,  2016: 7.8,  2017: 11.9,
     2018: 16.3, 2019: 15.2, 2020: 12.3, 2021: 19.6, 2022: 72.3,
-    2023: 53.9, 2024: 58.5, 2025: 38.1,
+    2023: 53.86, 2024: 58.51, 2025: 34.88,
   };
 
   const AYLAR = [
@@ -550,21 +568,21 @@
     if (basYil === bitYil) {
       // Same year: fractional months
       const fraction = (bitAy - basAy) / 12;
-      const r = (TUFE[basYil] || 20) / 100;
+      const r = TUFE[basYil] / 100;
       cumulative = Math.pow(1 + r, fraction);
     } else {
       // Partial first year (remaining months)
       const firstFraction = (12 - basAy) / 12;
-      cumulative *= Math.pow(1 + (TUFE[basYil] || 20) / 100, firstFraction);
+      cumulative *= Math.pow(1 + TUFE[basYil] / 100, firstFraction);
 
       // Full middle years
       for (let y = basYil + 1; y < bitYil; y++) {
-        cumulative *= (1 + (TUFE[y] || 20) / 100);
+        cumulative *= (1 + TUFE[y] / 100);
       }
 
       // Partial last year
       const lastFraction = bitAy / 12;
-      cumulative *= Math.pow(1 + (TUFE[bitYil] || 20) / 100, lastFraction);
+      cumulative *= Math.pow(1 + TUFE[bitYil] / 100, lastFraction);
     }
 
     return cumulative; // e.g. 1.82 means 82% cumulative inflation

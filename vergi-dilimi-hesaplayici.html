@@ -19,10 +19,10 @@
          crossorigin="anonymous"></script>
 
   <!-- Diğer meta etiketleri -->
-  <title>Vergi Dilimi Hesaplayıcı - FinansKolay</title>
-  <meta name="description" content="Brüt maaşınızı girin; 2026 gelir vergisi dilimlerine göre hangi dilimde olduğunuzu, ödeyeceğiniz vergiyi ve net maaşınızı hesaplayın.">
+  <title>2026 Ücret Geliri Vergi Dilimi Hesaplama | FinansKolay</title>
+  <meta name="description" content="Aylık veya yıllık vergi matrahınızı girerek 2026 ücret geliri tarifesine göre marjinal diliminizi, kademeli verginizi ve efektif oranı hesaplayın.">
   <meta property="og:title" content="Vergi Dilimi Hesaplayıcı - FinansKolay">
-  <meta property="og:description" content="Brüt maaşınızı girin; 2026 gelir vergisi dilimlerine göre hangi dilimde olduğunuzu, ödeyeceğiniz vergiyi ve net maaşınızı hesaplayın.">
+  <meta property="og:description" content="2026 ücret geliri tarifesine göre vergi diliminizi ve kademeli gelir verginizi hesaplayın.">
 <meta property="og:type" content="website">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -87,6 +87,7 @@
     ::-webkit-scrollbar-track { background:#0F172A; }
     ::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; }
   </style>
+  <link rel="canonical" href="https://www.finans-kolay.com/vergi-dilimi-hesaplayici.html" />
 </head>
 <body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
 
@@ -126,11 +127,11 @@
     <div class="py-8 sm:py-12 text-center">
       <p class="text-amber-400 text-xs font-semibold tracking-widest uppercase mb-2">Finans Aracı · 2026</p>
       <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3">
-        Vergi Diliminizi ve Net Maaşınızı Öğrenin
+        2026 Ücret Geliri Vergi Diliminizi Hesaplayın
       </h1>
       <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-        Brüt maaşınızı girin; hangi gelir vergisi diliminde olduğunuzu, ödeyeceğiniz vergiyi ve
-        net maaşınızı anında hesaplayın.
+        Aylık veya yıllık vergi matrahınızı girin; marjinal vergi diliminizi, kademeli gelir
+        verginizi ve vergi sonrası matrah tutarını görün.
       </p>
     </div>
 
@@ -144,22 +145,22 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
           </svg>
-          Maaş Bilgileri
+          Vergi Matrahı Bilgileri
         </h2>
 
         <!-- Maaş türü -->
         <div class="mb-5">
-          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Maaş Türü</label>
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Matrah Dönemi</label>
           <div class="flex gap-2 p-1.5 bg-navy-700/60 rounded-xl border border-white/5">
             <button id="btn-aylik" onclick="setMaasTuru('aylik')" class="toggle-btn active">Aylık</button>
             <button id="btn-yillik" onclick="setMaasTuru('yillik')" class="toggle-btn inactive">Yıllık</button>
           </div>
         </div>
 
-        <!-- Brüt maaş -->
+        <!-- Vergi matrahı -->
         <div class="mb-5">
           <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
-            <span id="maas-label">Brüt Aylık Maaş</span>
+            <span id="maas-label">Aylık Vergiye Tabi Matrah</span>
           </label>
           <div class="relative">
             <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold select-none">₺</span>
@@ -175,7 +176,7 @@
         </div>
 
         <!-- Medeni durum -->
-        <div class="mb-5">
+        <div class="hidden" aria-hidden="true">
           <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Medeni Durum</label>
           <div class="flex gap-2 p-1.5 bg-navy-700/60 rounded-xl border border-white/5">
             <button id="btn-bekar" onclick="setMedeni('bekar')" class="toggle-btn active">Bekar</button>
@@ -184,7 +185,7 @@
         </div>
 
         <!-- Çocuk sayısı -->
-        <div class="mb-7">
+        <div class="hidden" aria-hidden="true">
           <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Çocuk Sayısı</label>
           <div class="flex gap-2">
             <button class="child-btn active" data-val="0" onclick="setCocuk(0,this)">0</button>
@@ -204,7 +205,7 @@
           Hesapla
         </button>
         <p class="text-xs text-slate-600 text-center mt-3 leading-relaxed">
-          2026 gelir vergisi dilimlerine göre hesaplama yapılmaktadır. SGK ve damga vergisi kesintileri dahil değildir.
+          Doğrudan vergi matrahı üzerinden hesaplama yapılır. Brüt maaştan net maaşa geçiş için ayrıntılı aracı kullanın.
         </p>
       </div>
 
@@ -226,7 +227,7 @@
             </svg>
           </div>
           <p class="text-slate-400 text-sm font-medium mb-1">Sonuç bekleniyor</p>
-          <p class="text-slate-600 text-xs">Maaş bilgilerinizi girin ve Hesapla butonuna tıklayın</p>
+          <p class="text-slate-600 text-xs">Matrah bilgilerinizi girin ve Hesapla butonuna tıklayın</p>
         </div>
 
         <!-- Results -->
@@ -239,9 +240,9 @@
             <p id="dilim-aralik" class="text-xs text-slate-400">—</p>
           </div>
 
-          <!-- HERO: Aylık net maaş -->
+          <!-- HERO: Aylık vergi sonrası matrah -->
           <div class="bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border border-emerald-500/25 rounded-xl p-5 text-center">
-            <p class="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">Aylık Net Maaş</p>
+            <p class="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">Aylık Vergi Sonrası Matrah</p>
             <p id="res-aylik-net" class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">—</p>
             <p id="res-agi-not" class="text-slate-400 text-xs mt-2">—</p>
           </div>
@@ -249,7 +250,7 @@
           <!-- 2 metrik -->
           <div class="grid grid-cols-2 gap-3">
             <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
-              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Yıllık Brüt</p>
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Yıllık Matrah</p>
               <p id="res-yillik-brut" class="text-lg font-extrabold text-white">—</p>
             </div>
             <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
@@ -257,7 +258,7 @@
               <p id="res-yillik-vergi" class="text-lg font-extrabold text-rose-400">—</p>
             </div>
             <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
-              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Yıllık Net</p>
+              <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Vergi Sonrası Tutar</p>
               <p id="res-yillik-net" class="text-lg font-extrabold text-emerald-400">—</p>
             </div>
             <div class="bg-navy-700/60 border border-white/5 rounded-xl p-4 text-center">
@@ -268,13 +269,13 @@
 
           <!-- Vergi dağılımı bar -->
           <div class="bg-navy-700/40 border border-white/5 rounded-xl p-4">
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Brüt Maaş Dağılımı</p>
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Matrah Dağılımı</p>
             <div class="h-3 rounded-full bg-navy-600 overflow-hidden flex">
               <div id="bar-net"   class="prog h-full bg-emerald-500" style="width:0%"></div>
               <div id="bar-vergi" class="prog h-full bg-rose-400" style="width:0%"></div>
             </div>
             <div class="flex justify-between text-xs text-slate-500 mt-2">
-              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span>Net: <span id="pct-net" class="text-white font-semibold ml-0.5">—</span></span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span>Vergi sonrası: <span id="pct-net" class="text-white font-semibold ml-0.5">—</span></span>
               <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-rose-400"></span>Vergi: <span id="pct-vergi" class="text-white font-semibold ml-0.5">—</span></span>
             </div>
           </div>
@@ -323,11 +324,11 @@
         <div class="bg-navy-700/40 rounded-xl p-4 border border-white/4">
           <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">Dilim Tablosu</p>
           <div class="space-y-1.5 text-xs">
-            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20"><span class="font-bold text-emerald-300">%15</span><span class="text-slate-400">0 – 170.000 TL</span></div>
-            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20"><span class="font-bold text-sky-300">%20</span><span class="text-slate-400">170.001 – 350.000 TL</span></div>
-            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20"><span class="font-bold text-amber-300">%27</span><span class="text-slate-400">350.001 – 850.000 TL</span></div>
-            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-orange-500/10 border border-orange-500/20"><span class="font-bold text-orange-300">%35</span><span class="text-slate-400">850.001 – 4.500.000 TL</span></div>
-            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/20"><span class="font-bold text-rose-300">%40</span><span class="text-slate-400">4.500.001 TL ve üzeri</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20"><span class="font-bold text-emerald-300">%15</span><span class="text-slate-400">0 – 190.000 TL</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20"><span class="font-bold text-sky-300">%20</span><span class="text-slate-400">190.001 – 400.000 TL</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20"><span class="font-bold text-amber-300">%27</span><span class="text-slate-400">400.001 – 1.500.000 TL</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-orange-500/10 border border-orange-500/20"><span class="font-bold text-orange-300">%35</span><span class="text-slate-400">1.500.001 – 5.300.000 TL</span></div>
+            <div class="flex justify-between px-2.5 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/20"><span class="font-bold text-rose-300">%40</span><span class="text-slate-400">5.300.001 TL ve üzeri</span></div>
           </div>
         </div>
         <div class="flex flex-col gap-3">
@@ -349,16 +350,26 @@
               </svg>
             </div>
             <div>
-              <p class="text-sm font-semibold text-white mb-1">Asgari Geçim İndirimi</p>
-              <p class="text-xs text-slate-400 leading-relaxed">Evli ve çocuklu çalışanlar için basit bir indirim modeli uygulanır; gerçek AGİ hesaplaması daha karmaşıktır.</p>
+              <p class="text-sm font-semibold text-white mb-1">Matrah ve brüt maaş farklıdır</p>
+              <p class="text-xs text-slate-400 leading-relaxed">Bu araç SGK, işsizlik primi ve asgari ücret istisnasını hesaplamaz. Bordro hesabı için ayrıntılı net maaş aracını kullanın.</p>
             </div>
           </div>
         </div>
       </div>
       <p class="text-xs text-slate-600 leading-relaxed">
-        Bu hesaplama eğitim ve bilgilendirme amaçlıdır. SGK primi, işsizlik sigortası ve damga vergisi gibi diğer kesintiler dahil değildir.
-        Kesin maaş hesaplaması için bordro uzmanınıza veya muhasebecinize danışın.
+        Kaynak: Gelir İdaresi Başkanlığı 2026 ücret geliri tarifesi. Hesaplama yalnızca girilen vergi matrahına uygulanır.
+        <a href="https://cdn.gib.gov.tr/api/gibportal-file/file/getFileResources?objectKey=arsiv%2Fyardim-kaynaklar%2Fyararli-bilgiler%2Fgelir-vergisi-tarifeleri%2Fgelir-vergisi-tarifesi-2026.pdf" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300">Resmî tarifeyi açın</a>
+        · <a href="detayli-vergi-net-maas-hesaplayici.html" class="text-emerald-400 hover:text-emerald-300">Brütten nete ayrıntılı hesaplama</a>
+        · Son güncelleme: 19 Temmuz 2026.
       </p>
+      <div class="mt-5 rounded-xl border border-white/5 bg-navy-700/40 p-4">
+        <p class="text-sm font-semibold text-white mb-2">Örnek hesaplama: 500.000 TL yıllık matrah</p>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          İlk 190.000 TL için 28.500 TL, sonraki 210.000 TL için 42.000 TL ve kalan 100.000 TL için
+          27.000 TL vergi hesaplanır. Toplam gelir vergisi 97.500 TL, efektif oran %19,5 ve marjinal
+          vergi dilimi %27 olur. “%27 diliminde olmak”, matrahın tamamının %27 ile vergilendirildiği anlamına gelmez.
+        </p>
+      </div>
     </div>
 
   </div>
@@ -366,29 +377,30 @@
 
 <footer class="bg-navy-950 border-t border-white/5 py-6">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <p class="text-xs text-slate-600">© 2025 FinansKolay · Hesaplama tahminidir, resmi vergi danışmanlığı değildir.</p>
+    <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-slate-500 mb-4">
+      <a href="hakkimizda.html" class="hover:text-emerald-400">Hakkımızda</a><a href="kaynaklar-ve-hesaplama-yontemleri.html" class="hover:text-emerald-400">Kaynaklar ve Yöntem</a><a href="gizlilik-politikasi.html" class="hover:text-emerald-400">Gizlilik</a><a href="kullanim-sartlari.html" class="hover:text-emerald-400">Kullanım Şartları</a>
+    </nav>
+    <p class="text-xs text-slate-600">© 2026 FinansKolay · Hesaplama tahminidir, resmî vergi danışmanlığı değildir.</p>
   </div>
 </footer>
 
 <script>
 var maasTuru = 'aylik';
-var medeniDurum = 'bekar';
-var cocukSayisi = 0;
 
-// 2026 vergi dilimleri (verilen tarife)
+// 2026 ücret geliri vergi tarifesi — GİB
 var DILIMLER = [
-  { min:0,        max:170000,    oran:0.15 },
-  { min:170000,   max:350000,    oran:0.20 },
-  { min:350000,   max:850000,    oran:0.27 },
-  { min:850000,   max:4500000,   oran:0.35 },
-  { min:4500000,  max:Infinity,  oran:0.40 },
+  { min:0,        max:190000,    oran:0.15 },
+  { min:190000,   max:400000,    oran:0.20 },
+  { min:400000,   max:1500000,   oran:0.27 },
+  { min:1500000,  max:5300000,   oran:0.35 },
+  { min:5300000,  max:Infinity,  oran:0.40 },
 ];
 
 function setMaasTuru(t) {
   maasTuru = t;
   document.getElementById('btn-aylik').className = 'toggle-btn ' + (t==='aylik'?'active':'inactive');
   document.getElementById('btn-yillik').className = 'toggle-btn ' + (t==='yillik'?'active':'inactive');
-  document.getElementById('maas-label').textContent = t==='aylik' ? 'Brüt Aylık Maaş' : 'Brüt Yıllık Maaş';
+  document.getElementById('maas-label').textContent = t==='aylik' ? 'Aylık Vergiye Tabi Matrah' : 'Yıllık Vergiye Tabi Matrah';
   var quick = document.getElementById('maas-quick');
   if (t === 'aylik') {
     quick.innerHTML = '<span class="qtag" onclick="sv(\'maas\',25000)">₺25K</span>' +
@@ -403,19 +415,6 @@ function setMaasTuru(t) {
       '<span class="qtag" onclick="sv(\'maas\',960000)">₺960K</span>';
     document.getElementById('maas').placeholder = '420.000';
   }
-}
-
-function setMedeni(m) {
-  medeniDurum = m;
-  document.getElementById('btn-bekar').className = 'toggle-btn ' + (m==='bekar'?'active':'inactive');
-  document.getElementById('btn-evli').className = 'toggle-btn ' + (m==='evli'?'active':'inactive');
-}
-
-function setCocuk(n, btn) {
-  cocukSayisi = n;
-  document.querySelectorAll('.child-btn').forEach(function(b) {
-    b.className = 'child-btn ' + (parseInt(b.getAttribute('data-val'))===n ? 'active' : 'inactive');
-  });
 }
 
 function sv(id, v) { document.getElementById(id).value = v; clearErr(id); }
@@ -436,14 +435,6 @@ function showErr(id) {
 
 function fmt(n) { return '₺' + Math.round(n).toLocaleString('tr-TR'); }
 function fmtPct(n) { return '%' + n.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1}); }
-
-// Basit AGİ benzeri yıllık indirim modeli
-function agiIndirimi(medeni, cocuk) {
-  var indirim = 0;
-  if (medeni === 'evli') indirim += 6000;   // yıllık
-  indirim += Math.min(cocuk, 5) * 3000;     // çocuk başına yıllık, max 5 çocuk
-  return indirim;
-}
 
 // Dilimlere göre kademeli vergi hesabı + kırılım
 function vergiHesaplaKirilimli(matrah) {
@@ -490,8 +481,7 @@ function hesapla() {
 
   var yillikBrut = maasTuru === 'aylik' ? maasV * 12 : maasV;
 
-  var indirim = agiIndirimi(medeniDurum, cocukSayisi);
-  var matrah = Math.max(0, yillikBrut - indirim);
+  var matrah = yillikBrut;
 
   var sonuc = vergiHesaplaKirilimli(matrah);
   var yillikVergi = sonuc.vergi;
@@ -516,9 +506,7 @@ function hesapla() {
   document.getElementById('dilim-aralik').textContent = dilimEtiket(dilim) + ' TL aralığı (yıllık matrah)';
 
   document.getElementById('res-aylik-net').textContent = fmt(aylikNet);
-  document.getElementById('res-agi-not').textContent = indirim > 0
-    ? 'Yıllık ₺' + fmt(indirim).replace('₺','') + ' indirim uygulandı'
-    : 'İndirim uygulanmadı (bekar, çocuksuz)';
+  document.getElementById('res-agi-not').textContent = 'Girilen vergi matrahı esas alınmıştır; AGİ uygulanmaz.';
 
   document.getElementById('res-yillik-brut').textContent  = fmt(yillikBrut);
   document.getElementById('res-yillik-vergi').textContent = fmt(yillikVergi);

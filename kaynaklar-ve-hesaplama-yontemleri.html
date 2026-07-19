@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X8YD5QMW20"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X8YD5QMW20');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1884839489288952" crossorigin="anonymous"></script>
+
+  <title>Kaynaklar ve Hesaplama Yöntemleri | FinansKolay</title>
+  <meta name="description" content="FinansKolay hesaplayıcılarında kullanılan kaynaklar, formüller, varsayımlar, güncelleme süreci ve düzeltme politikası." />
+  <link rel="canonical" href="https://www.finans-kolay.com/kaynaklar-ve-hesaplama-yontemleri.html" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 950:'#070E1A', 900:'#0F172A', 800:'#1E293B', 700:'#263348', 600:'#334155' },
+            emerald: { 400:'#34D399', 500:'#10B981', 600:'#059669' }
+          },
+          fontFamily: { sans:['-apple-system','BlinkMacSystemFont','"Segoe UI"','Inter','Roboto','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .navbar-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(15,23,42,.92);
+      border-bottom: 1px solid rgba(16,185,129,.12);
+    }
+    .hero-bg {
+      background-color: #0F172A;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 60% -10%, rgba(16,185,129,.15) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(16,185,129,.08) 0%, transparent 50%);
+    }
+  </style>
+</head>
+
+<body class="bg-navy-900 text-slate-100 font-sans antialiased min-h-screen">
+  <header class="navbar-blur fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <span class="text-lg font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">Finans<span class="text-emerald-400 group-hover:text-white transition-colors">Kolay</span></span>
+        </a>
+
+        <nav class="flex items-center gap-1" aria-label="Ana gezinme">
+          <a href="index.html" class="px-3 sm:px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Ana Sayfa</a>
+          <a href="hakkimizda.html" class="hidden sm:inline-flex px-3 sm:px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Hakkımızda</a>
+          <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="px-3 sm:px-4 py-2 rounded-lg text-sm font-medium text-emerald-400 bg-emerald-500/10 transition-all">Yöntemimiz</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16">
+    <section class="hero-bg border-b border-white/5">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
+        <p class="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4">Şeffaflık ve doğruluk</p>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">Kaynaklar ve Hesaplama Yöntemleri</h1>
+        <p class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">
+          Bu sayfa, FinansKolay araçlarının nasıl hazırlandığını, hangi kaynak türlerinin tercih
+          edildiğini ve sonuçların hangi sınırlar içinde yorumlanması gerektiğini açıklar.
+        </p>
+        <p class="text-slate-500 text-sm mt-5">Son güncelleme: 19 Temmuz 2026</p>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-3 gap-5">
+          <article class="bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="text-emerald-400 font-bold mb-4">01</div>
+            <h2 class="text-xl font-bold text-white mb-3">Yöntemi tanımlama</h2>
+            <p class="text-slate-400 text-sm leading-relaxed">Her araç için formül, girdi birimi, yuvarlama yöntemi ve temel varsayımlar belirlenir.</p>
+          </article>
+          <article class="bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="text-emerald-400 font-bold mb-4">02</div>
+            <h2 class="text-xl font-bold text-white mb-3">Kaynak kontrolü</h2>
+            <p class="text-slate-400 text-sm leading-relaxed">Mevzuat ve oran içeren konularda mümkün olduğunda resmî kurumların birincil yayınları kullanılır.</p>
+          </article>
+          <article class="bg-navy-800 rounded-2xl border border-white/5 p-6">
+            <div class="text-emerald-400 font-bold mb-4">03</div>
+            <h2 class="text-xl font-bold text-white mb-3">Senaryo testi</h2>
+            <p class="text-slate-400 text-sm leading-relaxed">Hesaplamalar örnek girdiler, sınır değerler ve farklı senaryolarla kontrol edilir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20 bg-navy-950 border-y border-white/5">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-10">
+          <p class="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-3">Birincil kaynaklar</p>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-5">Başvurduğumuz resmî kurumlar</h2>
+          <p class="text-slate-400 leading-relaxed">Aşağıdaki liste bütün araçların aynı veriyi kullandığı anlamına gelmez. Her araçta konuya uygun kaynak ve geçerlilik tarihi ayrıca belirtilmelidir.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <a href="https://www.tcmb.gov.tr/" target="_blank" rel="noopener noreferrer" class="bg-navy-800 rounded-2xl border border-white/5 hover:border-emerald-500/30 p-6 transition-all">
+            <h3 class="text-white font-bold mb-2">TCMB</h3><p class="text-slate-400 text-sm">Faiz, para politikası ve finansal istatistikler</p>
+          </a>
+          <a href="https://www.bddk.org.tr/" target="_blank" rel="noopener noreferrer" class="bg-navy-800 rounded-2xl border border-white/5 hover:border-emerald-500/30 p-6 transition-all">
+            <h3 class="text-white font-bold mb-2">BDDK</h3><p class="text-slate-400 text-sm">Bankacılık ve kredi kartı düzenlemeleri</p>
+          </a>
+          <a href="https://www.gib.gov.tr/" target="_blank" rel="noopener noreferrer" class="bg-navy-800 rounded-2xl border border-white/5 hover:border-emerald-500/30 p-6 transition-all">
+            <h3 class="text-white font-bold mb-2">Gelir İdaresi Başkanlığı</h3><p class="text-slate-400 text-sm">Vergi mevzuatı, tarifeler ve rehberler</p>
+          </a>
+          <a href="https://www.sgk.gov.tr/" target="_blank" rel="noopener noreferrer" class="bg-navy-800 rounded-2xl border border-white/5 hover:border-emerald-500/30 p-6 transition-all">
+            <h3 class="text-white font-bold mb-2">SGK</h3><p class="text-slate-400 text-sm">Sosyal güvenlik ve emeklilik bilgileri</p>
+          </a>
+          <a href="https://www.tuik.gov.tr/" target="_blank" rel="noopener noreferrer" class="bg-navy-800 rounded-2xl border border-white/5 hover:border-emerald-500/30 p-6 transition-all">
+            <h3 class="text-white font-bold mb-2">TÜİK</h3><p class="text-slate-400 text-sm">Enflasyon ve resmî istatistikler</p>
+          </a>
+          <a href="https://www.resmigazete.gov.tr/" target="_blank" rel="noopener noreferrer" class="bg-navy-800 rounded-2xl border border-white/5 hover:border-emerald-500/30 p-6 transition-all">
+            <h3 class="text-white font-bold mb-2">Resmî Gazete</h3><p class="text-slate-400 text-sm">Kanun, yönetmelik ve güncel kararlar</p>
+          </a>
+          <a href="https://www.saglik.gov.tr/" target="_blank" rel="noopener noreferrer" class="bg-navy-800 rounded-2xl border border-white/5 hover:border-emerald-500/30 p-6 transition-all">
+            <h3 class="text-white font-bold mb-2">Sağlık Bakanlığı</h3><p class="text-slate-400 text-sm">Türkiye için resmî sağlık bilgileri</p>
+          </a>
+          <a href="https://www.who.int/" target="_blank" rel="noopener noreferrer" class="bg-navy-800 rounded-2xl border border-white/5 hover:border-emerald-500/30 p-6 transition-all">
+            <h3 class="text-white font-bold mb-2">Dünya Sağlık Örgütü</h3><p class="text-slate-400 text-sm">Uluslararası sağlık tanımları ve rehberleri</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 sm:py-20">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-6">
+          <article class="bg-navy-800 rounded-3xl border border-white/5 p-7 sm:p-9">
+            <h2 class="text-2xl font-bold text-white mb-5">Varsayımlar ve sınırlamalar</h2>
+            <ul class="space-y-3 text-slate-400 text-sm leading-relaxed list-disc pl-5">
+              <li>Sonuçlar kullanıcının girdiği bilgilerin doğruluğuna bağlıdır.</li>
+              <li>Banka, kurum veya kişiye özel masraflar her hesaplamaya dahil olmayabilir.</li>
+              <li>Vergi, faiz ve mevzuat değişiklikleri sonuçları etkileyebilir.</li>
+              <li>Sağlık araçları tarama ve bilgilendirme amaçlıdır; tanı koymaz.</li>
+              <li>Sayfaya özgü açıklama ile bu genel metin çelişirse daha ayrıntılı olan sayfa açıklaması esas alınır.</li>
+            </ul>
+          </article>
+
+          <article class="bg-navy-800 rounded-3xl border border-emerald-500/15 p-7 sm:p-9">
+            <h2 class="text-2xl font-bold text-white mb-5">Güncelleme ve düzeltme</h2>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">Zamanla değişen oran ve kurallar, ilgili kurumların yeni yayını sonrasında gözden geçirilir. Önemli araçlarda kullanılan veri tarihi sayfa üzerinde gösterilir.</p>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">Bir hata fark ederseniz sayfa bağlantısını, hatalı gördüğünüz alanı ve varsa resmî kaynağı iletin.</p>
+            <a href="mailto:info@finans-kolay.com?subject=İçerik%20düzeltme%20bildirimi" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold transition-all">Düzeltme bildirin</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-16 sm:pb-20">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-3xl bg-navy-950 border border-white/5 p-7 sm:p-9">
+          <h2 class="text-2xl font-bold text-white mb-4">İçerik üretiminde otomasyon</h2>
+          <p class="text-slate-400 leading-relaxed">Yapay zekâ destekli araçlar araştırma, taslak oluşturma veya dil düzenleme amacıyla kullanılabilir. Otomatik çıktı tek başına doğruluk kanıtı ya da kaynak değildir. Formüllerin, kaynakların, açıklamaların ve yayın kararının sorumluluğu FinansKolay'a aittir.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-navy-950 border-t border-white/5 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-slate-400 mb-6" aria-label="Yasal ve kurumsal bağlantılar">
+        <a href="hakkimizda.html" class="hover:text-emerald-400 transition-colors">Hakkımızda</a>
+        <a href="kaynaklar-ve-hesaplama-yontemleri.html" class="hover:text-emerald-400 transition-colors">Kaynaklar ve Yöntem</a>
+        <a href="gizlilik-politikasi.html" class="hover:text-emerald-400 transition-colors">Gizlilik Politikası</a>
+        <a href="kullanim-sartlari.html" class="hover:text-emerald-400 transition-colors">Kullanım Şartları</a>
+        <a href="kvkk-aydinlatma-metni.html" class="hover:text-emerald-400 transition-colors">KVKK Aydınlatma Metni</a>
+      </nav>
+      <p class="text-xs text-slate-600 text-center">© 2026 FinansKolay. Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
+</body>
+</html>
