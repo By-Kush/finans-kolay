@@ -97,6 +97,136 @@
       background-size: 40px 40px;
     }
 
+    /* Hero motion system */
+    .hero-motion-grid {
+      position: absolute;
+      inset: 0;
+      opacity: .34;
+      background-image:
+        linear-gradient(rgba(52,211,153,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(52,211,153,.055) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+      -webkit-mask-image: linear-gradient(to bottom, black, transparent 90%);
+      animation: gridDrift 18s linear infinite;
+      pointer-events: none;
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(10px);
+      pointer-events: none;
+      animation: orbFloat 9s ease-in-out infinite;
+    }
+    .hero-orb.one {
+      width: 22rem;
+      height: 22rem;
+      right: 3%;
+      top: 12%;
+      background: rgba(16,185,129,.10);
+    }
+    .hero-orb.two {
+      width: 14rem;
+      height: 14rem;
+      left: 5%;
+      bottom: 10%;
+      background: rgba(56,189,248,.07);
+      animation-delay: -4s;
+    }
+    .hero-dashboard {
+      position: relative;
+      isolation: isolate;
+      background: linear-gradient(145deg, rgba(30,41,59,.86), rgba(7,14,26,.92));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 35px 90px rgba(0,0,0,.38), 0 0 0 1px rgba(16,185,129,.05);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      animation: dashboardFloat 7s ease-in-out infinite;
+    }
+    .hero-dashboard::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      z-index: -1;
+      border-radius: inherit;
+      background: linear-gradient(120deg, rgba(52,211,153,.22), transparent 28%, transparent 72%, rgba(56,189,248,.14));
+      opacity: .65;
+    }
+    .hero-chart-line {
+      stroke-dasharray: 650;
+      stroke-dashoffset: 650;
+      animation: chartDraw 2.4s cubic-bezier(.22,1,.36,1) .35s forwards;
+    }
+    .hero-chart-area { animation: chartFade 1.2s ease .9s both; }
+    .hero-chart-dot { animation: dotPulse 2.4s ease-in-out infinite; transform-origin: center; }
+    .hero-float-card {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .7rem .85rem;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: .9rem;
+      background: rgba(15,23,42,.88);
+      box-shadow: 0 16px 38px rgba(0,0,0,.28);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      animation: cardFloat 5.5s ease-in-out infinite;
+    }
+    .hero-float-card.card-a { left: -2.2rem; top: 19%; }
+    .hero-float-card.card-b { right: -1.8rem; bottom: 17%; animation-delay: -2.7s; }
+    .hero-cta-primary { position: relative; overflow: hidden; }
+    .hero-cta-primary::after {
+      content: '';
+      position: absolute;
+      inset: -40% auto -40% -35%;
+      width: 24%;
+      transform: skewX(-18deg);
+      background: rgba(255,255,255,.25);
+      animation: buttonShine 5s ease-in-out infinite;
+    }
+    @keyframes gridDrift { to { background-position: 64px 64px; } }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(-18px,22px,0) scale(1.08); }
+    }
+    @keyframes dashboardFloat {
+      0%, 100% { transform: translateY(0) rotate(-.5deg); }
+      50% { transform: translateY(-10px) rotate(.5deg); }
+    }
+    @keyframes chartDraw { to { stroke-dashoffset: 0; } }
+    @keyframes chartFade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes dotPulse {
+      0%, 100% { opacity: .65; transform: scale(.9); }
+      50% { opacity: 1; transform: scale(1.18); }
+    }
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes buttonShine {
+      0%, 68% { left: -35%; opacity: 0; }
+      72% { opacity: 1; }
+      88%, 100% { left: 125%; opacity: 0; }
+    }
+    @media (max-width: 1023px) {
+      .hero-float-card.card-a { left: -.75rem; }
+      .hero-float-card.card-b { right: -.75rem; }
+    }
+    @media (max-width: 639px) {
+      .hero-motion-grid { background-size: 48px 48px; }
+      .hero-float-card { display: none; }
+      .hero-dashboard { animation-duration: 9s; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-motion-grid, .hero-orb, .hero-dashboard, .hero-float-card,
+      .hero-chart-line, .hero-chart-area, .hero-chart-dot, .hero-cta-primary::after {
+        animation: none !important;
+      }
+      .hero-chart-line { stroke-dashoffset: 0; }
+    }
+
     /* Navbar blur */
     .navbar-blur {
       backdrop-filter: blur(16px);
@@ -236,9 +366,13 @@
   </header>
 
   <!-- =================== HERO =================== -->
-  <section class="hero-bg grid-overlay min-h-screen flex items-center pt-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 w-full">
-      <div class="max-w-3xl mx-auto text-center">
+  <section class="hero-bg min-h-screen flex items-center pt-16 relative overflow-hidden">
+    <div class="hero-motion-grid" aria-hidden="true"></div>
+    <div class="hero-orb one" aria-hidden="true"></div>
+    <div class="hero-orb two" aria-hidden="true"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full relative z-10">
+      <div class="grid lg:grid-cols-[1.05fr_.95fr] gap-14 lg:gap-16 items-center">
+        <div class="max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
 
         <!-- Badge -->
         <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/25 rounded-full mb-8">
@@ -258,9 +392,9 @@
         </p>
 
         <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <a href="#araclar"
-            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all shadow-2xl shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:-translate-y-1 text-base">
+            class="hero-cta-primary inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all shadow-2xl shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:-translate-y-1 text-base">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
@@ -276,7 +410,7 @@
         </div>
 
         <!-- Stats row -->
-        <div class="mt-16 grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto">
+        <div class="mt-14 grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto lg:mx-0">
           <div class="text-center">
             <p class="text-2xl sm:text-3xl font-extrabold text-white">36</p>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">Ücretsiz Araç</p>
@@ -288,6 +422,70 @@
           <div class="text-center">
             <p class="text-2xl sm:text-3xl font-extrabold text-white">4</p>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">Kategori</p>
+          </div>
+        </div>
+      </div>
+
+        <!-- Animated finance preview -->
+        <div class="relative max-w-xl mx-auto w-full" aria-hidden="true">
+          <div class="hero-float-card card-a">
+            <span class="w-9 h-9 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center">✓</span>
+            <span><strong class="block text-xs text-white">Bütçe Planı</strong><small class="text-[10px] text-slate-500">Gelir ve gider dengesi</small></span>
+          </div>
+          <div class="hero-float-card card-b">
+            <span class="w-9 h-9 rounded-lg bg-sky-500/15 text-sky-400 flex items-center justify-center">↗</span>
+            <span><strong class="block text-xs text-white">Tasarruf Hedefi</strong><small class="text-[10px] text-slate-500">Senaryonu karşılaştır</small></span>
+          </div>
+
+          <div class="hero-dashboard rounded-3xl p-5 sm:p-7">
+            <div class="flex items-center justify-between mb-7">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-400/70"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400/70"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/70"></span>
+              </div>
+              <span class="text-[10px] uppercase tracking-[.2em] text-slate-500">Örnek görünüm</span>
+            </div>
+
+            <div class="flex items-end justify-between gap-4 mb-2">
+              <div>
+                <p class="text-xs text-slate-500 mb-1">Finansal planlama</p>
+                <p class="text-2xl sm:text-3xl font-extrabold text-white">Tek ekranda kontrol</p>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold text-emerald-300 bg-emerald-500/10 border border-emerald-500/20">CANLI</span>
+            </div>
+
+            <svg viewBox="0 0 520 210" class="w-full h-auto mt-5" role="img" aria-label="Yükselen örnek finans grafiği">
+              <defs>
+                <linearGradient id="heroArea" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#10B981" stop-opacity=".30"/>
+                  <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="heroLine" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#38BDF8"/>
+                  <stop offset="100%" stop-color="#34D399"/>
+                </linearGradient>
+              </defs>
+              <g stroke="rgba(148,163,184,.12)" stroke-width="1">
+                <line x1="12" y1="45" x2="508" y2="45"/><line x1="12" y1="95" x2="508" y2="95"/>
+                <line x1="12" y1="145" x2="508" y2="145"/><line x1="12" y1="195" x2="508" y2="195"/>
+              </g>
+              <path class="hero-chart-area" d="M12 176 C70 168 88 148 132 151 S205 119 250 128 S322 92 365 102 S432 52 508 35 L508 202 L12 202 Z" fill="url(#heroArea)"/>
+              <path class="hero-chart-line" d="M12 176 C70 168 88 148 132 151 S205 119 250 128 S322 92 365 102 S432 52 508 35" fill="none" stroke="url(#heroLine)" stroke-width="5" stroke-linecap="round"/>
+              <circle class="hero-chart-dot" cx="508" cy="35" r="7" fill="#34D399" stroke="#0F172A" stroke-width="4"/>
+            </svg>
+
+            <div class="grid grid-cols-3 gap-2 sm:gap-3 mt-3">
+              <div class="rounded-xl border border-white/5 bg-white/[.035] p-3">
+                <span class="block text-[10px] text-slate-500 mb-1">PLANLA</span><strong class="text-xs sm:text-sm text-white">Bütçeni</strong>
+              </div>
+              <div class="rounded-xl border border-white/5 bg-white/[.035] p-3">
+                <span class="block text-[10px] text-slate-500 mb-1">HESAPLA</span><strong class="text-xs sm:text-sm text-white">Maliyetini</strong>
+              </div>
+              <div class="rounded-xl border border-white/5 bg-white/[.035] p-3">
+                <span class="block text-[10px] text-slate-500 mb-1">KARŞILAŞTIR</span><strong class="text-xs sm:text-sm text-white">Seçenekleri</strong>
+              </div>
+            </div>
           </div>
         </div>
       </div>
